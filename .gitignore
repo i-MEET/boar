@@ -1,0 +1,46 @@
+# ignore file types
+*.dat
+*.txt
+*.jpg
+*.png
+*.pdf
+*.o
+*.exe
+*.h5
+*.gif
+*.pyc
+*.csv
+*.json
+*.xlsx
+*.ipynb
+*SIMsalabim
+*.py
+*.html
+
+# ignore folders
+__pycache__/
+.vscode/
+.ipynb_checkpoints/
+dist/
+build/
+.eggs/
+temp/
+warmstart/
+venv_boar/
+boar/__pycache__/
+boar.egg-info/
+old_notebook/
+old_Notebooks2/
+db_access/
+slack_utils/
+BOAR_DD_parallel.py
+
+# Exceptions
+!Notebooks/*.ipynb
+!Example_Data/Chao/*.csv
+!Notebooks/BOAR_DD_parallel.py
+!requirements.txt
+!requirements_main.txt
+!setup.py
+!boar/*.py
+
