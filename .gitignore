@@ -43,4 +43,7 @@ BOAR_DD_parallel.py
 !requirements_main.txt
 !setup.py
 !boar/*.py
-
+!boar/agents/*.py
+!boar/core/*.py
+!boar/dynamic_utils/*.py
+!boar/SIMsalabim_utils/*.py
