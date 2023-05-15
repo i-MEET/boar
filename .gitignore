@@ -14,7 +14,7 @@
 *.xlsx
 *.ipynb
 *SIMsalabim
-*.py
+# *.py
 *.html
 
 # ignore folders
