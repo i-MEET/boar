@@ -48,7 +48,7 @@ def Theta_B(ParStrDic,ParFileDic):
     L_LTL = float(ChosePar('L_LTL',ParStrDic,ParFileDic))
     L_RTL = float(ChosePar('L_RTL',ParStrDic,ParFileDic))
     kdirect = float(ChosePar('kdirect',ParStrDic,ParFileDic))
-    UseLangevin = ChosePar('UseLangevin',ParStrDic,ParFileDic)
+    UseLangevin = int(ChosePar('UseLangevin',ParStrDic,ParFileDic))
    
     if UseLangevin == 1:
         Lang_pre = float(ChosePar('Lang_pre',ParStrDic,ParFileDic))
@@ -86,7 +86,7 @@ def delta_B(ParStrDic,ParFileDic):
     """
 
     # Choose the parameters to use between command string and file
-    UseLangevin = ChosePar('UseLangevin',ParStrDic,ParFileDic)
+    UseLangevin = int(ChosePar('UseLangevin',ParStrDic,ParFileDic))
     if UseLangevin == 1:
         eps_r = float(ChosePar('eps_r',ParStrDic,ParFileDic))
         mun_0 = float(ChosePar('mun_0',ParStrDic,ParFileDic))
@@ -111,7 +111,7 @@ def Theta_T(ParStrDic,ParFileDic):
     Theta_T = (Bulk_tr*C_eff*(Lac**2))/(mu_eff*Vint)\n
 
     TO DO:
-    try Theta_B = (Bulk_tr*Cn*Cp*Gehp*(Lac**6))/(mun_0**2*mup_0*Vint**3)\n
+    try Theta_T = (Bulk_tr*Cn*Cp*Gehp*(Lac**6))/(mun_0**2*mup_0*Vint**3)\n
      
     Parameters
     ----------
@@ -147,6 +147,52 @@ def Theta_T(ParStrDic,ParFileDic):
 
     #Return theta trap
     return (Bulk_tr*C_eff*(Lac**2))/(mu_eff*Vint)
+
+def Theta_T2(ParStrDic,ParFileDic):
+    """Calculate theta trap from the 'Device_parameters.txt' file
+    and input parameters.\n
+     
+    Theta_T = (Bulk_tr*C_eff*(Lac**2))/(mu_eff*Vint)\n
+
+    TO DO:
+    try Theta_T = (Bulk_tr*Cn*Cp*Gehp*(Lac**6))/(mun_0**2*mup_0*Vint**3)\n
+     
+    Parameters
+    ----------
+    ParStrDic : dict
+        Contains the parameters and values from the command string
+
+    ParFileDic : dict
+        Contains the parameters and values from the 'Device_parameters.txt'
+
+    
+
+    """
+    
+    # Choose the parameters to use between command string and file
+    CB = float(ChosePar('CB',ParStrDic,ParFileDic))
+    VB = float(ChosePar('VB',ParStrDic,ParFileDic))
+    mun_0 = float(ChosePar('mun_0',ParStrDic,ParFileDic))
+    mup_0 = float(ChosePar('mup_0',ParStrDic,ParFileDic))
+    Gehp = float(ChosePar('Gehp',ParStrDic,ParFileDic))
+    L = float(ChosePar('L',ParStrDic,ParFileDic))
+    L_LTL = float(ChosePar('L_LTL',ParStrDic,ParFileDic))
+    L_RTL = float(ChosePar('L_RTL',ParStrDic,ParFileDic))
+    Bulk_tr = float(ChosePar('Bulk_tr',ParStrDic,ParFileDic))
+    Cn = float(ChosePar('Cn',ParStrDic,ParFileDic))
+    Cp = float(ChosePar('Cp',ParStrDic,ParFileDic))
+
+    # Calculate additional parameters    
+    Vint = (VB-CB)-0.4 # internal voltage (see paper)
+    Lac = L - L_LTL - L_RTL # active layer thickness
+    mu_eff = np.sqrt(mun_0 * mup_0)
+    Lac = L - L_LTL - L_RTL
+    C_eff = np.sqrt(Cn * Cp)
+
+    #Return theta trap
+    return (Bulk_tr*Cn*Cp*(Lac**2))/(Gehp*mun_0**2*mup_0**2*Vint**4)
+   
+   
 
 def delta_T(ParStrDic,ParFileDic):
     """Calculate delta trap from the 'Device_parameters.txt' file

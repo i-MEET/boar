@@ -6,9 +6,9 @@
 import numpy as np
 
 class Fitparam():
-    def __init__(self, name = '', startVal = None, val = 1.0, relRange = 0, lims = [], std = 0, d = '',display_name='',
+    def __init__(self, name = '', startVal = None, val = 1.0, relRange = 0, lims = [], std = 0, d = '',display_name='',unit='',
                 range_type = 'log', lim_type = 'absolute', optim_type = 'linear',axis_type = None):
-        """_summary_
+        """ Fitparam class object
 
         Parameters
         ----------
@@ -29,6 +29,8 @@ class Fitparam():
             parameter description, by default ''
         display_name : str, optional
             name to be displayed in plots, by default ''
+        unit : str, optional
+            unit of the parameter, by default ''
         range_type : str, optional
             Interpretation of relRange, by default 'log'
         lim_type : str, optional
@@ -38,34 +40,34 @@ class Fitparam():
             Interpretation by optimizer ('linear' or 'log'), by default 'linear'
         axis_type : str, optional
             Set the type of scale and formating for the axis of the plots ('linear' or 'log') if let to None we use optim_type, by default None
+
+        Raises
+        ------
+        ValueError
+            range_type must be 'linear', 'lin', 'logarithmic' of 'log'
+        ValueError
+            lim_type must be 'absolute' or 'relative'
+        ValueError
+            optim_type must be 'linear', 'lin', 'logarithmic' of 'log'
+        ValueError
+            axis_type must be 'linear', 'lin', 'logarithmic' of 'log'
+
+       
         """        
 
         self.name = name
-
         if display_name == '':
             self.display_name = name
         else:
             self.display_name = display_name
 
+        self.unit = unit
 
-        if startVal == None:
-            self.startVal = val * 1.0
+        if unit == '':
+            self.full_name = self.display_name
         else:
-            self.startVal = startVal
-        self.val = val *1.0
-        self.relRange = relRange
+            self.full_name = self.display_name + ' [' + self.unit + ']'
         
-        if lims ==[]:
-            if self.relRange == 0:
-                rr = 0.001
-            else:
-                rr = self.relRange
-            self.lims = [self.val - rr*abs(self.val),self.val + rr*abs(self.val)]
-        else:
-            self.lims = lims
-
-        self.std = std
-        self.d = d
         self.range_type = range_type
         self.lim_type = lim_type
         self.optim_type = optim_type
@@ -102,12 +104,63 @@ class Fitparam():
         elif self.axis_type == 'logarithmic':
             self.axis_type = 'log'
 
+
+        if startVal == None:
+            self.startVal = val * 1.0
+        else:
+            self.startVal = startVal
+        self.val = val *1.0
+        self.relRange = relRange
+        
+        if lims ==[]:
+            if self.relRange == 0:
+                rr = 0.001
+            else:
+                rr = self.relRange
+
+            if self.optim_type == 'linear':
+                self.lims = [self.startVal  - rr*abs(self.startVal),self.startVal  + rr*abs(self.startVal)]
+            elif self.optim_type == 'log':
+                self.lims = [self.startVal *10**(-rr),self.startVal *10**(rr)]
+            else:
+                raise ValueError('optim_type must be ''linear'' or ''log''')
+
+            # self.lims = [self.val - rr*abs(self.val),self.val + rr*abs(self.val)]
+        else:
+            self.lims = lims
+
+        self.std = std
+        self.d = d
+
+        
+        
+
+    def __str__(self):
+        """ String representation of the FOMparam object with all attributes when printed
+        Returns
+        -------
+        str
+            string representation of the FOMparam object with all attributes
+        """
+        all_attributes = vars(self)
+        attribute_string = "\n".join(f"{key}: {value}" for key, value in all_attributes.items() if not key.startswith("__"))
+        return attribute_string
+    
     def __repr__(self):
-        return self.name
+        """ String representation of the FOMparam object
+
+        Returns
+        -------
+        str
+            string representation of the FOMparam object
+        """   
+        return f"{self.__class__.__name__}(name={self.name}, val={self.val}, relRange={self.relRange}, lims={self.lims}, std={self.std}, d={self.d}, display_name={self.display_name}, unit={self.unit}, range_type={self.range_type}, lim_type={self.lim_type}, optim_type={self.optim_type}, axis_type={self.axis_type})"
+
+    
 
 class FOMparam():
-    def __init__(self, func, name = '',  val = 1.0, std = 0, relRange = 1, display_name='', optim_type = 'linear',axis_type = None):
-        """_summary_
+    def __init__(self, func, name = '',  val = 1.0, std = 0, relRange = 1, display_name='', unit ='', optim_type = 'linear',axis_type = None):
+        """ FOMparam class object
 
         Parameters
         ----------
@@ -128,6 +181,8 @@ class FOMparam():
             parameter description, by default ''
         display_name : str, optional
             name to be displayed in plots, by default ''
+        unit : str, optional
+            unit of the parameter, by default ''    
         range_type : str, optional
             Interpretation of relRange, by default 'log'
         lim_type : str, optional
@@ -135,6 +190,21 @@ class FOMparam():
             or relative limits controlled by relRange('relative'), by default 'absolute'
         optim_type : str, optional
             Interpretation by optimizer ('linear' or 'log'), by default 'linear'
+        axis_type : str, optional
+            Set the type of scale and formating for the axis of the plots ('linear' or 'log') if let to None we use optim_type, by default None
+
+        Raises
+        ------
+        ValueError
+            range_type must be 'linear', 'lin', 'logarithmic' of 'log'
+        ValueError
+            lim_type must be 'absolute' or 'relative'
+        ValueError
+            optim_type must be 'linear', 'lin', 'logarithmic' of 'log'
+        ValueError
+            axis_type must be 'linear', 'lin', 'logarithmic' of 'log'
+
+
         """        
 
         self.name = name
@@ -144,6 +214,12 @@ class FOMparam():
             self.display_name = name
         else:
             self.display_name = display_name
+
+        self.unit = unit
+        if unit == '':
+            self.full_name = self.display_name
+        else:
+            self.full_name = self.display_name + ' [' + self.unit + ']'
 
         self.func = func
 
@@ -196,5 +272,23 @@ class FOMparam():
         
         
 
+    def __str__(self):
+        """ String representation of the FOMparam object with all attributes when printed
+        Returns
+        -------
+        str
+            string representation of the FOMparam object with all attributes
+        """        
+        all_attributes = vars(self)
+        attribute_string = "\n".join(f"{key}: {value}" for key, value in all_attributes.items() if not key.startswith("__"))
+        return attribute_string
+    
     def __repr__(self):
-        return self.name
+        """ String representation of the FOMparam object
+
+        Returns
+        -------
+        str
+            string representation of the FOMparam object
+        """        
+        return f"{self.__class__.__name__}(name={self.name}, val={self.val}, relRange={self.relRange}, lims={self.lims}, std={self.std}, func={self.func}, display_name={self.display_name}, unit={self.unit}, optim_type={self.optim_type}, axis_type={self.axis_type})"

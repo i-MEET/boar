@@ -36,29 +36,38 @@ class Agent():
                     rr = 0.001
                 else:
                     rr = param.relRange
-                lims = [param.val - rr*abs(param.val),param.val + rr*abs(param.val)]
+
+                if param.optim_type == 'linear':
+                    param.lims = [param.startVal  - rr*abs(param.startVal),param.startVal  + rr*abs(param.startVal)]
+                elif param.optim_type == 'log':
+                    param.lims = [param.startVal *10**(-rr),param.startVal *10**(rr)]
+                else:
+                    raise ValueError('optim_type must be ''linear'' or ''log''')
+
+                # lims = [param.val - rr*abs(param.val),param.val + rr*abs(param.val)]
             else:
                 lims = param.lims
 
 
             if param.relRange!=0:
-                s = param.std
-                if param.optim_type=='log':# obj func is interpreted as log normal 
-                    # s[s>2]=2
-                    s1 = 10**(np.log10(p)+s) - p # upper error bars 
-                    s2 = -10**(np.log10(p)-s) + p # lower error bars 
-                    # check if the error bars are within the limits else set them to the limit
-                    if p+s1>lims[1]:
-                        s1 = lims[1]
-                    if p-s2<lims[0]:
-                        s2 = lims[0]
+                s3 = param.std
+            #     if param.optim_type=='log':# obj func is interpreted as log normal 
+            #         # s[s>2]=2
+            #         s1 = 10**(np.log10(p)+s) - p # upper error bars 
+            #         s2 = -10**(np.log10(p)-s) + p # lower error bars 
+            #         # check if the error bars are within the limits else set them to the limit
+            #         if p+s1>lims[1]:
+            #             s1 = lims[1]
+            #         if p-s2<lims[0]:
+            #             s2 = lims[0]
 
-                    s3 = (s2,s1)
-                else:
-                    s3 = (s,s)
+            #         s3 = (s2,s1)
+            #     else:
+            #         s3 = (s,s)
             else:
                 s3 = (0,0)
             paramdict.append({'name':pn,'relRange':param.relRange,'val':p,'std_l':s3[0],'std_h':s3[1]})
+
 
         return paramdict
 
@@ -231,24 +240,33 @@ class Agent():
             p = np.array([r[ii].val for r in pf])
             s = np.array([r[ii].std for r in pf])
             lims = np.array([r[ii].lims for r in pf])
-            if pf[0][ii].optim_type=='log':# obj func is interpreted as log normal 
-                axs[ii].set_yscale('log') 
-                # s[s>2]=2
+            # if pf[0][ii].optim_type=='log':# obj func is interpreted as log normal 
+            #     axs[ii].set_yscale('log') 
+            #     # s[s>2]=2
                 
-                s1 = 10**(np.log10(p)+s) - p # upper error bars
-                s2 = -10**(np.log10(p)-s) + p # lower error bars 
+            #     s1 = 10**(np.log10(p)+s) - p # upper error bars
+            #     s2 = -10**(np.log10(p)-s) + p # lower error bars 
 
-                # check if error bars are outside the limits
-                s1[p+s1>lims[:,1]]=lims[p+s1>lims[:,1],1]
-                s2[p-s2<lims[:,0]]=lims[p-s2<lims[:,0],0]
+            #     # check if error bars are outside the limits
+            #     s1[p+s1>lims[:,1]]=lims[p+s1>lims[:,1],1]
+            #     s2[p-s2<lims[:,0]]=lims[p-s2<lims[:,0],0]
 
-                s3 = np.vstack((s2.reshape(1,-1),s1.reshape(1,-1)))
+            #     s3 = np.vstack((s2.reshape(1,-1),s1.reshape(1,-1)))
                 
-            else:
-                s3 = s
-            s3[np.isinf(s3)]=0 # set error bars to zero if std is inf
-            s3[np.isnan(s3)]=0 # set error bars to zero if std is nan
-            
+            # else:
+            #     s3 = s
+            # print(pf[1])
+            s1 = np.array([r[ii].std[1] for r in pf]) # upper error bars
+            s2 = np.array([r[ii].std[0] for r in pf]) # lower error bars
+            # s3 = s.reshape(1,-1)   
+            # s3[np.isinf(s3)]=0 # set error bars to zero if std is inf
+            # s3[np.isnan(s3)]=0 # set error bars to zero if std is nan
+            # set s3 as list of tuples based on s
+            s3 = np.vstack((abs(p-s2),abs(p-s1)))
+            # s3 = np.vstack((abs(p-s2),abs(p-s1)))
+            if pf[0][ii].axis_type=='log':
+                axs[ii].set_yscale('log')
+
             axs[ii].errorbar(fpu, p, yerr=s3) 
             axs[ii].plot(fpu, p, 'o',c='C0')
             axs[ii].set_xlabel(xaxis_label)
@@ -257,7 +275,7 @@ class Agent():
             #axs[ii].set_xscale('log')
             infopack.append([fpu,p,s3])
             axs[ii].set_ylabel(nam)
-        plt.tight_layout()
+        fig.tight_layout()
         plt.show()
 
         if savefig:
@@ -265,79 +283,6 @@ class Agent():
 
         return (infopack)
 
-    # def get_unique_X(self,X,xaxis,X_dimensions):
-    #     """Get the unique values of the independent variable (X) in the dataset
-
-    #     Parameters
-    #     ----------
-    #     X : ndarray
-    #         the experimental dimensions
-    #     xaxis : str, optional
-    #         the name of the independent variable
-    #     X_dimensions : list, optional
-    #         names of the X columns
-    #     Returns
-    #     -------
-    #     X_unique : ndarray
-    #         the unique values of the independent variable
-    #     X_dimensions_uni : list
-    #         the names of the columns of X_unique
-
-    #     Raises
-    #     ------
-    #     ValueError
-    #         if xaxis is not in X_dimensions
-
-    #     """
-    #     X_unique = deepcopy(X)
-    #     idx_x = None
-    #     if xaxis in X_dimensions:
-    #         idx_x = X_dimensions.index(xaxis)
-    #     else:
-    #         raise ValueError(xaxis + ' not in X_dimensions, please add it to X_dimensions')
-
-    #     X_unique = np.delete(X_unique,idx_x,axis=1)
-    #     X_dimensions_uni = [x for x in X_dimensions if x != xaxis]
-    #     # get index of unique values
-    #     unique,idxuni = np.unique(X_unique,axis=0,return_index=True)
-
-    #     X_unique = X_unique[np.sort(idxuni),:] # resort X_unique 
-
-    #     return X_unique,X_dimensions_uni
-
-    # def get_unique_X_and_xaxis_values(self,X,xaxis,X_dimensions):
-    #     """Get the values of the independent variable (X) in the dataset for each unique value of the other dimensions
-
-    #     Parameters
-    #     ----------
-    #     X : ndarray
-    #         the experimental dimensions
-    #     xaxis : str, optional
-    #         the name of the independent variable
-    #     X_dimensions : list, optional
-    #         the names of the columns of X
-    #     Returns
-    #     -------
-    #     xs : list of ndarrays
-    #         the values of the independent variable for each unique value of the other dimensions
-
-    #     """
-    #     X_unique, X_dimensions_uni = self.get_unique_X(X,xaxis,X_dimensions) # get unique X values and their dimensions
-    #     idx_x = int(X_dimensions.index(xaxis))
-    #     xs = []
-    #     for uni in X_unique:
-            
-    #         X_dum = deepcopy(X)
-    #         # drop the xaxis column
-    #         X_dum = np.delete(X_dum,X_dimensions.index(xaxis),axis=1)
-    #         # find indexes where the other columns are equal to the unique values
-    #         idxs = np.where(np.all(X_dum==uni,axis=1))[0]
-    #         # get the values of the xaxis for these indexes
-    #         xs.append(X[idxs,idx_x])
-            
-            
-
-    #     return X_unique, X_dimensions_uni, xs
 
     def plot_fit_res(self,target,params,xaxis_name,xlim=[],ylim=[],kwargs=None):
         """Compare the targets vs fitting results

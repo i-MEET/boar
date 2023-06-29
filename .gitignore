@@ -14,7 +14,7 @@
 *.xlsx
 *.ipynb
 *SIMsalabim
-# *.py
+*.py
 *.html
 
 # ignore folders
@@ -34,6 +34,7 @@ old_Notebooks2/
 db_access/
 slack_utils/
 BOAR_DD_parallel.py
+# boar/agents/TAS_agent_new.py
 
 # Exceptions
 !Notebooks/*.ipynb
@@ -47,3 +48,4 @@ BOAR_DD_parallel.py
 !boar/core/*.py
 !boar/dynamic_utils/*.py
 !boar/SIMsalabim_utils/*.py
+

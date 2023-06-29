@@ -375,3 +375,184 @@ def get_random_value(val_min,val_max,scale='lin'):
         print('The program will stop')
         sys.exit('Wrong scale for the input parameters')
     return val
+
+def valence_urbach(CB,VB,Eu,num_points):
+    """ Creates a Urbach tail for the valence band (from VB to VB-(VB-CB)/2)
+    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim
+
+    Fomula: frac = exp(-(VB-E)/Eu)
+
+    Parameters
+    ----------
+    CB : float
+        Conduction band edge value in eV
+    VB : float
+        Valence band edge value in eV
+    Eu : float
+        Urbach energy in eV
+    num_points : int
+        Number of points to be generated
+
+    Returns
+    -------
+    E : 1-D sequence of floats
+        Array containing the energy values in eV
+    frac : 1-D sequence of floats
+        Array containing the fraction of traps at each energy value
+    """    
+
+
+    E = np.linspace(VB-(VB-CB)/2,VB,num_points)
+    Erela = VB - E
+    frac = np.ones(len(Erela))
+
+    for i in range(len(Erela)):
+        frac[i] = np.exp(-Erela[i]/Eu)
+
+    # drop last point
+    E = E[:-1]
+    frac = frac[:-1]
+
+    #normalize the fraction
+    frac = frac/np.sum(frac)
+
+    return E,frac
+
+def conduction_urbach(CB,VB,Eu,num_points):
+    """ Creates a Urbach tail for the conduction band (from CB to CB+(VB-CB)/2)
+    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim
+
+    Parameters
+    ----------
+    CB : float
+        Conduction band edge value in eV
+    VB : float
+        Valence band edge value in eV
+    Eu : float
+        Urbach energy in eV
+    num_points : int
+        Number of points to be generated
+
+    Returns
+    -------
+    E : 1-D sequence of floats
+        Array containing the energy values in eV
+    frac : 1-D sequence of floats
+        Array containing the fraction of traps at each energy value
+
+    """    
+
+    E = np.linspace(CB,CB+(VB-CB)/2,num_points)
+    Erela = E - CB
+    frac = np.ones(len(Erela))
+
+    for i in range(len(Erela)):
+        frac[i] = np.exp(-Erela[i]/Eu)
+
+    # drop first point
+    E = E[1:]
+    frac = frac[1:]
+
+    #normalize the fraction
+    frac = frac/np.sum(frac)
+
+    return E,frac
+
+
+def double_urbach(CB,VB,Eu,num_points):
+    """ Creates a Urbach tail on both sides of the bandgap
+    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim
+
+    Parameters
+    ----------
+    CB : float
+        Conduction band edge value in eV
+    VB : float
+        Valence band edge value in eV
+    Eu : float
+        Urbach energy in eV
+    num_points : int
+        Number of points to be generated
+
+    Returns
+    -------
+    E : 1-D sequence of floats
+        Array containing the energy values in eV
+    frac : 1-D sequence of floats
+        Array containing the fraction of traps at each energy value
+
+    """
+
+    num_points = int(num_points/2)
+    E1,frac1 = conduction_urbach(CB,VB,Eu,num_points)
+    E2,frac2 = valence_urbach(CB,VB,Eu,num_points)
+
+    E = np.concatenate((E1,E2))
+    frac = np.concatenate((frac1,frac2))
+
+    # check for duplicates in E and remove
+    E, idx = np.unique(E, return_index=True)
+
+    # drop the points with duplicates
+    frac = frac[idx]
+
+    #normalize the fraction
+    frac = frac/np.sum(frac)
+
+    return E,frac
+
+def double_urbach_midgap(CB,VB,Eu,fracmid,num_points):
+    """ Creates a Urbach tail on both sides of the bandgap and add a state mid-gap
+    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim
+
+    Parameters
+    ----------
+    CB : float
+        Conduction band edge value in eV
+    VB : float
+        Valence band edge value in eV
+    Eu : float
+        Urbach energy in eV
+    fracmid : float
+        Fraction of traps at mid-gap
+    num_points : int
+        Number of points to be generated
+
+    Returns
+    -------
+    E : 1-D sequence of floats
+        Array containing the energy values in eV
+    frac : 1-D sequence of floats
+        Array containing the fraction of traps at each energy value
+
+    """
+
+    E,Ntraps = double_urbach(CB,VB,Eu,num_points)
+
+    Emid = CB+(VB-CB)/2
+    Ntrap_mid = fracmid
+
+    Norm_Ntraps = Ntraps/np.sum(Ntraps)
+    Ntraps = Norm_Ntraps*(1-Ntrap_mid)
+
+    if Emid in E:
+        idx = np.where(E==Emid)
+        Ntraps[idx] = Ntraps[idx] + Ntrap_mid
+    else:
+        # add Emid to E amd add Ntrap_mid to Ntraps sorted with respect to E
+        E = np.append(E,Emid)
+        Ntraps = np.append(Ntraps,Ntrap_mid)
+        idx = np.argsort(E)
+        E = E[idx]
+        Ntraps = Ntraps[idx]
+
+    # check for duplicates in E and remove
+    E, idx = np.unique(E, return_index=True)
+
+    # drop the points with duplicates
+    Ntraps = Ntraps[idx]
+
+    #normalize the fraction
+    Ntraps = Ntraps/np.sum(Ntraps)
+    
+    return E,Ntraps

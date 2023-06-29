@@ -1,25 +1,24 @@
-## MultiObjectiveOptimizer class
-# Version 0.1
-# (c) Larry Lueer, Vincent M. Le Corre, i-MEET 2021-2022
+######################################################################
+################ MultiObjectiveOptimizer class #######################
+######################################################################
+# Authors: 
+# Larry Lueer (https://github.com/larryluer)
+# Vincent M. Le Corre (https://github.com/VMLC-PV)
+# (c) i-MEET, University of Erlangen-Nuremberg, 2021-2022-2023 
 
 # Import libraries
 import itertools,matplotlib,os,json,copy,warnings
 import numpy as np
 import pandas as pd
-import numdifftools as nd
 from time import time
-from ctypes.wintypes import PPOINTL
 from functools import partial
 from matplotlib import pyplot as plt
 from matplotlib import cm
-import matplotlib.patches as mpatches
 from copy import deepcopy
 from tqdm import tnrange, tqdm_notebook
-from sklearn.metrics import mean_squared_error,mean_squared_log_error,mean_absolute_error
 from scipy.optimize import curve_fit
 from scipy.special import logsumexp
 from scipy.ndimage.filters import gaussian_filter
-from scipy.stats import moment
 from skopt import Optimizer
 from skopt.space import Real
 from skopt.plots import plot_objective 
@@ -27,17 +26,13 @@ from skopt.utils import expected_minimum
 from joblib import Parallel, delayed
 from types import SimpleNamespace
 from matplotlib.gridspec import GridSpec
-from matplotlib.colors import ListedColormap
-from matplotlib.colors import ListedColormap, BoundaryNorm, LinearSegmentedColormap, Normalize, \
-    LogNorm
-# matplotlib.rcParams['figure.figsize'] = (18, 16) # set default figure size
-from boar.core.funcs import sci_notation
-from boar.core.funcs import get_unique_X,get_unique_X_and_xaxis_values
-#from VLC_units.UsefulFunctions.aux_func import sci_notation
+from matplotlib.colors import LogNorm
 
-# from IPython.display import display, clear_output
+# Import boar libraries
+from boar.core.optimizer import BoarOptimizer # import the base class
 
-class MultiObjectiveOptimizer():
+
+class MultiObjectiveOptimizer(BoarOptimizer):
     # a class for multi-objective optimization
     def __init__(self,params = None, targets = None, warmstart = None, Path2OldXY = None, SaveOldXY2file = None, res_dir = 'temp', verbose = False) -> None:
         """Initialization routine
@@ -90,278 +85,7 @@ class MultiObjectiveOptimizer():
             os.makedirs(self.res_dir)
         self.cwd = os.getcwd()
     
-    def params_r(self, params):
-        """ Prepare starting guess and bounds for optimizer \\
-        Considering settings of Fitparameters:\\
-        optim_type: if 'linear': abstract the order of magnitude (number between 1 and 10)\\
-                    if 'log': bring to decadic logarithm (discarding the negative sign, if any!)\\
-        lim_type:   if 'absolute', respect user settings in Fitparam.lims \\
-                    if 'relative', respect user settings in Fitparam.relRange:\\
-                    if Fitparam.range_type=='linear':\\
-                        interpret Fitparam.relRange as factor\\
-                    if Fitparam.range_type=='log':\\
-                        interpret Fitparam.relRange as order of magnitude\\
-        relRange:   if zero, Fitparam is not included into starting guess and bounds\\
-                            (but still available to the objective function) 
-        
-
-        Parameters
-        ----------
-        params : list
-            list of Fitparam() objects
-
-        Returns
-        -------
-        set of lists
-            set of lists with:  p0 = initial guesses\\
-                                lb = lower bounds\\
-                                ub = upper bounds\\       
-        """
-
-        lb = [] # initialize vector for lower bounds
-        ub = [] # initialize vector for upper bounds
-        p0 = [] # initialize vector for initial guess
-        for par in params: # walk across all parameter lists
-            if par.relRange != 0:
-
-                if par.optim_type=='linear':
-                    if par.startVal == 0:
-                        if par.lims[0] != 0:
-                            p0m = 10**(np.floor(np.log10(np.abs(par.lims[0])))) # the order of magnitude of the parameters
-                            par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
-                        elif par.lims[1] != 0:
-                            p0m = 10**(np.floor(np.log10(np.abs(par.lims[1])))) # the order of magnitude of the parameters
-                            par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
-                        else:
-                            par.p0m = 1
-                    else:
-                        p0m = 10**(np.floor(np.log10(np.abs(par.startVal)))) # the order of magnitude of the parameters
-                        par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
-                    p0.append(par.startVal/p0m) # optimizer can't handle very large besides very small numbers
-                                                # therefore, bring values to same order of magnitude
-                    if par.lim_type == 'absolute':
-                        lb0 = par.lims[0]
-                        ub0 = par.lims[1]
-                    elif par.lim_type == 'relative':
-                        if par.range_type == 'linear':
-                            lb0 = (par.startVal - par.relRange * abs(par.startVal))   # this is linear version
-                            ub0 = (par.startVal + par.relRange * abs(par.startVal))   # this is linear version                                
-                        elif par.range_type == 'log':
-                            lb0 = par.startVal*10**(-par.relRange)  # this is logarithmic version
-                            ub0 = par.startVal*10**(par.relRange)  # this is logarithmic version
-                    lb.append(lb0/p0m)
-                    ub.append(ub0/p0m)
-
-                elif par.optim_type=='log':
-                    # optimizer won't have problems with logarithmic quantities
-                    if par.startVal == 0:
-                        p0.append(-10)
-                    else:
-                        if par.startVal < 0:
-                            print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
-                        p0.append(np.log10(par.startVal))
-                    if par.lim_type == 'absolute':
-                        lb.append(np.log10(par.lims[0]))
-                        ub.append(np.log10(par.lims[1]))
-                    elif par.lim_type == 'relative':
-                        if par.range_type == 'linear':
-                            lb.append(np.log10(par.startVal - par.relRange * abs(par.startVal)))   # this is linear version
-                            ub.append(np.log10(par.startVal + par.relRange * abs(par.startVal)))    # this is linear version                                
-                        elif par.range_type == 'log':
-                            lb.append(np.log10(par.startVal*10**(-par.relRange)))  # this is logarithmic version
-                            ub.append(np.log10(par.startVal*10**(par.relRange)))  # this is logarithmic version
-
-        #print('params_r returns p0, lb, ub')
-        #print(p0, lb, ub)
-        return p0, lb, ub
-
-    def params_w(self, x, params, std = [], which='val'):
-        """Method to interact with Fitparam objects\\
-        Used by all Obj_funcs to write desired parameter from optimizer 
-        so the model can have the parameters in the physically correct units
-        The fitparams objects are in a nested list at self.include_params
-
-        Parameters
-        ----------
-        x : 1D-sequence of floats
-            fit parameters as requested by optimizer
-        params : list
-            list of Fitparam() objects
-        std : list, optional
-            _description_, by default [] [Larry check this]
-        which : str, optional
-            'val': x => Fitparam.val\\
-            'startVal': x=> Fitparam.startVal\\
-            defaults to Fitparam.val (which is used by the obj_funcs\\
-            to pass to the model function), by default 'val'
-
-        Returns
-        -------
-
-        """  
-       
-        ip = 0 # initialize param counter
-
-        if len(std)==0:
-            std = x
-
-        for par in params:
-            if par.relRange != 0:
-                if par.optim_type == 'linear':
-                    if which=='val':
-                        par.val = x[ip] * par.p0m # bring back to correct order of magnitude
-                    elif which=='startVal':
-                        par.startVal = x[ip] * par.p0m
-                    par.std = std[ip] * par.p0m
-
-                elif par.optim_type == 'log':
-                    if which=='val':
-                        par.val = 10**(x[ip])
-                    elif which=='startVal':
-                        par.startVal = 10**(x[ip])
-                    par.std = std[ip] # !!!!!! This is logarithmic while par.val is delogarithmized!!!!!
-                else: 
-                    raise ValueError('ERROR. ',par.name,' optim_type needs to be ''linear'' or ''log'' not ',par.optim_type,'.')      
-                ip += 1
-
-    def obj_func_metric(self,target,yf,obj_type='MSE'):
-        """_summary_
-
-        Parameters
-        ----------
-        target : target object
-            target object with data and weight
-        yf : array
-            model output
-        obj_type : str, optional
-            objective function type, can be ['MSE', 'RMSE', 'MSLE','nRMSE','MAE','larry','nRMSE_VLC'], by default 'MSE'
-            'MSE': mean squared error
-            'RMSE': root mean squared error
-            'MSLE': mean squared log error
-            'nRMSE': normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
-            'MAE': mean absolute error
-            'RAE': relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
-            'larry': mean squared error legacy version
-            'nRMSE_VLC': normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments
-            
-
-        Returns
-        -------
-        _type_
-            _description_
-        """        
-        if type(yf) == list: # if yf is a list convert to array
-            yf = np.asarray(yf)
-
-        y = target['data']['y']
-        weight = target['weight']
-        # set weight rigth for the sklearn functions
-        if type(weight) == int: # if weight is a number
-            if weight == 1: # if no weight is given
-                weight = None
-
-        if obj_type == 'MSE': # mean squared error
-            return mean_squared_error(yf,y,sample_weight=weight)
-        
-        elif obj_type == 'RMSE':
-            return mean_squared_error(yf,y,sample_weight=weight,squared=False)
-        
-        elif obj_type == 'MSLE': # mean squared log error
-            count = 0
-            for i in range(len(yf)):
-                if yf[i] * y[i] < 0: # if the sign of the model and data are different
-                    count += 1
-            if count/len(yf) > 0.8:
-                warnings.warn('WARNING: more than 80$%$ of the data has different sign in model and data. The calculation will continue but we recommand  using a different objective function.', UserWarning)
-            return mean_squared_log_error(abs(yf),abs(y),sample_weight=weight)
-        
-        elif obj_type == 'nRMSE': # normalized root mean squared error
-            maxi = max(np.max(y),np.max(yf))
-            mini = min(np.min(y),np.min(yf))
-            return mean_squared_error(yf,y,sample_weight=weight,squared=False)/(maxi-mini)
-
-        elif obj_type == 'MAE': # mean absolute error
-            return mean_absolute_error(yf,y,sample_weight=weight)
-        
-        elif obj_type == 'RAE': # relative absolute error
-            numerator = np.sum(np.abs(yf-y)*weight)
-            denominator = np.sum(np.abs(np.mean(y)-y)*weight)
-            return numerator/denominator
-        
-        elif obj_type == 'larry': # legacy 
-            if weight is None: # if no weight is given
-                weight = 1
-            return np.mean(((yf-y)*weight)**2)
-        
-        elif obj_type == 'nRMSE_VLC': # normalized root mean squared error
-            # split the data for unique values of X
-            X = target['data']['X']
-            X_dimensions = target['data']['X_dimensions']
-            if 'xaxis' in X_dimensions:
-                xaxis = X_dimensions['xaxis']
-            else:
-                xaxis = X_dimensions[0] # if no xaxis is given, take the first dimension
-
-            X_unique,X_dimensions_uni = get_unique_X(X,xaxis,X_dimensions)
-
-            # calculate the nRMSE for each unique value of X
-            nRMSE = []
-            for i in range(len(X_unique)):
-                X_dum = deepcopy(X)
-                #remove xaxis column from X
-                idx_xaxis = X_dimensions.index(xaxis)
-                X_dum = np.delete(X_dum,idx_xaxis,1) #remove xaxis column from X
-
-                # find index of all of the rows where X_dum == X_unique[i]
-                idx = np.where(np.all(X_dum==X_unique[i],axis=1))[0]
-
-                if type(weight) == int or weight is None:
-                    weight_dum = None
-                else:
-                    weight_dum = weight[idx]
-                maxi = max(np.max(y[idx]),np.max(yf[idx]))
-                mini = min(np.min(y[idx]),np.min(yf[idx]))
-                nRMSE.append(mean_squared_error(yf[idx],y[idx],sample_weight=weight_dum,squared=False)/(maxi-mini))
-            return np.mean(nRMSE)
-
-        else:
-            warnings.warn('WARNING: obj_func type not recognized. Using MSE instead.')
-            return mean_squared_error(yf,y,sample_weight=weight)     
-
-    def lossfunc(self,z0,loss,threshold=1000):
-        """Define the different loss functions that can be used to calculate the 
-        objective function value.
-
-        Parameters
-        ----------
-        z0 : 1D-array
-            data array of size (n,) with the mean squared error values
-        loss : str
-            type of loss function to use, can be ['linear','soft_l1','huber','cauchy','arctan']
-        threshold : int, optional
-            critical value above which loss sets in, by default 1000. 
-            Wisely select so that the loss function affects only outliers.
-            If threshold is set too low, then c<z0 even fon non-outliers
-            falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.
-
-        Returns
-        -------
-        1D-array
-            array of size (n,) with the loss function values
-        """    
-        z = z0/threshold # we know the obj func is between 0 and 100 
-        if loss=='linear':
-            c = z
-        elif loss=='soft_l1':
-            c = 2 * ((1 + z)**0.5 - 1)
-        elif loss=='huber':
-            c =  z if z <= 1 else 2*z**0.5 - 1
-        elif loss=='cauchy':
-            c = np.log(1 + z)
-        elif loss=='arctan':
-            c = np.arctan(z)
-        return threshold*c # make sure the cost is between 0 and 100 too
-
+    
         
     def LLH(self,X,beta_scaled,N,gpr,fscale): # now that beta is known, get negative log likelihood
         """Return the negative log likelihood -ln(p(t|w,beta)) where t are the measured target values,
@@ -434,6 +158,7 @@ class MultiObjectiveOptimizer():
         SSE = Y*N # the sum of squared errors
         LLH = -beta/2 * SSE + N/2*np.log(beta) - N/2*np.log(2*np.pi) # Bishop eq. 1.62
         #return np.exp(LLH)
+
         return LLH #
     
     def MCMC_LH(self,X,beta_scaled,N,gpr,fscale):
@@ -476,14 +201,14 @@ class MultiObjectiveOptimizer():
     ###############################################################################
     ############################ Posterior utils ##################################
     ###############################################################################
-    def MCMC_posterior(self, pos, beta_scaled, N, gpr, fscale, Nres, gaussfilt, logscale, vmin, zoom=1, xmin =[]):
+    def MCMC_posterior(self, pos, beta_scaled, N, gpr, fscale, Nres, logscale, vmin, zoom=1, xmin =[]):
         
         # get varied fitparams
         pf = [pp for pp in self.targets[-1]['params'] if pp.relRange!=0]
         p0, lb, ub = self.params_r(self.targets[-1]['params'])
         # create grid
         dims = []
-        Nreso = Nres*gaussfilt # oversampled resolution for anti-aliasing
+        Nreso = Nres # oversampled resolution for anti-aliasing
         for ii,pff in enumerate(pf):
             dims.append(np.linspace(lb[ii],ub[ii],Nreso))
 
@@ -514,14 +239,14 @@ class MultiObjectiveOptimizer():
         import corner
         pnames_display = [pp.display_name for pp in self.targets[-1]['params'] if pp.relRange!=0] # for plots axis labels ,2.66989700043360188048e1
         fig = plt.figure(figsize=(18, 12))
-        corner.corner(samples, labels=pnames_display,color='b',fig=fig)#,truths=[-1.73010299956639811952e1,-7.69897000433601880479,-7.09691001300805641436],fig=fig)
+        corner.corner(samples, labels=pnames_display,color='C0',fig=fig)#,truths=[-1.73010299956639811952e1,-7.69897000433601880479,-7.09691001300805641436],fig=fig)
         
         # fig = plt.figure(figsize=(12, 12))
         # gs = GridSpec(nb_params, nb_params, figure=fig)
 
        
     
-    def do_grid_posterior(self,step,fig,axes,gs,lb,ub,pf,beta_scaled, N, gpr, fscale, Nres, gaussfilt, logscale, vmin, min_prob=1e-2, clear_axis=False,True_values=None,points=None):
+    def do_grid_posterior(self,step,fig,axes,gs,lb,ub,pf,beta_scaled, N, gpr, fscale, Nres, logscale, vmin, min_prob=1e-2, clear_axis=False,True_values=None,points=None):
         """Obtain the posterior probability distribution p(w|y) by brute force gridding
         where w is the set of model parameters and y is the data
         For each fitparameter, return mean and standard deviation
@@ -550,8 +275,6 @@ class MultiObjectiveOptimizer():
             scaling factor 
         Nres : integer
             Sampling resolution. Number of data points per dimension.
-        gaussfilt : integer
-            anti-aliasing of posterior
         logscale : boolean
             display in log scale?
         vmin : float
@@ -573,9 +296,13 @@ class MultiObjectiveOptimizer():
         """ 
 
         pnames = [pp.name for pp in pf if pp.relRange!=0]
-        pnames_display = [pp.display_name for pp in pf if pp.relRange!=0] # for plots axis labels
+        # pnames_display = [pp.display_name for pp in pf if pp.relRange!=0] # for plots axis labels
+        pnames_main = [pp.name for pp in pf]
+        pnames_display = [pp.full_name for pp in pf if pp.relRange!=0]
+
         axis_type = [pp.axis_type for pp in pf if pp.relRange!=0] # to get the type of the axis for the plots
         optim_type = [pp.optim_type for pp in pf if pp.relRange!=0] # to get the type of the axis for the plots
+        pval = [pp.val for pp in pf if pp.relRange!=0]
         # get varied fitparams
         # pf = [pp for pp in self.targets[-1]['params'] if pp.relRange!=0]
         p0, lb_main, ub_main = self.params_r(pf)
@@ -604,26 +331,39 @@ class MultiObjectiveOptimizer():
 
         # create grid
         dims,dims_GP = [],[]
-        Nreso = Nres*gaussfilt # oversampled resolution for anti-aliasing
+        Nreso = Nres 
         # create grid and reconvert the parameters to the original scale
         for ii,pff in enumerate(pf): 
             if pff.relRange != 0:
+                parax = np.linspace(lb[ii],ub[ii],Nreso)
+                # add the best fit value if provided
+                if pf[ii].optim_type == 'log':
+                    best_val = np.log10(pf[ii].val)
+                else:
+                    best_val = pf[ii].val/pf[ii].p0m
+                
+                # put best value in par_ax and sort
+                parax = np.sort(np.append(parax,best_val))
+
+
                 if pff.optim_type == 'linear':
                     dum_lb = lb[ii] * pff.p0m
                     dum_ub = ub[ii] * pff.p0m
-                    dims.append(np.linspace(dum_lb,dum_ub,Nreso))
+                    # dims.append(np.linspace(dum_lb,dum_ub,Nreso))
+                    dims.append(parax*pff.p0m)
 
                 elif pff.optim_type == 'log':
                     dum_lb = 10**(lb[ii])
                     dum_ub = 10**(ub[ii])
-                    dims.append(np.geomspace(dum_lb,dum_ub,Nreso))
+                    # dims.append(np.geomspace(dum_lb,dum_ub,Nreso))
+                    dims.append(10**(parax))
                 else: 
                     raise ValueError('ERROR. ',pff.name,' optim_type needs to be ''linear'' or ''log'' not ',pff.optim_type,'.')
-                               
-        
-            dims_GP.append(np.linspace(lb[ii],ub[ii],Nreso))   #need as an input for the GP
-            
 
+                # dims_GP.append(np.linspace(lb[ii],ub[ii],Nreso))   #need as an input for the GP
+                dims_GP.append(parax)   #need as an input for the GP
+            
+ 
         if logscale: # if we are in logscale, we need to transform the grid
             min_prob = np.log10(min_prob)
             vmin = np.log10(vmin)
@@ -636,7 +376,7 @@ class MultiObjectiveOptimizer():
         # build complete matrix
         tic = time()
         XC = np.array(list(itertools.product(*dims_GP)))
-    
+
         ## Make sure that len(Xc) < 1e7 otherwise we risk to fill up the RAM
         if len(XC) > 1e6:
             Xcc = np.array_split(XC, int(len(XC)/1e6))
@@ -646,33 +386,62 @@ class MultiObjectiveOptimizer():
                 else:
                     aa0prime = np.concatenate((aa0prime, self.LH(Xcc[ii],beta_scaled=beta_scaled,N=N,gpr=gpr,fscale=fscale)))
             
-            aa1 = aa0prime.reshape(*[Nreso for _ in range(len(pf))]) # bring it into array format
+            aa1 = aa0prime.reshape(*[Nreso+1 for _ in range(len(pf))]) # bring it into array format
+            # Note: the Nreso plus one comes from adding the best fit value
         else:
             aa0 = self.LH(XC,beta_scaled=beta_scaled,N=N,gpr=gpr,fscale=fscale)# predict them all at once
-            aa1 = aa0.reshape(*[Nreso for _ in range(len(pf))]) # bring it into array format
-
+            aa1 = aa0.reshape(*[Nreso+1 for _ in range(len(pf))]) # bring it into array format
+            # Note: the Nreso plus one comes from adding the best fit value
         # build the single 2D panels
         
         for comb in list(itertools.combinations(range(nb_params), 2)):
             d1, d2 = comb[0], comb[1] 
 
             margax = [dd for dd in range(nb_params) if dd not in [d1,d2]] # the axes over which to marginalize
+            ''' old way
+            margax = [dd for dd in range(nb_params) if dd not in [d1,d2]] # the axes over which to marginalize
             LHS = logsumexp(aa1,axis = tuple(margax))
-            LHS-=np.max(LHS) # avoid underflow by setting the max to zero
+            # LHS-=np.max(LHS) # avoid underflow by setting the max to zero
+            
+            # if logscale:
+            #     LHS[LHS<vmin]=vmin
+            #     vmin = vmin
+            #     vmax = 0
+            # else:
+            #     LHS = np.exp(LHS) # do the exponential => now it's prop. to probability
+            #     # LHS/=np.sum(LHS)
+            #     vmin = 0
+            #     # vmax = 1
+            #     vmax = np.max(LHS)
+
+            # test 
+            LHS = np.exp(LHS) # do the exponential => now it's prop. to probability
+            total = np.sum(LHS)
+            LHS/=total
+
+            ######################
+            # LHS = np.exp(aa1) # do the exponential => now it's prop. to probability
+            # prob = np.sum(LHS,axis=tuple(margax))
+            # prob = prob/np.sum(prob) # normalize to 1
+            # LHS = prob
+            ######################
+            '''
+
+            # Calculate the marginal posterior probability distribution p(w|y) for parameter ii by integrating over the other parameters
+            lhlog = logsumexp(aa1,axis=tuple(margax)) # logsumexp is more accurate than np.log(np.sum(np.exp(lh),axis=1))
+            p = np.exp(lhlog-logsumexp(lhlog)) #normalize the likelihood
+            LHS = p
             
             if logscale:
+                LHS = np.log10(LHS)
                 LHS[LHS<vmin]=vmin
                 vmin = vmin
                 vmax = 0
             else:
-                LHS = np.exp(LHS) # do the exponential => now it's prop. to probability
-                LHS = gaussian_filter(LHS, sigma=gaussfilt)
-                # LHS/=np.sum(LHS)
                 vmin = 0
-                # vmax = 1
-                vmax = np.max(LHS)
+                vmax = 1
 
-            
+
             if clear_axis: # clear the axes for the zoomed in version
                 axes[d2][d1].clear() # clear the previous plot
             
@@ -704,8 +473,13 @@ class MultiObjectiveOptimizer():
                 axes[d2][d1].plot(pred1_plot,pred2_plot,'o',color='k',markersize=3)
             
             # plot the true values
-            if plot_true_values: 
-                axes[d2][d1].plot(True_values[pnames[d1]],True_values[pnames[d2]],'*',color='C3',markersize=10)
+            try:
+                if plot_true_values: 
+                    axes[d2][d1].plot(True_values[pnames[d1]],True_values[pnames[d2]],'*',color='C3',markersize=10)
+            except Exception as e:
+                warnings.warn('WARNING. Could not plot the true values either '+pnames[d1]+' or '+pnames[d2]+' are not in the True_values dictionary.')
+            # plot the best fit values
+            axes[d2][d1].plot(pf[d1].val,pf[d2].val,'C2X',markersize=10)
 
             # Prepare the axis labels and ticks
             if step == 0 or clear_axis:
@@ -780,19 +554,25 @@ class MultiObjectiveOptimizer():
             else:
                 raise ValueError('ERROR. ',pf[idx].name,' optim_type needs to be ''linear'' or ''log'' not ',pf[idx].optim_type,'.')
             idx+=1
-
+        std95 = []
         for comb in range(nb_params):
             margax = [dd for dd in range(nb_params) if dd !=comb] # the axes over which to marginalize
-            LHS = logsumexp(aa1,axis = tuple(margax))
-            LHS-=np.max(LHS) # avoid underflow by setting the max to zero
+            ''' old way
+            # LHS = logsumexp(aa1,axis = tuple(margax))
+            # LHS-=np.max(LHS) # avoid underflow by setting the max to zero
+            # LHS = np.exp(LHS) # do the exponential => now it's prop. to probability
+            '''
 
-            LHS = np.exp(LHS) # do the exponential => now it's prop. to probability
+            lhlog = logsumexp(aa1,axis=tuple(margax)) # logsumexp is more accurate than np.log(np.sum(np.exp(lh),axis=1))
+            p = np.exp(lhlog-logsumexp(lhlog)) #normalize the likelihood
+            LHS = p
+
+
             if logscale:
                 LHS[LHS<10**vmin]=10**vmin
                 vmin = vmin
                 vmax = 1
             else:
-                # LHS = gaussian_filter(LHS, sigma=gaussfilt) 
                 vmin = 0
                 vmax = 1
             
@@ -801,7 +581,13 @@ class MultiObjectiveOptimizer():
 
             # plot true values as a line
             if plot_true_values:
-                axes[comb][comb].axvline(True_values[pnames[comb]],color='C3',linestyle='--')
+                try:
+                    axes[comb][comb].axvline(True_values[pnames[comb]],color='C3',linestyle='--')
+                    axes[comb][comb].plot(True_values[pnames[comb]],1,'C3*',markersize=10)
+                
+                except Exception as e:
+                    warnings.warn('WARNING. Could not plot true value for '+pnames[comb])
+
 
             if logscale:
                 cut_prob = 10**min_prob
@@ -830,13 +616,14 @@ class MultiObjectiveOptimizer():
             if comb==0:
                 if logscale:
                     axes[comb][comb].set_yscale('log')
-                    axes[comb][comb].set_ylabel('P(w|y),norm') 
+                    axes[comb][comb].set_ylabel('P(w|y)') 
                     # axes[comb][comb].set_ylim((10**vmin,2)) 
                     axes[comb][comb].set_yticks([10**vmin,10**(int(vmin/2)),1], minor=False)
                     
                 else:
-                    axes[comb][comb].set_ylabel('P(w|y),norm')
+                    axes[comb][comb].set_ylabel('P(w|y)')
                     axes[comb][comb].set_yticks([0,0.5,1], minor=False) 
+                    # axes[comb][comb].set_ylim((0,2))
                     # axes[comb][comb].set_ylim((0,2))    
             else:
                 axes[comb][comb].tick_params(axis='y',labelleft=False,which='both')
@@ -881,16 +668,77 @@ class MultiObjectiveOptimizer():
 
 
             # get moments of cumulative probability density
-            pd = LHS
-            xpd = dims[comb] # do not delogarithmize as this would distort the pdf!
-            if optim_type[comb] == 'linear':
-                xpd/=pf[comb].p0m 
+            # pd = LHS
+            # # xpd = dims[comb] # do not delogarithmize as this would distort the pdf!
+            # # print(dims[comb])
+            # xpd = dims_GP[comb] # do not delogarithmize as this would distort the pdf!
+            # # print(xpd)
+            # if optim_type[comb] == 'linear':
+            #     xpd/=pf[comb].p0m 
             
-            m1 = np.sum(pd*(xpd)**1) / np.sum(pd) # the mean
-            m2 = np.sum(pd*(xpd-m1)**2) / np.sum(pd) # the variance
-            xx.append(m1)
-            stdx.append(np.sqrt(m2))
-        
+            # m1 = np.sum(pd*(xpd)**1) / np.sum(pd) # the mean
+            # m2 = np.sum(pd*(xpd-m1)**2) / np.sum(pd) # the variance
+            # xx.append(m1)
+            # stdx.append(np.sqrt(m2))
+
+            # get 95 % confidence interval
+            # find closest value to best fit value
+            #
+            x_name = pnames[comb]
+            idx_X_main = pnames_main.index(x_name)
+            if pf[idx_X_main].optim_type == 'log':
+                best_val = pf[idx_X_main].val
+            else:
+                best_val = pf[idx_X_main].val
+            idx_best = np.argmin(np.abs(dims[comb]-best_val))
+
+            par_ax = dims[comb]
+            p = LHS
+            ilow = 0
+            ihigh = len(par_ax)-1
+            sum_prob = 0
+            for i in range(len(par_ax)-1):
+                sum_prob += p[i]
+                if sum_prob >= 0.025:
+                    ilow = i
+                    break
+            sum_prob = 0
+            for i in range(len(par_ax)-1):
+                sum_prob += p[len(par_ax)-1-i]
+                if sum_prob >= 0.025:
+                    ihigh = len(par_ax)-1-i
+                    break
+            if ilow > idx_best:
+                ilow = idx_best
+            if ihigh < idx_best:
+                ihigh = idx_best
+            
+            # 95% confidence interval centered on the best fit value
+            ihigh = min(ihigh,len(par_ax)-1)
+            ilow = max(ilow,0)
+
+            limlow = min(par_ax[ilow],best_val)
+            limhigh = max(par_ax[ihigh],best_val)
+
+            # add the 95% confidence interval to the plot
+            axes[comb][comb].axvline(limlow,color='C0',linestyle='-.')
+            axes[comb][comb].axvline(limhigh,color='C0',linestyle='-.')
+            std95.append((limlow,limhigh))
+            # Note: this is the 95% confidence interval unless the ground truth val is too far from the minimum of the surrogate model
+            # in that case one of the limits of the confidence interval is the ground truth value
+
+            # color the 95% confidence interval
+            mask = (par_ax >= limlow) & (par_ax <= limhigh) # Create mask for the shaded area
+            axes[comb][comb].fill_between(par_ax, p, where=mask, color='C0', alpha=0.5) # Fill the area below the curve between the vertical lines
+
+            axes[comb][comb].axvline(pf[idx_X_main].val,color='C0',linestyle='-') # add the best fit value to the plot
+
+            # Set the axis limits and labels
+            if pf[idx_X_main].optim_type == 'log':
+                axes[comb][comb].set_xlim([10**(lb[comb]),10**(ub[comb])])
+            else:
+                axes[comb][comb].set_xlim([lb[comb]*pf[idx_X_main].p0m,ub[comb]*pf[idx_X_main].p0m])
+
         print('Sampling for posterior distribution done in ', time()-tic,'s')
 
         ## Make colorbar
@@ -919,24 +767,28 @@ class MultiObjectiveOptimizer():
 
         # Set the colorbar label on the left side
         cbar.ax.yaxis.set_label_position('left')
-        cbar.ax.set_ylabel('P(w|y),norm', rotation=90, va='bottom')
+        cbar.ax.set_ylabel('P(w|y)', rotation=90, va='bottom')
 
 
         # rearrange the lb_new and ub_new for the next iteration
+
         for comb in range(nb_params):
             if pf[comb].optim_type == 'linear':
                 lb_new[comb] = lb_new[comb]/pf[comb].p0m
                 ub_new[comb] = ub_new[comb]/pf[comb].p0m
+
             elif pf[comb].optim_type == 'log':
                 lb_new[comb] = np.log10(lb_new[comb])
                 ub_new[comb] = np.log10(ub_new[comb])
+
             else:
                 raise ValueError('ERROR. ',pnames[comb],' optim_type needs to be ''linear'' or ''log'' not ',optim_type[comb],'.')
 
-        
-        return xx,stdx, lb_new, ub_new
 
-    def zoomed_posterior(self, params, lb_main, ub_main, beta_scaled, N, gpr, fscale,kwargs_posterior, points = None):#, Nres, gaussfilt, logscale, vmin, zoom=1, min_prob=1e-40, clear_axis=False):
+        # return xx,stdx, lb_new, ub_new
+        return xx,std95, lb_new, ub_new
+
+    def posterior(self, params, lb_main, ub_main, beta_scaled, N, gpr, fscale,kwargs_posterior, points = None):#, Nres, logscale, vmin, zoom=1, min_prob=1e-40, clear_axis=False):
         """Obtain the posterior probability distribution p(w|y) by brute force gridding
         where w is the set of model parameters and y is the data
         For each fitparameter, return mean and standard deviation
@@ -963,14 +815,16 @@ class MultiObjectiveOptimizer():
             including: 
                 Nres : integer, optional
                     Sampling resolution. Number of data points per dimension, by default 30
-                gaussfilt : integer, optional
-                    anti-aliasing of posterior, by default 5
+                Ninteg : integer, optional
+                    Number of points for the marginalization over the other parameters when full_grid = False, by default 100
+                full_grid : boolean, optional
+                    If True, use a full grid for the posterior, by default False
                 logscale : boolean, optional
                     display in log scale?, by default True
                 vmin : float, optional
                     lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100
                 zoom : int, optional
-                    number of time to zoom in, by default 1.
+                    number of time to zoom in, only used if full_grid = True, by default 0
                 min_prob : float, optional
                     minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.
                 clear_axis : boolean, optional
@@ -1011,11 +865,13 @@ class MultiObjectiveOptimizer():
         nb_params = len(params)
 
         # get kwargs
-        Nres = kwargs_posterior.get('Nres',30)
-        gaussfilt = kwargs_posterior.get('gaussfilt',5)
+        Nres = kwargs_posterior.get('Nres',10)
+        Ninteg = kwargs_posterior.get('Ninteg',1e5)
+        full_grid = kwargs_posterior.get('full_grid',False)
+        randomize = kwargs_posterior.get('randomize',False)
         logscale = kwargs_posterior.get('logscale',True)
         vmin = kwargs_posterior.get('vmin',1e-100)
-        zoom = kwargs_posterior.get('zoom',1)
+        zoom = kwargs_posterior.get('zoom',0)
         min_prob = kwargs_posterior.get('min_prob',1e-40)
         clear_axis = kwargs_posterior.get('clear_axis',False)
         True_values = kwargs_posterior.get('True_values',None)
@@ -1028,44 +884,906 @@ class MultiObjectiveOptimizer():
         figdpi = kwargs_posterior.get('figdpi',300)
         show_fig = kwargs_posterior.get('show_fig',True)
 
+        # save parameters to self for later use
+        self.Nres = Nres
+        self.Ninteg = Ninteg
+        self.logscale = logscale
+        self.vmin = vmin
+        self.min_prob = min_prob
+       
+
+
         if show_points == False:
             points = None
-                
-        fig, axes = plt.subplots(nrows=nb_params, ncols=nb_params, figsize=figsize)
-        gs = GridSpec(nb_params, nb_params, figure=fig)
-        if zoom > 0:
-            for i in range(zoom):
-                if i == 0:
-                    old_lb = copy.deepcopy(lb_main)
-                    old_ub = copy.deepcopy(ub_main)
-                else:
-                    old_lb = copy.deepcopy(new_lb)
-                    old_ub = copy.deepcopy(new_ub)
-                
-                xx, stdx, new_lb, new_ub = self.do_grid_posterior(i,fig,axes,gs,old_lb,old_ub,params,beta_scaled, N, gpr, fscale, Nres, gaussfilt, logscale, vmin,min_prob=min_prob, clear_axis=clear_axis, True_values=True_values, points=points)
-
-                if new_lb == old_lb and new_ub == old_ub:
-                    print('Only {} zooms done'.format(i))
-                    print('No more zooming in, to zoom in further, change the min_prob')
-                    break
-                
-                if savefig:
-                    fig.savefig(os.path.join(figdir,figname+'_zoom_'+str(i)+figext), dpi=figdpi)
-            print('{} zooms done'.format(zoom))
-                
-        else:
-            xx, stdx, lb, ub = self.do_grid_posterior(0,fig,axes,gs,lb_main,ub_main,params,beta_scaled, N, gpr, fscale, Nres, gaussfilt, logscale, vmin,min_prob=min_prob, clear_axis=clear_axis, True_values=True_values, points=points)
         
-        if show_fig:
-            plt.show()
 
-        if savefig:
-            plt.tight_layout()
-            fig.savefig(os.path.join(figdir,figname+figext), dpi=300)
+        if full_grid == True and randomize == False:
+
+            fig, axes = plt.subplots(nrows=nb_params, ncols=nb_params, figsize=figsize)
+            gs = GridSpec(nb_params, nb_params, figure=fig)
+            if zoom > 0:
+                for i in range(zoom):
+                    if i == 0:
+                        old_lb = copy.deepcopy(lb_main)
+                        old_ub = copy.deepcopy(ub_main)
+                    else:
+                        old_lb = copy.deepcopy(new_lb)
+                        old_ub = copy.deepcopy(new_ub)
+                    
+                    xx, stdx, new_lb, new_ub = self.do_grid_posterior(i,fig,axes,gs,old_lb,old_ub,params,beta_scaled, N, gpr, fscale, Nres, logscale, vmin,min_prob=min_prob, clear_axis=clear_axis, True_values=True_values, points=points)
+
+                    if new_lb == old_lb and new_ub == old_ub:
+                        print('Only {} zooms done'.format(i))
+                        print('No more zooming in, to zoom in further, change the min_prob')
+                        break
+                    
+                    if savefig:
+                        fig.savefig(os.path.join(figdir,figname+'_zoom_'+str(i)+figext), dpi=figdpi)
+                print('{} zooms done'.format(zoom))
+                    
+            else:
+                xx, stdx, lb, ub = self.do_grid_posterior(0,fig,axes,gs,lb_main,ub_main,params,beta_scaled, N, gpr, fscale, Nres, logscale, vmin,min_prob=min_prob, clear_axis=clear_axis, True_values=True_values, points=points)
+
+            if show_fig:
+                plt.show()
+
+            if savefig:
+                plt.tight_layout()
+                fig.savefig(os.path.join(figdir,figname+figext), dpi=300)
+
+        elif full_grid == True and randomize == True:
+            
+            xx, stdx, lb, ub = self.randomize_grid_posterior(params, lb_main, ub_main, beta_scaled, N, gpr, fscale,kwargs_posterior, points = points,True_values=True_values)
+        else:
+            # make len(self.params)/2 x len(self.params)/2 grid of subplots
+            free_params = [p for p in params if p.relRange != 0]
+            num_plots = len(free_params)
+            num_rows = int(num_plots ** 0.5)  # Calculate number of columns
+            num_cols = int((num_plots + num_rows - 1) // num_rows) # Calculate number of rows
+            if num_rows == 0:
+                num_rows = 1
+            if num_cols == 0:
+                num_cols = 1
+            f, axes = plt.subplots(num_rows, num_cols,figsize=figsize)
+            idx = 0
+            xx,stdx = [],[]
+            for param in params:
+                if param.relRange != 0:
+                    row = int(idx // num_cols)
+                    col = int(idx % num_cols)
+                    if num_rows == 1:
+                        ax = axes[col]
+                    else:
+                        ax = axes[row, col]
+                    x_, std_, lb, ub = self.marginal_posterior_1D(param.name, pf=params, fig=f, ax=ax,True_values=True_values,points=points,logscale=logscale,lb = lb_main, ub = ub_main,beta_scaled = beta_scaled, N = N,gpr=gpr, fscale=fscale, Nres=Nres, Ninteg=Ninteg, vmin=vmin, min_prob=min_prob, clear_axis=clear_axis)
+                    
+                    idx += 1
+                    xx.append(x_)
+                    stdx.append(std_)
+            f.tight_layout()
+
+            if show_fig:
+                plt.show()
+            if savefig:
+                f.savefig(os.path.join(figdir,figname+figext), dpi=300)
 
         return xx,stdx
 
+
+    def marginal_posterior_1D(self, x_name, pf = None, lb = None, ub = None, fig = None, ax = None, True_values = None, gpr = None, N = None, beta_scaled =None, fscale = None, Nres = None, Ninteg = 1e5, vmin = None, min_prob=None, points = None, logscale = False, show_plot = True, clear_axis = False, xlabel_pos = 'bottom', ylabel_pos = 'left', **kwargs):
+
+        """ calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters
+        
+        Parameters
+        ----------
+        x_name : str
+            name of the parameter for which the marginal posterior probability distribution is calculated
+        lb : float, optional
+            lower bound of the parameter x_name, if None we use the main boundaries, by default None
+        ub : float, optional
+            upper bound of the parameter x_name, if None we use the main boundaries, by default None
+        fig : matplotlib figure, optional
+            figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None
+        ax : matplotlib axis, optional
+            axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None
+        True_values : dict, optional
+            dictionary with the true values of the parameters, by default None
+        gpr : sklearn regressor, optional
+            regressor to calculate the likelihood, if None we use the self.gpr, by default None
+        N : int, optional
+            number of samples to calculate the likelihood, if None we use the self.N, by default None
+        beta_scaled : float, optional
+            scaling factor for the likelihood, if None we use the self.beta_scaled, by default None
+        fscale : float, optional
+            scaling factor for the likelihood, if None we use the self.fscale, by default None
+        Nres : int, optional
+            number of points to calculate the marginal posterior probability distribution, by default None
+        Ninteg : int, optional
+            number of points to marginalize the prob, by default 1e5
+        vmin : float, optional
+            minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None
+        min_prob : float, optional
+            value used for the cut off probability when zooming in, note that for now this is not in used, by default None
+        points : array, optional
+            array with the points to plot the marginal posterior probability distribution, by default None
+        logscale : bool, optional
+            if True we plot the marginal posterior probability distribution in log scale, by default False
+        show_plot : bool, optional
+            if True we show the plot, by default True
+        clear_axis : bool, optional
+            if True we clear the axis, by default False
+        xlabel_pos : str, optional
+            position of the xlabel, by default 'bottom'
+        ylabel_pos : str, optional
+            position of the ylabel, by default 'left'
+        **kwargs : dict, optional
+            additional arguments to pass to the plot function, by default None
+
+        Returns
+        -------
+
+        """ 
+        # Make sure we have all the parameters we need otherwise use the values in self    
+        if pf is None:
+            # check is self.pf is intialized
+            if hasattr(self,'params') is True:
+                pf = self.params
+            else:
+                raise ValueError("self.pf is not initialized and no pf is provided.")
+        if gpr is None:
+            # check is self.gpr is intialized
+            if hasattr(self,'gpr') is True: 
+                gpr = self.gpr
+            else:
+                raise ValueError("self.gpr is not initialized and no gpr is provided.")
+        if N is None:
+            # check is self.N is intialized
+            if hasattr(self,'N') is True: 
+                N = self.N
+            else:
+                raise ValueError("self.N is not initialized and no N is provided.")
+        if beta_scaled is None:
+            # check is self.beta_scaled is intialized
+            if hasattr(self,'beta_scaled') is True:
+                beta_scaled = self.beta_scaled
+            else:
+                raise ValueError("self.beta_scaled is not initialized and no beta_scaled is provided.")
+        if fscale is None:
+            # check is self.fscale is intialized
+            if hasattr(self,'fscale') is False: 
+                fscale = [1]
+                warnings.warn("self.fscale is not initialized and no fscale is provided. Set to default value of 1.")
+            else:
+                fscale = self.fscale
+        if Nres is None:
+            # check is self.Nres is intialized
+            if hasattr(self,'Ninteg') is False:
+                Nres = int(10) 
+                warnings.warn("self.Nres is not initialized and no Nres is provided. Set to default value of 10.")
+            else:
+                Nres = int(self.Nres) # make sure it is an integer
+        else:
+            Nres = int(Nres)
+        if Ninteg is None:
+            if hasattr(self,'Ninteg') is False: # number of samples to draw from the grid to calculate the likelihood
+                Ninteg = int(1e5)
+                warnings.warn("self.Ninteg is not initialized and no Ninteg is provided. Set to default value of 1e5.")
+            else:
+                Ninteg = int(self.Ninteg)
+        else:
+            Ninteg = int(Ninteg)
+        if vmin is None:
+            if logscale is True:
+                if hasattr(self,'vmin') is False:
+                    vmin = 1e-10
+                    warnings.warn("self.vmin is not initialized and no vmin is provided. Set to default value of 1e-10.")
+                else:
+                    vmin = self.vmin
+
+        pnames_main = [pp.name for pp in pf]
+        pnames = [pp.name for pp in pf if pp.relRange!=0]
+        pnames_display = [pp.display_name for pp in pf if pp.relRange!=0]
+        pnames_full = [pp.full_name for pp in pf if pp.relRange!=0]
+
+        # get the bounds of the parameters
+        p0, lb_main, ub_main = self.params_r(pf) # get the main bounds of the parameters (i.e. with the zooming)
+        if lb is None:
+            lb = lb_main
+        if ub is None:
+            ub = ub_main
+
+        
+        # get the index of the parameter to plot in pnames_main
+        idx_X_main = pnames_main.index(x_name)
+        ii = pnames.index(x_name)
+
+        # initialize the figure if not provided
+        if (fig is None and ax is None) or (ax is None):
+            fig = plt.figure(figsize=(8,8))
+            ax = fig.add_subplot(111)
+            not_init = True
+        else:
+            not_init = False
+
+        # create a linspace for the parameter ii
+        par_ax = np.linspace(lb[ii],ub[ii],Nres)
+        # add the best fit value if provided
+        if pf[idx_X_main].optim_type == 'log':
+            best_val = np.log10(pf[idx_X_main].val)
+        else:
+            best_val = pf[idx_X_main].val/pf[idx_X_main].p0m
+
+        # put best value in par_ax and sort
+        par_ax = np.sort(np.append(par_ax,best_val))
+        idx_best = np.where(par_ax==best_val)[0][0]#get best_val position
+
+        # create an empty array to store the likelihood
+        lh = np.zeros((len(par_ax),Ninteg))
+
+        # make a 2D vector where the value of parameter ii is fixed to the values in par_ax and a Ninteg random samples are drawn randomly from the grid to set the values of the other parameters
+        for i in range(len(par_ax)):
+            X = np.zeros((Ninteg,len(lb)))
+            X[:,ii] = par_ax[i]
+            for jj in range(len(lb)):
+                if jj!=ii:
+                    X[:,jj] = np.random.uniform(lb[jj],ub[jj],Ninteg)
+            lh[i,:] = self.LH(X,beta_scaled,N,gpr,fscale)
+
+        # Calculate the marginal posterior probability distribution p(w|y) for parameter ii by integrating over the other parameters
+        lhlog = logsumexp(lh,axis=1) # logsumexp is more accurate than np.log(np.sum(np.exp(lh),axis=1))
+        p = np.exp(lhlog-logsumexp(lhlog)) #normalize the likelihood
+
+       
+        ''' old way (Not accurate so need logsumexp)
+        lh[i,:] =  np.exp(self.LH(X,beta_scaled,N,gpr,fscale))
+        calculate the marginal posterior probability distribution p(w|y) for parameter ii by integrating over the other parameters
+        p = np.sum(lh,axis=1)
+        p = p/np.sum(p)
+        '''
+
+        if np.sum(p) <= 1e-3: # this is in case all p are zeros 
+            warnings.warn("The marginal posterior probability distribution is all zeros. We set it to a uniform distribution.")
+            p = np.ones(len(p))
+
+        # prepare the axis
+        if pf[idx_X_main].optim_type == 'log':
+            par_ax = 10**(par_ax)
+        else:
+            par_ax = par_ax * pf[idx_X_main].p0m
+
+        # plot the marginal posterior probability distribution p(w|y) for parameter ii
+        if logscale:
+            p[p<vmin] = vmin
+            p[np.isnan(p)] = vmin
+        else:
+            p[p<0] = 0
+            # or or p is nan
+            p[np.isnan(p)] = 0
+        ax.plot(par_ax,p,'C0',linewidth=2)
+
+        if pf[idx_X_main].axis_type == 'log':
+            ax.set_xscale('log')
+        
+        ilow = 0
+        ihigh = len(par_ax)-1
+        sum_prob = 0
+        for i in range(len(par_ax)-1):
+            sum_prob += p[i]
+            if sum_prob >= 0.025:
+                ilow = i
+                break
+        sum_prob = 0
+        for i in range(len(par_ax)-1):
+            sum_prob += p[len(par_ax)-1-i]
+            if sum_prob >= 0.025:
+                ihigh = len(par_ax)-1-i
+                break
+        if ilow > idx_best:
+            ilow = idx_best
+        if ihigh < idx_best:
+            ihigh = idx_best
+
+
+        # 95% confidence interval centered on the best fit value
+        ihigh = min(ihigh,len(par_ax)-1)
+        ilow = max(ilow,0)
+        # add the 95% confidence interval to the plot
+        ax.axvline(par_ax[ilow],color='C0',linestyle='-.')
+        ax.axvline(par_ax[ihigh],color='C0',linestyle='-.')
+
+        # Note: this is the 95% confidence interval unless the ground truth val is too far from the minimum of the surrogate model
+        # in that case one of the limits of the confidence interval is the ground truth value
+
+        # color the 95% confidence interval
+        mask = (par_ax >= par_ax[ilow]) & (par_ax <= par_ax[ihigh]) # Create mask for the shaded area
+        ax.fill_between(par_ax, p, where=mask, color='C0', alpha=0.5) # Fill the area below the curve between the vertical lines
+
+        ax.axvline(pf[idx_X_main].val,color='C0',linestyle='-') # add the best fit value to the plot
+
+        try:
+            if True_values is not None: # plot the true value of parameter ii if provided
+            
+                ax.axvline(True_values[pnames[ii]],color='C3',linestyle='--')
+                ax.plot(True_values[pnames[ii]],1,'C3*',markersize=10)
+        except Exception as e:
+            warnings.warn('WARNING. Could not plot true value for '+pnames[ii])
+
+
+        ''' Old way of calculating the mean and standard deviation of the marginal posterior probability distribution p(w|y) for parameter ii (not used anymore)
+        calculate the mean and standard deviation of the marginal posterior probability distribution p(w|y) for parameter ii
+        m1 = np.sum(p*par_ax) / np.sum(p) # the mean
+        m2 = np.sum(p*(par_ax-m1)**2) / np.sum(p) # the variapar_axTnce
+        std = np.sqrt(m2) # the standard deviation
+        '''
+
+        # Set the axis limits and labels
+        if pf[idx_X_main].optim_type == 'log':
+            ax.set_xlim([10**(lb[ii]),10**(ub[ii])])
+        else:
+            ax.set_xlim([lb[ii]*pf[idx_X_main].p0m,ub[ii]*pf[idx_X_main].p0m])
+
+        ax.tick_params(axis='x', labelrotation = 45, which='both')
+
+        if logscale:
+            ax.set_yscale('log')
+            ax.set_ylim([vmin,2])
+        else:
+            ax.set_ylim([0,1.1])
+
+        if xlabel_pos is not None:
+            ax.set_xlabel(pnames_full[ii],position = xlabel_pos)
+            if xlabel_pos == 'top':
+                ax.xaxis.set_label_position('top')
+                ax.tick_params(axis='x',labelbottom=False,which='both')
+                ax.tick_params(axis='x',labeltop=True,which='both')
+            else:
+                ax.xaxis.set_label_position('bottom')
+                ax.tick_params(axis='x',labelbottom=True,which='both')
+                ax.tick_params(axis='x',labeltop=False,which='both')
+
+        else:
+            ax.set_xticklabels([]) # remove the x label ticks  
+            ax.set_xticks([]) # remove the x label ticks
+            ax.set_xlabel('')
+            ax.tick_params(axis='x',labelbottom=False,which='both')
+            ax.tick_params(axis='x',labeltop=False,which='both')
+
+        if ylabel_pos is not None:
+            ax.set_ylabel('P('+pnames_display[ii]+'|y)',position = ylabel_pos)
+            if ylabel_pos == 'right':
+                ax.yaxis.set_label_position('right')
+                ax.tick_params(axis='y',labelleft=False,which='both')
+                ax.tick_params(axis='y',labelright=True,which='both')
+            else:
+                ax.yaxis.set_label_position('left')
+                ax.tick_params(axis='y',labelleft=True,which='both')
+                ax.tick_params(axis='y',labelright=False,which='both')
+        else:
+            ax.set_yticklabels([]) # remove the x label ticks  
+            ax.set_yticks([]) # remove the x label ticks
+            ax.set_ylabel('')
+            ax.tick_params(axis='y',labelleft=False,which='both')
+            ax.tick_params(axis='y',labelright=False,which='both')
+
+        
+        if not_init:
+            fig.tight_layout()
+            plt.show()
+
+        # max probability
+        idx_max = np.argmax(p)
+        xmin = par_ax[idx_max]
+        std = (par_ax[ilow],par_ax[ihigh]) # 95% confidence interval
+
+        # Prepare new bounds for next zoom (not needed for now but maybe in the future)
+        lb_new = copy.deepcopy(lb)
+        ub_new = copy.deepcopy(ub)
+
+
+
+        return xmin,std,lb_new,ub_new
     
+    def marginal_posterior_2D(self, x_name, y_name, pf = None, lb = None, ub = None, fig = None, ax = None, True_values = None, gpr = None, N = None, beta_scaled =None, fscale = None, Nres = None, Ninteg = 1e5, vmin = None, min_prob=None, points = None, logscale = False, show_plot = True, clear_axis = False, xlabel_pos = 'bottom', ylabel_pos = 'left', **kwargs):
+
+        """ calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters
+        
+        Parameters
+        ----------
+        x_name : str
+            name of the parameter for which the marginal posterior probability distribution is calculated on the x-axis
+        y_name : str
+            name of the parameter for which the marginal posterior probability distribution is calculated on the y-axis
+        lb : float, optional
+            lower bound of the parameter x_name, if None we use the main boundaries, by default None
+        ub : float, optional
+            upper bound of the parameter x_name, if None we use the main boundaries, by default None
+        fig : matplotlib figure, optional
+            figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None
+        ax : matplotlib axis, optional
+            axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None
+        True_values : dict, optional
+            dictionary with the true values of the parameters, by default None
+        gpr : sklearn regressor, optional
+            regressor to calculate the likelihood, if None we use the self.gpr, by default None
+        N : int, optional
+            number of samples to calculate the likelihood, if None we use the self.N, by default None
+        beta_scaled : float, optional
+            scaling factor for the likelihood, if None we use the self.beta_scaled, by default None
+        fscale : float, optional
+            scaling factor for the likelihood, if None we use the self.fscale, by default None
+        Nres : int, optional
+            number of points to calculate the marginal posterior probability distribution, by default None
+        Ninteg : int, optional
+            number of points to marginalize the prob, by default 1e5
+        vmin : float, optional
+            minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None
+        min_prob : float, optional
+            value used for the cut off probability when zooming in, note that for now this is not in used, by default None
+        points : array, optional
+            array with the points to plot the marginal posterior probability distribution, by default None
+        logscale : bool, optional
+            if True we plot the marginal posterior probability distribution in log scale, by default False
+        show_plot : bool, optional
+            if True we show the plot, by default True
+        clear_axis : bool, optional
+            if True we clear the axis, by default False
+        xlabel_pos : str, optional
+            position of the xlabel, by default 'bottom'
+        ylabel_pos : str, optional
+            position of the ylabel, by default 'left'
+        **kwargs : dict, optional
+            additional arguments to pass to the plot function, by default None
+                show_points : bool, optional
+                    if True we show the points, by default True
+
+        Returns
+        -------
+
+        """ 
+
+        show_points = kwargs.setdefault('show_points', True)
+
+        # Make sure we have all the parameters we need otherwise use the values in self    
+        if pf is None:
+            # check is self.pf is intialized
+            if hasattr(self,'params') is True:
+                pf = self.params
+            else:
+                raise ValueError("self.pf is not initialized and no pf is provided.")
+        if gpr is None:
+            # check is self.gpr is intialized
+            if hasattr(self,'gpr') is True: 
+                gpr = self.gpr
+            else:
+                raise ValueError("self.gpr is not initialized and no gpr is provided.")
+        if N is None:
+            # check is self.N is intialized
+            if hasattr(self,'N') is True: 
+                N = self.N
+            else:
+                raise ValueError("self.N is not initialized and no N is provided.")
+        if beta_scaled is None:
+            # check is self.beta_scaled is intialized
+            if hasattr(self,'beta_scaled') is True:
+                beta_scaled = self.beta_scaled
+            else:
+                raise ValueError("self.beta_scaled is not initialized and no beta_scaled is provided.")
+        if fscale is None:
+            # check is self.fscale is intialized
+            if hasattr(self,'fscale') is False: 
+                fscale = [1]
+                warnings.warn("self.fscale is not initialized and no fscale is provided. Set to default value of 1.")
+            else:
+                fscale = self.fscale
+        if Nres is None:
+            # check is self.Nres is intialized
+            if hasattr(self,'Ninteg') is False:
+                Nres = int(10) 
+                warnings.warn("self.Nres is not initialized and no Nres is provided. Set to default value of 10.")
+            else:
+                Nres = int(self.Nres) # make sure it is an integer
+        else:
+            Nres = int(Nres)
+        if Ninteg is None:
+            if hasattr(self,'Ninteg') is False: # number of samples to draw from the grid to calculate the likelihood
+                Ninteg = int(1e5)
+                warnings.warn("self.Ninteg is not initialized and no Ninteg is provided. Set to default value of 1e5.")
+            else:
+                Ninteg = int(self.Ninteg)
+        else:
+            Ninteg = int(Ninteg)
+        if vmin is None:
+            if logscale is True:
+                if hasattr(self,'vmin') is False:
+                    vmin = 1e-10
+                    warnings.warn("self.vmin is not initialized and no vmin is provided. Set to default value of 1e-10.")
+                else:
+                    vmin = self.vmin
+
+        # if show_points is True and points is None:
+        #     points = self.points
+
+        
+        
+        pnames_main = [pp.name for pp in pf]
+        pnames = [pp.name for pp in pf if pp.relRange!=0]
+        pnames_display = [pp.display_name for pp in pf if pp.relRange!=0]
+        pnames_full = [pp.full_name for pp in pf if pp.relRange!=0]
+
+        # get the bounds of the parameters
+        p0, lb_main, ub_main = self.params_r(pf) # get the main bounds of the parameters (i.e. with the zooming)
+        if lb is None:
+            lb = lb_main
+        if ub is None:
+            ub = ub_main
+
+        
+        # get the index of the parameter to plot in pnames_main
+        idx_X_main = pnames_main.index(x_name)
+        iiX = pnames.index(x_name)
+        idx_Y_main = pnames_main.index(y_name)
+        iiY = pnames.index(y_name)
+
+        # initialize the figure if not provided
+        if (fig is None and ax is None) or (ax is None):
+            fig = plt.figure(figsize=(8,8))
+            ax = fig.add_subplot(111)
+            not_init = True
+        elif fig is not None and ax is None:
+            # get figure number
+            fig_num = fig.number
+            #activate figure
+            plt.figure(fig_num)
+            ax = fig.add_subplot(111)
+            not_init = True
+        else:
+            not_init = False
+
+        # create a linspace for the parameter ii
+        par_ax = np.linspace(lb[iiX],ub[iiX],Nres)
+        par_ay = np.linspace(lb[iiY],ub[iiY],Nres)
+
+        # add the best fit value if provided
+        if pf[idx_X_main].optim_type == 'log':
+            best_val_x = np.log10(pf[idx_X_main].val)
+        else:
+            best_val_x = pf[idx_X_main].val/pf[idx_X_main].p0m
+        
+        if pf[idx_Y_main].optim_type == 'log':
+            best_val_y = np.log10(pf[idx_Y_main].val)
+        else:
+            best_val_y = pf[idx_Y_main].val/pf[idx_Y_main].p0m
+
+
+        # put best value in par_ax and sort
+        par_ax = np.sort(np.append(par_ax,best_val_x))
+        idx_best = np.where(par_ax==best_val_x)[0][0]#get best_val position
+        par_ay = np.sort(np.append(par_ay,best_val_y))
+        idy_best = np.where(par_ay==best_val_y)[0][0]#get best_val position
+
+        # create an empty array to store the likelihood
+        lh = np.zeros((len(par_ax),len(par_ay),Ninteg))
+
+
+        # make a 2D vector where the value of parameter ii is fixed to the values in par_ax and a Ninteg random samples are drawn randomly from the grid to set the values of the other parameters
+        for i in range(len(par_ax)):
+            for j in range(len(par_ay)):
+                X = np.zeros((Ninteg,len(lb)))
+                X[:,iiX] = par_ax[i]
+                X[:,iiY] = par_ay[j]
+                for k in range(len(lb)):
+                    if k!=iiX and k!=iiY:
+                        X[:,k] = np.random.uniform(lb[k],ub[k],Ninteg)
+                lh[i,j,:] = self.LH(X,beta_scaled,N,gpr,fscale)
+        
+        # calculate the marginal posterior probability distribution p(w|y) for parameter ii by integrating over the other parameters
+        lhlog = logsumexp(lh,axis=2) # logsumexp is more accurate than np.log(np.sum(np.exp(lh),axis=1))
+        p = np.exp(lhlog-logsumexp(lhlog)) #normalize the likelihood
+
+
+        # prepare the axis
+        if pf[idx_X_main].optim_type == 'log':
+            par_ax = 10**(par_ax)
+        else:
+            par_ax = par_ax * pf[idx_X_main].p0m
+
+        if pf[idx_Y_main].optim_type == 'log':
+            par_ay = 10**(par_ay)
+        else:
+            par_ay = par_ay * pf[idx_Y_main].p0m
+
+        # plot the marginal posterior probability distribution p(w|y) for parameter ii
+        if logscale:
+            p = np.log10(p)
+            vmin = np.log10(vmin)
+            p[p<vmin] = vmin
+            p[np.isnan(p)] = vmin
+            vmax = 0
+        else:
+            p[p<0] = 0
+            # or or p is nan
+            p[np.isnan(p)] = 0
+            vmin = 0
+            vmax = 1
+
+        if clear_axis: # clear the axes for the zoomed in version
+            ax.clear() # clear the previous plot
+
+        contour_=ax.contourf(par_ax,par_ay,p.T,levels=50,vmin=vmin,vmax=vmax)
+        
+        if pf[idx_X_main].axis_type == 'log':
+            ax.set_xscale('log')
+        if pf[idx_Y_main].axis_type == 'log':
+            ax.set_yscale('log')
+        
+        if True_values is not None: # plot the true value of parameter ii if provided
+            try:
+                ax.plot(True_values[x_name],True_values[y_name],'C3*',markersize=10)
+            except Exception as e:
+                warnings.warn("At least one of the true values "+x_name+" or "+y_name+" is not provided. We skip plotting the true values.")
+        
+        # add best value
+        ax.plot(par_ax[idx_best],par_ay[idy_best],'C2X',markersize=10)
+
+        # plot the points
+        if show_points:
+            pred1_plot = [x[iiX] for x in points]
+            pred2_plot = [x[iiY] for x in points]
+            # convert back to the right values  
+            if pf[idx_X_main].optim_type == 'log':
+                pred1_plot = 10**(np.asarray(pred1_plot))
+            elif pf[idx_X_main].optim_type == 'linear':
+                pred1_plot = np.asarray(pred1_plot) * pf[iiX].p0m
+            else:
+                raise ValueError('ERROR. ',pnames[iiX],' optim_type needs to be ''linear'' or ''log'' not ',pf[iiX].optim_type,'.')
+
+            if pf[idx_Y_main].optim_type == 'log':
+                pred2_plot = 10**(np.asarray(pred2_plot))
+
+            elif pf[idx_Y_main].optim_type == 'linear':
+                pred2_plot = np.asarray(pred2_plot) * pf[iiY].p0m
+            else:
+                raise ValueError('ERROR. ',pnames[iiY],' optim_type needs to be ''linear'' or ''log'' not ',pf[iiY].optim_type,'.')
+
+            ax.plot(pred1_plot,pred2_plot,'o',color='k',markersize=3)
+
+        
+        # Set the axis limits and labels
+        if pf[idx_X_main].optim_type == 'log':
+            ax.set_xlim([10**(lb[iiX]),10**(ub[iiX])])
+        else:
+            ax.set_xlim([lb[iiX]*pf[idx_X_main].p0m,ub[iiX]*pf[idx_X_main].p0m])
+        ax.tick_params(axis='x', labelrotation = 45, which='both')
+        if pf[idx_Y_main].optim_type == 'log':
+            ax.set_ylim([10**(lb[iiY]),10**(ub[iiY])])
+        else:
+            ax.set_ylim([lb[iiY]*pf[idx_Y_main].p0m,ub[iiY]*pf[idx_Y_main].p0m])
+
+
+        if xlabel_pos is not None:
+            ax.set_xlabel(pnames_full[iiX],position = xlabel_pos)
+            if xlabel_pos == 'top':
+                ax.xaxis.set_label_position('top')
+                ax.tick_params(axis='x',labelbottom=False,which='both')
+                ax.tick_params(axis='x',labeltop=True,which='both')
+            else:
+                ax.xaxis.set_label_position('bottom')
+                ax.tick_params(axis='x',labelbottom=True,which='both')
+                ax.tick_params(axis='x',labeltop=False,which='both')
+
+        else:
+            ax.set_xticklabels([]) # remove the x label ticks  
+            ax.set_xticks([]) # remove the x label ticks
+            ax.set_xlabel('')
+            ax.tick_params(axis='x',labelbottom=False,which='both')
+            ax.tick_params(axis='x',labeltop=False,which='both')
+
+        if ylabel_pos is not None:
+            ax.set_ylabel('P('+pnames_display[iiY]+'|y)',position = ylabel_pos)
+            if ylabel_pos == 'right':
+                ax.yaxis.set_label_position('right')
+                ax.tick_params(axis='y',labelleft=False,which='both')
+                ax.tick_params(axis='y',labelright=True,which='both')
+            else:
+                ax.yaxis.set_label_position('left')
+                ax.tick_params(axis='y',labelleft=True,which='both')
+                ax.tick_params(axis='y',labelright=False,which='both')
+        else:
+            ax.set_yticklabels([]) # remove the x label ticks  
+            ax.set_yticks([]) # remove the x label ticks
+            ax.set_ylabel('')
+            ax.tick_params(axis='y',labelleft=False,which='both')
+            ax.tick_params(axis='y',labelright=False,which='both')
+
+
+        if not_init:
+            ## Make colorbar
+            # Define the logarithmic space for the colorbar
+            cmap = plt.get_cmap('viridis')
+            if logscale:
+                norm = matplotlib.colors.LogNorm(vmin=10**vmin, vmax=10**vmax)
+                ticks = [10**vmin,10**(int(vmin/2)),1]
+            else:
+                norm = matplotlib.colors.Normalize(vmin=0, vmax=vmax)
+                ticks = [0,0.5,1]
+
+            # Create a scalar mappable to map the values to colors
+            sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+            sm.set_array([])
+
+            # Create a colorbar
+            if logscale:
+                fmt = matplotlib.ticker.LogFormatterMathtext()
+            else:
+                fmt = None
+
+            # add colorbar
+            cbar = fig.colorbar(sm, ax=ax, ticks=ticks, format=fmt) # add the colorbar
+
+
+            # Set the colorbar label on the left side
+            cbar.ax.yaxis.set_label_position('right')
+            # add pad for the cbar label
+            cbar.ax.set_ylabel('P('+pnames_display[iiX]+'|y)', rotation=90, va='bottom')
+
+
+            
+            cbar.ax.set_ylabel('P('+pnames_display[iiX]+'&'+pnames_display[iiX]+'|y)', rotation=90, va='bottom',labelpad=15)
+
+            fig.tight_layout()
+            plt.show()
+
+    def randomize_grid_posterior(self, params, lb_main, ub_main, beta_scaled, N, gpr, fscale,kwargs_posterior, points = None, True_values = None):#, logscale = False, clear_axis = True, xlabel_pos = None, ylabel_pos = None, ax = None, fig = None, **kwargs):
+        """Obtain the posterior probability distribution p(w|y) by brute force gridding
+        where w is the set of model parameters and y is the data
+        For each fitparameter, return mean and standard deviation
+
+
+        Parameters
+        ----------
+        params : list of fitparameter objects
+            list of fitparameters
+        lb_main : list of floats
+            lower bound for the fitparameters
+        ub_main : list of floats
+            upper bound for the fitparameters
+        beta_scaled : float
+            1/minimum of the scaled surrogate function
+        N : integer
+            number of datasets
+        gpr : scikit-optimize estimator
+            trained regressor
+        fscale : float
+            scaling factor
+        kwargs_posterior : dict
+            dictionary of keyword arguments for posterior function
+            including: 
+                Nres : integer, optional
+                    Sampling resolution. Number of data points per dimension, by default 30
+                Ninteg : integer, optional
+                    Number of points for the marginalization over the other parameters when full_grid = False, by default 100
+                full_grid : boolean, optional
+                    If True, use a full grid for the posterior, by default False
+                logscale : boolean, optional
+                    display in log scale?, by default True
+                vmin : float, optional
+                    lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100
+                zoom : int, optional
+                    number of time to zoom in, only used if full_grid = True, by default 0
+                min_prob : float, optional
+                    minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.
+                clear_axis : boolean, optional
+                    clear the axis before plotting the zoomed in data, by default False.
+                True_values : dict, optional
+                    dictionary of true values of the parameters, by default None
+                show_points : boolean, optional
+                    show the explored points in the parameter space during the optimization, by default False
+                savefig : boolean, optional
+                    save the figure, by default False
+                savefig_name : str, optional
+                    name of the file to save the figure, by default 'posterior.png'
+                savefig_dir : str, optional
+                    directory to save the figure, by default self.res_dir
+                figext : str, optional
+                    extension of the figure, by default '.png'
+                figsize : tuple, optional
+                    size of the figure, by default (5*nb_params,5*nb_params)
+                figdpi : int, optional
+                    dpi of the figure, by default 300
+        points : array, optional
+            array of explored points in the parameter space during the optimization, by default None
+        True_values : dict, optional
+            dictionary of true values of the parameters, by default None
+        
+
+        Returns
+        -------
+        Contour plots for each pair of fit parameters
+        list of float, list of float
+           the mean and the square root of the second central moment 
+           (generalized standard deviation for arbitrary probability distribution)
+        """
+        xx,stdx = [],[]
+        # get varied fitparams
+        pf = [pp for pp in params if pp.relRange!=0]
+        pnames = [pp.name for pp in params if pp.relRange!=0]
+        # p0, lb_main, ub_main = self.params_r(self.targets[-1]['params'])
+
+        # initialize figure
+        nb_params = len(pf)
+
+        # get kwargs
+        Nres = kwargs_posterior.get('Nres',10)
+        Ninteg = kwargs_posterior.get('Ninteg',1e5)
+        full_grid = kwargs_posterior.get('full_grid',False)
+        logscale = kwargs_posterior.get('logscale',True)
+        vmin = kwargs_posterior.get('vmin',1e-100)
+        zoom = kwargs_posterior.get('zoom',0)
+        min_prob = kwargs_posterior.get('min_prob',1e-40)
+        clear_axis = kwargs_posterior.get('clear_axis',False)
+        True_values = kwargs_posterior.get('True_values',None)
+        show_points = kwargs_posterior.get('show_points',True)
+        savefig = kwargs_posterior.get('savefig',False)
+        figname = kwargs_posterior.get('figname','posterior')
+        figdir = kwargs_posterior.get('figdir',self.res_dir)
+        figext = kwargs_posterior.get('figext','.png')
+        figsize = kwargs_posterior.get('figsize',(5*nb_params,5*nb_params))
+        figdpi = kwargs_posterior.get('figdpi',300)
+        show_fig = kwargs_posterior.get('show_fig',True)
+
+        # save parameters to self for later use
+        self.Nres = Nres
+        self.Ninteg = Ninteg
+        self.logscale = logscale
+        self.vmin = vmin
+        self.min_prob = min_prob
+
+
+        if show_points == False:
+            points = None
+
+        fig, axes = plt.subplots(nrows=nb_params, ncols=nb_params, figsize=figsize)
+
+        for i in range(nb_params):
+            for j in range(nb_params):
+                if i==j: # plot the 1D posterior on the diagonal
+                    if i==0:
+                        ylabel_pos = 'left'
+                    else:
+                        ylabel_pos = 'right'
+                    if i==nb_params-1:
+                        xlabel_pos = 'bottom'
+                    else:
+                        xlabel_pos = None
+                    xmin,std,lb_new,ub_new = self.marginal_posterior_1D(pnames[i],pf=params,lb=lb_main,ub=ub_main,beta_scaled=beta_scaled,N=N,gpr=gpr,fscale=fscale,fig=fig,ax=axes[i,i],Nres=Nres,Ninteg=Ninteg,logscale=logscale,vmin=vmin,show_points=show_points,points=points,True_values=True_values,ylabel_pos=ylabel_pos,xlabel_pos=xlabel_pos)
+                    xx.append(xmin)
+                    stdx.append(std)
+                elif i>j: # plot the 2D posterior on the lower triangle
+                    if j==0:
+                        ylabel_pos = 'left'
+                    else:
+                        ylabel_pos = None
+
+                    if i==nb_params-1:
+                        xlabel_pos = 'bottom'
+                    else:
+                        xlabel_pos = None
+
+                    self.marginal_posterior_2D(pnames[j],pnames[i],pf=params,lb=lb_main,ub=ub_main,fig=fig,ax=axes[i,j],beta_scaled=beta_scaled,N=N,gpr=gpr,fscale=fscale,Nres=Nres,Ninteg=Ninteg,full_grid=full_grid,logscale=logscale,vmin=vmin,zoom=zoom,min_prob=min_prob,clear_axis=clear_axis,show_points=show_points,points=points,True_values=True_values,ylabel_pos=ylabel_pos,xlabel_pos=xlabel_pos)
+                else: # plot the 2D posterior on the upper triangle
+                    axes[i,j].axis('off')
+
+        plt.tight_layout()
+        if savefig:
+            fig.savefig(figdir+figname+figext,dpi=figdpi)
+        if show_fig:
+            plt.show()
+        else:
+            plt.close()
+
+        return xx,stdx,lb_new,ub_new
+
+
     def plot_objective_function(self, rrr, r, axis_type, pnames_display,kwargs_plot_obj={}):
         """Plot the objective function as a contour plot using skopt plt_objective function
 
@@ -1451,14 +2169,16 @@ class MultiObjectiveOptimizer():
             
                 Nres : integer, optional
                     Sampling resolution. Number of data points per dimension, by default 30
-                gaussfilt : integer, optional
-                    anti-aliasing of posterior, by default 5
+                Ninteg : integer, optional
+                    Number of points for the marginalization over the other parameters when full_grid = False, by default 100
+                full_grif : boolean, optional
+                    If True, use a full grid for the posterior, by default False
                 logscale : boolean, optional
                     display in log scale?, by default True
                 vmin : float, optional
                     lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100
                 zoom : int, optional
-                    number of time to zoom in, by default 1.
+                    number of time to zoom in, only used if full_grid = True, by default 0
                 min_prob : float, optional
                     minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.
                 clear_axis : boolean, optional
@@ -1814,28 +2534,42 @@ class MultiObjectiveOptimizer():
             warnings.warn('The surrogate function got negative. setting beta to the absolute value of the negative value')
         
 
+        # number of data points
+        Num_data_pts = 0
+        for num,t in enumerate(self.targets): # get the number of data points
+            Num_data_pts += len(t['data']['y'])
+            # if type(t['data']['X']) is list: # safety check for the case when the data is a list and not an np arrays
+            #     Num_data_pts += np.array(t['data']['X']).shape[0]
+            # else:
+            #     Num_data_pts += t['data']['X'].shape[0]
+
+        # save parameters to self for later use
+        self.N = Num_data_pts
+        self.gpr = gpr
+        self.fscale = fscales
+        self.beta_scaled = beta
+        self.points = r.x_iters
+        self.kwargs_posterior = kwargs_posterior
+
+        self.params_w(r.x,self.params) # write the best fit parameters to self.params
         # get the posterior probabiliy distribution p(w|t)
         if show_posterior:
-            Num_data_pts = 0
-            for num,t in enumerate(self.targets): # get the number of data points
-                if type(t['data']['X']) is list: # safety check for the case when the data is a list and not an np arrays
-                    Num_data_pts += np.array(t['data']['X']).shape[0]
-                else:
-                    Num_data_pts += t['data']['X'].shape[0]
-
-
+            
             pf = [pp for pp in self.params if pp.relRange!=0]
             p0, lb_main, ub_main = self.params_r(self.params)
-            xmin0,std = self.zoomed_posterior(pf, lb_main, ub_main,points=r.x_iters,beta_scaled = beta,N=Num_data_pts,gpr = gpr,fscale=fscales,kwargs_posterior=kwargs_posterior)#Nres=Np,gaussfilt=oversample,logscale=logscale,vmin=vmin,zoom=4,min_prob=1e-40,clear_axis=True)
-            # std from the posterior distribution should be better than those from the Hessian
-            # but we discard xmin0 because we rely on the best fit not the surrogate
-            
+            self.points = r.x_iters
+            xmin0,std = self.posterior(pf, lb_main, ub_main,points=r.x_iters,beta_scaled = beta,N=Num_data_pts,gpr = gpr,fscale=fscales,kwargs_posterior=kwargs_posterior)
+
+            # Note: the posterior is calculated with from the surrogate function and not the ground truth function therefore it is not always accurate
+            #       especially when the surrogate function is not trained well. This is why the best fit parameters are taken from the best one sampled by the BO
+            #       and not from the posterior. The posterior is only used to get the error bars. This mean that sometimes the best fit parameters is not necessarily
+            #       the one with the highest posterior probability. In this case the 95% confidence interval that is outputted is stretched to include the best fit parameters.
+            #       This is not a problem because the posterior is not used to get the best fit parameters but only to get the error bars, this way guarantee that the best fit is 
+            #       always within the outputted error bars.
+            #       The 95% interval is stored in std (so std is NOT the standard deviation of the posterior distribution)
         
-        #self.params_w(xmin,t['params'],std=std) # read out Fitparams & respect settings
-        if show_posterior:
             self.params_w(r.x,self.params,std=std) # read out Fitparams & respect settings
-        else:
-            self.params_w(r.x,self.params)
+
 
         return {'popt':xmin,'r':rrr,'GrMin':r.x}
         
@@ -1914,8 +2648,7 @@ class MultiObjectiveOptimizer():
                 weightfull = weightfull + weight
                 
             if kwargs == None:
-                kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,
-                         'loss':'linear','max_nfev':5000}
+                kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,'loss':'linear','max_nfev':5000}
 
 
         p0,lb,ub = self.params_r(self.params) # read out Fitparams & respect settings    
@@ -1990,11 +2723,12 @@ class MultiObjectiveOptimizer():
             pnames_display = [pp.display_name for pp in params if pp.relRange!=0] # for plots axis labels
             self.plot_objective_function(rrr, r, axis_type, pnames_display, kwargs_plot_obj = kwargs_plot_obj)   
 
-        
 
         gpr = deepcopy(rrr.models[-1]) # take the last of the models (for some reason it is not trained)
         gpr.fit(rrr.x_iters,rrr.func_vals) # train it
         
+        self.gpr_single = gpr # save it for later use
+        self.params_single = params # save it for later use
 
         if len(rrr.models)>0:
             xmin,funmin = expected_minimum(rrr)
@@ -2009,36 +2743,32 @@ class MultiObjectiveOptimizer():
             #Add warning here
             warnings.warn('The surrogate function got negative. setting beta to the absolute value of the negative value')
 
-
+        self.params_w(xmin,params) # write variable parameters into params, respecting user settings
+        # Number of data points
+        Num_data_pts = 0
+        for num,t in enumerate(self.targets): # get the number of data points
+            if type(t['data']['X']) is list: # safety check for the case when the data is a list and not an np arrays
+                Num_data_pts += np.array(t['data']['X']).shape[0]
+            else:
+                Num_data_pts += t['data']['X'].shape[0]
+        
+        # if self.N not an atritube of the class, then set it to the number of data points
+        if not hasattr(self,'N'):
+            self.N = Num_data_pts
         # get the posterior probabiliy distribution p(w|t)
         if show_posterior:
             # params = [pp for pp in self.targets[-1]['params'] if pp.relRange!=0]
             p0, lb_main, ub_main = self.params_r(params)
-            xmin0,std = self.zoomed_posterior(params,lb_main, ub_main,points=r.x_iters,beta_scaled = beta,N=Xa.shape[0],gpr = gpr,fscale=[1],kwargs_posterior=kwargs_posterior)#Nres=Np,gaussfilt=oversample,logscale=logscale,vmin=vmin,zoom=4,min_prob=1e-40,clear_axis=True)
+            self.points_fom = r.x_iters
+            xmin0,std = self.posterior(params,lb_main, ub_main,points=r.x_iters,beta_scaled = beta,N=Num_data_pts,gpr = gpr,fscale=[1],kwargs_posterior=kwargs_posterior)
             # std from the posterior distribution should be better than those from the Hessian
             # but we discard xmin0 because we rely on the best fit not the surrogate
-
+            self.params_w(xmin,params,std=std) # write variable parameters into params, respecting user settings
+        
+        self.params_single = params # save the foms for later use
+        self.points_single = r.x_iters # save the foms points for later use
         if show_posterior: 
             return xmin,std
         else:
             return xmin
 
-    
-    def format_func(self,value, tick_number):
-        """Format function for the x and y axis ticks
-        to be passed to axo[ii,jj].xaxis.set_major_formatter(plt.FuncFormatter(format_func))
-        to get the logarithmic ticks looking good on the plot
-
-        Parameters
-        ----------
-        value : float
-            value to convert
-        tick_number : int
-            tick position
-
-        Returns
-        -------
-        str
-            string representation of the value in scientific notation
-        """        
-        return sci_notation(10**value, sig_fig=-1)
