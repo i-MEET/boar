@@ -77,3 +77,4 @@ sphinx_gallery_conf = {
 
 }
 
+nbsphinx_execute = 'never'
