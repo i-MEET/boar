@@ -7,8 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: docker://pandoc/core:2.9
-          with:
-            args: "--help" # gets appended to pandoc command
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - name: Install dependencies
