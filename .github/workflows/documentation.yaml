@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v3
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme
+          pip install sphinx sphinx_rtd_theme sphinx-gallery
           pip install -r requirements_torch_CPU.txt
       - name: Build
         run: |
