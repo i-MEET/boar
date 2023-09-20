@@ -51,7 +51,7 @@ BOAR_DD_parallel.py
 # !docs/*.txt
 # !docs/**
 !docs/logo/**
-!docs/source/index.html
+!docs/index.html
 !docs/source/*.rst
 !docs/source/examples/*.ipynb
 !Download_SIMsalabim.py
