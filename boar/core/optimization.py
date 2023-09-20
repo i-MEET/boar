@@ -1,4 +1,4 @@
-######################################################################
+######################################################################_torch
 ################ MultiObjectiveOptimizer class #######################
 ######################################################################
 # Authors: 
@@ -20,7 +20,7 @@ from scipy.optimize import curve_fit
 from scipy.special import logsumexp
 from scipy.ndimage.filters import gaussian_filter
 from skopt import Optimizer
-from skopt.space import Real
+from skopt.space import Real, Integer, Categorical
 from skopt.plots import plot_objective 
 from skopt.utils import expected_minimum
 from joblib import Parallel, delayed
@@ -34,7 +34,7 @@ from boar.core.optimizer import BoarOptimizer # import the base class
 
 class MultiObjectiveOptimizer(BoarOptimizer):
     # a class for multi-objective optimization
-    def __init__(self,params = None, targets = None, warmstart = None, Path2OldXY = None, SaveOldXY2file = None, res_dir = 'temp', verbose = False) -> None:
+    def __init__(self,params = None, targets = None, warmstart = None, Path2OldXY = None, SaveOldXY2file = None, res_dir = 'temp', parallel = True, verbose = False) -> None:
         """Initialization routine
 
         Parameters
@@ -62,6 +62,10 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             full path to the json file containing the self.old_xy results to be loaded, by default None
         SaveOldXY2file : str, optional
             full path to the json file where the new self.old_xy results will be saved if it is None then we do not save the data, by default None
+        res_dir : str, optional
+            path to the directory where the results will be saved, by default 'temp'
+        parallel : bool, optional
+            use parallelization, if False n_jobs can still be > 1 but the evaluation will be done sequentially, by default True
         verbose : bool, optional
             print some information, by default False
 
@@ -84,6 +88,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
         if not os.path.exists(self.res_dir):
             os.makedirs(self.res_dir)
         self.cwd = os.getcwd()
+
+        self.parallel = parallel # do we want to run in parallel?
     
     
         
@@ -113,7 +119,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
 
         Returns
         -------
-        float_
+        float
             the negative log likelihood
         """
 
@@ -145,7 +151,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
 
         Returns
         -------
-        float_
+        float
             the positive log likelihood
         """
         if len(fscale)>1: # we have more than one target
@@ -161,91 +167,10 @@ class MultiObjectiveOptimizer(BoarOptimizer):
 
         return LLH #
     
-    def MCMC_LH(self,X,beta_scaled,N,gpr,fscale):
-        """Compute the positive log likelihood from the negative log likelihood
-
-        Parameters:
-        X : ndarray
-            X Data array of size(n,m): n=number of data points, m=number of dimensions
-        beta_scaled : float
-            1 / minimum of scaled surrogate function
-            will be multiplied with fscale to give 1/ the unscaled minimum which is the MSE of the best fit
-            If there are no systematic deviations, and if the noise in y is Gaussian, then this should yield
-            the variance of the Gaussian distribution of target values
-        N : integer
-            number of data points
-        gpr : scikit-optimize estimator
-            a trained regressor which has a .predict() method
-        fscale : float
-            scaling factor to keep the surrogate function between 0 and 100 (yields best results in BO but
-            here we need the unscaled surrogate function, that is, MSE)
-
-        Returns
-        -------
-        float_
-            the positive log likelihood
-        """
-        if len(fscale)>1: # we have more than one target
-            fscale = 1 # we don't scale the likelihood for multiple targets since there is no way to the the MSE nicely if the values for the different targets ys are not comparable
-        else:
-            fscale = fscale[0] # we have only one target so we can keep the scaling
-        X = np.array([X])
-        Y = gpr.predict(X, return_std=False)
-        Y = Y / fscale # remove the scaling to yield the MSE
-        beta = beta_scaled * fscale # remove the scaling from beta too
-        SSE = Y*N # the sum of squared errors
-        LLH = -beta/2 * SSE + N/2*np.log(beta) - N/2*np.log(2*np.pi) # Bishop eq. 1.62
-        #return np.exp(LLH)
-        return LLH #
-
     ###############################################################################
     ############################ Posterior utils ##################################
     ###############################################################################
-    def MCMC_posterior(self, pos, beta_scaled, N, gpr, fscale, Nres, logscale, vmin, zoom=1, xmin =[]):
-        
-        # get varied fitparams
-        pf = [pp for pp in self.targets[-1]['params'] if pp.relRange!=0]
-        p0, lb, ub = self.params_r(self.targets[-1]['params'])
-        # create grid
-        dims = []
-        Nreso = Nres # oversampled resolution for anti-aliasing
-        for ii,pff in enumerate(pf):
-            dims.append(np.linspace(lb[ii],ub[ii],Nreso))
 
-        # initialize figure
-        nb_params = len(pf)
-        import emcee
-        print('Running MCMC...')
-        
-        # pos = np.array([pos]) # get the best fit position
-        use_high_prob = True
-        if use_high_prob:
-            ndim, nwalkers = 5, 600
-            # starting_points = emcee.utils.sample_ball(pos, [1e-6,1e-6,1e-6,1e-6], size=nwalkers)
-            starting_points = [pos + 1e-4*np.random.randn(ndim) for i in range(nwalkers)]
-        else:
-            
-            starting_points = np.array(list(itertools.product(*dims)))
-            ndim,nwalkers = len(starting_points[0]), len(starting_points)
-            print('Number of walkers: ', nwalkers)
-            print('Number of dimensions: ', ndim)
-
-        # initialize sampler
-        from multiprocessing import Pool
-        # with Pool(100) as pool:
-        sampler = emcee.EnsembleSampler(nwalkers, ndim, self.MCMC_LH, args=(beta_scaled, N, gpr, fscale))#, pool=pool)
-        sampler.run_mcmc(starting_points, 3000, progress=True) 
-        samples = sampler.chain[:, 50:, :].reshape((-1, ndim))
-        import corner
-        pnames_display = [pp.display_name for pp in self.targets[-1]['params'] if pp.relRange!=0] # for plots axis labels ,2.66989700043360188048e1
-        fig = plt.figure(figsize=(18, 12))
-        corner.corner(samples, labels=pnames_display,color='C0',fig=fig)#,truths=[-1.73010299956639811952e1,-7.69897000433601880479,-7.09691001300805641436],fig=fig)
-        
-        # fig = plt.figure(figsize=(12, 12))
-        # gs = GridSpec(nb_params, nb_params, figure=fig)
-
-       
-    
     def do_grid_posterior(self,step,fig,axes,gs,lb,ub,pf,beta_scaled, N, gpr, fscale, Nres, logscale, vmin, min_prob=1e-2, clear_axis=False,True_values=None,points=None):
         """Obtain the posterior probability distribution p(w|y) by brute force gridding
         where w is the set of model parameters and y is the data
@@ -819,6 +744,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                     Number of points for the marginalization over the other parameters when full_grid = False, by default 100
                 full_grid : boolean, optional
                     If True, use a full grid for the posterior, by default False
+                randomize : boolean, optional
+                    If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False
                 logscale : boolean, optional
                     display in log scale?, by default True
                 vmin : float, optional
@@ -1579,7 +1506,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             ax.tick_params(axis='x',labeltop=False,which='both')
 
         if ylabel_pos is not None:
-            ax.set_ylabel('P('+pnames_display[iiY]+'|y)',position = ylabel_pos)
+            ax.set_ylabel(pnames_full[iiY],position = ylabel_pos)
             if ylabel_pos == 'right':
                 ax.yaxis.set_label_position('right')
                 ax.tick_params(axis='y',labelleft=False,which='both')
@@ -1624,11 +1551,11 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             # Set the colorbar label on the left side
             cbar.ax.yaxis.set_label_position('right')
             # add pad for the cbar label
-            cbar.ax.set_ylabel('P('+pnames_display[iiX]+'|y)', rotation=90, va='bottom')
+            # cbar.ax.set_ylabel('P('+pnames_display[iiX]+'|y)', rotation=90, va='bottom')
 
 
             
-            cbar.ax.set_ylabel('P('+pnames_display[iiX]+'&'+pnames_display[iiX]+'|y)', rotation=90, va='bottom',labelpad=15)
+            cbar.ax.set_ylabel('P('+pnames_display[iiX]+'&'+pnames_display[iiY]+'|y)', rotation=90, va='bottom',labelpad=15)
 
             fig.tight_layout()
             plt.show()
@@ -1922,6 +1849,22 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                 weight = 1
             yf = t['model'](X,params)
             # yf = model(X,params)
+
+            if 'loss' in t.keys(): # if loss is specified in targets, use it
+                loss_dum = t['loss']
+            else:
+                loss_dum = loss
+
+            if 'threshold' in t.keys(): # if threshold is specified in targets, use it
+                threshold_dum = t['threshold']
+            else:
+                threshold_dum = threshold
+
+            
+            if 'obj_type' in t.keys():
+                obj_type_dum = t['obj_type']
+            else:
+                obj_type_dum = obj_type
             
             if 'collect' in self.warmstart: # WAS: 'collect in self.warmstart
 
@@ -1942,13 +1885,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             
 
             # z = np.mean(((yf-y)*weight)**2)*fscale[num]
-            z = self.obj_func_metric(t,yf,obj_type=obj_type)*fscale[num]
+            z = self.obj_func_metric(t,yf,obj_type=obj_type_dum)*fscale[num]
 
-            if 'loss' in t.keys(): # if loss is specified in targets, use it
-                loss = t['loss']
-
-            if threshold in t.keys(): # if threshold is specified in targets, use it
-                threshold = t['threshold']
             
             if 'target_weight' in t.keys() and (isinstance(t['target_weight'], float) or isinstance(t['target_weight'], int)): # if target_weight is specified in targets, use it
                 #check if target_weight is a float
@@ -1958,7 +1896,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                 target_weights.append(1)
                 warnings.warn('target_weight for target '+str(num)+' must be a float or int. Using default value of 1.')
 
-            zs.append(self.lossfunc(z,loss,threshold=threshold))
+            zs.append(self.lossfunc(z,loss_dum,threshold=threshold_dum))
 
         # cost is the weigthed average of the losses
         cost = np.average(zs, weights=target_weights)    
@@ -2009,19 +1947,28 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                 weight = 1
 
             if 'loss' in t.keys(): # if loss is specified in targets, use it
-                loss = t['loss']
+                loss_dum = t['loss']
+            else:
+                loss_dum = loss
 
-            if threshold in t.keys(): # if threshold is specified in targets, use it
-                threshold = t['threshold']
+            if 'threshold' in t.keys(): # if threshold is specified in targets, use it
+                threshold_dum = t['threshold']
+            else:
+                threshold_dum = threshold
+
+            
+            if 'obj_type' in t.keys():
+                obj_type_dum = t['obj_type']
+            else:
+                obj_type_dum = obj_type
 
             costs = []
             for yf in yfs:
                 yf = np.asarray(yf) # needs to be an array for the obj_func_metric
-                z = self.obj_func_metric(t,yf,obj_type=obj_type)*fscale[num]
+                z = self.obj_func_metric(t,yf,obj_type=obj_type_dum)*fscale[num]
                 # z = np.mean(((np.asarray(yf)-y)*weight)**2)*fscale[num]
-                costs.append(self.lossfunc(z,loss,threshold=threshold))
+                costs.append(self.lossfunc(z,loss_dum,threshold=threshold_dum))
 
- 
             if 'target_weight' in t.keys(): # if target_weight is specified in targets, use it
                 #check if target_weight is a float
                 if isinstance(t['target_weight'], float) or isinstance(t['target_weight'], int):
@@ -2072,8 +2019,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
 
         return
 
-    def optimize_sko_parallel(self,n_jobs=4,n_yscale=20, n_BO=10, n_initial_points = 10,n_BO_warmstart=5,n_jobs_init=None,obj_type='MSE',loss='linear',threshold=1000,kwargs=None,verbose=True,
-            base_estimator = 'GP',show_objective_func=True,kwargs_plot_obj=None,show_posterior=True,kwargs_posterior=None):
+    def optimize_sko_parallel(self,n_jobs=4,n_yscale=20, n_BO=10, n_initial_points = 10,n_BO_warmstart=5,n_jobs_init=None,obj_type='MSE',loss='linear',threshold=1000,kwargs=None, base_estimator = 'GP',show_objective_func=True,kwargs_plot_obj=None,show_posterior=True,kwargs_posterior=None,verbose=True):
         """Multi-objective optimization of the parameters of the model using the scikit-optimize package
 
         Parameters
@@ -2108,6 +2054,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             Wisely select so that the loss function affects only outliers.
             If threshold is set too low, then the value will be suppressed even fon non-outliers
             falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.
+        suggest_only : bool, optional
+            only suggest the next point and does not evaluate it, by default False
         kwargs : dict, optional
             dictionary of keyword argument to check for the improvement of the model, by default None
             including:
@@ -2136,8 +2084,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                 switch2exploit : bool, optional
                     switch to exploitation after reaching max_loop_no_improvement loops without improvement and reset the counter, by default True
                     
-        verbose : bool, optional
-            display progress and results, by default True
+        
         show_objective_func : bool, optional
             plot the objective function, by default True
         kwargs_plot_obj : dict, optional
@@ -2171,8 +2118,10 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                     Sampling resolution. Number of data points per dimension, by default 30
                 Ninteg : integer, optional
                     Number of points for the marginalization over the other parameters when full_grid = False, by default 100
-                full_grif : boolean, optional
+                full_grid : boolean, optional
                     If True, use a full grid for the posterior, by default False
+                randomize : boolean, optional
+                    If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False
                 logscale : boolean, optional
                     display in log scale?, by default True
                 vmin : float, optional
@@ -2199,6 +2148,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                     size of the figure, by default (5*nb_params,5*nb_params)
                 figdpi : int, optional
                     dpi of the figure, by default 300
+        verbose : bool, optional
+            display progress and results, by default True
 
         Returns
         -------
@@ -2269,8 +2220,32 @@ class MultiObjectiveOptimizer(BoarOptimizer):
         pnames_display = [pp.display_name for pp in self.params if pp.relRange!=0] # for plots axis labels
         axis_type = [pp.optim_type for pp in self.params if pp.relRange!=0] # to get the type of the axis for the plots
 
-        dimensions = [Real(up,lo) for up,lo in zip(lb,ub)] # sampling space
-        
+        # dimensions = [Real(up,lo) for up,lo in zip(lb,ub)] # sampling space
+        dimensions = [] # sampling space
+        idx = 0
+        got_categorical = False
+        for num,pp in enumerate(self.params):
+            if pp.relRange != 0:
+                if pp.val_type == 'float':
+                    dimensions.append(Real(lb[idx],ub[idx]))
+                    idx += 1
+                elif pp.val_type == 'int':
+                    dimensions.append(Integer(lb[idx],ub[idx]))
+                    idx += 1
+                elif pp.val_type == 'str':
+                    dimensions.append(Categorical(pp.lims))
+                    got_categorical = True
+                else:
+                    raise ValueError('val_type should be either "float", "int" or "str"')
+
+        if got_categorical:
+            if check_improvement is not None and check_improvement != 'strict':
+                check_improvement = 'strict' # if we have categorical variables, we need to check strictly for improvement
+                warnings.warn('check_improvement is set to "strict" because we have categorical variables')
+            if show_posterior == True:
+                show_posterior = False
+                warnings.warn('show_posterior is set to False because we have categorical variables')
+
         ## First do a blind optimization to get an idea of the total y dynamics which lets us calculate a scaling factor
         if 'recall' not in self.warmstart: 
 
@@ -2294,7 +2269,10 @@ class MultiObjectiveOptimizer(BoarOptimizer):
                 
                 for ii in tnrange(nloop,desc='Scaling runs for target '+str(num)):
                     x = optimizer.ask(n_points=n_jobs_init)
-                    y = Parallel(n_jobs=n_jobs)(delayed(pfunc)(v) for v in x)
+                    if self.parallel:
+                        y = Parallel(n_jobs=n_jobs)(delayed(pfunc)(v) for v in x)
+                    else:
+                        y = [pfunc(v) for v in x]
                     r0 = optimizer.tell(x,y)
 
                 
@@ -2350,10 +2328,11 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             
             for ii in tnrange(nloop_init,desc='Initial points'):
                 x = optimizer.ask(n_points=n_jobs_init)
+                if self.parallel:
+                    y = Parallel(n_jobs=n_jobs_init)(delayed(pfunc)(v) for v in x)
+                else:
+                    y = [pfunc(v) for v in x]
 
-                y = Parallel(n_jobs=n_jobs_init)(delayed(pfunc)(v) for v in x)
-
-                
                 if ('collect_init' in self.warmstart) or (('collect' in self.warmstart) and 'collect_BO' not in self.warmstart): # collect the initial points
                     self.old_xy['x'].extend(x)
                     for num,t in enumerate(self.targets):
@@ -2404,8 +2383,10 @@ class MultiObjectiveOptimizer(BoarOptimizer):
 
         for ii in tnrange(nloop_BO,desc='BO runs'):
             x = optimizer.ask(n_points=n_jobs)
-
-            y = Parallel(n_jobs=n_jobs)(delayed(pfunc)(v) for v in x)
+            if self.parallel:
+                y = Parallel(n_jobs=n_jobs)(delayed(pfunc)(v) for v in x)
+            else:
+                y = [pfunc(v) for v in x]
                 
             if ('collect' in self.warmstart and 'collect_init' not in self.warmstart) or 'collect_BO' in self.warmstart: 
                 self.old_xy['x'].extend(x)
@@ -2508,7 +2489,8 @@ class MultiObjectiveOptimizer(BoarOptimizer):
             self.plot_objective_function(rrr, r, axis_type, pnames_display, kwargs_plot_obj = kwargs_plot_obj)    
 
         gpr = deepcopy(rrr.models[-1]) # take the last of the models (for some reason it is not trained)
-        gpr.fit(rrr.x_iters,rrr.func_vals) # train it
+        if not got_categorical: # if there are categorical variables, the gpr is not trained (need to figure this out later)
+            gpr.fit(rrr.x_iters,rrr.func_vals) # train it
         gprs.append(deepcopy(gpr))
 
         # save the old_xy dictionary to file
@@ -2574,96 +2556,100 @@ class MultiObjectiveOptimizer(BoarOptimizer):
         return {'popt':xmin,'r':rrr,'GrMin':r.x}
         
     
-    ###############################################################################
-    ################################# Curve fit ###################################
-    ###############################################################################
+    # ###############################################################################
+    # ################################# Curve fit ###################################
+    # ###############################################################################
 
-    def obj_func_curvefit(self,X,*p,params,model):
-        """Objective function as desired by scipy.curve_fit
+    # def obj_func_curvefit(self,X,*p,params,model):
+    #     """Objective function as desired by scipy.curve_fit
 
-        Parameters
-        ----------
-        X : ndarray
-            X Data array of size(n,m): n=number of data points, m=number of dimensions
-        *p : ndarray
-            list of float; values of the fit parameters as supplied by the optimizer
-        params : list
-            list of Fitparam() objects
-        model : callable
-            Model function yf = f(X) to compare to y
+    #     Parameters
+    #     ----------
+    #     X : ndarray
+    #         X Data array of size(n,m): n=number of data points, m=number of dimensions
+    #     *p : ndarray
+    #         list of float; values of the fit parameters as supplied by the optimizer
+    #     params : list
+    #         list of Fitparam() objects
+    #     model : callable
+    #         Model function yf = f(X) to compare to y
 
-        Returns
-        -------
-        1D-array
-            array of size (n,) with the model values
-        """ 
+    #     Returns
+    #     -------
+    #     1D-array
+    #         array of size (n,) with the model values
+    #     """ 
 
-        yfit = []
-        for t in self.targets:
-            xdata = t['data']['X'] # get array of experimental X values
-            ydata = t['data']['y'] # get vector of experimental y values
+    #     yfit = []
+    #     for t in self.targets:
+    #         xdata = t['data']['X'] # get array of experimental X values
+    #         ydata = t['data']['y'] # get vector of experimental y values
 
 
-            self.params_w(p, params) # write variable parameters into params, respecting user settings
-            y = list(t['model'](xdata,params))
-            yfit = yfit + y
+    #         self.params_w(p, params) # write variable parameters into params, respecting user settings
+    #         y = list(t['model'](xdata,params))
+    #         yfit = yfit + y
 
-        yfit = np.array(yfit)
-        #print('errsq', np.sum(((yfit-self.yfull)/self.weightfull))**2)
-        return yfit
+    #     yfit = np.array(yfit)
+    #     #print('errsq', np.sum(((yfit-self.yfull)/self.weightfull))**2)
+    #     return yfit
 
-    def optimize_curvefit(self, kwargs = None):
-        """Use curvefit to optimize a function y = f(x) where x can be multi-dimensional
-        use this function if the loss function is deterministic
-        do not use this function if loss function has uncertainty (e.g from numerical simulation)
-        in this case, use optimize_sko
+    # def optimize_curvefit(self, kwargs = None):
+    #     """Use curvefit to optimize a function y = f(x) where x can be multi-dimensional
+    #     use this function if the loss function is deterministic
+    #     do not use this function if loss function has uncertainty (e.g from numerical simulation)
+    #     in this case, use optimize_sko
 
-        Parameters
-        ----------
-        kwargs : dict, optional
-            kwargs aruguments for curve_fit, see scipy.optimize.curve_fit documentation for more information, by default None\\
-            If no kwargs is provided use:\\
-            kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,'loss':'linear','max_nfev':5000}
+    #     Parameters
+    #     ----------
+    #     kwargs : dict, optional
+    #         kwargs aruguments for curve_fit, see scipy.optimize.curve_fit documentation for more information, by default None\\
+    #         If no kwargs is provided use:\\
+    #         kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,'loss':'linear','max_nfev':5000}
 
-        Returns
-        -------
-        dict
-            dictionary with the optimized parameters ('popt') and the corresponding covariance ('pcov') and standard deviation ('std') values
-        """  
-        xfull = []
-        yfull = []
-        weightfull = []
+    #     Returns
+    #     -------
+    #     dict
+    #         dictionary with the optimized parameters ('popt') and the corresponding covariance ('pcov') and standard deviation ('std') values
+    #     """  
+    #     xfull = []
+    #     yfull = []
+    #     weightfull = []
 
-        for t in self.targets:
-            xdata = t['data']['X'] # get array of experimental X values
-            ydata = list(t['data']['y']) # get vector of experimental y values
-            if len(xfull)==0:
-                xfull = xdata
-                yfull = ydata 
-                weightfull = list(1/t['weight'])
-            else:
-                xfull = np.vstack((xfull,xdata))
-                yfull = yfull + ydata
-                weight = list(1/t['weight'])
-                weightfull = weightfull + weight
+    #     for t in self.targets:
+    #         xdata = t['data']['X'] # get array of experimental X values
+    #         ydata = list(t['data']['y']) # get vector of experimental y values
+    #         if len(xfull)==0:
+    #             xfull = xdata
+    #             yfull = ydata 
+    #             weightfull = list(1/t['weight'])
+    #         else:
+    #             xfull = np.vstack((xfull,xdata))
+    #             yfull = yfull + ydata
+    #             weight = list(1/t['weight'])
+    #             weightfull = weightfull + weight
                 
-            if kwargs == None:
-                kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,'loss':'linear','max_nfev':5000}
+    #         if kwargs == None:
+    #             kwargs = {'ftol':1e-8, 'xtol':1e-6, 'gtol': 1e-8, 'diff_step':0.001,'loss':'linear','max_nfev':5000}
 
 
-        p0,lb,ub = self.params_r(self.params) # read out Fitparams & respect settings    
-        # using partial functions allows passing extra parameters
-        pfunc = partial(self.obj_func_curvefit, params = self.params, model = t['model'])
+    #     p0,lb,ub = self.params_r(self.params) # read out Fitparams & respect settings    
+    #     # using partial functions allows passing extra parameters
+    #     pfunc = partial(self.obj_func_curvefit, params = self.params, model = t['model'])
 
-        r = curve_fit(pfunc,xfull,yfull,p0=p0,sigma=weightfull,absolute_sigma=False,check_finite=True,bounds=(lb,ub),full_output=True,method=None,jac=None, **kwargs)
-        popt = r[0]
-        pcov = r[1]
-        infodict = r[2]
-        mesg = r[3]
-        std = np.sqrt(np.diag(pcov))
-        self.params_w(popt,self.params,std=std) # write variable parameters into params, respecting user settings
+    #     r = curve_fit(pfunc,xfull,yfull,p0=p0,sigma=weightfull,absolute_sigma=False,check_finite=True,bounds=(lb,ub),full_output=True,method=None,jac=None, **kwargs)
+    #     popt = r[0]
+    #     pcov = r[1]
+    #     infodict = r[2]
+    #     mesg = r[3]
+    #     std = np.sqrt(np.diag(pcov))
+    #     # make tuple with (std,std) for each parameter
+    #     stdx = []
+    #     for s in std:
+    #         stdx.append((s,s))
+    #     self.params_w(popt,self.params,std=stdx) # write variable parameters into params, respecting user settings
 
-        return {'popt':popt,'pcov':pcov,'std':std,'infodict':infodict}
+    #     return {'popt':popt,'pcov':pcov,'std':std,'infodict':infodict}
 
     
     def single_point(self,X,y,params,n_jobs=4,base_estimator='GP',n_initial_points = 100,show_objective_func=True,kwargs_plot_obj=None,axis_type=[],show_posterior=True,kwargs_posterior=None):

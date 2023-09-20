@@ -3,12 +3,11 @@ from boar.core.optimization import *
 from boar.core.funcs import *
 from boar.agents.Agent import *
 from boar.agents.DD_agents import *
-# from boar.agents.Dynamics_agent import *
-# from boar.agents.Dynamics_base_agent import *
 from boar.agents.TAS_agent import *
 from boar.agents.TrPL_agent import *
 from boar.agents.TrMC_agent import *
 from boar.agents.NonIdealDiode_agents import *
+from boar.agents.TranferMatrix_agent import *
 
 # import SIMsalabim_utils
 from boar.SIMsalabim_utils.RunSim import *

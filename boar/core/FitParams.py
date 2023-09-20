@@ -7,7 +7,7 @@ import numpy as np
 
 class Fitparam():
     def __init__(self, name = '', startVal = None, val = 1.0, relRange = 0, lims = [], std = 0, d = '',display_name='',unit='',
-                range_type = 'log', lim_type = 'absolute', optim_type = 'linear',axis_type = None):
+                range_type = 'log', lim_type = 'absolute', optim_type = 'linear',axis_type = None, val_type = 'float',rescale = True,stepsize = None):
         """ Fitparam class object
 
         Parameters
@@ -40,6 +40,12 @@ class Fitparam():
             Interpretation by optimizer ('linear' or 'log'), by default 'linear'
         axis_type : str, optional
             Set the type of scale and formating for the axis of the plots ('linear' or 'log') if let to None we use optim_type, by default None
+        val_type : str, optional
+            type of the parameter, can be 'float' or 'int' or 'str', by default 'float'
+        rescale : bool, optional
+            rescale the parameter to the order of magnitude of the startVal, by default True
+        stepsize : float, optional
+            stepsize for integer parameters (val_type = 'int'), by default None
 
         Raises
         ------
@@ -75,6 +81,9 @@ class Fitparam():
         if self.axis_type == None:
             self.axis_type = self.optim_type
         
+        self.val_type = val_type
+        self.stepsize = stepsize
+
 
         # Check if limits are valid
         if self.range_type not in ['linear', 'log','lin','logarithmic']:
@@ -88,6 +97,9 @@ class Fitparam():
         
         if self.axis_type not in ['linear', 'log','lin','logarithmic']:
             raise ValueError('axis_type must be ''linear'', ''lin'', ''logarithmic'' of ''log''')
+
+        if self.val_type not in ['float', 'int','str']:
+            raise ValueError('val_type must be ''float'', ''int'', ''str''')
 
         if self.range_type == 'lin': # correct for improper range_type
             self.range_type = 'linear'
@@ -105,14 +117,24 @@ class Fitparam():
             self.axis_type = 'log'
 
 
-        if startVal == None:
-            self.startVal = val * 1.0
+        if self.val_type != 'str':
+            if startVal == None:
+                self.startVal = val *1.0
+            else:
+                self.startVal = startVal
+            self.val = val *1.0
         else:
-            self.startVal = startVal
-        self.val = val *1.0
+            if startVal == None:
+                self.startVal = val
+            else:
+                self.startVal = startVal
+            self.val = val
+
+
+       
         self.relRange = relRange
         
-        if lims ==[]:
+        if lims ==[] and self.val_type == 'float':
             if self.relRange == 0:
                 rr = 0.001
             else:
@@ -128,9 +150,10 @@ class Fitparam():
             # self.lims = [self.val - rr*abs(self.val),self.val + rr*abs(self.val)]
         else:
             self.lims = lims
-
+        
         self.std = std
         self.d = d
+        self.rescale = rescale
 
         
         

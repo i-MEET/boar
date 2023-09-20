@@ -198,14 +198,17 @@ def run_parallel_simu(code_name_lst,path_lst,str_lst,max_jobs=max(1,os.cpu_count
     except subprocess.CalledProcessError as e:
         #don't stop if error code is 95
         if e.returncode != 0:
-            log = pd.read_csv(log_file,sep='\t',usecols=['Exitval'],error_bad_lines=False)
+            # log = pd.read_csv(log_file,sep='\t',usecols=['Exitval'],error_bad_lines=False)
+            # repalce error bad line with skip
+            log = pd.read_csv(log_file,sep='\t',usecols=['Exitval'],on_bad_lines='skip')
             if log['Exitval'].isin([0, 95]).all():
                 os.remove(log_file)
                 if verbose:
                     print("Error code 95")
             else:
                 if ignore_error_code:
-                    warnings.warn('Error code '+str(log['Exitval'].unique())+' found in log file, ignoring error code')
+                    print(str(cmd_str))
+                    warnings.warn('Error code '+str(log['Exitval'].unique())+' found in log file, ignoring error code.'+ str(filename))
                     pass
                 else:
                     print('Error code '+str(log['Exitval'].unique())+' found in log file, stopping simulation')

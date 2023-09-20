@@ -5,19 +5,38 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="boar", # Replace with your own username
-    version="0.0.1",
+    version="1.0.0",
     author="Vincent Le Corre, Larry Lueer",
-    author_email="larry.lueer@fau.de",
-    description="High throughput parameter extraction",
+    author_email="vincent.le.corre@fau.de",
+    description="High throughput parameter extraction and experimental design with Bayesian optimization",
     long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://git.hte.group/lecorrev/boar",
+    url="https://github.com/i-MEET/boar",
     packages=setuptools.find_packages(),
+    readme = "README.md",
+    keywords=['Bayesian optimization', 'parameter extraction', 'experimental design', 'high throughput', 'solar cells'],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Science/Research",
+        "Status :: Beta",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    setup_requires=["wheel"]
+    install_requires = [
+        'numpy',
+        'pandas',
+        'matplotlib',
+        'notebook',
+        'jupyterlab',
+        'ipympl',
+        'seaborn',
+        'scipy',
+        'scikit-optimize',
+        'tqdm',
+        'parmap',
+        'sqlalchemy',
+        'pyodbc',
+        'openpyxl',
+        'futures'
+    ],
+        
 )

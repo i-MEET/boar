@@ -179,7 +179,8 @@ class Agent():
     
  
     def plot_params(self,paramslist,fpu=[],kwargs=None):
-        """_summary_
+        """Plot the fit parameters as a function of the varied parameter
+        
 
         Parameters
         ----------
@@ -236,7 +237,7 @@ class Agent():
         plt.subplots_adjust(wspace=0.4,hspace=0.4,bottom=0.2,left=0.2)
         axs = axs.flatten()
         for ii in range(Np): # iterate over all parameters 
-            nam = [r[ii].display_name for r in pf][0]
+            nam = [r[ii].full_name for r in pf][0]
             p = np.array([r[ii].val for r in pf])
             s = np.array([r[ii].std for r in pf])
             lims = np.array([r[ii].lims for r in pf])
@@ -335,6 +336,8 @@ class Agent():
         yscale_type = kwargs.get('yscale_type','linear')
         norm_data = kwargs.get('norm_data',False)
         delog = kwargs.get('delog',False)
+        absx = kwargs.get('absx',False)
+        absy = kwargs.get('absy',False)
 
         # check if xscale_type and yscale_type are correct
         if xscale_type == 'lin':
@@ -405,6 +408,12 @@ class Agent():
                 yp = yp/np.max(yp)
                 yf = yf/np.max(yf)
             
+            if absx:
+                xp = abs(xp)
+            if absy:
+                yp = abs(yp)
+                yf = abs(yf)
+                
             plt.plot(xp,yp,'o',c='C'+str(idx),label=lab,alpha=0.5)
             plt.plot(xp,yf,c='C'+str(idx))
             # plt.loglog(abs(xp),abs(yp),'o',c='C'+str(idx),label=lab)

@@ -158,7 +158,7 @@ class Drift_diffusion_agent(Agent):
                 f = interpolate.interp1d(df['Vext'], df['Jext'],kind='linear')
                 Ysin = f(volt)
 
-            if Y == []:
+            if len(Y) == 0:
                 Y = Ysin
             else:
                 Y = np.append(Y,Ysin)
@@ -537,7 +537,7 @@ class Drift_diffusion_agent(Agent):
             Array of containing the simulation results (Current Density)
         """  
         ignore_error_code = kwargs.get('ignore_error_code',True)
-        
+        # print('Running DriftDiffusion_relative')
         if dev_par_fname=='': # if no dev_par_fname is provided, use the default one
             dev_par_fname = ''
             ParFileDic = ReadParameterFile(os.path.join(self.path2simu,'device_parameters.txt'))
@@ -641,10 +641,13 @@ class Drift_diffusion_agent(Agent):
             # Read JV file output from SIMsalabim
             try:
                 df = pd.read_csv(JV_name,delim_whitespace=True)
-            except:
+            except Exception as e:
                 print(str_lst[idx])
                 raise Exception('Could not read JV file: ',JV_name)
             
+            if len(df) <= 3:
+                print(str_lst[idx])
+                raise Exception('The JV file is empty. Please check the input parameters.')
             # Do interpolation in case SIMsalabim did not return the same number of points
             try: # try sline interpolation first and if it fails use simple linear interpolation
                 tck = interpolate.splrep(df['Vext'], df['Jext'], s=0)
@@ -654,7 +657,7 @@ class Drift_diffusion_agent(Agent):
                 try:  
                     f = interpolate.interp1d(df['Vext'], df['Jext'],kind='linear',fill_value='extrapolate')
                     Ysin = f(volt)
-                except: # if linear interpolation fails, use the minimum value of the JV curve
+                except Exception as e2: # if linear interpolation fails, use the minimum value of the JV curve
                     if min(volt)- 0.025 < min(df['Vext']): # need this as a safety to make sure we output something
                         # add a point at the beginning of the JV curve
                         df = df.append({'Vext':min(volt),'Jext':df['Jext'].iloc[0]},ignore_index=True)
@@ -663,7 +666,7 @@ class Drift_diffusion_agent(Agent):
                     Ysin = f(volt)
 
 
-            if Y == []:
+            if len(Y) == 0:
                 Y = Ysin
             else:
                 Y = np.append(Y,Ysin)
@@ -923,7 +926,7 @@ class Drift_diffusion_agent(Agent):
                         Ysin = f(volt)
 
 
-                if Y == []:
+                if len(Y) == 0:
                     Y = Ysin
                 else:
                     Y = np.append(Y,Ysin)
@@ -931,6 +934,274 @@ class Drift_diffusion_agent(Agent):
                 # Delete the JV file
                 os.remove(JV_name)
                 idx += 1
+
+
+        return Y
+    
+    def DriftDiffusion4fit(self,X,params,X_dimensions=[],max_jobs=3,fixed_str='',dev_par_fname='',Trap_dist=None,test=True,**kwargs):
+        """ Run the drift diffusion simulations for a given list of parameters\\
+        Use the relative energy level positions, see Check_fit_params for more info.
+        Also, input the custom trap distribution with different models.
+        For now, only the urbach tails and urbach tail plus mid gap traps are implemented.
+        Can also control the CNI, CPI ions densities being equal by using Cions as a parameter name.
+
+        Parameters
+        ----------
+        X : np.array
+            Array of fixed parameters (like Voltages, light intensities, etc.)) 
+        params : list
+            list of Fitparam objects
+        X_dimensions : list, optional
+            name of the fixed parameters in X, by default []
+        max_jobs : int, optional
+            maximum number of jobs to run in parallel, by default 3
+        fixed_str : str, optional
+            string of fixed parameters to be passed to SIMsalabim, by default ''
+        dev_par_fname : str, optional
+            can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ''
+        Trap_dist : str, optional
+            name of the trap model to be used, by default None
+            Can be:
+            'conduction_urbach' : urbach tails below the conduction band
+            'calence_urbach' : urbach tails above the valence band
+            'double_urbach' : urbach tails above the valence band and below the conduction band
+            'double_urbach_midgap' : urbach tails above the valence band and below the conduction band plus mid gap traps
+            None : no trap distribution is used (default)
+        
+        **kwargs : dict, optional
+            dictionary of optional parameters to be passed to the simulation code, by default {}
+            num_points : int, optional
+                number of points in the trap distribution, by default 20
+            ignore_error_code : bool, optional
+                if True, ignore the error code returned by SIMsalabim, by default True
+            take_log : bool, optional
+                if True, take the log of the absolute value of the current density, by default False
+
+        Returns
+        -------
+        np.array
+            Array of containing the simulation results (Current Density)
+        """  
+
+        take_log = kwargs.get('take_log',False) # if True, take the log of the current density
+        num_points = kwargs.get('num_points',20) # number of points in the trap distribution
+        ignore_error_code = kwargs.get('ignore_error_code',True) # if True, ignore the error code returned by SIMsalabim
+
+        
+        if dev_par_fname=='': # if no dev_par_fname is provided, use the default one
+            dev_par_fname = ''
+            ParFileDic = ReadParameterFile(os.path.join(self.path2simu,'device_parameters.txt'))
+        else:
+            ParFileDic = ReadParameterFile(os.path.join(self.path2simu,dev_par_fname))
+            fixed_str = dev_par_fname + ' ' + fixed_str # add the dev_par_fname at the beginning of the fixed_str
+
+        fixed_params = {} # dict of structure: {X_dimension:ordered list of unique params}
+
+        # Get the unique values of the experimental parameters
+        X_dimx = [XX for XX in X_dimensions if XX!='Vext'] # exclude Vext from the list of experimental parameters
+        idimX = [ii for ii,XX in enumerate(X_dimensions) if XX!='Vext'] # get the indices of the experimental parameters without Vext
+        
+        LU = 1 # need to initialize LU
+        for idim,xdim in zip(idimX,X_dimx):
+            uniques1,iau = np.unique(X[:,idim],return_index=True) # make sure we don't drop the index of the first occurence of a unique value
+            iaus = np.argsort(iau) # sort the indices of the first occurence of a unique value
+            uniques = uniques1[iaus] # sort the unique values
+            fixed_params[X_dimensions[idim]] = uniques  
+            LU = len(uniques) # this should be the same for all          
+        
+        str_lst,labels,JV_files,Var_files,path_lst,code_name_lst,scPars_files,val,nam,V,JV_files_all = [],[],[],[],[],[],[],[],[],[],[]
+
+        for param in params:
+            val.append([param.val]) # param vals in order of param
+            nam.append(param.name) # names in order of param
+
+        # check if 'Eu' is in the list of parameters
+        if Trap_dist is not None:
+            if 'Eu' in nam or 'Eu' in fixed_params.keys():
+                if 'Eu' in nam:
+                    idx = nam.index('Eu')
+                    Eu = val[idx][0]
+                elif 'Eu' in fixed_params.keys():
+                    Eu = fixed_params['Eu'][0]
+                else:
+                    raise ValueError('Eu is not in the list of parameters, please add it to the list of parameters')
+                    
+                if Trap_dist == 'double_urbach_midgap':
+                    if 'frac_mid' in nam or 'frac_mid' in fixed_params.keys():
+                        if 'frac_mid' in nam:
+                            idx = nam.index('frac_mid')
+                            frac_mid = val[idx][0]
+                        elif 'frac_mid' in fixed_params.keys():
+                            frac_mid = fixed_params['frac_mid'][0]
+                        else:
+                            raise ValueError('frac_mid is not in the list of parameters, please add it to the list of parameters')
+                        if frac_mid < 0 or frac_mid > 1:
+                            raise ValueError('frac_mid must be between 0 and 1')
+                    else:
+                        raise ValueError('frac_mid is not in the list of parameters, please add it to the list of parameters')
+            else:
+                raise ValueError('Eu is not in the list of parameters, please add it to the list of parameters')
+                
+            if num_points <= 0:
+                raise ValueError('num_points must be greater than 0')
+            
+            num_points = int(num_points) # make sure num_points is an integer
+
+            # create the trap distribution file for SIMsalabim
+            CB = ParFileDic['CB'] # conduction band default value
+            VB = ParFileDic['VB'] # valence band default value
+            if 'CB' in fixed_params.keys(): # if CB is in the list of fixed parameters, use the value of CB
+                CB = fixed_params['CB'][0]
+            elif 'CB' in nam: # if CB is in the list of parameters, use the value of CB
+                idx = nam.index('CB')
+                CB = val[idx][0]
+            if 'VB' in fixed_params.keys(): # if VB is in the list of fixed parameters, use the value of VB
+                VB = fixed_params['VB'][0]
+            elif 'VB' in nam: # if VB is in the list of parameters, use the value of VB
+                idx = nam.index('VB')
+                VB = val[idx][0]
+
+            # make sure CB and VB are floats
+            CB = float(CB)
+            VB = float(VB)
+
+            if Trap_dist == 'conduction_urbach':
+                E,Ntraps = conduction_urbach(CB,VB,Eu,num_points)
+            elif Trap_dist == 'valence_urbach':
+                E,Ntraps = valence_urbach(CB,VB,Eu,num_points)
+            elif Trap_dist == 'double_urbach_midgap':
+                E,Ntraps = double_urbach_midgap(CB,VB,Eu,frac_mid,num_points)
+            elif Trap_dist == 'double_urbach':
+                E,Ntraps = double_urbach(CB,VB,Eu,num_points)
+            else:
+                raise ValueError('Trap_dist must be ''conduction_urbach'', ''valence_urbach'', ''double_urbach_midgap'' or ''double_urbach''')
+
+            # create trap file
+            df_trap = pd.DataFrame({'E':E,'Ntraps':Ntraps})
+            filename = f'urbach_{Eu*1e3:.3e}_mV.txt'
+            # set numerb of digits to 4
+            df_trap.to_csv(os.path.join(self.path2simu,filename),sep='\t',index=False,header=True,float_format='%.4e')
+
+            # append the trap file to fixed_str
+            fixed_str = fixed_str + ' -BulkTrapFile ' + filename
+        else:
+            pass # no trap distribution file
+        
+        
+        Y = []
+        Xs = []
+
+        
+        exptl_param_names = [k for k,v in fixed_params.items()]
+        nam = nam + exptl_param_names
+        for ii in range(LU):
+            exptl_params = [v[ii] for k,v in fixed_params.items()]
+            
+            i = [vv[0] for vv in val] + exptl_params
+            
+
+            str_line = fixed_str + ' '
+            lab = ''
+            JV_name = 'JV'
+            Var_name = 'none'
+            short_dic = {}
+            scPars_name = 'scPars'
+            dum = []
+
+            # correct the parameters for the relative energy level positions
+            CorrectedParams = self.Check_fit_params(i,nam,ParFileDic)
+            
+            # create the string to be passed to SIMsalabim
+            for j,name in zip(i,nam):
+                
+                if name in CorrectedParams.keys():
+                    dumval = CorrectedParams[name]
+                else:
+                    dumval = j
+
+                if name in ParFileDic.keys(): # don't pass the parameters that are in the ParFileDic to SIMsalabim, but keeo them for the labels
+                    str_line = str_line +'-'+name+' {:.3e} '.format(dumval)
+                elif name in 'Cions':
+                    str_line = str_line +'-CNI {:.3e} -CPI {:.3e} '.format(dumval,dumval)
+
+
+                JV_name = JV_name +'_'+name +'_{:.3e}'.format(dumval)
+                scPars_name = scPars_name +'_'+ name +'_{:.3e}'.format(dumval)
+                if name in X_dimensions:
+                    if name != 'Vext':
+                        dum.append(j)
+                        
+            Xs.append(dum)
+            
+
+            if self.SafeModeParallel:
+                JV_name = 'JV_' + str(uuid.uuid4())
+                str2run =  str_line+ '-JV_file '+JV_name+ '.dat -Var_file none'
+                str_lst.append(str2run)
+                JV_files.append(os.path.join(self.path2simu , str(JV_name+ '.dat')))
+                JV_files_all.append(os.path.join(self.path2simu , str(JV_name+ '.dat')))
+                Var_files.append(os.path.join(self.path2simu , str(Var_name+ '.dat')))
+                scPars_files.append(os.path.join(self.path2simu , str(scPars_name+ '.dat')))
+                code_name_lst.append('simss')
+                path_lst.append(self.path2simu)
+                labels.append(lab)
+            else:
+                str2run =  str_line+ '-JV_file '+JV_name+ '.dat -Var_file none'
+                str_lst.append(str2run)
+                JV_files.append(os.path.join(self.path2simu , str(JV_name+ '.dat')))
+                JV_files_all.append(os.path.join(self.path2simu , str(JV_name+ '.dat')))
+                Var_files.append(os.path.join(self.path2simu , str(Var_name+ '.dat')))
+                scPars_files.append(os.path.join(self.path2simu , str(scPars_name+ '.dat')))
+                code_name_lst.append('simss')
+                path_lst.append(self.path2simu)
+                labels.append(lab)
+        
+        Simulation_Input = str_lst,JV_files,Var_files,scPars_files,code_name_lst,path_lst,labels
+
+        RunSimulation(Simulation_Input,max_jobs=max_jobs,do_multiprocessing=True,ignore_error_code=ignore_error_code)
+
+        idx = 0
+        for JV_name,fix in zip(JV_files_all,Xs):
+            volt = []
+            for i in X:
+                if (i[1:] == np.asarray(fix)).all():
+                    volt.append(i[0])
+
+            # Read JV file output from SIMsalabim
+            try:
+                df = pd.read_csv(JV_name,delim_whitespace=True)
+            except:
+                print(str_lst[idx])
+                raise Exception('Could not read JV file: ',JV_name)
+            
+            # Do interpolation in case SIMsalabim did not return the same number of points
+            try: # try sline interpolation first and if it fails use simple linear interpolation
+                tck = interpolate.splrep(df['Vext'], df['Jext'], s=0)
+                Ysin = interpolate.splev(volt, tck, der=0,ext = 0)
+            except Exception as e:
+                # try linear interpolation
+                try:  
+                    f = interpolate.interp1d(df['Vext'], df['Jext'],kind='linear',fill_value='extrapolate')
+                    Ysin = f(volt)
+                except: # if linear interpolation fails, use the minimum value of the JV curve
+                    if min(volt)- 0.025 < min(df['Vext']): # need this as a safety to make sure we output something
+                        # add a point at the beginning of the JV curve
+                        df = df.append({'Vext':min(volt),'Jext':df['Jext'].iloc[0]},ignore_index=True)
+                        df = df.sort_values(by=['Vext'])
+                    f = interpolate.interp1d(df['Vext'], df['Jext'],kind='linear',fill_value='extrapolate')
+                    Ysin = f(volt)
+
+            if take_log:
+                Ysin = np.log10(abs(Ysin))
+
+            if len(Y) == 0:
+                Y = Ysin
+            else:
+                Y = np.append(Y,Ysin)
+            
+            # Delete the JV file
+            os.remove(JV_name)
+            idx += 1
 
 
         return Y
@@ -966,7 +1237,7 @@ class Drift_diffusion_agent(Agent):
         for i,j in zip(names,vals):
             ParStrDic[i] = float(j)
         
-
+        
         # loop through the ParStrDic and check if the value is within the range of the energy levels
         if 'CB' not in ParStrDic.keys():
             CB = float(ParFileDic['CB'])
@@ -998,6 +1269,7 @@ class Drift_diffusion_agent(Agent):
             CB_RTL = CB + float(ParStrDic['CB_RTL'])
             CorrectedDic['CB_RTL'] = CB_RTL
 
+        
         if 'VB_RTL' not in ParStrDic.keys():
             VB_RTL = float(ParFileDic['VB_RTL'])
         else:
@@ -1021,11 +1293,20 @@ class Drift_diffusion_agent(Agent):
             else:
                 W_R = VB + float(ParStrDic['W_R'])
             CorrectedDic['W_R'] = W_R
-        
+
         if 'ETrapSingle' not in ParStrDic.keys():
             ETrapSingle = float(ParFileDic['ETrapSingle'])
-        else:           
-            ETrapSingle = max(CB,CB_LTL) + float(ParStrDic['ETrapSingle'])
+        else:
+            if int(ParFileDic['Tr_type_B' ]) == -1:
+                if float(ChosePar('L_LTL', ParStrDic, ParFileDic)) > 0 :
+                    ETrapSingle = max(CB,CB_LTL) + float(ParStrDic['ETrapSingle'])
+                else:
+                    ETrapSingle = CB + float(ParStrDic['ETrapSingle'])
+            elif int(ParFileDic['Tr_type_B' ]) == 1:
+                if float(ChosePar('L_RTL', ParStrDic, ParFileDic)) > 0 :
+                    ETrapSingle = min(VB,VB_RTL) - float(ParStrDic['ETrapSingle'])
+                else:
+                    ETrapSingle = VB - float(ParStrDic['ETrapSingle'])
             CorrectedDic['ETrapSingle'] = ETrapSingle
 
         # Make the same checks as in SIMsalabim

@@ -13,7 +13,7 @@
 *.json
 *.xlsx
 *.ipynb
-*SIMsalabim
+# *SIMsalabim
 *.py
 *.html
 
@@ -33,19 +33,32 @@ old_notebook/
 old_Notebooks2/
 db_access/
 slack_utils/
+Notebooks_not_ready/
 BOAR_DD_parallel.py
+# SIMsalabim/*
+# /SIMsalabim/*
+# **/SIMsalabim
 # boar/agents/TAS_agent_new.py
 
 # Exceptions
+!Download_SIMsalabim.py
 !Notebooks/*.ipynb
 !Example_Data/Chao/*.csv
+!Example_Data/Chao/device_parameters_chao.txt
+!Example_Data/Data_test/device_parameters_fake_OPV.txt
+!Example_Data/Christian/*.csv
+!Example_Data/matdata/*.csv
+!Example_Data/matdata/Biblio_info_to_cite.txt
+!Example_Data/Jiyun/*.xlsx
+!Example_Data/Frederik/*.csv
+!Example_Data/Data_test/device_parameters_fake_OPV.txt
 !Notebooks/BOAR_DD_parallel.py
 !requirements.txt
 !requirements_main.txt
+!requirements_torch_CPU.txt
 !setup.py
 !boar/*.py
 !boar/agents/*.py
 !boar/core/*.py
 !boar/dynamic_utils/*.py
 !boar/SIMsalabim_utils/*.py
-
