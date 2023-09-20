@@ -25,7 +25,7 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 dist/
-build/
+# build/
 .eggs/
 temp/
 warmstart/
@@ -50,6 +50,8 @@ BOAR_DD_parallel.py
 # !docs/*.js
 # !docs/*.txt
 # !docs/**
+!docs/logo/**
+!docs/source/index.html
 !docs/source/*.rst
 !docs/source/examples/*.ipynb
 !Download_SIMsalabim.py
