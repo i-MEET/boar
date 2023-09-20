@@ -3,14 +3,17 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
     contents: write
 jobs:
-  docs:
-    runs-on: ubuntu-latest
+  convert_via_pandoc:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
+      - uses: docker://pandoc/core:2.9
+      - name: Test Pandoc
+        run: |
+          pandoc --version
       - name: Install dependencies
         run: |
-          apt-get install pandoc
           pip install sphinx sphinx_rtd_theme sphinx-gallery nbsphinx sphinx_copybutton sphinx-notfound-page docutils readthedocs-sphinx-search pandoc
           pip install -r requirements_torch_CPU.txt
       - name: Build
