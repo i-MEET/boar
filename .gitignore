@@ -16,6 +16,9 @@
 # *SIMsalabim
 *.py
 *.html
+*.rst
+*.css
+*.js
 
 # ignore folders
 __pycache__/
@@ -41,6 +44,14 @@ BOAR_DD_parallel.py
 # boar/agents/TAS_agent_new.py
 
 # Exceptions
+# !docs/*.html
+# !docs/*.png
+# !docs/*.css
+# !docs/*.js
+# !docs/*.txt
+# !docs/**
+!docs/source/*.rst
+!docs/source/examples/*.ipynb
 !Download_SIMsalabim.py
 !Notebooks/*.ipynb
 !Example_Data/Chao/*.csv
