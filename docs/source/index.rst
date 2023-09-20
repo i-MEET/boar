@@ -9,6 +9,26 @@ Welcome to BOAR's documentation!
 
 Most of the agents in BOAR can be used to fit a model to experimental data, yet BOAR can be also used to optimize experimental process condition and guide experimentation in an automated fashion.
 
+See the `BOAR GitHub repository <https://github.com/i-MEET/boar>`_ for more information.
+
+Authors
+==================
+* `Larry Lüer <https://github.com/larryluer>`_
+* `Vincent M. Le Corre <https://github.com/VMLC-PV>`_
+
+Institution
+==================
+.. figure:: ../logo/imeet_logo_square.jpg
+   :align: left
+   :width: 100px
+   :alt: i-MEET logo
+
+| `Institute Materials for Electronics and Energy Technology <https://www.i-meet.ww.uni-erlangen.de/>`_ (i-MEET)
+| University of Erlangen-Nuremberg (FAU) 
+| Erlangen, Germany
+
+|
+
 What is currently implemented in BOAR? : The optimizers & agents
 #################################################################
 
@@ -18,7 +38,7 @@ The optimizers are used to find the optimal parameters for a given optimization 
 
 Available optimizers are:
 
-* `scikit-optimize <https://scikit-optimize.github.io/stable/index.html>`_
+* `scikit-optimize <https://scikit-optimize.github.io/stable/index.html
 * `scipy.optimize.curve_fit <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html>`_
 * `Ax & BoTorch <https://ax.dev/tutorials/multiobjective_optimization.html>`_ 
 
@@ -69,24 +89,6 @@ Available agents are:
    
    modules
    
-
-Authors
-==================
-* `Larry Lüer <https://github.com/larryluer>`_
-* `Vincent M. Le Corre <https://github.com/VMLC-PV>`_
-
-Institution
-==================
-.. figure:: ../logo/imeet_logo_square.jpg
-   :align: left
-   :width: 100px
-   :alt: i-MEET logo
-
-| `Institute Materials for Electronics and Energy Technology <https://www.i-meet.ww.uni-erlangen.de/>`_ (i-MEET)
-| University of Erlangen-Nuremberg (FAU) 
-| Erlangen, Germany
-
-|
 
 Indices and tables
 ==================

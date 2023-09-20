@@ -77,4 +77,12 @@ sphinx_gallery_conf = {
 
 }
 
-nbsphinx_execute = 'never'
+nbsphinx_execute = 'never' # so we don't run the notebooks
+
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "i-MEET", # Username
+    "github_repo": "boar", # Repo name
+    "github_version": "main", # Version
+    "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
+}
