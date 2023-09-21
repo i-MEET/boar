@@ -68,14 +68,6 @@ boar.SIMsalabim\_utils.SimSS\_plots module
    :undoc-members:
    :show-inheritance:
 
-boar.SIMsalabim\_utils.SimSS\_plots\_old module
------------------------------------------------
-
-.. automodule:: boar.SIMsalabim_utils.SimSS_plots_old
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 boar.SIMsalabim\_utils.ZimT\_plots module
 -----------------------------------------
 
