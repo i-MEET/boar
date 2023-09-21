@@ -19,7 +19,7 @@
 *.rst
 *.css
 *.js
-
+*.egg-info
 # ignore folders
 __pycache__/
 .vscode/
@@ -27,6 +27,7 @@ __pycache__/
 dist/
 # build/
 .eggs/
+.pypirc
 temp/
 warmstart/
 venv_boar/
