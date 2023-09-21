@@ -38,7 +38,7 @@ The optimizers are used to find the optimal parameters for a given optimization 
 
 Available optimizers are:
 
-* `scikit-optimize <https://scikit-optimize.github.io/stable/index.html
+* `scikit-optimize <https://scikit-optimize.github.io/stable/index.html>`_
 * `scipy.optimize.curve_fit <https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html>`_
 * `Ax & BoTorch <https://ax.dev/tutorials/multiobjective_optimization.html>`_ 
 
