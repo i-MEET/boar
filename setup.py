@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     license='BSD 3-Clause License',
     url="https://github.com/i-MEET/boar",
-    download_url="https://github.com/i-MEET/boar/archive/refs/tags/v1.0.1.tar.gz",
+    download_url="https://github.com/i-MEET/boar/archive/refs/tags/v1.0.0-beta.tar.gz",
     packages=setuptools.find_packages(),
     readme = "README.md",
     keywords=['Bayesian optimization', 'parameter extraction', 'experimental design', 'high throughput', 'solar cells'],
