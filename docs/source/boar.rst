@@ -10,6 +10,7 @@ Subpackages
    boar.SIMsalabim_utils
    boar.agents
    boar.core
+   boar.dynamic_utils
 
 Module contents
 ---------------

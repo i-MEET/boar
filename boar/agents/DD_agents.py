@@ -382,19 +382,20 @@ class Drift_diffusion_agent(Agent):
             print the results, by default False
         kwargs : dict, optional
             dictionary with the plotting options, by default None
-            including:
-                savefig : bool, optional
-                    save the figure, by default True
-                figname : str, optional
-                    name of the figure, by default 'JV_fit'
-                figdir : str, optional
-                    directory where to save the figure, by default ''
-                figext : str, optional
-                    extension of the figure, by default '.png'
-                figsize : tuple, optional
-                    size of the figure, by default (16,12)
-                figdpi : int, optional
-                    dpi of the figure, by default 300
+
+                including:
+                    savefig : bool, optional
+                        save the figure, by default True
+                    figname : str, optional
+                        name of the figure, by default 'JV_fit'
+                    figdir : str, optional
+                        directory where to save the figure, by default ''
+                    figext : str, optional
+                        extension of the figure, by default '.png'
+                    figsize : tuple, optional
+                        size of the figure, by default (16,12)
+                    figdpi : int, optional
+                        dpi of the figure, by default 300
         """  
         if DD_func == None:
             DD_func = self.DriftDiffusion
@@ -529,8 +530,9 @@ class Drift_diffusion_agent(Agent):
             can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ''
         **kwargs : dict, optional
             additional arguments to be passed to the DriftDiffusion function, by default {}
-            ignore_error_code : bool, optional
-                if True, ignore the error code returned by SIMsalabim, by default True
+                including:
+                    ignore_error_code : bool, optional
+                        if True, ignore the error code returned by SIMsalabim, by default True
         Returns
         -------
         np.array
@@ -701,20 +703,21 @@ class Drift_diffusion_agent(Agent):
             can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ''
         Trap_dist : str, optional
             name of the trap model to be used, by default None
-            Can be:
-            'conduction_urbach' : urbach tails below the conduction band
-            'calence_urbach' : urbach tails above the valence band
-            'double_urbach' : urbach tails above the valence band and below the conduction band
-            'double_urbach_midgap' : urbach tails above the valence band and below the conduction band plus mid gap traps
-            None : no trap distribution is used (default)
+                Can be:
+                    'conduction_urbach' : urbach tails below the conduction band
+                    'calence_urbach' : urbach tails above the valence band
+                    'double_urbach' : urbach tails above the valence band and below the conduction band
+                    'double_urbach_midgap' : urbach tails above the valence band and below the conduction band plus mid gap traps
+                    None : no trap distribution is used (default)
         test : bool, optional
             if True, run a test simulation that does not transform the input, by default True
         **kwargs : dict, optional
             dictionary of optional parameters to be passed to the simulation code, by default {}
-            num_points : int, optional
-                number of points in the trap distribution, by default 20
-            ignore_error_code : bool, optional
-                if True, ignore the error code returned by SIMsalabim, by default True
+                including:
+                    num_points : int, optional
+                        number of points in the trap distribution, by default 20
+                    ignore_error_code : bool, optional
+                        if True, ignore the error code returned by SIMsalabim, by default True
 
         Returns
         -------
@@ -961,21 +964,22 @@ class Drift_diffusion_agent(Agent):
             can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ''
         Trap_dist : str, optional
             name of the trap model to be used, by default None
-            Can be:
-            'conduction_urbach' : urbach tails below the conduction band
-            'calence_urbach' : urbach tails above the valence band
-            'double_urbach' : urbach tails above the valence band and below the conduction band
-            'double_urbach_midgap' : urbach tails above the valence band and below the conduction band plus mid gap traps
-            None : no trap distribution is used (default)
+                Can be:
+                    'conduction_urbach' : urbach tails below the conduction band
+                    'calence_urbach' : urbach tails above the valence band
+                    'double_urbach' : urbach tails above the valence band and below the conduction band
+                    'double_urbach_midgap' : urbach tails above the valence band and below the conduction band plus mid gap traps
+                    None : no trap distribution is used (default)
         
         **kwargs : dict, optional
             dictionary of optional parameters to be passed to the simulation code, by default {}
-            num_points : int, optional
-                number of points in the trap distribution, by default 20
-            ignore_error_code : bool, optional
-                if True, ignore the error code returned by SIMsalabim, by default True
-            take_log : bool, optional
-                if True, take the log of the absolute value of the current density, by default False
+                including:
+                    num_points : int, optional
+                        number of points in the trap distribution, by default 20
+                    ignore_error_code : bool, optional
+                        if True, ignore the error code returned by SIMsalabim, by default True
+                    take_log : bool, optional
+                        if True, take the log of the absolute value of the current density, by default False
 
         Returns
         -------

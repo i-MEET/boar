@@ -258,7 +258,7 @@ def RunSimulation(Simulation_Inputs,max_jobs=os.cpu_count()-2 ,do_multiprocessin
         for i in range(len(str_lst)):
             run_code(code_name_lst[i],path_lst[i],str_lst[i],show_term_output=show_progress,ignore_error_code=ignore_error_code)
 
-def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS',output_Var=False,verbose=False):
+def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS',output_Var=False,cropname=True,verbose=False):
     """Prepare the command strings to run and the fixed parameters and output files
     This procedure will make command with fixed_str and all the possible combinations of the input parameters in parameters. (see itertools.product)
 
@@ -274,7 +274,9 @@ def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS
     CodeName : str, optional
         code name, can be ['SimSS','simss','ZimT','zimt'], by default 'SimSS'
     output_Var : bool, optional
-        Output the Var file?, by default False        
+        Output the Var file?, by default False
+    cropname : bool, optional
+        Crop the name of the output files to a random uuid (use this is you generate filenames too long), by default True        
     verbose : bool, optional
         Verbose?, by default False
 
@@ -324,7 +326,14 @@ def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS
                 Var_name = 'none'
                 add_str = ''
             else:
-                Var_name = Var_name+'.dat'
+                if cropname:
+                    Var_name = str(uuid.uuid4())
+                else:
+                    Var_name = Var_name+'.dat'
+            if cropname:
+                rand_uuid = str(uuid.uuid4())
+                JV_name = 'JV_' + rand_uuid 
+                scPars_name = 'scPars_' + rand_uuid
             str_lst.append(fixed_str+add_str+ ' ' +str_line+ '-JV_file '+JV_name+ '.dat -Var_file '+Var_name+' -scPars_file '+scPars_name+'.dat')# -ExpJV '+JVexp_lst[idx])
             JV_files.append(os.path.join(Path2Simu , str(JV_name+ '.dat')))
             Var_files.append(os.path.join(Path2Simu , str(Var_name+ '.dat')))
@@ -355,7 +364,14 @@ def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS
                 Var_name = 'none'
                 add_str = ' -OutputRatio 0'
             else:
+                if cropname:
+                    Var_name = str(uuid.uuid4())
                 add_str = ''
+            if cropname:
+                rand_uuid = str(uuid.uuid4())
+                JV_name = 'JV_' + rand_uuid 
+                scPars_name= 'scPars_' + rand_uuid
+
             scPars_name = scPars_name +'_'+ name +'_{:.2e}'.format(j)
             str_lst.append(fixed_str+add_str+ ' ' +str_line+ '-JV_file '+JV_name+ '.dat -Var_file '+Var_name+' -scPars_file '+scPars_name+'.dat')# -ExpJV '+JVexp_lst[idx])
             JV_files.append(os.path.join(Path2Simu , str(JV_name+ '.dat')))
@@ -387,7 +403,7 @@ def PrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS
     
     return str_lst,JV_files,Var_files,scPars_files,code_name_lst,path_lst,labels
 
-def DegradationPrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS',output_Var=False,verbose=False):
+def DegradationPrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeName = 'SimSS',output_Var=False,cropname=True,verbose=False):
     """Prepare the command strings to run and the fixed parameters and output files
     This procedure will make command with fixed_str and all the possible combinations of the input parameters in parameters. (see itertools.product)
 
@@ -404,6 +420,8 @@ def DegradationPrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeNa
         code name, can be ['SimSS','simss','ZimT','zimt'], by default 'SimSS'
     output_Var : bool, optional
         Output the Var file?, by default False
+    cropname : bool, optional
+        Crop the name of the output files to a random uuid (use this is you generate filenames too long), by default True
     verbose : bool, optional
         Verbose?, by default False
 
@@ -459,7 +477,15 @@ def DegradationPrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeNa
                 Var_name = 'none'
                 add_str = ''
             else:
-                Var_name = Var_name+'.dat'
+                if cropname:
+                    Var_name = str(uuid.uuid4())
+                else:
+                    Var_name = Var_name+'.dat'
+            
+            if cropname:
+                rand_uuid = str(uuid.uuid4())
+                JV_name = 'JV_' + rand_uuid 
+                scPars_name = 'scPars_' + rand_uuid
             str_lst.append(fixed_str+add_str+ ' ' +str_line+ '-JV_file '+JV_name+ '.dat -Var_file '+Var_name+' -scPars_file '+scPars_name+'.dat')# -ExpJV '+JVexp_lst[idx])
             JV_files.append(os.path.join(Path2Simu , str(JV_name+ '.dat')))
             Var_files.append(os.path.join(Path2Simu , str(Var_name+ '.dat')))
@@ -491,6 +517,10 @@ def DegradationPrepareSimuInputs(Path2Simu,parameters=None,fixed_str=None,CodeNa
                 add_str = ''
             else:
                 Var_name = Var_name+'.dat'
+            if cropname:
+                rand_uuid = str(uuid.uuid4())
+                JV_name = 'JV_' + rand_uuid 
+                scPars_name= 'scPars_' + rand_uuid
             scPars_name = scPars_name +'_'+ name +'_{:.2e}'.format(j)
             str_lst.append(fixed_str+add_str+ ' ' +str_line+ '-JV_file '+JV_name+ '.dat -Var_file '+Var_name+' -scPars_file '+scPars_name+'.dat')# -ExpJV '+JVexp_lst[idx])
             JV_files.append(os.path.join(Path2Simu , str(JV_name+ '.dat')))

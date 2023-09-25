@@ -35,22 +35,23 @@ class TrMC_agent(Agent):
 
     pump_params : dict, optional
         dictionary of pump parameters, by default {'P':0.0039, 'wvl':850, 'fpu':10000, 'A':0.3*0.3*1e-4, 'alpha':1e-5*1e-2, 'pulse_width':0.2*(1/10000), 't0':0, 'background':0}
-        P : float
-            total CW power of pulse in W
-        wvl : float
-            excitation wavelength in nm
-        fpu : float
-            pump frequency in Hz
-        A : float
-            effective pump area in m^-2
-        alpha : float
-            penetration depth in m
-        pulse_width : float
-            width of the pump pulse in seconds
-        t0 : float, optional
-            time shift of the pump pulse, by default 0
-        background : float, optional
-            background volume density of generated photons, by default 0
+            including:
+                P : float
+                    total CW power of pulse in W
+                wvl : float
+                    excitation wavelength in nm
+                fpu : float
+                    pump frequency in Hz
+                A : float
+                    effective pump area in m^-2
+                alpha : float
+                    penetration depth in m
+                pulse_width : float
+                    width of the pump pulse in seconds
+                t0 : float, optional
+                    time shift of the pump pulse, by default 0
+                background : float, optional
+                    background volume density of generated photons, by default 0
 
 
 

@@ -14,18 +14,25 @@ class Agent():
         pass
 
     def get_param_dict(self, params):
-        """get standard deviations from parameters
+        """ get standard deviations from parameters
         if optimization has been done in log scale, convert them into 
         linear scale which will make the upper and lower limit unsymmetric and will return a tuple
 
         Parameters
         ----------
         params : list of Fitparam()
-            
-        Returns:
-         paramdict: list of dict with keys 'name'(string),'relRange'(float),'val'(float),'std'(float or tuple of float)
-         depending on whether in the param optim_type=='linear' or 'log', respectively
-        """
+            list of Fitparam objects
+
+        Returns
+        -------
+        list of dict
+            list of dict with keys 'name'(string),'relRange'(float),'val'(float),'std'(float or tuple of float)
+
+        Raises
+        ------
+        ValueError
+            if optim_type is not 'linear' or 'log'
+        """        
 
         paramdict = []
         for param in params:
@@ -76,14 +83,14 @@ class Agent():
 
         Parameters
         ----------
-        ps : ist of string
+        ps : list of string
             list the names of the desired fit parameters
         params : list of Fitparam()
             Fitparam objects
 
         Returns
         -------
-        ist of float
+        list of float
             the values of the respective fit parameters
         """
         out = []
@@ -112,7 +119,7 @@ class Agent():
         Returns
         -------
         dictionary
-            key 'x' is independent parameter, oter keys are metadata
+            key 'x' is independent parameter, other keys are metadata
         """
 
         Xm = np.delete(X, axis, 1)  # delete data column of X, leaving only the metadata columns
@@ -162,6 +169,18 @@ class Agent():
         return fig
 
     def to_excel(self,fn_xlsx,outdict,params):
+        """Export the results to an excel file
+
+        Parameters
+        ----------
+        fn_xlsx : str
+            filename of the excel file
+        outdict : dict
+            dictionary containing the results see Xy_to_dict
+        params : list of Fitparam()
+            list of Fitparam objects
+
+        """        
         param_dict = self.get_param_dict(params) # get fitparameters (and fixed ones)
         pout = [[f'{v:.3E}' if isinstance(v,float) else v for _,v in pp.items()] for pp in param_dict]
 
@@ -179,9 +198,9 @@ class Agent():
     
  
     def plot_params(self,paramslist,fpu=[],kwargs=None):
+  
         """Plot the fit parameters as a function of the varied parameter
         
-
         Parameters
         ----------
         paramslist : list
@@ -189,24 +208,25 @@ class Agent():
         fpu : list, optional
             list to plot on the x axis, by default []
         kwargs : dict, optional
-            dictionary with the plotting options, by default None
-            including:
-                savefig : bool, optional
-                    save the figure, by default True
-                figname : str, optional
-                    name of the figure, by default 'JV_fit'
-                figdir : str, optional
-                    directory where to save the figure, by default ''
-                figext : str, optional
-                    extension of the figure, by default '.png'
-                figsize : tuple, optional
-                    size of the figure, by default (8*Np,12)
-                figdpi : int, optional
-                    dpi of the figure, by default 300
-                nrows : int, optional
-                    number of rows in the figure, by default 1
-                ncols : int, optional
-                    number of columns in the figure, by default Np
+            dictionary with the plotting options, by default None  
+
+                including:  
+                    savefig : bool, optional  
+                        save the figure, by default True
+                    figname : str, optional  
+                        name of the figure, by default 'JV_fit'
+                    figdir : str, optional  
+                        directory where to save the figure, by default ''
+                    figext : str, optional  
+                        extension of the figure, by default '.png'
+                    figsize : tuple, optional  
+                        size of the figure, by default (8*Np,12)
+                    figdpi : int, optional  
+                        dpi of the figure, by default 300
+                    nrows : int, optional  
+                        number of rows in the figure, by default 1
+                    ncols : int, optional  
+                        number of columns in the figure, by default Np
 
         Returns
         -------
@@ -285,7 +305,7 @@ class Agent():
         return (infopack)
 
 
-    def plot_fit_res(self,target,params,xaxis_name,xlim=[],ylim=[],kwargs=None):
+    def plot_fit_res(self,target,params,xaxis_name,xlim=[],ylim=[],kwargs=None):       
         """Compare the targets vs fitting results
 
         Parameters
@@ -305,20 +325,42 @@ class Agent():
         verbose : bool, optional
             print the results, by default False
         kwargs : dict, optional
-            dictionary with the plotting options, by default None
-            including:
-                savefig : bool, optional
-                    save the figure, by default True
-                figname : str, optional
-                    name of the figure, by default 'JV_fit'
-                figdir : str, optional
-                    directory where to save the figure, by default ''
-                figext : str, optional
-                    extension of the figure, by default '.png'
-                figsize : tuple, optional
-                    size of the figure, by default (8,8)
-                figdpi : int, optional
-                    dpi of the figure, by default 300
+            dictionary with the plotting options, by default None  
+
+                including:  
+                    savefig : bool, optional  
+                        save the figure, by default True
+                    figname : str, optional  
+                        name of the figure, by default 'JV_fit'
+                    figdir : str, optional  
+                        directory where to save the figure, by default ''
+                    figext : str, optional  
+                        extension of the figure, by default '.png'
+                    figsize : tuple, optional  
+                        size of the figure, by default (8,8)
+                    figdpi : int, optional  
+                        dpi of the figure, by default 300
+                    x_scaling : float, optional  
+                        scaling factor for the x axis, by default 1
+                    y_scaling : float, optional  
+                        scaling factor for the y axis, by default 1
+                    xscale_type : str, optional  
+                        type of the x axis, by default 'linear'
+                    yscale_type : str, optional  
+                        type of the y axis, by default 'linear'
+                    norm_data : bool, optional  
+                        normalize the data, by default False
+                    delog : bool, optional  
+                        de-log the data, by default False
+                    absx : bool, optional  
+                        take the absolute value of the x axis, by default False
+                    absy : bool, optional  
+                        take the absolute value of the y axis, by default False
+                    xaxis_label : str, optional  
+                        label of the x axis, by default ''
+                    yaxis_label : str, optional  
+                        label of the y axis, by default ''
+
         """  
         # if kwargs != {}:
         if kwargs is None:
