@@ -12,7 +12,6 @@ parmap
 sqlalchemy
 pyodbc
 openpyxl
-futures
 torch
 torchvision
 torchaudio

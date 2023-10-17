@@ -12,4 +12,3 @@ parmap
 sqlalchemy
 pyodbc
 openpyxl
-futures
