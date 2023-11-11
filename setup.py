@@ -37,7 +37,6 @@ setuptools.setup(
         'tqdm>=4.65',
         'parmap>=1.5',
         'sqlalchemy>=1.4',
-        'pyodbc>=4.0',
         'torch>=2.0',
         'torchvision>=0.15',
         'torchaudio>=2.0',

@@ -10,7 +10,6 @@ scikit-optimize
 tqdm
 parmap
 sqlalchemy
-pyodbc
 torch
 torchvision
 torchaudio

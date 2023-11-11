@@ -10,4 +10,3 @@ scikit-optimize
 tqdm
 parmap
 sqlalchemy
-pyodbc
