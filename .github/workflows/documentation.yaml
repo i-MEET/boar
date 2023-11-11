@@ -8,6 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Test Pandoc
         run: |
