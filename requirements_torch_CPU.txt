@@ -9,8 +9,8 @@ scipy
 scikit-optimize
 tqdm
 parmap
-sqlalchemy
 torch
 torchvision
 torchaudio
 ax-platform
+gitpython

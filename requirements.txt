@@ -9,4 +9,4 @@ scipy
 scikit-optimize
 tqdm
 parmap
-sqlalchemy
+gitpython

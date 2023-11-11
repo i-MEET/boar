@@ -36,11 +36,11 @@ setuptools.setup(
         'scikit-optimize>=0.9',
         'tqdm>=4.65',
         'parmap>=1.5',
-        'sqlalchemy>=1.4',
         'torch>=2.0',
         'torchvision>=0.15',
         'torchaudio>=2.0',
         'ax-platform>=0.3',
+        'gitpython>=3.1',
     ],
     extras_require = {
         'dev': [
