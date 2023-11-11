@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="boar_pv", # Replace with your own username
-    version="1.0.5",
+    version="1.0.6",
     author="Vincent Le Corre, Larry Lueer",
     author_email="vincent.le.corre@fau.de",
     description="High throughput parameter extraction and experimental design with Bayesian optimization",
@@ -38,7 +38,6 @@ setuptools.setup(
         'parmap>=1.5',
         'sqlalchemy>=1.4',
         'pyodbc>=4.0',
-        'openpyxl>=3.0',
         'torch>=2.0',
         'torchvision>=0.15',
         'torchaudio>=2.0',

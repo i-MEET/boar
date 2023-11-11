@@ -11,4 +11,3 @@ tqdm
 parmap
 sqlalchemy
 pyodbc
-openpyxl
