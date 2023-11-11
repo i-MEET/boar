@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "License :: OSI Approved :: BSD License",
     ],
-    python_requires='>=3.9',
+    python_requires='>=3.9, <3.12',
     install_requires = [
         'numpy>=1.2',
         'pandas>=1.4',
