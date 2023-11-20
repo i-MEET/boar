@@ -10,3 +10,5 @@ scikit-optimize
 tqdm
 parmap
 gitpython
+pyodbc
+openpyxl

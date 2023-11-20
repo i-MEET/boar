@@ -18,3 +18,5 @@ tk
 pymysql
 slack_sdk
 ray
+pyodbc
+openpyxl
