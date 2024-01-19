@@ -416,7 +416,7 @@ class Non_Ideal_Diode_agent():
             raise ValueError('JV_type must be either ''dark'' or ''light''')
         
         # # Fit the non ideal diode equation
-        popt, pcov = curve_fit(diode_func, V, J, p0=p0_, maxfev =1e3,bounds = bounds_, method = 'dogbox')
+        popt, pcov = curve_fit(diode_func, V, J, p0=p0_, maxfev = 5e3,bounds = bounds_, method = 'dogbox')
         perr = np.sqrt(np.diag(pcov)) # error of the fit
 
         if JV_type == 'dark':

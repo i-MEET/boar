@@ -129,7 +129,7 @@ class MultiObjectiveOptimizer(BoarOptimizer):
         SSE = Y*N # the sum of squared errors
         LLH = -beta/2 * SSE + N/2*np.log(beta) - N/2*np.log(2*np.pi) # Bishop eq. 1.62
         return -LLH 
-
+        
     def LH(self,X,beta_scaled,N,gpr,fscale):
         """Compute the positive log likelihood from the negative log likelihood
 
@@ -164,7 +164,6 @@ class MultiObjectiveOptimizer(BoarOptimizer):
         SSE = Y*N # the sum of squared errors
         LLH = -beta/2 * SSE + N/2*np.log(beta) - N/2*np.log(2*np.pi) # Bishop eq. 1.62
         #return np.exp(LLH)
-
         return LLH #
     
     ###############################################################################

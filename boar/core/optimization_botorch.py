@@ -336,7 +336,7 @@ class MooBOtorch(BoarOptimizer):
                 if 'minimize' in target.keys():
                     minimize = target['minimize']
                     if not isinstance(minimize, bool): # check if minimize is a boolean
-                        warnings.warn('minimize for target '+str(num)+' must be a boolean. Using default value of True.')
+                        warnings.warn('minimize for target '+str(_)+' must be a boolean. Using default value of True.')
                         minimize = True
                 else:
                     minimize = True
@@ -570,7 +570,7 @@ class MooBOtorch(BoarOptimizer):
 
         # check that no n_jobs is larger than os.cpu_count()-1, reset to os.cpu_count()-1 if so and raise warning
         for i in range(len(n_jobs)):
-            if n_jobs[i] > os.cpu_count()-1 or not self.parallel: 
+            if n_jobs[i] > os.cpu_count()-1 and self.parallel: 
                 n_jobs[i] = os.cpu_count()-1
                 warnings.warn('n_jobs for step '+str(i)+' is larger than os.cpu_count()-1. Resetting to '+str(os.cpu_count()-1))
         maxjobs = max(n_jobs) # maximum number of parallel jobs
@@ -633,7 +633,7 @@ class MooBOtorch(BoarOptimizer):
             # ray.init(num_cpus=maxjobs)
         
         if 'recall' in self.warmstart:
-            # try:
+            try:
                 # load the old data
                 path2file = self.Path2OldXY
                 with open(path2file, "r") as outfile:
@@ -684,14 +684,14 @@ class MooBOtorch(BoarOptimizer):
                         parameters, trial_index = ax_client.attach_trial(parameters=dic)
                         ax_client.complete_trial(trial_index=trial_index, raw_data=(cost,None))
 
-            # except Exception as e:
-            #     print('Could not load the old_xy data so we keep going without it')
-            #     warnings.warn('error message: '+str(e))
+            except Exception as e:
+                print('Could not load the old_xy data so we keep going without it')
+                print('error message: '+str(e))
+
 
 
         while n < num_trials:
             curr_batch_size = int(n_jobs[np.argmax(cum_n_step_points>n)]) # number of trials in the current batch
-
             n = n + curr_batch_size
             if n > num_trials: # if the number of trials is larger than the total number of trials, reduce the batch size
                 curr_batch_size = int(curr_batch_size - (n - num_trials))
@@ -708,11 +708,11 @@ class MooBOtorch(BoarOptimizer):
                         results = Parallel(n_jobs=curr_batch_size)(delayed(self.evaluate)(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values())
                 else:
                     warnings.warn('Using custom evaluation function, make sure that the function returns a dictionary with the following format: {metric_name:metric_value}')
-                    # if curr_batch_size == 1:
-                    results = [self.evaluate_custom(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values()]
-                # else:
-                #     raise ValueError('Cannot use custom evaluation function with more than one job, please set n_jobs to 1')
-                    # results = Parallel(n_jobs=curr_batch_size)(delayed(self.evaluate_custom)(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values())
+                    if curr_batch_size == 1 or not self.parallel:
+                        results = [self.evaluate_custom(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values()]
+                    else:
+                    #     raise ValueError('Cannot use custom evaluation function with more than one job, please set n_jobs to 1')
+                        results = Parallel(n_jobs=curr_batch_size)(delayed(self.evaluate_custom)(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values())
                     # # user ray 
                     # results = ray.get([self.evaluate_custom.remote(px,obj_type,loss,threshold=threshold,is_MOO=is_MOO) for px in trial_mapping.values()])
 
@@ -770,77 +770,107 @@ class MooBOtorch(BoarOptimizer):
                 
 
         # get the best parameters
-        if not is_MOO:
-            best_parameters, values = ax_client.get_best_parameters()
-        else:
-            self.hv_list = hv_list
-            try:
-                pareto = ax_client.get_pareto_optimal_parameters(use_model_predictions=False)
-                keys = list(pareto.keys())
-                best_parameters = pareto[keys[0]][0]
-            except Exception as e:
-                raise ValueError('No pareto optimal parameters found, try to increase the number of trials or the threshold or let Ax infer the threshold by setting it to None.\n',e)
-
-        px = [best_parameters[p.name] for p in self.params if p.relRange != 0]
-        self.params_w(px,self.params)
-
-        if not is_MOO:
-            # number of data points
-            Num_data_pts = 0
-            for num,t in enumerate(self.targets): # get the number of data points
-                Num_data_pts += len(t['data']['y'])
-
-
-            triedX = ax_client.generation_strategy.trials_as_df
-
-            # get previous trials
-            points = []
-            for index, row in triedX.iterrows():
-                dum = row['Arm Parameterizations']
-                key = list(dum.keys())[0]
-                points.append(list(dum[key].values()))
-
-            ax_client.fit_model() # fit the model
-            gpr = ax_client.generation_strategy.model # get the model
-            xmin, funmin = self.expected_minimum_BOAR(triedX,gpr)
-
-            if self.verbose:
-                print('Minimum of surrogate function:',xmin,'with function value',funmin)
-            # Christopher M. Bishop:Pattern Recognition and Machine Learning, Springer Information Science & statistics
-            # Chapter 1.2.5 pg 29 eq- 1.63
-            if funmin>0:
-                beta = 1/funmin # precision = 1/sigma**2 !!! rr.fun is MSE which is OK because consided below in LLH()!! 
+        try:
+            if not is_MOO:
+                best_parameters, values = ax_client.get_best_parameters()
             else:
-                beta = abs(1/funmin) # precision = 1/sigma**2 !!! rr.fun is MSE which is OK because consided below in LLH()!!
-                #Add warning here
-                warnings.warn('The surrogate function got negative. setting beta to the absolute value of the negative value')
+                self.hv_list = hv_list
+                try:
+                    pareto = ax_client.get_pareto_optimal_parameters(use_model_predictions=False)
+                    keys = list(pareto.keys())
+                    best_parameters = pareto[keys[-1]][0]
 
-            # save parameters to self for later use
-            self.N = Num_data_pts
-            self.gpr = gpr
-            self.fscale = None
-            self.beta_scaled = beta
-            self.points = points
-            self.kwargs_posterior = kwargs_posterior
+                    # Make a list of the pareto points in the for [key, MSE_trMC, MSE_trPL] for easier handling
+                    pareto_list=[]
+                    for i, sublist in zip(pareto.keys(), pareto.values()):
+                        dum_list = [i]
+                        for j in range(len(sublist[1][0].keys())):
+                            dum_list.append(sublist[1][0][list(sublist[1][0].keys())[j]])
+                        pareto_list.append(dum_list)
 
-            # get the posterior probabiliy distribution p(w|t)
-            if show_posterior:
+                    # Sort the list based on the first and second elements of each sublist
+                    # Calculate squared sum of indices for each element and find the one with the lowest sum
+                    min_index_sum = float('inf')
+                    min_index_element = None
+                    indexs = []
+                    for i, sublist in enumerate(pareto_list):
+                        dum_list = []
+                        for j in range(len(sublist)):
+                            if j > 0:
+                                dum_list.append(sorted(pareto_list, key=lambda x: x[j]).index(sublist))
+                        indexs.append(dum_list)
+                    # Find the index of the element with the lowest sum of indices
+                    sum_indexs = [sum(i) for i in zip(*indexs)]
+                    min_index_element = sum_indexs.index(min(sum_indexs))
+                    best_parameters = pareto[pareto_list[min_index_element][0]][0]
+                    
+                except Exception as e:
+                    raise ValueError('No pareto optimal parameters found, try to increase the number of trials or the threshold or let Ax infer the threshold by setting it to None.\n',e)
+
+            px = [best_parameters[p.name] for p in self.params if p.relRange != 0]
+            self.params_w(px,self.params)
+
+            if not is_MOO:
+                # number of data points
+                Num_data_pts = 0
+                for num,t in enumerate(self.targets): # get the number of data points
+                    Num_data_pts += len(t['data']['y'])
+
+
+                triedX = ax_client.generation_strategy.trials_as_df
+
+                # get previous trials
+                points = []
+                for index, row in triedX.iterrows():
+                    dum = row['Arm Parameterizations']
+                    key = list(dum.keys())[0]
+                    points.append(list(dum[key].values()))
+
+                ax_client.fit_model() # fit the model
+                gpr = ax_client.generation_strategy.model # get the model
+                xmin, funmin = self.expected_minimum_BOAR(triedX,gpr)
+
+                if self.verbose:
+                    print('Minimum of surrogate function:',xmin,'with function value',funmin)
+                # Christopher M. Bishop:Pattern Recognition and Machine Learning, Springer Information Science & statistics
+                # Chapter 1.2.5 pg 29 eq- 1.63
+                if funmin>0:
+                    beta = 1/funmin # precision = 1/sigma**2 !!! rr.fun is MSE which is OK because consided below in LLH()!! 
+                else:
+                    beta = abs(1/funmin) # precision = 1/sigma**2 !!! rr.fun is MSE which is OK because consided below in LLH()!!
+                    #Add warning here
+                    warnings.warn('The surrogate function got negative. setting beta to the absolute value of the negative value')
+
+                # save parameters to self for later use
+                self.N = Num_data_pts
+                self.gpr = gpr
+                self.fscale = None
+                self.beta_scaled = beta
+                self.points = points
+                self.kwargs_posterior = kwargs_posterior
+
+                # get the posterior probabiliy distribution p(w|t)
+                if show_posterior:
+                    
+                    pf = [pp for pp in self.params if pp.relRange!=0]
+                    p0, lb_main, ub_main = self.params_r(self.params)
+
+                    xmin0,std = self.posterior(pf, lb_main, ub_main,points=points,beta_scaled = beta,N=Num_data_pts,gpr = gpr,fscale=None,kwargs_posterior=kwargs_posterior)
+
+                    # Note: the posterior is calculated with from the surrogate function and not the ground truth function therefore it is not always accurate
+                    #       especially when the surrogate function is not trained well. This is why the best fit parameters are taken from the best one sampled by the BO
+                    #       and not from the posterior. The posterior is only used to get the error bars. This mean that sometimes the best fit parameters is not necessarily
+                    #       the one with the highest posterior probability. In this case the 95% confidence interval that is outputted is stretched to include the best fit parameters.
+                    #       This is not a problem because the posterior is not used to get the best fit parameters but only to get the error bars, this way guarantee that the best fit is 
+                    #       always within the outputted error bars.
+                    #       The 95% interval is stored in std (so std is NOT the standard deviation of the posterior distribution)
                 
-                pf = [pp for pp in self.params if pp.relRange!=0]
-                p0, lb_main, ub_main = self.params_r(self.params)
-
-                xmin0,std = self.posterior(pf, lb_main, ub_main,points=points,beta_scaled = beta,N=Num_data_pts,gpr = gpr,fscale=None,kwargs_posterior=kwargs_posterior)
-
-                # Note: the posterior is calculated with from the surrogate function and not the ground truth function therefore it is not always accurate
-                #       especially when the surrogate function is not trained well. This is why the best fit parameters are taken from the best one sampled by the BO
-                #       and not from the posterior. The posterior is only used to get the error bars. This mean that sometimes the best fit parameters is not necessarily
-                #       the one with the highest posterior probability. In this case the 95% confidence interval that is outputted is stretched to include the best fit parameters.
-                #       This is not a problem because the posterior is not used to get the best fit parameters but only to get the error bars, this way guarantee that the best fit is 
-                #       always within the outputted error bars.
-                #       The 95% interval is stored in std (so std is NOT the standard deviation of the posterior distribution)
-            
-                self.params_w(px,self.params,std=std) # read out Fitparams & respect settings
-
+                    self.params_w(px,self.params,std=std) # read out Fitparams & respect settings
+        except Exception as e:
+            if suggest_only:
+                warnings.warn('Could not get the best parameters as suggest_only is set to True and no trial was completed, error message: '+str(e))
+            else:
+                raise ValueError('Error message: '+str(e))
         return ax_client
 
     
@@ -1042,16 +1072,21 @@ class MooBOtorch(BoarOptimizer):
                             axes[i,j].xaxis.set_label_position('top')
                             axes[i,j].xaxis.tick_top()
                             axes[i,j].yaxis.set_label_position('right')
-                            axes[i,j].yaxis.tick_right()
-                            axes[i,j].set_ylabel('Probability')
+                            axes[i,j].set_yticklabels([])
+                            # axes[i,j].yaxis.tick_right()
+                            # axes[i,j].set_ylabel('Probability')
+                            axes[i,j].set_ylabel('')
 
                         else:
                             axes[i,j].tick_params(axis='x', rotation=45)
                             axes[i,j].tick_params(axis='x', which='minor', rotation=45)
                             axes[i,j].set_xlabel(pnames_display[i])
                             axes[i,j].yaxis.set_label_position('right')
-                            axes[i,j].yaxis.tick_right()
-                            axes[i,j].set_ylabel('Probability')
+                            # remove the yticks
+                            axes[i,j].set_yticklabels([])
+                            # axes[i,j].yaxis.tick_right()
+                            # axes[i,j].set_ylabel('Probability')
+                            axes[i,j].set_ylabel('')
 
 
                     elif i > j:
