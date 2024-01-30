@@ -206,14 +206,29 @@ def run_parallel_simu(code_name_lst,path_lst,str_lst,max_jobs=max(1,os.cpu_count
                 if verbose:
                     print("Error code 95")
             else:
+                os.remove(log_file)
                 if ignore_error_code:
-                    print(str(cmd_str))
-                    warnings.warn('Error code '+str(log['Exitval'].unique())+' found in log file, ignoring error code.'+ str(filename))
+                    print('\n'+str(cmd_str)+'\n')
+                    # print text in filename
+                    with open(os.path.join(path2prog,filename),'r') as f:
+                        print(f.read())
+                    
+                    warnings.warn('Error code '+str(log['Exitval'].unique())+' found in log file, ignoring error code. \n'+ str(filename))
                     pass
                 else:
                     print('Error code '+str(log['Exitval'].unique())+' found in log file, stopping simulation')
                     print(log['Exitval'])
                     raise e
+
+    # Remove temporary file
+    try:
+        os.remove(os.path.join(path2prog,filename))
+    except:
+        pass
+    try:
+        os.remove(log_file)
+    except:
+        pass
 
     os.chdir(curr_dir)                          # Change directory back to original directory
 

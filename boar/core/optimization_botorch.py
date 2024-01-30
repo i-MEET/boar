@@ -772,7 +772,9 @@ class MooBOtorch(BoarOptimizer):
         # get the best parameters
         try:
             if not is_MOO:
-                best_parameters, values = ax_client.get_best_parameters()
+
+                best_parameters, values = ax_client.get_best_parameters(use_model_predictions=False)
+            
             else:
                 self.hv_list = hv_list
                 try:
@@ -810,7 +812,8 @@ class MooBOtorch(BoarOptimizer):
             px = [best_parameters[p.name] for p in self.params if p.relRange != 0]
             self.params_w(px,self.params)
 
-            if not is_MOO:
+            if not is_MOO and show_posterior:
+                print('for some reason I am here')
                 # number of data points
                 Num_data_pts = 0
                 for num,t in enumerate(self.targets): # get the number of data points

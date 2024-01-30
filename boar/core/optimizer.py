@@ -90,10 +90,14 @@ class BoarOptimizer():
                             elif par.lim_type == 'relative':
                                 if par.range_type == 'linear':
                                     lb0 = (par.startVal - par.relRange * abs(par.startVal))   # this is linear version
-                                    ub0 = (par.startVal + par.relRange * abs(par.startVal))   # this is linear version                                
+                                    ub0 = (par.startVal + par.relRange * abs(par.startVal))   # this is linear version    
+                                    par.lims[0] = lb0
+                                    par.lims[1] = ub0                            
                                 elif par.range_type == 'log':
                                     lb0 = par.startVal*10**(-par.relRange)  # this is logarithmic version
                                     ub0 = par.startVal*10**(par.relRange)  # this is logarithmic version
+                                    par.lims[0] = lb0
+                                    par.lims[1] = ub0
                             lb.append(lb0/p0m)
                             ub.append(ub0/p0m)
                         else:
