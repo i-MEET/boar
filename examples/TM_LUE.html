@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOAR with Transfer Matrix Method &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BOAR with Transfer Matrix Method" href="TM_AVT_Jsc_MO.html" />
+    <link rel="prev" title="Notebooks gallery" href="../gallery_Opti_DoE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">BOAR with Transfer Matrix Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TM_AVT_Jsc_MO.html">BOAR with Transfer Matrix Method</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+      <li class="breadcrumb-item active">BOAR with Transfer Matrix Method</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/TM_LUE.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="BOAR-with-Transfer-Matrix-Method">
+<h1>BOAR with Transfer Matrix Method<a class="headerlink" href="#BOAR-with-Transfer-Matrix-Method" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<div class="line-block">
+<div class="line">This notebook is made to use BOAR in combination with transfer matrix modeling (TMM) to optimize the thickness of the layers in a multilayer stack to optimize the light utilization efficiency (LUE) of a solar cell.</div>
+<div class="line">To perform the transfer matrix modeling we use a modified version of the open-source program devoloped by <a class="reference external" href="https://web.stanford.edu/group/mcgehee/transfermatrix/">McGehee’s group</a> (Stanford University) and adapted to python by Kamil Mielczarek (University of Texas).</div>
+<div class="line">For more information about the transfer matrix modeling, please refer to the <a class="reference external" href="https://doi.org/10.1002/adma.201000883">original paper</a>.</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># Import homemade package by VLC</span>
+<span class="c1"># import boar.SIMsalabim_utils.plot_settings_screen # to set default plot settings</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># current directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+<span class="n">mat_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;Example_Data/matdata&#39;</span><span class="p">)</span> <span class="c1"># path to the mat files directory, comment if not in Notebooks folder</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the agent and default device stack</span>
+<span class="n">layers</span>                      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SiOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;ITO&#39;</span> <span class="p">,</span> <span class="s1">&#39;ZnO&#39;</span> <span class="p">,</span> <span class="s1">&#39;PCE10_FOIC_1to1&#39;</span> <span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;Air&#39;</span><span class="p">]</span> <span class="c1"># list of layers (need to be the same than the name nk_*.csv file in the matdata folder)</span>
+<span class="n">thicknesses</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">30</span>  <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">9</span> <span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span> <span class="c1"># list of thicknesses in nm</span>
+
+<span class="n">tm</span> <span class="o">=</span> <span class="n">Transfer_Matrix_agent</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">thicknesses</span><span class="o">=</span><span class="n">thicknesses</span><span class="p">,</span><span class="n">mat_dir</span><span class="o">=</span><span class="n">mat_dir</span><span class="p">)</span> <span class="c1"># initialize the agent</span>
+</pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">d_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">80</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;AL thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_3</span><span class="p">)</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_4&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_4</span><span class="p">)</span>
+<span class="n">d_5</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_5&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Ag thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_5</span><span class="p">)</span>
+<span class="n">d_6</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_6&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_6</span><span class="p">)</span>
+<span class="n">d_7</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_7&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_7</span><span class="p">)</span>
+<span class="n">d_8</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_8&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 3 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_8</span><span class="p">)</span>
+<span class="n">d_9</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_9&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_9</span><span class="p">)</span>
+<span class="n">nk_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;nk_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="s1">&#39;PCE10_FOIC_1to1&#39;</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;P3HTPCBM_BHJ&#39;</span><span class="p">,</span><span class="s1">&#39;PCE10_FOIC_1to1&#39;</span><span class="p">,</span><span class="s1">&#39;PM6Y6Brabec&#39;</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;AL nk&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nk_3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model on the default stack configuration</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># we need to provide a list of inputs even if it is not used later</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jsc = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LUE = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AVT = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Jsc =  10.53248308747983
+LUE =  3.5542800166757664
+AVT =  0.337458886679895
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the targets and the model for the TM problem</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;LUE&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;obj_type&#39;</span><span class="p">:</span><span class="s1">&#39;diff&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="c1"># Define optimizer</span>
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MultiObjectiveOptimizer</span><span class="p">(</span><span class="n">res_dir</span><span class="o">=</span><span class="n">res_dir</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span><span class="n">targets</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])</span> <span class="c1"># initialize the optimizer</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span> <span class="c1"># &#39;recall&#39; data from Path2OldXY file</span>
+
+<span class="c1"># Define the number of iterations for the optimization</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n_jobs_init</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">n_yscale</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">n_initial_points</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">n_BO</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_BO_warmstart</span> <span class="o">=</span> <span class="mi">80</span>
+
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;check_improvement&#39;</span><span class="p">:</span><span class="s1">&#39;strict&#39;</span><span class="p">,</span><span class="s1">&#39;max_loop_no_improvement&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">,</span><span class="s1">&#39;ftol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">}</span>
+<span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;gaussfilt&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span> <span class="p">,</span><span class="s1">&#39;show_fig&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;figsize&#39;</span><span class="p">:(</span><span class="mi">14</span><span class="p">,</span><span class="mi">14</span><span class="p">)}</span>
+<span class="n">kwargs_plot_obj</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;zscale&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;show_fig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">optimize_sko_parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span><span class="n">n_yscale</span><span class="o">=</span><span class="n">n_yscale</span><span class="p">,</span> <span class="n">n_BO</span><span class="o">=</span><span class="n">n_BO</span><span class="p">,</span> <span class="n">n_initial_points</span> <span class="o">=</span> <span class="n">n_initial_points</span><span class="p">,</span><span class="n">n_BO_warmstart</span><span class="o">=</span><span class="n">n_BO_warmstart</span><span class="p">,</span><span class="n">n_jobs_init</span><span class="o">=</span><span class="n">n_jobs_init</span><span class="p">,</span><span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">base_estimator</span> <span class="o">=</span> <span class="s1">&#39;GP&#39;</span><span class="p">,</span><span class="n">show_objective_func</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="n">kwargs_posterior</span><span class="p">,</span><span class="n">kwargs_plot_obj</span><span class="o">=</span><span class="n">kwargs_plot_obj</span><span class="p">)</span>
+<span class="c1"># pf.append(deepcopy(target[&#39;params&#39;])) # collects optimized fitparameters</span>
+<span class="n">rrr</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span> <span class="c1"># the results dict of the last optimizer.tell()</span>
+
+<span class="n">best_params</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># get the best parameters</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b902121f6e3343ccb06766a6b48e31ff", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Starting with initial points
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "afe9317ef86e4642aa607d993dc487f4", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial points done in 10.96 s
+Starting with BO
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c66807aa62d5449bbb7efccff6c39af6", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+BO done in 289.27 s
+Ground truth minimum at: [67, 15, 9, 127, 142, 97, &#39;PCE10_FOIC_1to1&#39;] with function value: 54.38641870460238
+Minimum of surrogate function: [68, 17, 11, 137, 130, 98, &#39;PCE10_FOIC_1to1&#39;] with function value 60.827301262591554
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_LUE_9_6.png" src="../_images/examples_TM_LUE_9_6.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the optimized stack structure</span>
+<span class="c1"># Print the optimized stack structure</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">val_type</span> <span class="o">!=</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Optimized performance</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jsc = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LUE = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AVT = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AL thickness 67 nm
+MoOx 1 thickness 15 nm
+Ag thickness 9 nm
+MoOx 2 thickness 127 nm
+LiF 1 thickness 142 nm
+MoOx 3 thickness 97 nm
+LiF 2 thickness 10 nm
+AL nk PCE10_FOIC_1to1
+Jsc =  14.475545734390858
+LUE =  7.355844164912176
+AVT =  0.508156604240228
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../gallery_Opti_DoE.html" class="btn btn-neutral float-left" title="Notebooks gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TM_AVT_Jsc_MO.html" class="btn btn-neutral float-right" title="BOAR with Transfer Matrix Method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.SIMsalabim_utils.PlotInputPar &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.SIMsalabim_utils.PlotInputPar</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.SIMsalabim_utils.PlotInputPar</h1><div class="highlight"><pre>
+<span></span><span class="c1">##########################################################################</span>
+<span class="c1">#################### Read and get parameters from    #####################</span>
+<span class="c1">#################### dev_para file and command string ####################</span>
+<span class="c1">##########################################################################</span>
+<span class="c1"># Author: Vincent M. Le Corre</span>
+<span class="c1"># Github: https://github.com/VMLC-PV</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Import SIMsalabim_utils</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.MakeDevParFile</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.GetInputPar</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="plot_input_mob">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_mob">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_input_mob</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the input mobility from the device_parameters.txt</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ParFileDic : dic</span>
+<span class="sd">        dictionary of the device_parameters.txt file</span>
+<span class="sd">    ax : axes</span>
+<span class="sd">        axes object where the plot will be done</span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        unit to plot the y-axis, can be [&#39;cm&#39;,&#39;m&#39;], by default &#39;m&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_ac</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="c1"># color_electrode =&#39;#999999&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;k&#39;</span>
+
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In SIMsalabim_dens_plot function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Convert in y-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;cm&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$\mu$ [cm$^2$ V$^{-1}$ s$^{-1}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$\mu$ [m$^2$ V$^{-1}$ s$^{-1}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;$\mu$ [m$^2$ V$^{-1}$ s$^{-1}$]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_mob function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+
+    <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">Lac</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L_LTL</span> <span class="o">-</span> <span class="n">L_RTL</span>
+    <span class="n">mob_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;mob_LTL&#39;</span><span class="p">])</span>
+    <span class="n">mob_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;mob_RTL&#39;</span><span class="p">])</span>
+    <span class="n">mun_0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;mun_0&#39;</span><span class="p">])</span>
+    <span class="n">mup_0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;mup_0&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Plotting</span>
+    <span class="c1"># plt.figure(num_fig)</span>
+    <span class="c1"># ax = plt.axes()</span>
+    <span class="k">if</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">mob_LTL</span><span class="p">,</span><span class="n">mob_LTL</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_ac</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">mun_0</span><span class="p">,</span><span class="n">mun_0</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;$\mu_n$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">mup_0</span><span class="p">,</span><span class="n">mup_0</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;$\mu_p$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">mob_RTL</span><span class="p">,</span><span class="n">mob_RTL</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+   
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_input_dens">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_dens">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_input_dens</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">dens</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">],</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">y2_unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the input mobility from the device_parameters.txt</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ParFileDic : dic</span>
+<span class="sd">        dictionary of the device_parameters.txt file</span>
+<span class="sd">    ax : axes</span>
+<span class="sd">        axes object where the plot will be done</span>
+<span class="sd">    dens : list, optional</span>
+<span class="sd">        list of the densities type to plot, can be [&#39;Bulk_tr&#39;,&#39;CNI&#39;,&#39;CPI&#39;,&#39;St_L&#39;,&#39;St_R&#39;], by default [&#39;Bulk_tr&#39;]</span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        unit to plot the y-axis, can be [&#39;cm&#39;,&#39;m&#39;], by default &#39;m&#39;</span>
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        unit to plot the y2-axis, can be [&#39;cm&#39;,&#39;m&#39;], by default &#39;m&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span> <span class="c1"># instantiate a second axes that shares the same x-axis</span>
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_ac</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="c1"># color_electrode =&#39;#999999&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;k&#39;</span>
+
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In SIMsalabim_dens_plot function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Convert in y-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;cm&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [cm$^{-3}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [m$^{-3}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [cm$^{-3}$]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_dens function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">y2_unit</span> <span class="o">==</span> <span class="s1">&#39;cm&#39;</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mf">1e4</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface Trap Density [cm$^{-2}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y2_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface Trap Density [m$^{-2}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface Trap Density [m$^{-2}$]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_lifetime function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y2_unit is wrong so [s] is used. &#39;</span><span class="p">)</span>
+
+    <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">Lac</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L_LTL</span> <span class="o">-</span> <span class="n">L_RTL</span>
+    <span class="n">Bulk_tr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">])</span>
+    <span class="n">CNI</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;CNI&#39;</span><span class="p">])</span>
+    <span class="n">CPI</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;CPI&#39;</span><span class="p">])</span>
+    <span class="n">St_L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_L&#39;</span><span class="p">])</span>
+    <span class="n">St_R</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_R&#39;</span><span class="p">])</span>
+    <span class="n">TLsTrap</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;TLsTrap&#39;</span><span class="p">])</span>
+    <span class="n">IonsInTLs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;IonsInTLs&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">CNI</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">CPI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Plotting</span>
+        <span class="k">if</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">TLsTrap</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Bulk_tr</span><span class="p">,</span><span class="n">Bulk_tr</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">IonsInTLs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;CNI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CNI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CNI</span><span class="p">,</span><span class="n">CNI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;CPI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CPI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CPI</span><span class="p">,</span><span class="n">CPI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">St_L</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;St$_L$&#39;</span><span class="p">)</span>
+    
+
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_ac</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Bulk_tr</span><span class="p">,</span><span class="n">Bulk_tr</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Bulk Traps&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;CNI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CNI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CNI</span><span class="p">,</span><span class="n">CNI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Anion&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;CPI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CPI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CPI</span><span class="p">,</span><span class="n">CPI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Cation&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">TLsTrap</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">Bulk_tr</span><span class="p">,</span><span class="n">Bulk_tr</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">IonsInTLs</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;CNI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CNI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">CNI</span><span class="p">,</span><span class="n">CNI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;CPI&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">CPI</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">CPI</span><span class="p">,</span><span class="n">CPI</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">St_R</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;St$_R$&#39;</span><span class="p">)</span>
+            
+    
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+        <span class="c1"># ax.legend()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y2axis_label</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bulk Traps&#39;</span><span class="p">),</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span> <span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Anion&#39;</span><span class="p">),</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cation&#39;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;St$_L$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;St$_R$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">))</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;No Traps or Ions&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_input_nrj_diag">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_nrj_diag">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_input_nrj_diag</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the input energy diagram from the device_parameters.txt</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ParFileDic : dic</span>
+<span class="sd">        dictionary of the device_parameters.txt file</span>
+<span class="sd">    ax : axes</span>
+<span class="sd">        axes object where the plot will be done</span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_ac</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="c1"># color_electrode =&#39;#999999&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;k&#39;</span>
+
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_nrj_diag function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so &#39;&#39;m&#39;&#39; is used. &#39;</span><span class="p">)</span>
+
+    <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">Lac</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L_LTL</span> <span class="o">-</span> <span class="n">L_RTL</span>
+    <span class="n">CB</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;CB&#39;</span><span class="p">])</span>
+    <span class="n">VB</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;VB&#39;</span><span class="p">])</span>
+    <span class="n">CB_LTL</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;CB_LTL&#39;</span><span class="p">])</span>
+    <span class="n">CB_RTL</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;CB_RTL&#39;</span><span class="p">])</span>
+    <span class="n">VB_LTL</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;VB_LTL&#39;</span><span class="p">])</span>
+    <span class="n">VB_RTL</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;VB_RTL&#39;</span><span class="p">])</span>
+    <span class="n">W_L</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;W_L&#39;</span><span class="p">])</span>
+    <span class="n">W_R</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;W_R&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Plotting</span>
+    <span class="c1"># plt.figure(num_fig)</span>
+    <span class="c1"># ax = plt.axes()</span>
+    <span class="k">if</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CB_LTL</span><span class="p">,</span><span class="n">CB_LTL</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="n">VB_LTL</span><span class="p">,</span><span class="n">VB_LTL</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">CB</span><span class="p">,</span><span class="n">CB</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="n">VB</span><span class="p">,</span><span class="n">VB</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">color_ac</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">CB_RTL</span><span class="p">,</span><span class="n">CB_RTL</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="n">VB_RTL</span><span class="p">,</span><span class="n">VB_RTL</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">L</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="n">W_L</span><span class="p">,</span><span class="n">W_L</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span> <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L</span><span class="p">,</span><span class="n">L</span><span class="o">+</span><span class="mf">0.1</span><span class="o">*</span><span class="n">L</span><span class="p">],[</span><span class="n">W_R</span><span class="p">,</span><span class="n">W_R</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span> <span class="p">)</span>
+    
+
+    <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ETrapSingle</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;ETrapSingle&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;TLsTrap&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">],[</span><span class="n">ETrapSingle</span><span class="p">,</span><span class="n">ETrapSingle</span> <span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">ETrapSingle</span><span class="p">,</span><span class="n">ETrapSingle</span> <span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_L&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ETrapSingle</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;ETrapSingle&#39;</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">ETrapSingle</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_R&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ETrapSingle</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;ETrapSingle&#39;</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">Lac</span><span class="p">],[</span><span class="n">ETrapSingle</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+
+
+
+    <span class="c1"># Set the axis      </span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axisbelow</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span><span class="c1">#.yaxis.grid(color=&#39;gray&#39;, linestyle=&#39;dashed&#39;)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Energy [eV]&#39;</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_input_SRH_lifetime">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_SRH_lifetime">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_input_SRH_lifetime</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="p">,</span><span class="n">dens</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">],</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">y2_unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the input mobility from the device_parameters.txt</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ParFileDic : dic</span>
+<span class="sd">        dictionary of the device_parameters.txt file</span>
+<span class="sd">    ax : axes</span>
+<span class="sd">        axes object where the plot will be done</span>
+<span class="sd">    dens : list, optional</span>
+<span class="sd">        list of the densities type to plot, can be [&#39;Bulk_tr&#39;,&#39;CNI&#39;,&#39;CPI&#39;,&#39;St_L&#39;,&#39;St_R&#39;], by default [&#39;Bulk_tr&#39;]</span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        unit to plot the y-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;s&#39;], by default &#39;s&#39;</span>
+<span class="sd">    y2_unit : str, optional</span>
+<span class="sd">        unit to plot the y2-axis, can be [&#39;ns&#39;,&#39;us&#39;,&#39;s&#39;], by default &#39;m&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span> <span class="ow">or</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span> <span class="c1"># instantiate a second axes that shares the same x-axis</span>
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_ac</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="c1"># color_electrode =&#39;#999999&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;k&#39;</span>
+
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In SIMsalabim_dens_plot function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Convert in y-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;ns&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Lifetime [ns]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Lifetime [$\mu$s]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Lifetime [s]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [cm$^{-3}$]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_lifetime function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [s] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">y2_unit</span> <span class="o">==</span> <span class="s1">&#39;cm&#39;</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mf">1e2</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface rec. velocities [cm s$^{-1}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y2_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface rec. velocities [m s$^{-1}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y2unit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y2axis_label</span> <span class="o">=</span> <span class="s1">&#39;Surface rec. velocities [m s$^{-1}$]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In plot_input_lifetime function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y2_unit is wrong so [s] is used. &#39;</span><span class="p">)</span>
+
+    <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+    <span class="n">Lac</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L_LTL</span> <span class="o">-</span> <span class="n">L_RTL</span>
+    <span class="n">Bulk_tr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">])</span>
+    <span class="n">St_L</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_L&#39;</span><span class="p">])</span>
+    <span class="n">St_R</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;St_R&#39;</span><span class="p">])</span>
+    <span class="n">TLsTrap</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;TLsTrap&#39;</span><span class="p">])</span>
+    <span class="n">Cn</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;Cn&#39;</span><span class="p">])</span>
+    <span class="n">Cp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;Cp&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">tau_n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">Bulk_tr</span><span class="o">*</span><span class="n">Cn</span><span class="p">)</span><span class="o">*</span><span class="n">yunit_fact</span>
+        <span class="n">tau_p</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">Bulk_tr</span><span class="o">*</span><span class="n">Cp</span><span class="p">)</span><span class="o">*</span><span class="n">yunit_fact</span>
+    <span class="n">Sn_R</span> <span class="o">=</span> <span class="n">St_R</span><span class="o">*</span><span class="n">Cn</span><span class="o">*</span><span class="n">y2unit_fact</span>
+    <span class="n">Sn_L</span> <span class="o">=</span> <span class="n">St_L</span><span class="o">*</span><span class="n">Cn</span><span class="o">*</span><span class="n">y2unit_fact</span>
+    <span class="n">Sp_R</span> <span class="o">=</span> <span class="n">St_R</span><span class="o">*</span><span class="n">Cp</span><span class="o">*</span><span class="n">y2unit_fact</span>
+    <span class="n">Sp_L</span> <span class="o">=</span> <span class="n">St_L</span><span class="o">*</span><span class="n">Cp</span><span class="o">*</span><span class="n">y2unit_fact</span>
+
+    <span class="k">if</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Plotting</span>
+        <span class="k">if</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">TLsTrap</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">tau_n</span><span class="p">,</span><span class="n">tau_n</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">tau_p</span><span class="p">,</span><span class="n">tau_pp</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Sn_L</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;S$_n$&#39;</span><span class="p">)</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Sp_L</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;S$_p$&#39;</span><span class="p">)</span>
+
+
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_ac</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">tau_n</span><span class="p">,</span><span class="n">tau_n</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau_n$&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">tau_p</span><span class="p">,</span><span class="n">tau_p</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau_p$&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">TLsTrap</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s1">&#39;Bulk_tr&#39;</span> <span class="ow">in</span> <span class="n">dens</span> <span class="ow">and</span> <span class="n">Bulk_tr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">tau_n</span><span class="p">,</span><span class="n">tau_n</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">)</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">,</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="o">+</span><span class="n">L_RTL</span><span class="p">],[</span><span class="n">tau_p</span><span class="p">,</span><span class="n">tau_p</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Sn_R</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;S$_n$&#39;</span><span class="p">)</span>
+                <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">Lac</span><span class="o">+</span><span class="n">L_LTL</span><span class="p">],[</span><span class="n">Sp_R</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;S$_p$&#39;</span><span class="p">)</span>
+        
+    
+        <span class="c1"># Set the axis    </span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+        <span class="c1"># ax.legend()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">y2axis_label</span><span class="p">)</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau_n$&#39;</span><span class="p">),</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span> <span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">tau_p$&#39;</span><span class="p">)]</span> 
+        <span class="k">if</span> <span class="p">(</span><span class="n">St_L</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">L_LTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">St_R</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">L_RTL</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;S$_n$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">))</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;S$_p$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">))</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;No Traps&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualizeDevParFile">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.VisualizeDevParFile">[docs]</a>
+<span class="k">def</span> <span class="nf">VisualizeDevParFile</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">num_fig</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Visualize the parameters in the ParFileDic.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ParFileDic : dic</span>
+<span class="sd">        Dictionary of the parameters in the ParFile.</span>
+<span class="sd">    num_fig : int, optional</span>
+<span class="sd">        figure number , by default 0</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">num</span> <span class="o">=</span> <span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">plot_input_nrj_diag</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plot_input_mob</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">plot_input_dens</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plot_input_SRH_lifetime</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span><span class="n">y2_unit</span><span class="o">=</span><span class="s1">&#39;cm&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

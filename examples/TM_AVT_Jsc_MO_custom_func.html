@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Notebooks gallery" href="../gallery_Opti_DoE.html" />
+    <link rel="prev" title="Multi-objective optimization for perovskite material composition" href="BOAR_Exp_MO.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/TM_AVT_Jsc_MO_custom_func.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Custom-evaluate-function-for-Multi-Objective-Optimization---Transfer-Matrix-example">
+<h1>Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example<a class="headerlink" href="#Custom-evaluate-function-for-Multi-Objective-Optimization---Transfer-Matrix-example" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<div class="line-block">
+<div class="line">This notebook is made to use BOAR in combination with transfer matrix modeling (TMM) to optimize the thickness of the layers in a multilayer stack to optimize the average visible transmittance (AVT) and maximize the current density (Jsc) of a solar cell.</div>
+<div class="line">To perform the transfer matrix modeling we use a modified version of the open-source program devoloped by <a class="reference external" href="https://web.stanford.edu/group/mcgehee/transfermatrix/">McGehee’s group</a> (Stanford University) and adapted to python by Kamil Mielczarek (University of Texas).</div>
+<div class="line">For more information about the transfer matrix modeling, please refer to the <a class="reference external" href="https://doi.org/10.1002/adma.201000883">original paper</a>.</div>
+</div>
+<p>Here, we show how to use the custom evaluate function for the optimization which allows to only run the TMM once per iteration and then evaluate the two objectives (AVT and Jsc) making the optimization faster.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span> <span class="c1"># comment out to only render png</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># import additional libraries from Ax</span>
+<span class="kn">from</span> <span class="nn">ax.utils.notebook.plotting</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">init_notebook_plotting</span> <span class="c1"># for plotting in notebook</span>
+<span class="kn">from</span> <span class="nn">ax.plot.slice</span> <span class="kn">import</span> <span class="n">plot_slice</span>
+<span class="kn">from</span> <span class="nn">ax.plot.scatter</span> <span class="kn">import</span> <span class="n">interact_fitted</span><span class="p">,</span><span class="n">plot_objective_vs_constraints</span><span class="p">,</span><span class="n">tile_fitted</span>
+<span class="kn">from</span> <span class="nn">ax.modelbridge.cross_validation</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">ax.plot.contour</span> <span class="kn">import</span> <span class="n">interact_contour</span>
+<span class="kn">from</span> <span class="nn">ax.plot.diagnostic</span> <span class="kn">import</span> <span class="n">interact_cross_validation</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_utils</span> <span class="kn">import</span> <span class="n">compute_posterior_pareto_frontier</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_frontier</span> <span class="kn">import</span> <span class="n">plot_pareto_frontier</span>
+<span class="c1"># Import homemade package by VLC</span>
+<span class="c1"># import boar.SIMsalabim_utils.plot_settings_screen # to set default plot settings</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># current directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+<span class="n">mat_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;Example_Data/matdata&#39;</span><span class="p">)</span> <span class="c1"># path to the mat files directory, comment if not in Notebooks folder</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the agent and default device stack</span>
+<span class="n">layers</span>                      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SiOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;ITO&#39;</span> <span class="p">,</span> <span class="s1">&#39;ZnO&#39;</span> <span class="p">,</span> <span class="s1">&#39;PCE10_FOIC_1to1&#39;</span> <span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;Air&#39;</span><span class="p">]</span> <span class="c1"># list of layers (need to be the same than the name nk_*.csv file in the matdata folder)</span>
+<span class="n">thicknesses</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">30</span>  <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">9</span> <span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span> <span class="c1"># list of thicknesses in nm</span>
+
+<span class="n">tm</span> <span class="o">=</span> <span class="n">Transfer_Matrix_agent</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">thicknesses</span><span class="o">=</span><span class="n">thicknesses</span><span class="p">,</span><span class="n">mat_dir</span><span class="o">=</span><span class="n">mat_dir</span><span class="p">)</span> <span class="c1"># initialize the agent</span>
+</pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="line-block">
+<div class="line">In this notebook, we not only optimize the thickness of the different layers in the stack, but also the material composition of the absorber layer by optimizing the nk values selected by the parameter nk_3.</div>
+<div class="line">This can be done by passing a list of names of the materials to the parameter nk_3 in the lims attribute and by choosing the value_type of the FitParam object as ‘str’. We also limit the resolution of the thickness to 1 nm by optimizing the thicknesses values as integers (value_type=’int’).</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">d_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">80</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;AL thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_3</span><span class="p">)</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_4&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_4</span><span class="p">)</span>
+<span class="n">d_5</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_5&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Ag thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_5</span><span class="p">)</span>
+<span class="n">d_6</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_6&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_6</span><span class="p">)</span>
+<span class="n">d_7</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_7&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_7</span><span class="p">)</span>
+<span class="n">d_8</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_8&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 3 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_8</span><span class="p">)</span>
+<span class="n">d_9</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_9&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_9</span><span class="p">)</span>
+<span class="n">nk_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;nk_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="s1">&#39;PCE10_FOIC_1to1&#39;</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PCE10_FOIC_1to1&#39;</span><span class="p">,</span><span class="s1">&#39;P3HTPCBM_BHJ&#39;</span><span class="p">,</span><span class="s1">&#39;PM6Y6Brabec&#39;</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;AL nk&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nk_3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model on the default stack configuration</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># we need to provide a list of inputs even if it is not used later</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jsc = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LUE = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AVT = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Jsc =  10.53248308747983
+LUE =  3.5542800166757664
+AVT =  0.337458886679895
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<p>Here, we use the custom evaluation function since both targets are outputted by the same model. This allows us to call the model only once per sample and saves calculation time.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We create a new class that inherits from the MooBOtorch class, this is necessary to be able to write a custom evaluation function that can be ran in parallel</span>
+<span class="k">class</span> <span class="nc">customMooBOtorch</span><span class="p">(</span><span class="n">MooBOtorch</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parameter_constraints</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">warmstart</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Path2OldXY</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">SaveOldXY2file</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">res_dir</span> <span class="o">=</span> <span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="n">use_evaluate_custom</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parallel</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialization routine</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        targets : list of dict, optional</span>
+<span class="sd">            List of Dictionaries with the following keys:\\</span>
+<span class="sd">                &#39;model&#39;: a pointer to a function y = f(X) where X has m dimensions\\</span>
+<span class="sd">                &#39;data&#39;: dictionary with keys\\</span>
+<span class="sd">                &#39;X&#39;:ndarray with shape (n,m) where n is the number of evaluations for X \\</span>
+<span class="sd">                &#39;y&#39;:ndarray with shape (n,)\\</span>
+<span class="sd">                &#39;X_dimensions&#39;: list of string: the names of the dimensions in X\\</span>
+<span class="sd">                &#39;X_units&#39;: list of string: the units of the dimensions in X\\</span>
+<span class="sd">                &#39;y_dimension&#39;: string: the name of the dimension y\\</span>
+<span class="sd">                &#39;y_unit&#39;: string: the unit of the dimension y\\</span>
+<span class="sd">                &#39;params&#39;: list of Fitparam() objects, by default None\\</span>
+<span class="sd">        warmstart : str, optional</span>
+<span class="sd">                &#39;None&#39;, &#39;collect&#39;, &#39;collect_init&#39;, &#39;collect_BO&#39;, &#39;recall&#39; or &#39;collect&amp;recall&#39;, by default None\\</span>
+<span class="sd">                    if &#39;None&#39; does not store results\\</span>
+<span class="sd">                    if &#39;collect&#39; stores all results\\</span>
+<span class="sd">                    if &#39;collect_init&#39; stores results from the initial sampling only. NOTE: In reality it collects the n_jobs*(n_initial_points + n_BO)/n_initial_points first point, so you may get some of the first few BO points depending on n_jobs\\</span>
+<span class="sd">                    if collect_BO&#39; stores results from the Bayesian Optimization only\\</span>
+<span class="sd">                    if &#39;recall&#39; recalls results\\</span>
+<span class="sd">                    if &#39;collect&amp;recall&#39; stores and recalls results\\</span>
+<span class="sd">        Path2OldXY : str, optional</span>
+<span class="sd">            full path to the json file containing the self.old_xy results to be loaded, by default None</span>
+<span class="sd">        SaveOldXY2file : str, optional</span>
+<span class="sd">            full path to the json file where the new self.old_xy results will be saved if it is None then we do not save the data, by default None</span>
+<span class="sd">        res_dir : str, optional</span>
+<span class="sd">            directory where the results will be saved, by default &#39;temp&#39;</span>
+<span class="sd">        evaluate_custom : function, optional</span>
+<span class="sd">            use a custom evaluation function instead of the default one, this is useful when the same model is used for different targets, by default None</span>
+<span class="sd">        parallel : bool, optional</span>
+<span class="sd">            use parallelization, if False n_jobs can still be &gt; 1 but the evaluation will be done sequentially, by default True</span>
+<span class="sd">        verbose : bool, optional</span>
+<span class="sd">            print some information, by default False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">targets</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">targets</span>
+
+        <span class="k">if</span> <span class="n">params</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+
+        <span class="k">if</span> <span class="n">parameter_constraints</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameter_constraints</span> <span class="o">=</span> <span class="n">parameter_constraints</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameter_constraints</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="n">warmstart</span> <span class="c1"># want to re-use expensive calculations from a previous run?</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">old_xy</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ydyn&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;x&#39;</span><span class="p">:[],</span><span class="s1">&#39;y&#39;</span><span class="p">:[]}</span> <span class="c1"># dict to hold the calculations from a previous run if warmstart==True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Path2OldXY</span> <span class="o">=</span> <span class="n">Path2OldXY</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SaveOldXY2file</span> <span class="o">=</span> <span class="n">SaveOldXY2file</span> <span class="c1"># path to file where we want to save the old_xy data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">res_dir</span> <span class="o">=</span> <span class="n">res_dir</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_evaluate_custom</span> <span class="o">=</span> <span class="n">use_evaluate_custom</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span>
+
+    <span class="k">def</span> <span class="nf">evaluate_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">px</span><span class="p">,</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Custom evaluation function that can be used instead of the default one</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        px : list</span>
+<span class="sd">            list of parameters values</span>
+<span class="sd">        obj_type : str</span>
+<span class="sd">            type of objective function to be used, see self.obj_func_metric</span>
+<span class="sd">        loss : str</span>
+<span class="sd">            loss function to be used, see self.lossfunc</span>
+<span class="sd">        threshold : float, optional</span>
+<span class="sd">            threshold for the loss function, by default 1</span>
+<span class="sd">        is_MOO : bool, optional</span>
+<span class="sd">            whether to use multi-objective optimization or enforce single-objective optimization, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            dictionary with the results, the keys are the names of the targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">]</span>
+
+        <span class="n">px_</span> <span class="o">=</span> <span class="p">[</span><span class="n">px</span><span class="p">[</span><span class="n">pnames</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pnames</span><span class="p">))]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">px_</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;model&#39;</span><span class="p">]</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+
+        <span class="n">res_dum</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># evaluate the model only once</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">:</span>
+            <span class="n">dum</span> <span class="o">=</span> <span class="n">res_dum</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="s1">&#39;obj_type&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">obj_dum</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;obj_type&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">obj_dum</span> <span class="o">=</span> <span class="n">obj_type</span>
+            <span class="k">if</span> <span class="s1">&#39;loss&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">loss_dum</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">loss_dum</span> <span class="o">=</span> <span class="n">loss</span>
+
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_func_metric</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">dum</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_dum</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="n">obj_dum</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lossfunc</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">loss_dum</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># threshold is set to 1 as we don&#39;t need it for MOO and if it is a list it will not work</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the targets and the model for the TM problem</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;J&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;Jsc&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;AVT&#39;</span>
+<span class="n">target2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;AVT&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;obj_type&#39;</span><span class="p">:</span><span class="s1">&#39;diff&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mf">0.4</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">,</span><span class="n">target2</span><span class="p">]</span>
+<span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;identity&#39;</span>
+<span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span>
+<span class="n">threshold</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.05</span><span class="p">]</span>
+
+<span class="n">mo</span> <span class="o">=</span> <span class="n">customMooBOtorch</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span> <span class="n">targets</span><span class="p">,</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># initialize the custom optimization object</span>
+
+<span class="n">ax_client</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">BoTorchOpti</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="p">[</span><span class="mi">80</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="n">n_step_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sobol&#39;</span><span class="p">,</span><span class="s1">&#39;MOO&#39;</span><span class="p">],</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span><span class="n">use_CUDA</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">kwargs_posterior</span><span class="o">=</span><span class="p">{},</span><span class="n">use_custom_func</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 01-18 09:15:56] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 6 decimal points.
+[INFO 01-18 09:15:56] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#39;d_3&#39;, parameter_type=INT, range=[40, 200]), RangeParameter(name=&#39;d_4&#39;, parameter_type=INT, range=[0, 200]), RangeParameter(name=&#39;d_5&#39;, parameter_type=INT, range=[0, 15]), RangeParameter(name=&#39;d_6&#39;, parameter_type=INT, range=[0, 200]), RangeParameter(name=&#39;d_7&#39;, parameter_type=INT, range=[0, 200]), RangeParameter(name=&#39;d_8&#39;, parameter_type=INT, range=[0, 200]), ChoiceParameter(name=&#39;nk_3&#39;, parameter_type=STRING, values=[&#39;PCE10_FOIC_1to1&#39;, &#39;P3HTPCBM_BHJ&#39;, &#39;PM6Y6Brabec&#39;], is_ordered=False, sort_values=False)], parameter_constraints=[]).
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 0 with parameters {&#39;d_3&#39;: 166, &#39;d_4&#39;: 117, &#39;d_5&#39;: 7, &#39;d_6&#39;: 1, &#39;d_7&#39;: 146, &#39;d_8&#39;: 1, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 1 with parameters {&#39;d_3&#39;: 144, &#39;d_4&#39;: 98, &#39;d_5&#39;: 4, &#39;d_6&#39;: 103, &#39;d_7&#39;: 122, &#39;d_8&#39;: 183, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 2 with parameters {&#39;d_3&#39;: 112, &#39;d_4&#39;: 154, &#39;d_5&#39;: 15, &#39;d_6&#39;: 162, &#39;d_7&#39;: 82, &#39;d_8&#39;: 141, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 3 with parameters {&#39;d_3&#39;: 68, &#39;d_4&#39;: 57, &#39;d_5&#39;: 8, &#39;d_6&#39;: 199, &#39;d_7&#39;: 10, &#39;d_8&#39;: 157, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 4 with parameters {&#39;d_3&#39;: 191, &#39;d_4&#39;: 67, &#39;d_5&#39;: 1, &#39;d_6&#39;: 137, &#39;d_7&#39;: 189, &#39;d_8&#39;: 95, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 5 with parameters {&#39;d_3&#39;: 165, &#39;d_4&#39;: 58, &#39;d_5&#39;: 8, &#39;d_6&#39;: 115, &#39;d_7&#39;: 172, &#39;d_8&#39;: 187, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 6 with parameters {&#39;d_3&#39;: 47, &#39;d_4&#39;: 111, &#39;d_5&#39;: 4, &#39;d_6&#39;: 85, &#39;d_7&#39;: 51, &#39;d_8&#39;: 36, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 7 with parameters {&#39;d_3&#39;: 166, &#39;d_4&#39;: 181, &#39;d_5&#39;: 10, &#39;d_6&#39;: 185, &#39;d_7&#39;: 66, &#39;d_8&#39;: 200, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 8 with parameters {&#39;d_3&#39;: 140, &#39;d_4&#39;: 152, &#39;d_5&#39;: 3, &#39;d_6&#39;: 39, &#39;d_7&#39;: 181, &#39;d_8&#39;: 80, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 9 with parameters {&#39;d_3&#39;: 152, &#39;d_4&#39;: 115, &#39;d_5&#39;: 11, &#39;d_6&#39;: 67, &#39;d_7&#39;: 196, &#39;d_8&#39;: 55, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 10 with parameters {&#39;d_3&#39;: 71, &#39;d_4&#39;: 97, &#39;d_5&#39;: 15, &#39;d_6&#39;: 200, &#39;d_7&#39;: 123, &#39;d_8&#39;: 160, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 11 with parameters {&#39;d_3&#39;: 188, &#39;d_4&#39;: 141, &#39;d_5&#39;: 7, &#39;d_6&#39;: 124, &#39;d_7&#39;: 142, &#39;d_8&#39;: 45, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 12 with parameters {&#39;d_3&#39;: 60, &#39;d_4&#39;: 80, &#39;d_5&#39;: 8, &#39;d_6&#39;: 160, &#39;d_7&#39;: 93, &#39;d_8&#39;: 50, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 13 with parameters {&#39;d_3&#39;: 91, &#39;d_4&#39;: 84, &#39;d_5&#39;: 4, &#39;d_6&#39;: 29, &#39;d_7&#39;: 140, &#39;d_8&#39;: 102, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 14 with parameters {&#39;d_3&#39;: 135, &#39;d_4&#39;: 133, &#39;d_5&#39;: 13, &#39;d_6&#39;: 22, &#39;d_7&#39;: 56, &#39;d_8&#39;: 83, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 15 with parameters {&#39;d_3&#39;: 45, &#39;d_4&#39;: 124, &#39;d_5&#39;: 0, &#39;d_6&#39;: 110, &#39;d_7&#39;: 117, &#39;d_8&#39;: 128, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 16 with parameters {&#39;d_3&#39;: 198, &#39;d_4&#39;: 100, &#39;d_5&#39;: 14, &#39;d_6&#39;: 84, &#39;d_7&#39;: 17, &#39;d_8&#39;: 53, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 17 with parameters {&#39;d_3&#39;: 150, &#39;d_4&#39;: 108, &#39;d_5&#39;: 3, &#39;d_6&#39;: 23, &#39;d_7&#39;: 83, &#39;d_8&#39;: 131, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:56] ax.service.ax_client: Generated new trial 18 with parameters {&#39;d_3&#39;: 144, &#39;d_4&#39;: 121, &#39;d_5&#39;: 14, &#39;d_6&#39;: 147, &#39;d_7&#39;: 90, &#39;d_8&#39;: 146, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 19 with parameters {&#39;d_3&#39;: 104, &#39;d_4&#39;: 118, &#39;d_5&#39;: 8, &#39;d_6&#39;: 0, &#39;d_7&#39;: 98, &#39;d_8&#39;: 110, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 20 with parameters {&#39;d_3&#39;: 189, &#39;d_4&#39;: 22, &#39;d_5&#39;: 14, &#39;d_6&#39;: 66, &#39;d_7&#39;: 102, &#39;d_8&#39;: 198, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 21 with parameters {&#39;d_3&#39;: 112, &#39;d_4&#39;: 17, &#39;d_5&#39;: 3, &#39;d_6&#39;: 164, &#39;d_7&#39;: 164, &#39;d_8&#39;: 18, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 22 with parameters {&#39;d_3&#39;: 157, &#39;d_4&#39;: 186, &#39;d_5&#39;: 9, &#39;d_6&#39;: 111, &#39;d_7&#39;: 21, &#39;d_8&#39;: 148, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 23 with parameters {&#39;d_3&#39;: 128, &#39;d_4&#39;: 179, &#39;d_5&#39;: 12, &#39;d_6&#39;: 65, &#39;d_7&#39;: 178, &#39;d_8&#39;: 28, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 24 with parameters {&#39;d_3&#39;: 85, &#39;d_4&#39;: 18, &#39;d_5&#39;: 11, &#39;d_6&#39;: 118, &#39;d_7&#39;: 18, &#39;d_8&#39;: 69, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 25 with parameters {&#39;d_3&#39;: 199, &#39;d_4&#39;: 17, &#39;d_5&#39;: 3, &#39;d_6&#39;: 198, &#39;d_7&#39;: 53, &#39;d_8&#39;: 56, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 26 with parameters {&#39;d_3&#39;: 131, &#39;d_4&#39;: 120, &#39;d_5&#39;: 4, &#39;d_6&#39;: 182, &#39;d_7&#39;: 137, &#39;d_8&#39;: 168, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 27 with parameters {&#39;d_3&#39;: 169, &#39;d_4&#39;: 157, &#39;d_5&#39;: 2, &#39;d_6&#39;: 125, &#39;d_7&#39;: 135, &#39;d_8&#39;: 106, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 28 with parameters {&#39;d_3&#39;: 157, &#39;d_4&#39;: 142, &#39;d_5&#39;: 0, &#39;d_6&#39;: 180, &#39;d_7&#39;: 62, &#39;d_8&#39;: 2, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 29 with parameters {&#39;d_3&#39;: 76, &#39;d_4&#39;: 116, &#39;d_5&#39;: 5, &#39;d_6&#39;: 41, &#39;d_7&#39;: 33, &#39;d_8&#39;: 50, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 30 with parameters {&#39;d_3&#39;: 153, &#39;d_4&#39;: 18, &#39;d_5&#39;: 12, &#39;d_6&#39;: 36, &#39;d_7&#39;: 170, &#39;d_8&#39;: 162, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 31 with parameters {&#39;d_3&#39;: 116, &#39;d_4&#39;: 106, &#39;d_5&#39;: 10, &#39;d_6&#39;: 130, &#39;d_7&#39;: 58, &#39;d_8&#39;: 135, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 32 with parameters {&#39;d_3&#39;: 142, &#39;d_4&#39;: 13, &#39;d_5&#39;: 0, &#39;d_6&#39;: 117, &#39;d_7&#39;: 170, &#39;d_8&#39;: 47, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 33 with parameters {&#39;d_3&#39;: 105, &#39;d_4&#39;: 127, &#39;d_5&#39;: 9, &#39;d_6&#39;: 138, &#39;d_7&#39;: 92, &#39;d_8&#39;: 120, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 34 with parameters {&#39;d_3&#39;: 146, &#39;d_4&#39;: 81, &#39;d_5&#39;: 7, &#39;d_6&#39;: 188, &#39;d_7&#39;: 184, &#39;d_8&#39;: 3, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 35 with parameters {&#39;d_3&#39;: 181, &#39;d_4&#39;: 196, &#39;d_5&#39;: 12, &#39;d_6&#39;: 154, &#39;d_7&#39;: 76, &#39;d_8&#39;: 186, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 36 with parameters {&#39;d_3&#39;: 75, &#39;d_4&#39;: 5, &#39;d_5&#39;: 6, &#39;d_6&#39;: 65, &#39;d_7&#39;: 181, &#39;d_8&#39;: 58, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 37 with parameters {&#39;d_3&#39;: 153, &#39;d_4&#39;: 120, &#39;d_5&#39;: 12, &#39;d_6&#39;: 198, &#39;d_7&#39;: 83, &#39;d_8&#39;: 175, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 38 with parameters {&#39;d_3&#39;: 98, &#39;d_4&#39;: 140, &#39;d_5&#39;: 7, &#39;d_6&#39;: 43, &#39;d_7&#39;: 137, &#39;d_8&#39;: 33, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 39 with parameters {&#39;d_3&#39;: 193, &#39;d_4&#39;: 100, &#39;d_5&#39;: 5, &#39;d_6&#39;: 129, &#39;d_7&#39;: 101, &#39;d_8&#39;: 143, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 40 with parameters {&#39;d_3&#39;: 113, &#39;d_4&#39;: 129, &#39;d_5&#39;: 3, &#39;d_6&#39;: 199, &#39;d_7&#39;: 31, &#39;d_8&#39;: 153, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 41 with parameters {&#39;d_3&#39;: 71, &#39;d_4&#39;: 64, &#39;d_5&#39;: 6, &#39;d_6&#39;: 116, &#39;d_7&#39;: 97, &#39;d_8&#39;: 15, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 42 with parameters {&#39;d_3&#39;: 100, &#39;d_4&#39;: 161, &#39;d_5&#39;: 3, &#39;d_6&#39;: 44, &#39;d_7&#39;: 116, &#39;d_8&#39;: 18, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 43 with parameters {&#39;d_3&#39;: 193, &#39;d_4&#39;: 146, &#39;d_5&#39;: 10, &#39;d_6&#39;: 125, &#39;d_7&#39;: 185, &#39;d_8&#39;: 53, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:57] ax.service.ax_client: Generated new trial 44 with parameters {&#39;d_3&#39;: 51, &#39;d_4&#39;: 111, &#39;d_5&#39;: 7, &#39;d_6&#39;: 138, &#39;d_7&#39;: 39, &#39;d_8&#39;: 13, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 45 with parameters {&#39;d_3&#39;: 76, &#39;d_4&#39;: 62, &#39;d_5&#39;: 5, &#39;d_6&#39;: 169, &#39;d_7&#39;: 44, &#39;d_8&#39;: 86, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 46 with parameters {&#39;d_3&#39;: 168, &#39;d_4&#39;: 119, &#39;d_5&#39;: 6, &#39;d_6&#39;: 140, &#39;d_7&#39;: 108, &#39;d_8&#39;: 153, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 47 with parameters {&#39;d_3&#39;: 101, &#39;d_4&#39;: 196, &#39;d_5&#39;: 13, &#39;d_6&#39;: 167, &#39;d_7&#39;: 18, &#39;d_8&#39;: 122, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 48 with parameters {&#39;d_3&#39;: 103, &#39;d_4&#39;: 95, &#39;d_5&#39;: 1, &#39;d_6&#39;: 146, &#39;d_7&#39;: 161, &#39;d_8&#39;: 81, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 49 with parameters {&#39;d_3&#39;: 135, &#39;d_4&#39;: 25, &#39;d_5&#39;: 6, &#39;d_6&#39;: 27, &#39;d_7&#39;: 4, &#39;d_8&#39;: 21, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 50 with parameters {&#39;d_3&#39;: 44, &#39;d_4&#39;: 71, &#39;d_5&#39;: 12, &#39;d_6&#39;: 194, &#39;d_7&#39;: 198, &#39;d_8&#39;: 177, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 51 with parameters {&#39;d_3&#39;: 56, &#39;d_4&#39;: 80, &#39;d_5&#39;: 0, &#39;d_6&#39;: 83, &#39;d_7&#39;: 177, &#39;d_8&#39;: 80, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 52 with parameters {&#39;d_3&#39;: 42, &#39;d_4&#39;: 72, &#39;d_5&#39;: 12, &#39;d_6&#39;: 179, &#39;d_7&#39;: 80, &#39;d_8&#39;: 69, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 53 with parameters {&#39;d_3&#39;: 179, &#39;d_4&#39;: 72, &#39;d_5&#39;: 4, &#39;d_6&#39;: 67, &#39;d_7&#39;: 58, &#39;d_8&#39;: 149, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 54 with parameters {&#39;d_3&#39;: 184, &#39;d_4&#39;: 28, &#39;d_5&#39;: 9, &#39;d_6&#39;: 157, &#39;d_7&#39;: 140, &#39;d_8&#39;: 89, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 55 with parameters {&#39;d_3&#39;: 104, &#39;d_4&#39;: 52, &#39;d_5&#39;: 5, &#39;d_6&#39;: 54, &#39;d_7&#39;: 125, &#39;d_8&#39;: 164, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 56 with parameters {&#39;d_3&#39;: 173, &#39;d_4&#39;: 111, &#39;d_5&#39;: 2, &#39;d_6&#39;: 192, &#39;d_7&#39;: 192, &#39;d_8&#39;: 25, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 57 with parameters {&#39;d_3&#39;: 131, &#39;d_4&#39;: 153, &#39;d_5&#39;: 12, &#39;d_6&#39;: 33, &#39;d_7&#39;: 98, &#39;d_8&#39;: 168, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 58 with parameters {&#39;d_3&#39;: 141, &#39;d_4&#39;: 43, &#39;d_5&#39;: 7, &#39;d_6&#39;: 21, &#39;d_7&#39;: 181, &#39;d_8&#39;: 29, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:58] ax.service.ax_client: Generated new trial 59 with parameters {&#39;d_3&#39;: 139, &#39;d_4&#39;: 83, &#39;d_5&#39;: 4, &#39;d_6&#39;: 87, &#39;d_7&#39;: 85, &#39;d_8&#39;: 12, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 60 with parameters {&#39;d_3&#39;: 86, &#39;d_4&#39;: 22, &#39;d_5&#39;: 2, &#39;d_6&#39;: 140, &#39;d_7&#39;: 66, &#39;d_8&#39;: 152, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 61 with parameters {&#39;d_3&#39;: 81, &#39;d_4&#39;: 194, &#39;d_5&#39;: 12, &#39;d_6&#39;: 68, &#39;d_7&#39;: 199, &#39;d_8&#39;: 163, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 62 with parameters {&#39;d_3&#39;: 113, &#39;d_4&#39;: 127, &#39;d_5&#39;: 13, &#39;d_6&#39;: 135, &#39;d_7&#39;: 154, &#39;d_8&#39;: 43, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 63 with parameters {&#39;d_3&#39;: 136, &#39;d_4&#39;: 34, &#39;d_5&#39;: 11, &#39;d_6&#39;: 108, &#39;d_7&#39;: 149, &#39;d_8&#39;: 39, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 64 with parameters {&#39;d_3&#39;: 74, &#39;d_4&#39;: 148, &#39;d_5&#39;: 7, &#39;d_6&#39;: 171, &#39;d_7&#39;: 147, &#39;d_8&#39;: 30, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 65 with parameters {&#39;d_3&#39;: 187, &#39;d_4&#39;: 23, &#39;d_5&#39;: 8, &#39;d_6&#39;: 187, &#39;d_7&#39;: 96, &#39;d_8&#39;: 87, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 66 with parameters {&#39;d_3&#39;: 64, &#39;d_4&#39;: 17, &#39;d_5&#39;: 3, &#39;d_6&#39;: 99, &#39;d_7&#39;: 161, &#39;d_8&#39;: 182, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 67 with parameters {&#39;d_3&#39;: 102, &#39;d_4&#39;: 58, &#39;d_5&#39;: 11, &#39;d_6&#39;: 36, &#39;d_7&#39;: 138, &#39;d_8&#39;: 174, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 68 with parameters {&#39;d_3&#39;: 48, &#39;d_4&#39;: 31, &#39;d_5&#39;: 1, &#39;d_6&#39;: 43, &#39;d_7&#39;: 194, &#39;d_8&#39;: 130, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 69 with parameters {&#39;d_3&#39;: 102, &#39;d_4&#39;: 110, &#39;d_5&#39;: 14, &#39;d_6&#39;: 60, &#39;d_7&#39;: 39, &#39;d_8&#39;: 113, &#39;nk_3&#39;: &#39;PM6Y6Brabec&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 70 with parameters {&#39;d_3&#39;: 191, &#39;d_4&#39;: 170, &#39;d_5&#39;: 14, &#39;d_6&#39;: 197, &#39;d_7&#39;: 24, &#39;d_8&#39;: 78, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 71 with parameters {&#39;d_3&#39;: 45, &#39;d_4&#39;: 152, &#39;d_5&#39;: 14, &#39;d_6&#39;: 193, &#39;d_7&#39;: 76, &#39;d_8&#39;: 129, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 72 with parameters {&#39;d_3&#39;: 160, &#39;d_4&#39;: 44, &#39;d_5&#39;: 7, &#39;d_6&#39;: 28, &#39;d_7&#39;: 152, &#39;d_8&#39;: 112, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:15:59] ax.service.ax_client: Generated new trial 73 with parameters {&#39;d_3&#39;: 164, &#39;d_4&#39;: 177, &#39;d_5&#39;: 11, &#39;d_6&#39;: 86, &#39;d_7&#39;: 65, &#39;d_8&#39;: 177, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 74 with parameters {&#39;d_3&#39;: 46, &#39;d_4&#39;: 45, &#39;d_5&#39;: 6, &#39;d_6&#39;: 86, &#39;d_7&#39;: 150, &#39;d_8&#39;: 24, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 75 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 146, &#39;d_5&#39;: 9, &#39;d_6&#39;: 149, &#39;d_7&#39;: 193, &#39;d_8&#39;: 137, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 76 with parameters {&#39;d_3&#39;: 190, &#39;d_4&#39;: 74, &#39;d_5&#39;: 3, &#39;d_6&#39;: 186, &#39;d_7&#39;: 47, &#39;d_8&#39;: 158, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 77 with parameters {&#39;d_3&#39;: 85, &#39;d_4&#39;: 80, &#39;d_5&#39;: 2, &#39;d_6&#39;: 72, &#39;d_7&#39;: 180, &#39;d_8&#39;: 159, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 78 with parameters {&#39;d_3&#39;: 178, &#39;d_4&#39;: 76, &#39;d_5&#39;: 2, &#39;d_6&#39;: 180, &#39;d_7&#39;: 7, &#39;d_8&#39;: 138, &#39;nk_3&#39;: &#39;P3HTPCBM_BHJ&#39;}.
+[INFO 01-18 09:16:00] ax.service.ax_client: Generated new trial 79 with parameters {&#39;d_3&#39;: 150, &#39;d_4&#39;: 21, &#39;d_5&#39;: 12, &#39;d_6&#39;: 15, &#39;d_7&#39;: 25, &#39;d_8&#39;: 117, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 0 with data: {&#39;identity_Jsc&#39;: (18.2198, None), &#39;diff_AVT&#39;: (0.176488, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 1 with data: {&#39;identity_Jsc&#39;: (10.196302, None), &#39;diff_AVT&#39;: (0.241435, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 2 with data: {&#39;identity_Jsc&#39;: (9.016016, None), &#39;diff_AVT&#39;: (0.139593, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 3 with data: {&#39;identity_Jsc&#39;: (9.387147, None), &#39;diff_AVT&#39;: (0.056451, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 4 with data: {&#39;identity_Jsc&#39;: (11.117357, None), &#39;diff_AVT&#39;: (0.198941, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 5 with data: {&#39;identity_Jsc&#39;: (10.767025, None), &#39;diff_AVT&#39;: (0.22002, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 6 with data: {&#39;identity_Jsc&#39;: (6.556204, None), &#39;diff_AVT&#39;: (0.184029, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 7 with data: {&#39;identity_Jsc&#39;: (18.520158, None), &#39;diff_AVT&#39;: (0.176581, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 8 with data: {&#39;identity_Jsc&#39;: (16.540018, None), &#39;diff_AVT&#39;: (0.088693, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 9 with data: {&#39;identity_Jsc&#39;: (10.723894, None), &#39;diff_AVT&#39;: (0.249583, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 10 with data: {&#39;identity_Jsc&#39;: (7.282712, None), &#39;diff_AVT&#39;: (0.089688, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 11 with data: {&#39;identity_Jsc&#39;: (21.308975, None), &#39;diff_AVT&#39;: (0.316978, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 12 with data: {&#39;identity_Jsc&#39;: (9.058054, None), &#39;diff_AVT&#39;: (0.090226, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 13 with data: {&#39;identity_Jsc&#39;: (13.162369, None), &#39;diff_AVT&#39;: (0.081263, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 14 with data: {&#39;identity_Jsc&#39;: (10.142888, None), &#39;diff_AVT&#39;: (0.243426, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 15 with data: {&#39;identity_Jsc&#39;: (6.705191, None), &#39;diff_AVT&#39;: (0.120397, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 16 with data: {&#39;identity_Jsc&#39;: (19.601335, None), &#39;diff_AVT&#39;: (0.186713, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 17 with data: {&#39;identity_Jsc&#39;: (17.323506, None), &#39;diff_AVT&#39;: (0.068384, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 18 with data: {&#39;identity_Jsc&#39;: (10.420283, None), &#39;diff_AVT&#39;: (0.228032, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 19 with data: {&#39;identity_Jsc&#39;: (17.092969, None), &#39;diff_AVT&#39;: (0.170395, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 20 with data: {&#39;identity_Jsc&#39;: (12.434496, None), &#39;diff_AVT&#39;: (0.286521, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 21 with data: {&#39;identity_Jsc&#39;: (8.530936, None), &#39;diff_AVT&#39;: (0.072368, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 22 with data: {&#39;identity_Jsc&#39;: (19.925102, None), &#39;diff_AVT&#39;: (0.247491, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 23 with data: {&#39;identity_Jsc&#39;: (10.395592, None), &#39;diff_AVT&#39;: (0.22092, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 24 with data: {&#39;identity_Jsc&#39;: (16.272806, None), &#39;diff_AVT&#39;: (0.220461, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 25 with data: {&#39;identity_Jsc&#39;: (19.663711, None), &#39;diff_AVT&#39;: (0.220558, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 26 with data: {&#39;identity_Jsc&#39;: (18.193379, None), &#39;diff_AVT&#39;: (0.257914, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 27 with data: {&#39;identity_Jsc&#39;: (10.520949, None), &#39;diff_AVT&#39;: (0.163793, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 28 with data: {&#39;identity_Jsc&#39;: (9.733903, None), &#39;diff_AVT&#39;: (0.12465, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 29 with data: {&#39;identity_Jsc&#39;: (11.633264, None), &#39;diff_AVT&#39;: (0.113072, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 30 with data: {&#39;identity_Jsc&#39;: (10.432319, None), &#39;diff_AVT&#39;: (0.177191, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 31 with data: {&#39;identity_Jsc&#39;: (17.076574, None), &#39;diff_AVT&#39;: (0.231005, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 32 with data: {&#39;identity_Jsc&#39;: (19.129087, None), &#39;diff_AVT&#39;: (0.232981, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 33 with data: {&#39;identity_Jsc&#39;: (8.556356, None), &#39;diff_AVT&#39;: (0.085649, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 34 with data: {&#39;identity_Jsc&#39;: (9.784434, None), &#39;diff_AVT&#39;: (0.131783, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 35 with data: {&#39;identity_Jsc&#39;: (20.851982, None), &#39;diff_AVT&#39;: (0.318794, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 36 with data: {&#39;identity_Jsc&#39;: (13.469106, None), &#39;diff_AVT&#39;: (0.042669, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 37 with data: {&#39;identity_Jsc&#39;: (10.451178, None), &#39;diff_AVT&#39;: (0.210287, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 38 with data: {&#39;identity_Jsc&#39;: (15.66057, None), &#39;diff_AVT&#39;: (0.171382, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 39 with data: {&#39;identity_Jsc&#39;: (11.434804, None), &#39;diff_AVT&#39;: (0.226189, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 40 with data: {&#39;identity_Jsc&#39;: (16.66293, None), &#39;diff_AVT&#39;: (0.158924, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 41 with data: {&#39;identity_Jsc&#39;: (10.439648, None), &#39;diff_AVT&#39;: (0.037377, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 42 with data: {&#39;identity_Jsc&#39;: (7.978164, None), &#39;diff_AVT&#39;: (0.023578, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 43 with data: {&#39;identity_Jsc&#39;: (19.524651, None), &#39;diff_AVT&#39;: (0.17917, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 44 with data: {&#39;identity_Jsc&#39;: (4.610379, None), &#39;diff_AVT&#39;: (0.17278, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 45 with data: {&#39;identity_Jsc&#39;: (6.251883, None), &#39;diff_AVT&#39;: (0.024597, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 46 with data: {&#39;identity_Jsc&#39;: (10.918781, None), &#39;diff_AVT&#39;: (0.220834, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 47 with data: {&#39;identity_Jsc&#39;: (8.350278, None), &#39;diff_AVT&#39;: (0.053402, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 48 with data: {&#39;identity_Jsc&#39;: (8.238707, None), &#39;diff_AVT&#39;: (0.04767, None)}.
+[INFO 01-18 09:16:09] ax.service.ax_client: Completed trial 49 with data: {&#39;identity_Jsc&#39;: (16.178903, None), &#39;diff_AVT&#39;: (0.072487, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 50 with data: {&#39;identity_Jsc&#39;: (2.762122, None), &#39;diff_AVT&#39;: (0.009081, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 51 with data: {&#39;identity_Jsc&#39;: (9.621587, None), &#39;diff_AVT&#39;: (0.028233, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 52 with data: {&#39;identity_Jsc&#39;: (7.846114, None), &#39;diff_AVT&#39;: (0.022931, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 53 with data: {&#39;identity_Jsc&#39;: (18.345788, None), &#39;diff_AVT&#39;: (0.121601, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 54 with data: {&#39;identity_Jsc&#39;: (11.193563, None), &#39;diff_AVT&#39;: (0.214079, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 55 with data: {&#39;identity_Jsc&#39;: (14.194809, None), &#39;diff_AVT&#39;: (0.082309, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 56 with data: {&#39;identity_Jsc&#39;: (18.293037, None), &#39;diff_AVT&#39;: (0.156878, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 57 with data: {&#39;identity_Jsc&#39;: (16.672999, None), &#39;diff_AVT&#39;: (0.092577, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 58 with data: {&#39;identity_Jsc&#39;: (9.66773, None), &#39;diff_AVT&#39;: (0.121755, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 59 with data: {&#39;identity_Jsc&#39;: (16.07866, None), &#39;diff_AVT&#39;: (0.04461, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 60 with data: {&#39;identity_Jsc&#39;: (14.126166, None), &#39;diff_AVT&#39;: (0.065302, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 61 with data: {&#39;identity_Jsc&#39;: (13.346185, None), &#39;diff_AVT&#39;: (0.066761, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 62 with data: {&#39;identity_Jsc&#39;: (18.389646, None), &#39;diff_AVT&#39;: (0.227713, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 63 with data: {&#39;identity_Jsc&#39;: (10.826106, None), &#39;diff_AVT&#39;: (0.262561, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 64 with data: {&#39;identity_Jsc&#39;: (13.62565, None), &#39;diff_AVT&#39;: (0.101066, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 65 with data: {&#39;identity_Jsc&#39;: (11.586198, None), &#39;diff_AVT&#39;: (0.252753, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 66 with data: {&#39;identity_Jsc&#39;: (11.952017, None), &#39;diff_AVT&#39;: (0.022438, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 67 with data: {&#39;identity_Jsc&#39;: (14.224748, None), &#39;diff_AVT&#39;: (0.153527, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 68 with data: {&#39;identity_Jsc&#39;: (4.330863, None), &#39;diff_AVT&#39;: (0.172422, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 69 with data: {&#39;identity_Jsc&#39;: (15.328504, None), &#39;diff_AVT&#39;: (0.206731, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 70 with data: {&#39;identity_Jsc&#39;: (11.833549, None), &#39;diff_AVT&#39;: (0.245285, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 71 with data: {&#39;identity_Jsc&#39;: (8.928217, None), &#39;diff_AVT&#39;: (0.079613, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 72 with data: {&#39;identity_Jsc&#39;: (10.249941, None), &#39;diff_AVT&#39;: (0.154869, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 73 with data: {&#39;identity_Jsc&#39;: (18.858038, None), &#39;diff_AVT&#39;: (0.214934, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 74 with data: {&#39;identity_Jsc&#39;: (4.652073, None), &#39;diff_AVT&#39;: (0.051038, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 75 with data: {&#39;identity_Jsc&#39;: (9.182928, None), &#39;diff_AVT&#39;: (0.115486, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 76 with data: {&#39;identity_Jsc&#39;: (18.833062, None), &#39;diff_AVT&#39;: (0.152709, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 77 with data: {&#39;identity_Jsc&#39;: (11.397825, None), &#39;diff_AVT&#39;: (0.024177, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 78 with data: {&#39;identity_Jsc&#39;: (10.676916, None), &#39;diff_AVT&#39;: (0.183175, None)}.
+[INFO 01-18 09:16:10] ax.service.ax_client: Completed trial 79 with data: {&#39;identity_Jsc&#39;: (17.706235, None), &#39;diff_AVT&#39;: (0.122021, None)}.
+[INFO 01-18 09:16:17] ax.service.ax_client: Generated new trial 80 with parameters {&#39;d_3&#39;: 137, &#39;d_4&#39;: 26, &#39;d_5&#39;: 2, &#39;d_6&#39;: 76, &#39;d_7&#39;: 81, &#39;d_8&#39;: 75, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:17] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:21] ax.service.ax_client: Generated new trial 81 with parameters {&#39;d_3&#39;: 81, &#39;d_4&#39;: 0, &#39;d_5&#39;: 6, &#39;d_6&#39;: 120, &#39;d_7&#39;: 189, &#39;d_8&#39;: 142, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:21] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:24] ax.service.ax_client: Generated new trial 82 with parameters {&#39;d_3&#39;: 137, &#39;d_4&#39;: 83, &#39;d_5&#39;: 2, &#39;d_6&#39;: 67, &#39;d_7&#39;: 63, &#39;d_8&#39;: 70, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:24] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:26] ax.service.ax_client: Generated new trial 83 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 19, &#39;d_5&#39;: 7, &#39;d_6&#39;: 107, &#39;d_7&#39;: 133, &#39;d_8&#39;: 28, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:33] ax.service.ax_client: Completed trial 80 with data: {&#39;identity_Jsc&#39;: (17.6291, None), &#39;diff_AVT&#39;: (0.200328, None)}.
+[INFO 01-18 09:16:33] ax.service.ax_client: Completed trial 81 with data: {&#39;identity_Jsc&#39;: (14.132196, None), &#39;diff_AVT&#39;: (0.0189, None)}.
+[INFO 01-18 09:16:33] ax.service.ax_client: Completed trial 82 with data: {&#39;identity_Jsc&#39;: (17.33772, None), &#39;diff_AVT&#39;: (0.13125, None)}.
+[INFO 01-18 09:16:33] ax.service.ax_client: Completed trial 83 with data: {&#39;identity_Jsc&#39;: (16.903194, None), &#39;diff_AVT&#39;: (0.189702, None)}.
+[INFO 01-18 09:16:43] ax.service.ax_client: Generated new trial 84 with parameters {&#39;d_3&#39;: 140, &#39;d_4&#39;: 142, &#39;d_5&#39;: 6, &#39;d_6&#39;: 49, &#39;d_7&#39;: 33, &#39;d_8&#39;: 26, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:43] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:46] ax.service.ax_client: Generated new trial 85 with parameters {&#39;d_3&#39;: 76, &#39;d_4&#39;: 0, &#39;d_5&#39;: 7, &#39;d_6&#39;: 69, &#39;d_7&#39;: 200, &#39;d_8&#39;: 161, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:47] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:49] ax.service.ax_client: Generated new trial 86 with parameters {&#39;d_3&#39;: 144, &#39;d_4&#39;: 141, &#39;d_5&#39;: 5, &#39;d_6&#39;: 12, &#39;d_7&#39;: 29, &#39;d_8&#39;: 56, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:49] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:16:51] ax.service.ax_client: Generated new trial 87 with parameters {&#39;d_3&#39;: 78, &#39;d_4&#39;: 0, &#39;d_5&#39;: 5, &#39;d_6&#39;: 129, &#39;d_7&#39;: 195, &#39;d_8&#39;: 127, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:52] ax.service.ax_client: Completed trial 84 with data: {&#39;identity_Jsc&#39;: (16.740827, None), &#39;diff_AVT&#39;: (0.087538, None)}.
+[INFO 01-18 09:16:52] ax.service.ax_client: Completed trial 85 with data: {&#39;identity_Jsc&#39;: (13.323459, None), &#39;diff_AVT&#39;: (0.019873, None)}.
+[INFO 01-18 09:16:52] ax.service.ax_client: Completed trial 86 with data: {&#39;identity_Jsc&#39;: (17.70547, None), &#39;diff_AVT&#39;: (0.164626, None)}.
+[INFO 01-18 09:16:52] ax.service.ax_client: Completed trial 87 with data: {&#39;identity_Jsc&#39;: (13.27174, None), &#39;diff_AVT&#39;: (0.051575, None)}.
+[INFO 01-18 09:16:58] ax.service.ax_client: Generated new trial 88 with parameters {&#39;d_3&#39;: 82, &#39;d_4&#39;: 0, &#39;d_5&#39;: 10, &#39;d_6&#39;: 105, &#39;d_7&#39;: 151, &#39;d_8&#39;: 162, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:16:58] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:00] ax.service.ax_client: Generated new trial 89 with parameters {&#39;d_3&#39;: 119, &#39;d_4&#39;: 184, &#39;d_5&#39;: 7, &#39;d_6&#39;: 82, &#39;d_7&#39;: 164, &#39;d_8&#39;: 125, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:00] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:02] ax.service.ax_client: Generated new trial 90 with parameters {&#39;d_3&#39;: 80, &#39;d_4&#39;: 0, &#39;d_5&#39;: 6, &#39;d_6&#39;: 76, &#39;d_7&#39;: 178, &#39;d_8&#39;: 148, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:02] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:04] ax.service.ax_client: Generated new trial 91 with parameters {&#39;d_3&#39;: 82, &#39;d_4&#39;: 0, &#39;d_5&#39;: 6, &#39;d_6&#39;: 88, &#39;d_7&#39;: 176, &#39;d_8&#39;: 144, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:06] ax.service.ax_client: Completed trial 88 with data: {&#39;identity_Jsc&#39;: (15.936711, None), &#39;diff_AVT&#39;: (0.160331, None)}.
+[INFO 01-18 09:17:06] ax.service.ax_client: Completed trial 89 with data: {&#39;identity_Jsc&#39;: (16.100068, None), &#39;diff_AVT&#39;: (0.044203, None)}.
+[INFO 01-18 09:17:06] ax.service.ax_client: Completed trial 90 with data: {&#39;identity_Jsc&#39;: (13.979641, None), &#39;diff_AVT&#39;: (0.052314, None)}.
+[INFO 01-18 09:17:06] ax.service.ax_client: Completed trial 91 with data: {&#39;identity_Jsc&#39;: (14.532591, None), &#39;diff_AVT&#39;: (0.059455, None)}.
+[INFO 01-18 09:17:10] ax.service.ax_client: Generated new trial 92 with parameters {&#39;d_3&#39;: 106, &#39;d_4&#39;: 163, &#39;d_5&#39;: 6, &#39;d_6&#39;: 105, &#39;d_7&#39;: 178, &#39;d_8&#39;: 125, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:13] ax.service.ax_client: Generated new trial 93 with parameters {&#39;d_3&#39;: 115, &#39;d_4&#39;: 185, &#39;d_5&#39;: 8, &#39;d_6&#39;: 59, &#39;d_7&#39;: 166, &#39;d_8&#39;: 116, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:13] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:16] ax.service.ax_client: Generated new trial 94 with parameters {&#39;d_3&#39;: 109, &#39;d_4&#39;: 167, &#39;d_5&#39;: 8, &#39;d_6&#39;: 60, &#39;d_7&#39;: 177, &#39;d_8&#39;: 115, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:16] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:18] ax.service.ax_client: Generated new trial 95 with parameters {&#39;d_3&#39;: 127, &#39;d_4&#39;: 184, &#39;d_5&#39;: 4, &#39;d_6&#39;: 137, &#39;d_7&#39;: 130, &#39;d_8&#39;: 111, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:20] ax.service.ax_client: Completed trial 92 with data: {&#39;identity_Jsc&#39;: (15.242094, None), &#39;diff_AVT&#39;: (0.03547, None)}.
+[INFO 01-18 09:17:20] ax.service.ax_client: Completed trial 93 with data: {&#39;identity_Jsc&#39;: (15.500757, None), &#39;diff_AVT&#39;: (0.009432, None)}.
+[INFO 01-18 09:17:20] ax.service.ax_client: Completed trial 94 with data: {&#39;identity_Jsc&#39;: (15.177412, None), &#39;diff_AVT&#39;: (0.008298, None)}.
+[INFO 01-18 09:17:20] ax.service.ax_client: Completed trial 95 with data: {&#39;identity_Jsc&#39;: (16.162004, None), &#39;diff_AVT&#39;: (0.007666, None)}.
+[INFO 01-18 09:17:28] ax.service.ax_client: Generated new trial 96 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 180, &#39;d_5&#39;: 6, &#39;d_6&#39;: 124, &#39;d_7&#39;: 138, &#39;d_8&#39;: 93, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:28] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:32] ax.service.ax_client: Generated new trial 97 with parameters {&#39;d_3&#39;: 132, &#39;d_4&#39;: 173, &#39;d_5&#39;: 5, &#39;d_6&#39;: 136, &#39;d_7&#39;: 134, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:32] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:35] ax.service.ax_client: Generated new trial 98 with parameters {&#39;d_3&#39;: 113, &#39;d_4&#39;: 200, &#39;d_5&#39;: 5, &#39;d_6&#39;: 103, &#39;d_7&#39;: 120, &#39;d_8&#39;: 91, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:35] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:38] ax.service.ax_client: Generated new trial 99 with parameters {&#39;d_3&#39;: 128, &#39;d_4&#39;: 167, &#39;d_5&#39;: 5, &#39;d_6&#39;: 139, &#39;d_7&#39;: 133, &#39;d_8&#39;: 94, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:40] ax.service.ax_client: Completed trial 96 with data: {&#39;identity_Jsc&#39;: (16.518842, None), &#39;diff_AVT&#39;: (0.026921, None)}.
+[INFO 01-18 09:17:40] ax.service.ax_client: Completed trial 97 with data: {&#39;identity_Jsc&#39;: (16.606984, None), &#39;diff_AVT&#39;: (0.020717, None)}.
+[INFO 01-18 09:17:40] ax.service.ax_client: Completed trial 98 with data: {&#39;identity_Jsc&#39;: (16.077271, None), &#39;diff_AVT&#39;: (0.088742, None)}.
+[INFO 01-18 09:17:40] ax.service.ax_client: Completed trial 99 with data: {&#39;identity_Jsc&#39;: (16.611251, None), &#39;diff_AVT&#39;: (0.033055, None)}.
+[INFO 01-18 09:17:46] ax.service.ax_client: Generated new trial 100 with parameters {&#39;d_3&#39;: 114, &#39;d_4&#39;: 154, &#39;d_5&#39;: 9, &#39;d_6&#39;: 89, &#39;d_7&#39;: 191, &#39;d_8&#39;: 120, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:46] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:50] ax.service.ax_client: Generated new trial 101 with parameters {&#39;d_3&#39;: 134, &#39;d_4&#39;: 169, &#39;d_5&#39;: 4, &#39;d_6&#39;: 140, &#39;d_7&#39;: 140, &#39;d_8&#39;: 123, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:50] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:54] ax.service.ax_client: Generated new trial 102 with parameters {&#39;d_3&#39;: 141, &#39;d_4&#39;: 177, &#39;d_5&#39;: 4, &#39;d_6&#39;: 149, &#39;d_7&#39;: 113, &#39;d_8&#39;: 91, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:54] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:17:58] ax.service.ax_client: Generated new trial 103 with parameters {&#39;d_3&#39;: 134, &#39;d_4&#39;: 171, &#39;d_5&#39;: 5, &#39;d_6&#39;: 124, &#39;d_7&#39;: 135, &#39;d_8&#39;: 125, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:17:59] ax.service.ax_client: Completed trial 100 with data: {&#39;identity_Jsc&#39;: (16.259971, None), &#39;diff_AVT&#39;: (0.096671, None)}.
+[INFO 01-18 09:17:59] ax.service.ax_client: Completed trial 101 with data: {&#39;identity_Jsc&#39;: (16.516896, None), &#39;diff_AVT&#39;: (0.034959, None)}.
+[INFO 01-18 09:17:59] ax.service.ax_client: Completed trial 102 with data: {&#39;identity_Jsc&#39;: (17.311348, None), &#39;diff_AVT&#39;: (0.098091, None)}.
+[INFO 01-18 09:17:59] ax.service.ax_client: Completed trial 103 with data: {&#39;identity_Jsc&#39;: (16.783572, None), &#39;diff_AVT&#39;: (0.050871, None)}.
+[INFO 01-18 09:18:11] ax.service.ax_client: Generated new trial 104 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 159, &#39;d_5&#39;: 4, &#39;d_6&#39;: 118, &#39;d_7&#39;: 157, &#39;d_8&#39;: 130, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:11] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:15] ax.service.ax_client: Generated new trial 105 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 199, &#39;d_5&#39;: 4, &#39;d_6&#39;: 145, &#39;d_7&#39;: 178, &#39;d_8&#39;: 115, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:15] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:22] ax.service.ax_client: Generated new trial 106 with parameters {&#39;d_3&#39;: 111, &#39;d_4&#39;: 190, &#39;d_5&#39;: 8, &#39;d_6&#39;: 34, &#39;d_7&#39;: 164, &#39;d_8&#39;: 137, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:22] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:26] ax.service.ax_client: Generated new trial 107 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 166, &#39;d_5&#39;: 5, &#39;d_6&#39;: 106, &#39;d_7&#39;: 150, &#39;d_8&#39;: 117, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:27] ax.service.ax_client: Completed trial 104 with data: {&#39;identity_Jsc&#39;: (15.94862, None), &#39;diff_AVT&#39;: (0.038421, None)}.
+[INFO 01-18 09:18:27] ax.service.ax_client: Completed trial 105 with data: {&#39;identity_Jsc&#39;: (15.329497, None), &#39;diff_AVT&#39;: (0.02903, None)}.
+[INFO 01-18 09:18:27] ax.service.ax_client: Completed trial 106 with data: {&#39;identity_Jsc&#39;: (14.460006, None), &#39;diff_AVT&#39;: (0.017877, None)}.
+[INFO 01-18 09:18:27] ax.service.ax_client: Completed trial 107 with data: {&#39;identity_Jsc&#39;: (16.301932, None), &#39;diff_AVT&#39;: (0.021706, None)}.
+[INFO 01-18 09:18:42] ax.service.ax_client: Generated new trial 108 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 168, &#39;d_5&#39;: 4, &#39;d_6&#39;: 112, &#39;d_7&#39;: 153, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:42] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:48] ax.service.ax_client: Generated new trial 109 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 169, &#39;d_5&#39;: 6, &#39;d_6&#39;: 89, &#39;d_7&#39;: 142, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:51] ax.service.ax_client: Generated new trial 110 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 169, &#39;d_5&#39;: 5, &#39;d_6&#39;: 102, &#39;d_7&#39;: 151, &#39;d_8&#39;: 106, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:51] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:18:57] ax.service.ax_client: Generated new trial 111 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 181, &#39;d_5&#39;: 6, &#39;d_6&#39;: 75, &#39;d_7&#39;: 150, &#39;d_8&#39;: 119, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:18:58] ax.service.ax_client: Completed trial 108 with data: {&#39;identity_Jsc&#39;: (16.198649, None), &#39;diff_AVT&#39;: (0.001402, None)}.
+[INFO 01-18 09:18:58] ax.service.ax_client: Completed trial 109 with data: {&#39;identity_Jsc&#39;: (16.494916, None), &#39;diff_AVT&#39;: (0.023935, None)}.
+[INFO 01-18 09:18:58] ax.service.ax_client: Completed trial 110 with data: {&#39;identity_Jsc&#39;: (16.448991, None), &#39;diff_AVT&#39;: (0.009999, None)}.
+[INFO 01-18 09:18:58] ax.service.ax_client: Completed trial 111 with data: {&#39;identity_Jsc&#39;: (16.054362, None), &#39;diff_AVT&#39;: (0.009811, None)}.
+[INFO 01-18 09:19:10] ax.service.ax_client: Generated new trial 112 with parameters {&#39;d_3&#39;: 110, &#39;d_4&#39;: 177, &#39;d_5&#39;: 6, &#39;d_6&#39;: 34, &#39;d_7&#39;: 175, &#39;d_8&#39;: 97, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:19:19] ax.service.ax_client: Generated new trial 113 with parameters {&#39;d_3&#39;: 127, &#39;d_4&#39;: 176, &#39;d_5&#39;: 4, &#39;d_6&#39;: 97, &#39;d_7&#39;: 152, &#39;d_8&#39;: 98, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:19] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:19:26] ax.service.ax_client: Generated new trial 114 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 179, &#39;d_5&#39;: 4, &#39;d_6&#39;: 97, &#39;d_7&#39;: 153, &#39;d_8&#39;: 96, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:26] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:19:34] ax.service.ax_client: Generated new trial 115 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 174, &#39;d_5&#39;: 4, &#39;d_6&#39;: 105, &#39;d_7&#39;: 154, &#39;d_8&#39;: 93, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:35] ax.service.ax_client: Completed trial 112 with data: {&#39;identity_Jsc&#39;: (14.150695, None), &#39;diff_AVT&#39;: (0.0093, None)}.
+[INFO 01-18 09:19:35] ax.service.ax_client: Completed trial 113 with data: {&#39;identity_Jsc&#39;: (16.543436, None), &#39;diff_AVT&#39;: (0.01691, None)}.
+[INFO 01-18 09:19:35] ax.service.ax_client: Completed trial 114 with data: {&#39;identity_Jsc&#39;: (16.447396, None), &#39;diff_AVT&#39;: (0.015609, None)}.
+[INFO 01-18 09:19:35] ax.service.ax_client: Completed trial 115 with data: {&#39;identity_Jsc&#39;: (16.470684, None), &#39;diff_AVT&#39;: (0.016364, None)}.
+[INFO 01-18 09:19:48] ax.service.ax_client: Generated new trial 116 with parameters {&#39;d_3&#39;: 104, &#39;d_4&#39;: 185, &#39;d_5&#39;: 6, &#39;d_6&#39;: 49, &#39;d_7&#39;: 162, &#39;d_8&#39;: 116, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:19:54] ax.service.ax_client: Generated new trial 117 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 190, &#39;d_5&#39;: 4, &#39;d_6&#39;: 132, &#39;d_7&#39;: 153, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:54] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:19:58] ax.service.ax_client: Generated new trial 118 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 189, &#39;d_5&#39;: 4, &#39;d_6&#39;: 127, &#39;d_7&#39;: 154, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:19:58] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:20:03] ax.service.ax_client: Generated new trial 119 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 188, &#39;d_5&#39;: 4, &#39;d_6&#39;: 127, &#39;d_7&#39;: 153, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:05] ax.service.ax_client: Completed trial 116 with data: {&#39;identity_Jsc&#39;: (14.078331, None), &#39;diff_AVT&#39;: (0.049139, None)}.
+[INFO 01-18 09:20:05] ax.service.ax_client: Completed trial 117 with data: {&#39;identity_Jsc&#39;: (15.705157, None), &#39;diff_AVT&#39;: (0.000608, None)}.
+[INFO 01-18 09:20:05] ax.service.ax_client: Completed trial 118 with data: {&#39;identity_Jsc&#39;: (15.830781, None), &#39;diff_AVT&#39;: (0.003183, None)}.
+[INFO 01-18 09:20:05] ax.service.ax_client: Completed trial 119 with data: {&#39;identity_Jsc&#39;: (15.850506, None), &#39;diff_AVT&#39;: (0.002331, None)}.
+[INFO 01-18 09:20:20] ax.service.ax_client: Generated new trial 120 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 156, &#39;d_5&#39;: 7, &#39;d_6&#39;: 35, &#39;d_7&#39;: 170, &#39;d_8&#39;: 113, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:21] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:20:25] ax.service.ax_client: Generated new trial 121 with parameters {&#39;d_3&#39;: 80, &#39;d_4&#39;: 20, &#39;d_5&#39;: 5, &#39;d_6&#39;: 121, &#39;d_7&#39;: 200, &#39;d_8&#39;: 166, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:26] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:20:34] ax.service.ax_client: Generated new trial 122 with parameters {&#39;d_3&#39;: 127, &#39;d_4&#39;: 166, &#39;d_5&#39;: 6, &#39;d_6&#39;: 43, &#39;d_7&#39;: 157, &#39;d_8&#39;: 115, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:34] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:20:40] ax.service.ax_client: Generated new trial 123 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 161, &#39;d_5&#39;: 7, &#39;d_6&#39;: 43, &#39;d_7&#39;: 164, &#39;d_8&#39;: 111, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:41] ax.service.ax_client: Completed trial 120 with data: {&#39;identity_Jsc&#39;: (15.048233, None), &#39;diff_AVT&#39;: (0.01759, None)}.
+[INFO 01-18 09:20:41] ax.service.ax_client: Completed trial 121 with data: {&#39;identity_Jsc&#39;: (13.157561, None), &#39;diff_AVT&#39;: (0.062337, None)}.
+[INFO 01-18 09:20:41] ax.service.ax_client: Completed trial 122 with data: {&#39;identity_Jsc&#39;: (15.51351, None), &#39;diff_AVT&#39;: (0.019048, None)}.
+[INFO 01-18 09:20:41] ax.service.ax_client: Completed trial 123 with data: {&#39;identity_Jsc&#39;: (15.384811, None), &#39;diff_AVT&#39;: (0.022529, None)}.
+[INFO 01-18 09:20:57] ax.service.ax_client: Generated new trial 124 with parameters {&#39;d_3&#39;: 117, &#39;d_4&#39;: 163, &#39;d_5&#39;: 4, &#39;d_6&#39;: 141, &#39;d_7&#39;: 159, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:20:57] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:05] ax.service.ax_client: Generated new trial 125 with parameters {&#39;d_3&#39;: 118, &#39;d_4&#39;: 161, &#39;d_5&#39;: 4, &#39;d_6&#39;: 107, &#39;d_7&#39;: 169, &#39;d_8&#39;: 101, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:06] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:11] ax.service.ax_client: Generated new trial 126 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 166, &#39;d_5&#39;: 4, &#39;d_6&#39;: 123, &#39;d_7&#39;: 156, &#39;d_8&#39;: 105, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:11] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:18] ax.service.ax_client: Generated new trial 127 with parameters {&#39;d_3&#39;: 117, &#39;d_4&#39;: 158, &#39;d_5&#39;: 4, &#39;d_6&#39;: 101, &#39;d_7&#39;: 173, &#39;d_8&#39;: 100, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:20] ax.service.ax_client: Completed trial 124 with data: {&#39;identity_Jsc&#39;: (15.569315, None), &#39;diff_AVT&#39;: (0.009272, None)}.
+[INFO 01-18 09:21:20] ax.service.ax_client: Completed trial 125 with data: {&#39;identity_Jsc&#39;: (15.941712, None), &#39;diff_AVT&#39;: (7e-06, None)}.
+[INFO 01-18 09:21:20] ax.service.ax_client: Completed trial 126 with data: {&#39;identity_Jsc&#39;: (15.973676, None), &#39;diff_AVT&#39;: (0.004432, None)}.
+[INFO 01-18 09:21:20] ax.service.ax_client: Completed trial 127 with data: {&#39;identity_Jsc&#39;: (15.91311, None), &#39;diff_AVT&#39;: (0.003106, None)}.
+[INFO 01-18 09:21:32] ax.service.ax_client: Generated new trial 128 with parameters {&#39;d_3&#39;: 110, &#39;d_4&#39;: 181, &#39;d_5&#39;: 9, &#39;d_6&#39;: 27, &#39;d_7&#39;: 180, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:32] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:37] ax.service.ax_client: Generated new trial 129 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 172, &#39;d_5&#39;: 4, &#39;d_6&#39;: 104, &#39;d_7&#39;: 160, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:37] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:44] ax.service.ax_client: Generated new trial 130 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 173, &#39;d_5&#39;: 4, &#39;d_6&#39;: 107, &#39;d_7&#39;: 159, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:44] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:21:51] ax.service.ax_client: Generated new trial 131 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 175, &#39;d_5&#39;: 4, &#39;d_6&#39;: 107, &#39;d_7&#39;: 160, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:21:53] ax.service.ax_client: Completed trial 128 with data: {&#39;identity_Jsc&#39;: (14.289432, None), &#39;diff_AVT&#39;: (0.030314, None)}.
+[INFO 01-18 09:21:53] ax.service.ax_client: Completed trial 129 with data: {&#39;identity_Jsc&#39;: (16.070742, None), &#39;diff_AVT&#39;: (0.004309, None)}.
+[INFO 01-18 09:21:53] ax.service.ax_client: Completed trial 130 with data: {&#39;identity_Jsc&#39;: (16.048899, None), &#39;diff_AVT&#39;: (0.004899, None)}.
+[INFO 01-18 09:21:53] ax.service.ax_client: Completed trial 131 with data: {&#39;identity_Jsc&#39;: (16.027337, None), &#39;diff_AVT&#39;: (0.004641, None)}.
+[INFO 01-18 09:22:05] ax.service.ax_client: Generated new trial 132 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 161, &#39;d_5&#39;: 4, &#39;d_6&#39;: 107, &#39;d_7&#39;: 162, &#39;d_8&#39;: 100, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:05] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:10] ax.service.ax_client: Generated new trial 133 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 176, &#39;d_5&#39;: 4, &#39;d_6&#39;: 125, &#39;d_7&#39;: 153, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:17] ax.service.ax_client: Generated new trial 134 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 182, &#39;d_5&#39;: 4, &#39;d_6&#39;: 130, &#39;d_7&#39;: 151, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:17] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:23] ax.service.ax_client: Generated new trial 135 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 173, &#39;d_5&#39;: 4, &#39;d_6&#39;: 123, &#39;d_7&#39;: 154, &#39;d_8&#39;: 104, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:24] ax.service.ax_client: Completed trial 132 with data: {&#39;identity_Jsc&#39;: (16.096862, None), &#39;diff_AVT&#39;: (0.001524, None)}.
+[INFO 01-18 09:22:24] ax.service.ax_client: Completed trial 133 with data: {&#39;identity_Jsc&#39;: (16.064405, None), &#39;diff_AVT&#39;: (0.001383, None)}.
+[INFO 01-18 09:22:24] ax.service.ax_client: Completed trial 134 with data: {&#39;identity_Jsc&#39;: (16.025015, None), &#39;diff_AVT&#39;: (0.005107, None)}.
+[INFO 01-18 09:22:24] ax.service.ax_client: Completed trial 135 with data: {&#39;identity_Jsc&#39;: (16.105714, None), &#39;diff_AVT&#39;: (0.001333, None)}.
+[INFO 01-18 09:22:34] ax.service.ax_client: Generated new trial 136 with parameters {&#39;d_3&#39;: 119, &#39;d_4&#39;: 168, &#39;d_5&#39;: 5, &#39;d_6&#39;: 113, &#39;d_7&#39;: 171, &#39;d_8&#39;: 97, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:35] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:38] ax.service.ax_client: Generated new trial 137 with parameters {&#39;d_3&#39;: 119, &#39;d_4&#39;: 166, &#39;d_5&#39;: 5, &#39;d_6&#39;: 110, &#39;d_7&#39;: 173, &#39;d_8&#39;: 95, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:38] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:49] ax.service.ax_client: Generated new trial 138 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 167, &#39;d_5&#39;: 4, &#39;d_6&#39;: 112, &#39;d_7&#39;: 169, &#39;d_8&#39;: 98, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:49] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:22:55] ax.service.ax_client: Generated new trial 139 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 169, &#39;d_5&#39;: 4, &#39;d_6&#39;: 112, &#39;d_7&#39;: 162, &#39;d_8&#39;: 102, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:22:57] ax.service.ax_client: Completed trial 136 with data: {&#39;identity_Jsc&#39;: (16.04321, None), &#39;diff_AVT&#39;: (0.00607, None)}.
+[INFO 01-18 09:22:57] ax.service.ax_client: Completed trial 137 with data: {&#39;identity_Jsc&#39;: (16.107915, None), &#39;diff_AVT&#39;: (0.008313, None)}.
+[INFO 01-18 09:22:57] ax.service.ax_client: Completed trial 138 with data: {&#39;identity_Jsc&#39;: (16.024885, None), &#39;diff_AVT&#39;: (0.001919, None)}.
+[INFO 01-18 09:22:57] ax.service.ax_client: Completed trial 139 with data: {&#39;identity_Jsc&#39;: (16.104574, None), &#39;diff_AVT&#39;: (0.000257, None)}.
+[INFO 01-18 09:23:09] ax.service.ax_client: Generated new trial 140 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 160, &#39;d_5&#39;: 4, &#39;d_6&#39;: 111, &#39;d_7&#39;: 163, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:09] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:23:18] ax.service.ax_client: Generated new trial 141 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 159, &#39;d_5&#39;: 4, &#39;d_6&#39;: 110, &#39;d_7&#39;: 163, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:18] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:23:24] ax.service.ax_client: Generated new trial 142 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 159, &#39;d_5&#39;: 4, &#39;d_6&#39;: 109, &#39;d_7&#39;: 163, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:25] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:23:31] ax.service.ax_client: Generated new trial 143 with parameters {&#39;d_3&#39;: 122, &#39;d_4&#39;: 158, &#39;d_5&#39;: 4, &#39;d_6&#39;: 110, &#39;d_7&#39;: 165, &#39;d_8&#39;: 102, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:32] ax.service.ax_client: Completed trial 140 with data: {&#39;identity_Jsc&#39;: (16.160351, None), &#39;diff_AVT&#39;: (0.005283, None)}.
+[INFO 01-18 09:23:32] ax.service.ax_client: Completed trial 141 with data: {&#39;identity_Jsc&#39;: (16.172024, None), &#39;diff_AVT&#39;: (0.005904, None)}.
+[INFO 01-18 09:23:32] ax.service.ax_client: Completed trial 142 with data: {&#39;identity_Jsc&#39;: (16.177458, None), &#39;diff_AVT&#39;: (0.005913, None)}.
+[INFO 01-18 09:23:32] ax.service.ax_client: Completed trial 143 with data: {&#39;identity_Jsc&#39;: (16.180569, None), &#39;diff_AVT&#39;: (0.008015, None)}.
+[INFO 01-18 09:23:42] ax.service.ax_client: Generated new trial 144 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 175, &#39;d_5&#39;: 4, &#39;d_6&#39;: 120, &#39;d_7&#39;: 156, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:42] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:23:48] ax.service.ax_client: Generated new trial 145 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 175, &#39;d_5&#39;: 4, &#39;d_6&#39;: 122, &#39;d_7&#39;: 156, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:23:54] ax.service.ax_client: Generated new trial 146 with parameters {&#39;d_3&#39;: 120, &#39;d_4&#39;: 176, &#39;d_5&#39;: 4, &#39;d_6&#39;: 122, &#39;d_7&#39;: 156, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:23:54] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:24:01] ax.service.ax_client: Generated new trial 147 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 175, &#39;d_5&#39;: 4, &#39;d_6&#39;: 120, &#39;d_7&#39;: 153, &#39;d_8&#39;: 103, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:02] ax.service.ax_client: Completed trial 144 with data: {&#39;identity_Jsc&#39;: (15.944194, None), &#39;diff_AVT&#39;: (0.005617, None)}.
+[INFO 01-18 09:24:02] ax.service.ax_client: Completed trial 145 with data: {&#39;identity_Jsc&#39;: (15.864041, None), &#39;diff_AVT&#39;: (0.007985, None)}.
+[INFO 01-18 09:24:02] ax.service.ax_client: Completed trial 146 with data: {&#39;identity_Jsc&#39;: (15.85413, None), &#39;diff_AVT&#39;: (0.007924, None)}.
+[INFO 01-18 09:24:02] ax.service.ax_client: Completed trial 147 with data: {&#39;identity_Jsc&#39;: (15.96736, None), &#39;diff_AVT&#39;: (0.006747, None)}.
+[INFO 01-18 09:24:16] ax.service.ax_client: Generated new trial 148 with parameters {&#39;d_3&#39;: 116, &#39;d_4&#39;: 173, &#39;d_5&#39;: 7, &#39;d_6&#39;: 17, &#39;d_7&#39;: 157, &#39;d_8&#39;: 116, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:16] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:24:21] ax.service.ax_client: Generated new trial 149 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 179, &#39;d_5&#39;: 4, &#39;d_6&#39;: 113, &#39;d_7&#39;: 152, &#39;d_8&#39;: 106, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:21] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:24:29] ax.service.ax_client: Generated new trial 150 with parameters {&#39;d_3&#39;: 125, &#39;d_4&#39;: 176, &#39;d_5&#39;: 4, &#39;d_6&#39;: 112, &#39;d_7&#39;: 151, &#39;d_8&#39;: 106, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:30] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:24:37] ax.service.ax_client: Generated new trial 151 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 179, &#39;d_5&#39;: 4, &#39;d_6&#39;: 111, &#39;d_7&#39;: 151, &#39;d_8&#39;: 106, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:38] ax.service.ax_client: Completed trial 148 with data: {&#39;identity_Jsc&#39;: (14.592041, None), &#39;diff_AVT&#39;: (0.008706, None)}.
+[INFO 01-18 09:24:38] ax.service.ax_client: Completed trial 149 with data: {&#39;identity_Jsc&#39;: (16.148496, None), &#39;diff_AVT&#39;: (0.001155, None)}.
+[INFO 01-18 09:24:38] ax.service.ax_client: Completed trial 150 with data: {&#39;identity_Jsc&#39;: (16.245377, None), &#39;diff_AVT&#39;: (0.002997, None)}.
+[INFO 01-18 09:24:38] ax.service.ax_client: Completed trial 151 with data: {&#39;identity_Jsc&#39;: (16.175804, None), &#39;diff_AVT&#39;: (0.00101, None)}.
+[INFO 01-18 09:24:57] ax.service.ax_client: Generated new trial 152 with parameters {&#39;d_3&#39;: 123, &#39;d_4&#39;: 195, &#39;d_5&#39;: 4, &#39;d_6&#39;: 139, &#39;d_7&#39;: 144, &#39;d_8&#39;: 112, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:24:57] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:06] ax.service.ax_client: Generated new trial 153 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 185, &#39;d_5&#39;: 4, &#39;d_6&#39;: 120, &#39;d_7&#39;: 146, &#39;d_8&#39;: 110, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:06] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:12] ax.service.ax_client: Generated new trial 154 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 194, &#39;d_5&#39;: 4, &#39;d_6&#39;: 130, &#39;d_7&#39;: 144, &#39;d_8&#39;: 111, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:12] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:23] ax.service.ax_client: Generated new trial 155 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 186, &#39;d_5&#39;: 4, &#39;d_6&#39;: 118, &#39;d_7&#39;: 145, &#39;d_8&#39;: 110, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:24] ax.service.ax_client: Completed trial 152 with data: {&#39;identity_Jsc&#39;: (15.624735, None), &#39;diff_AVT&#39;: (0.002896, None)}.
+[INFO 01-18 09:25:24] ax.service.ax_client: Completed trial 153 with data: {&#39;identity_Jsc&#39;: (16.032359, None), &#39;diff_AVT&#39;: (0.003391, None)}.
+[INFO 01-18 09:25:24] ax.service.ax_client: Completed trial 154 with data: {&#39;identity_Jsc&#39;: (15.828784, None), &#39;diff_AVT&#39;: (0.006965, None)}.
+[INFO 01-18 09:25:24] ax.service.ax_client: Completed trial 155 with data: {&#39;identity_Jsc&#39;: (16.056518, None), &#39;diff_AVT&#39;: (0.003898, None)}.
+[INFO 01-18 09:25:39] ax.service.ax_client: Generated new trial 156 with parameters {&#39;d_3&#39;: 121, &#39;d_4&#39;: 188, &#39;d_5&#39;: 4, &#39;d_6&#39;: 157, &#39;d_7&#39;: 151, &#39;d_8&#39;: 108, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:39] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:43] ax.service.ax_client: Generated new trial 157 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 177, &#39;d_5&#39;: 4, &#39;d_6&#39;: 122, &#39;d_7&#39;: 148, &#39;d_8&#39;: 107, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:43] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:50] ax.service.ax_client: Generated new trial 158 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 178, &#39;d_5&#39;: 4, &#39;d_6&#39;: 124, &#39;d_7&#39;: 151, &#39;d_8&#39;: 107, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:51] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 01-18 09:25:57] ax.service.ax_client: Generated new trial 159 with parameters {&#39;d_3&#39;: 124, &#39;d_4&#39;: 178, &#39;d_5&#39;: 4, &#39;d_6&#39;: 125, &#39;d_7&#39;: 149, &#39;d_8&#39;: 107, &#39;nk_3&#39;: &#39;PCE10_FOIC_1to1&#39;}.
+[INFO 01-18 09:25:58] ax.service.ax_client: Completed trial 156 with data: {&#39;identity_Jsc&#39;: (15.344195, None), &#39;diff_AVT&#39;: (0.004369, None)}.
+[INFO 01-18 09:25:58] ax.service.ax_client: Completed trial 157 with data: {&#39;identity_Jsc&#39;: (16.093668, None), &#39;diff_AVT&#39;: (0.000258, None)}.
+[INFO 01-18 09:25:58] ax.service.ax_client: Completed trial 158 with data: {&#39;identity_Jsc&#39;: (16.037003, None), &#39;diff_AVT&#39;: (0.000975, None)}.
+[INFO 01-18 09:25:58] ax.service.ax_client: Completed trial 159 with data: {&#39;identity_Jsc&#39;: (16.042917, None), &#39;diff_AVT&#39;: (0.000273, None)}.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the optimized stack structure</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">val_type</span> <span class="o">!=</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Optimized performance</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jsc = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LUE = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AVT = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AL thickness 132 nm
+MoOx 1 thickness 173 nm
+Ag thickness 5 nm
+MoOx 2 thickness 136 nm
+LiF 1 thickness 134 nm
+MoOx 3 thickness 105 nm
+LiF 2 thickness 10 nm
+AL nk PCE10_FOIC_1to1
+Jsc =  16.60698379218779
+LUE =  6.298753248997721
+AVT =  0.3792833983471919
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all tried data from the ax_client</span>
+<span class="n">triedX</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">trials_as_df</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">triedX</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+<span class="n">triedY</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">()</span><span class="o">.</span><span class="n">df</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">triedY</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 01-18 09:26:05] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+     Generation Step Generation Model  Trial Index Trial Status  \
+155                1              MOO          155    COMPLETED
+156                1              MOO          156    COMPLETED
+157                1              MOO          157    COMPLETED
+158                1              MOO          158    COMPLETED
+159                1              MOO          159    COMPLETED
+
+                                 Arm Parameterizations
+155  {&#39;155_0&#39;: {&#39;d_3&#39;: 124, &#39;d_4&#39;: 186, &#39;d_5&#39;: 4, &#39;...
+156  {&#39;156_0&#39;: {&#39;d_3&#39;: 121, &#39;d_4&#39;: 188, &#39;d_5&#39;: 4, &#39;...
+157  {&#39;157_0&#39;: {&#39;d_3&#39;: 124, &#39;d_4&#39;: 177, &#39;d_5&#39;: 4, &#39;...
+158  {&#39;158_0&#39;: {&#39;d_3&#39;: 124, &#39;d_4&#39;: 178, &#39;d_5&#39;: 4, &#39;...
+159  {&#39;159_0&#39;: {&#39;d_3&#39;: 124, &#39;d_4&#39;: 178, &#39;d_5&#39;: 4, &#39;...
+    arm_name   metric_name       mean  sem  trial_index
+315    157_0      diff_AVT   0.000258  NaN          157
+316    158_0  identity_Jsc  16.037003  NaN          158
+317    158_0      diff_AVT   0.000975  NaN          158
+318    159_0  identity_Jsc  16.042917  NaN          159
+319    159_0      diff_AVT   0.000273  NaN          159
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Pareto front of the test problem</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_all_objectives</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_15_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_15_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plotting of the objective function tradeoffs</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">model</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_objective_vs_constraints</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;identity_Jsc&#39;</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_16_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_16_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the contour of the objective function for a given target</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="s2">&quot;d_3&quot;</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="s2">&quot;d_4&quot;</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="s2">&quot;d_3&quot;</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="s2">&quot;d_4&quot;</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">target2</span><span class="p">[</span><span class="s1">&#39;obj_type&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target2</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 01-18 09:26:08] ax.service.ax_client: Retrieving contour plot with parameter &#39;d_3&#39; on X-axis and &#39;d_4&#39; on Y-axis, for metric &#39;identity_Jsc&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_17_1.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_17_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 01-18 09:26:10] ax.service.ax_client: Retrieving contour plot with parameter &#39;d_3&#39; on X-axis and &#39;d_4&#39; on Y-axis, for metric &#39;diff_AVT&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_17_3.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_17_3.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the slice (i.e., 1D projection) of the model along the a single dimension</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;d_3&quot;</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_18_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_18_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results of cross validation</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_cross_validation</span><span class="p">(</span><span class="n">cv_results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_19_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_19_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plot of the target during the optimization process</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_fitted</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_20_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_20_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the hypervolume evolution during the optimization</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_hypervolume</span><span class="p">(</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_21_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_21_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute and plot the Pareto frontier</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">optimization_config</span><span class="o">.</span><span class="n">objective</span><span class="o">.</span><span class="n">objectives</span>
+<span class="n">frontier</span> <span class="o">=</span> <span class="n">compute_posterior_pareto_frontier</span><span class="p">(</span>
+    <span class="n">experiment</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">(),</span>
+    <span class="n">primary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">secondary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">absolute_metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;diff_AVT&quot;</span><span class="p">,</span> <span class="s2">&quot;identity_Jsc&quot;</span><span class="p">],</span>
+    <span class="n">num_points</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_pareto_frontier</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="n">CI_level</span><span class="o">=</span><span class="mf">0.90</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_custom_func_22_0.png" src="../_images/examples_TM_AVT_Jsc_MO_custom_func_22_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BOAR_Exp_MO.html" class="btn btn-neutral float-left" title="Multi-objective optimization for perovskite material composition" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../gallery_Opti_DoE.html" class="btn btn-neutral float-right" title="Notebooks gallery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

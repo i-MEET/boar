@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.agents.TrPL_agent &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.agents.TrPL_agent</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.agents.TrPL_agent</h1><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################</span>
+<span class="c1">################## Transient Absorption agent ########################</span>
+<span class="c1">######################################################################</span>
+<span class="c1"># Version 0.1</span>
+<span class="c1"># (c) Larry Lueer, Vincent M. Le Corre, i-MEET 2021-2023</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span><span class="p">,</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># Import boar</span>
+<span class="kn">from</span> <span class="nn">boar.dynamic_utils.pump</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.dynamic_utils.rate_eq</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.agents.Agent</span> <span class="kn">import</span> <span class="n">Agent</span>
+<span class="kn">from</span> <span class="nn">boar.core.funcs</span> <span class="kn">import</span> <span class="n">callable_name</span><span class="p">,</span> <span class="n">get_unique_X</span><span class="p">,</span> <span class="n">get_unique_X_and_xaxis_values</span>
+
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TrPL_agent">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.TrPL_agent.TrPL_agent">[docs]</a>
+<span class="k">class</span> <span class="nc">TrPL_agent</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Agent to run Transient Phololuminescence simulation based on rate equations to be used with BOAR MultiObjectiveOptimizer</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    trPL_model : function, optional</span>
+<span class="sd">        trPL model to be used, by default Bimolecular_Trapping_equation</span>
+<span class="sd">        To see the available models, check the rate_eq.py file in the dynamic_utils folder</span>
+
+<span class="sd">    pump_model : function, optional</span>
+<span class="sd">        pump model to be used, by default square_pump</span>
+<span class="sd">        To see the available models, check the pump.py file in the dynamic_utils folder</span>
+
+<span class="sd">    pump_params : dict, optional</span>
+<span class="sd">        dictionary of pump parameters, by default {&#39;P&#39;:0.0039, &#39;wvl&#39;:850, &#39;fpu&#39;:10000, &#39;A&#39;:0.3*0.3*1e-4, &#39;alpha&#39;:1e-5*1e-2, &#39;pulse_width&#39;:0.2*(1/10000), &#39;t0&#39;:0, &#39;background&#39;:0}</span>
+<span class="sd">            including:</span>
+<span class="sd">                P : float</span>
+<span class="sd">                    total CW power of pulse in W</span>
+<span class="sd">                wvl : float</span>
+<span class="sd">                    excitation wavelength in nm</span>
+<span class="sd">                fpu : float</span>
+<span class="sd">                    pump frequency in Hz</span>
+<span class="sd">                A : float</span>
+<span class="sd">                    effective pump area in m^-2</span>
+<span class="sd">                alpha : float</span>
+<span class="sd">                    penetration depth in m</span>
+<span class="sd">                pulse_width : float</span>
+<span class="sd">                    width of the pump pulse in seconds</span>
+<span class="sd">                t0 : float, optional</span>
+<span class="sd">                    time shift of the pump pulse, by default 0</span>
+<span class="sd">                background : float, optional</span>
+<span class="sd">                    background volume density of generated photons, by default 0</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">trPL_model</span> <span class="o">=</span> <span class="n">Bimolecular_Trapping_equation</span><span class="p">,</span><span class="n">pump_model</span> <span class="o">=</span> <span class="n">initial_carrier_density</span><span class="p">,</span> <span class="n">pump_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fpu&#39;</span><span class="p">:</span><span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;background&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="n">flux_density_model</span> <span class="o">=</span> <span class="n">get_flux_density</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flux_density_model</span> <span class="o">=</span> <span class="n">flux_density_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trPL_model</span> <span class="o">=</span> <span class="n">trPL_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">=</span> <span class="n">pump_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="o">=</span> <span class="n">pump_params</span>
+
+
+        <span class="c1">#  check model function name even when it is called inside a partial function</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">callable_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_model</span><span class="p">)</span>
+        <span class="c1"># if self.model_name == &#39;Bimolecular_Trapping_equation&#39;:</span>
+        <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_equation&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kdirect&#39;</span> <span class="p">:</span> <span class="mf">1e-18</span><span class="p">,</span> <span class="s1">&#39;ktrap&#39;</span><span class="p">:</span> <span class="mf">1e5</span><span class="p">,</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span><span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span> <span class="mf">1e-17</span><span class="p">}</span> <span class="c1"># kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2)</span>
+        <span class="c1"># elif self.trPL_model == Bimolecular_Trapping_Detrapping_equation:</span>
+        <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kdirect&#39;</span> <span class="p">:</span> <span class="mf">26e-17</span><span class="p">,</span> <span class="s1">&#39;ktrap&#39;</span><span class="p">:</span> <span class="mf">1.2e-15</span><span class="p">,</span> <span class="s1">&#39;kdetrap&#39;</span><span class="p">:</span> <span class="mf">80e-17</span><span class="p">,</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">:</span><span class="mf">6e18</span><span class="p">,</span><span class="s1">&#39;p_0&#39;</span><span class="p">:</span><span class="mf">65e18</span><span class="p">,</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span><span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span> <span class="mf">1e-17</span><span class="p">}</span> <span class="c1"># kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2) ktrap = 1.2e-15</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="c1"># if self.model_name == &#39;Bimolecular_Trapping_equation&#39;:</span>
+        <span class="c1">#     self.trPL_default_val = {&#39;kdirect&#39; : 1e-18, &#39;ktrap&#39;: 1e5, &#39;QE&#39;:0.9, &#39;I_PL&#39;: 1e-17} # kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2)</span>
+        <span class="c1"># elif self.trPL_model == Bimolecular_Trapping_Detrapping_equation:</span>
+        <span class="c1">#     self.trPL_default_val = {&#39;kdirect&#39; : 26e-17, &#39;ktrap&#39;: 1.2e-15, &#39;kdetrap&#39;: 80e-17,&#39;Bulk_tr&#39;:6e18,&#39;p_0&#39;:65e18, &#39;QE&#39;:0.9, &#39;I_PL&#39;: 1e-17} # kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2) ktrap = 1.2e-15</span>
+
+        
+
+    
+<div class="viewcode-block" id="TrPL_agent.trPL">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.trPL">[docs]</a>
+    <span class="k">def</span> <span class="nf">trPL</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="p">[],</span><span class="n">take_log</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Run the trPL simulations for a given list of parameters </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : np.array</span>
+<span class="sd">            Array of fixed parameters (like time, light intensities, etc.)) </span>
+<span class="sd">        params : list</span>
+<span class="sd">            list of Fitparam objects</span>
+<span class="sd">        X_dimensions : list, optional</span>
+<span class="sd">            name of the fixed parameters in X, by default []</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.array</span>
+<span class="sd">            Array of containing the simulation results</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="c1"># check if X is np.array</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+
+        <span class="n">QE</span><span class="p">,</span> <span class="n">I_PL</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">Gfrac</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">X_unique</span><span class="p">,</span> <span class="n">X_dimensions_uni</span><span class="p">,</span><span class="n">ts</span> <span class="o">=</span> <span class="n">get_unique_X_and_xaxis_values</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">X_dimensions</span><span class="p">)</span> <span class="c1"># get unique X values and their dimensions</span>
+        <span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="p">]</span> <span class="c1"># get parameter names</span>
+
+        
+        <span class="n">flux_args</span><span class="p">,</span> <span class="n">pump_args</span><span class="p">,</span> <span class="n">pump_params</span><span class="p">,</span> <span class="n">trPL_params</span><span class="p">,</span> <span class="n">trPL_default_val</span><span class="p">,</span> <span class="n">trPL_args_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_args_flux_pump_models</span><span class="p">()</span> <span class="c1"># initialize arguments for the flux density and pump models</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">uni</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X_unique</span><span class="p">):</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+            <span class="c1"># update the pump,flux_density and trPL arguments from a fixed parameter</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">X_dimensions_uni</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pnames</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Parameter </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> is optimized, it should not be in the fixed parameters&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">flux_args</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">!=</span> <span class="n">initial_carrier_density</span><span class="p">:</span>
+                    <span class="n">flux_args</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pump_args</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">pump_args</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pnames</span><span class="p">:</span>
+                    <span class="n">pump_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="n">pnames</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Typically Pump parameter </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> should not be optimized, it is set to </span><span class="si">{</span><span class="n">pump_params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span>
+                    <span class="n">QE</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span>
+                    <span class="n">I_PL</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;p_0&#39;</span><span class="p">:</span>
+                    <span class="n">p_0</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;Gfrac&#39;</span><span class="p">:</span>
+                    <span class="n">Gfrac</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>  
+
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;N0&#39;</span><span class="p">:</span>
+                    <span class="n">pump_args</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">uni</span><span class="p">[</span><span class="n">X_dimensions_uni</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>            
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>
+            
+            <span class="c1"># update the trPL arguments from the params list</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">pump_args</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">pump_args</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">flux_args</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">flux_args</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">trPL_args_names</span><span class="p">:</span>
+                    <span class="n">trPL_params</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span>
+                    <span class="n">QE</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span>
+                    <span class="n">I_PL</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;p_0&#39;</span><span class="p">:</span>
+                    <span class="n">p_0</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Gfrac&#39;</span><span class="p">:</span>
+                    <span class="n">Gfrac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+                <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;N0&#39;</span><span class="p">:</span>
+                    <span class="n">pump_args</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span>
+
+                
+            <span class="c1"># check if the trPL arguments are set</span>
+            <span class="k">if</span> <span class="n">QE</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">QE</span> <span class="o">=</span> <span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;QE&#39;</span><span class="p">]</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;QE is not set, it is set to </span><span class="si">{</span><span class="n">QE</span><span class="si">}</span><span class="s1"> %&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">I_PL</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">I_PL</span> <span class="o">=</span> <span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;I_PL&#39;</span><span class="p">]</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;I_PL is not set, it is set to </span><span class="si">{</span><span class="n">I_PL</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">p_0</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+                <span class="n">p_0</span> <span class="o">=</span> <span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;p_0&#39;</span><span class="p">]</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p_0 is not set, it is set to </span><span class="si">{</span><span class="n">p_0</span><span class="si">}</span><span class="s1"> cm-3&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Gfrac</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+                <span class="n">Gfrac</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;Gfrac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Gfrac</span>
+                <span class="c1"># warnings.warn(f&#39;Gfrac is not set, it is set to {Gfrac} &#39;)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;Gfrac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Gfrac</span>
+                
+
+            
+            <span class="c1"># calculate the flux density</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">!=</span> <span class="n">initial_carrier_density</span><span class="p">:</span>
+                <span class="n">flux</span><span class="p">,</span><span class="n">density</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_density_model</span><span class="p">(</span><span class="o">**</span><span class="n">flux_args</span><span class="p">)</span>
+
+                <span class="c1"># calculate the pump</span>
+                <span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">density</span> <span class="c1"># update the pump power with the density</span>
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">t</span>
+                <span class="n">tmax</span> <span class="o">=</span> <span class="mf">0.99999</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">]</span> <span class="c1"># maximum time for the pump</span>
+
+                <span class="c1"># check if the time is too long to use arange, we need to do this to ensure that the pulse_width is not too small compared to the timestep</span>
+                <span class="n">order_of_magnitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">]))</span>
+
+                <span class="k">if</span> <span class="n">tmax</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="n">order_of_magnitude</span><span class="p">:</span>
+                    <span class="c1"># use logspace if the time is too long</span>
+                    <span class="n">num_steps</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tmax</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="n">order_of_magnitude</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="c1"># at least ten steps per order of magnitude</span>
+                    <span class="n">tpulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">order_of_magnitude</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">tmax</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">num_steps</span><span class="p">))</span> <span class="c1"># time vector for the pump</span>
+                    <span class="c1">#add 0 to the beginning of the time vector</span>
+                    <span class="n">tpulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tpulse</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># use arange if the time is short enough can use linear steps</span>
+                    <span class="n">tpulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="n">order_of_magnitude</span><span class="p">)</span>
+
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;tpulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tpulse</span>
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;Gpulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span><span class="p">(</span><span class="n">tpulse</span><span class="p">,</span><span class="o">**</span><span class="n">pump_args</span><span class="p">)</span> <span class="o">*</span> <span class="n">QE</span><span class="c1"># * Gfrac</span>
+
+                <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trPL_model</span><span class="p">(</span><span class="o">**</span><span class="n">trPL_params</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">t</span>
+                <span class="n">tmax</span> <span class="o">=</span> <span class="mf">0.99999</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">]</span> <span class="c1"># maximum time for the pump</span>
+                <span class="n">tpulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span> <span class="c1"># time vector for the pump</span>
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;tpulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tpulse</span>
+                <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;Gpulse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span><span class="p">(</span><span class="n">tpulse</span><span class="p">,</span><span class="o">**</span><span class="n">pump_args</span><span class="p">)</span> <span class="o">*</span> <span class="n">QE</span> <span class="c1">#* Gfrac</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_equation&#39;</span><span class="p">:</span> <span class="c1"># initial electron density</span>
+                    <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;ninit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;N0&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">Gfrac</span><span class="p">]</span>
+
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+                    <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;ninit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;N0&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">Gfrac</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;N0&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">Gfrac</span><span class="p">]</span> <span class="c1"># initial electron, hole and exciton density</span>
+
+                <span class="n">signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trPL_model</span><span class="p">(</span><span class="o">**</span><span class="n">trPL_params</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_equation&#39;</span><span class="p">:</span>
+                <span class="n">signal</span> <span class="o">=</span> <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">I_PL</span> <span class="o">*</span> <span class="n">signal</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># PL = I_PL  * kdirect * n * p, here n = p</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+                <span class="n">n</span><span class="p">,</span> <span class="n">nt</span> <span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">signal</span><span class="c1"># electron density</span>
+                <span class="n">signal</span> <span class="o">=</span> <span class="n">trPL_params</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">I_PL</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span> <span class="c1"># PL = I_PL * kdirect * n * (p + p_0)</span>
+            
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="c1"># small signal limit !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! </span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">take_log</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">y</span></div>
+
+                
+                
+
+<div class="viewcode-block" id="TrPL_agent.init_args_flux_pump_models">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.init_args_flux_pump_models">[docs]</a>
+    <span class="k">def</span> <span class="nf">init_args_flux_pump_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Initialize the arguments for the flux density model, pump model and trPL model </span>
+<span class="sd">            For more information, check the pump.py file in the dynamic_utils folder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Reset default values when checking for model, to avoid errors</span>
+
+        <span class="c1"># check model function name even when it is called inside a partial function</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="n">callable_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="c1"># if self.model_name == &#39;Bimolecular_Trapping_equation&#39;:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_equation&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kdirect&#39;</span> <span class="p">:</span> <span class="mf">1e-18</span><span class="p">,</span> <span class="s1">&#39;ktrap&#39;</span><span class="p">:</span> <span class="mf">1e5</span><span class="p">,</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span><span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span> <span class="mf">1e-17</span><span class="p">}</span> <span class="c1"># kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2)</span>
+        <span class="c1"># elif self.trPL_model == Bimolecular_Trapping_Detrapping_equation:</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kdirect&#39;</span> <span class="p">:</span> <span class="mf">26e-17</span><span class="p">,</span> <span class="s1">&#39;ktrap&#39;</span><span class="p">:</span> <span class="mf">1.2e-15</span><span class="p">,</span> <span class="s1">&#39;kdetrap&#39;</span><span class="p">:</span> <span class="mf">80e-17</span><span class="p">,</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">:</span><span class="mf">6e18</span><span class="p">,</span><span class="s1">&#39;p_0&#39;</span><span class="p">:</span><span class="mf">65e18</span><span class="p">,</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span><span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;I_PL&#39;</span><span class="p">:</span> <span class="mf">1e-17</span><span class="p">}</span> <span class="c1"># kwargs for the trPL model  by defaults (tpulse=None, equilibrate=True,eq_limit=1e-2) ktrap = 1.2e-15</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+        <span class="c1"># Initialize the dictionary with the default values and make deep copy</span>
+        <span class="n">trPL_default_val</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">)</span>
+        <span class="n">pump_params</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">)</span>
+
+
+        <span class="c1"># get arguments for get_flux_density</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">!=</span> <span class="n">initial_carrier_density</span><span class="p">:</span> <span class="c1"># if the pump model is not the initial carrier density, then the flux density model is used</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_density_model</span> <span class="o">==</span> <span class="n">get_flux_density</span><span class="p">:</span>
+                <span class="c1"># P,wvl,fpu,A,alpha</span>
+                <span class="n">flux_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;wvl&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;wvl&#39;</span><span class="p">],</span> <span class="s1">&#39;fpu&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">],</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">],</span><span class="s1">&#39;P&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">flux_args</span> <span class="o">=</span> <span class="p">{}</span>    
+        
+        <span class="c1"># get arguments for pump_model</span>
+        <span class="c1"># P is ommited because it is calculated in get_flux_density</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">==</span> <span class="n">square_pump</span><span class="p">:</span>
+            <span class="n">pump_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fpu&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">],</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">],</span> <span class="s1">&#39;t0&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;t0&#39;</span><span class="p">],</span> <span class="s1">&#39;background&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">]}</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">==</span> <span class="n">gaussian_pump</span><span class="p">:</span>
+            <span class="n">pump_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fpu&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">],</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">],</span> <span class="s1">&#39;t0&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;t0&#39;</span><span class="p">],</span> <span class="s1">&#39;background&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">]}</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">==</span> <span class="n">pump_from_file</span><span class="p">:</span>
+            <span class="n">pump_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">],</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">],</span> <span class="s1">&#39;background&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">],</span> <span class="s1">&#39;sep&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;sep&#39;</span><span class="p">]}</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span> <span class="o">==</span> <span class="n">initial_carrier_density</span><span class="p">:</span>
+            <span class="n">pump_args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fpu&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">],</span><span class="s1">&#39;background&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">]}</span>
+            <span class="k">if</span> <span class="s1">&#39;N0&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">pump_args</span><span class="p">[</span><span class="s1">&#39;N0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;N0&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;pump model </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pump_model</span><span class="si">}</span><span class="s1"> not implemented&#39;</span><span class="p">)</span>
+
+        <span class="c1"># get argument for trPL_model</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_equation&#39;</span><span class="p">:</span>
+            <span class="n">trPL_args_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ktrap&#39;</span><span class="p">,</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]</span> <span class="c1"># name of the physical parameters in the Bimolecular_Trapping_equation</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trPL_args_names</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">trPL_default_val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">trPL_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ktrap&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;ktrap&#39;</span><span class="p">],</span><span class="s1">&#39;kdirect&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]}</span> <span class="c1"># default values of the physical parameters in the Bimolecular_Trapping_equation</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span>  <span class="o">==</span> <span class="s1">&#39;Bimolecular_Trapping_Detrapping_equation&#39;</span><span class="p">:</span>
+            <span class="n">trPL_args_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ktrap&#39;</span><span class="p">,</span> <span class="s1">&#39;kdirect&#39;</span><span class="p">,</span> <span class="s1">&#39;kdetrap&#39;</span><span class="p">,</span> <span class="s1">&#39;Bulk_tr&#39;</span><span class="p">,</span> <span class="s1">&#39;p_0&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trPL_args_names</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">trPL_default_val</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">trPL_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ktrap&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;ktrap&#39;</span><span class="p">],</span><span class="s1">&#39;kdirect&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">],</span> <span class="s1">&#39;kdetrap&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;kdetrap&#39;</span><span class="p">],</span> <span class="s1">&#39;Bulk_tr&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;Bulk_tr&#39;</span><span class="p">],</span> <span class="s1">&#39;p_0&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">trPL_default_val</span><span class="p">[</span><span class="s1">&#39;p_0&#39;</span><span class="p">]}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;trPL model </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> not implemented&#39;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">flux_args</span><span class="p">,</span> <span class="n">pump_args</span><span class="p">,</span> <span class="n">pump_params</span><span class="p">,</span> <span class="n">trPL_params</span><span class="p">,</span> <span class="n">trPL_default_val</span><span class="p">,</span> <span class="n">trPL_args_names</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

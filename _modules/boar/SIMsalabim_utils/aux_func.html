@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.SIMsalabim_utils.aux_func &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.SIMsalabim_utils.aux_func</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.SIMsalabim_utils.aux_func</h1><div class="highlight"><pre>
+<span></span><span class="c1">###################################################</span>
+<span class="c1">############### Useful function ###################</span>
+<span class="c1">###################################################</span>
+<span class="c1"># Author: Vincent M. Le Corre</span>
+<span class="c1"># Github: https://github.com/VMLC-PV</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span><span class="p">,</span><span class="n">constants</span>
+
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">eps_0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;electric constant&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="sci_notation">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.sci_notation">[docs]</a>
+<span class="k">def</span> <span class="nf">sci_notation</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">sig_fig</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make proper scientific notation for graphs</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    number : float</span>
+<span class="sd">        Number to put in scientific notation.</span>
+
+<span class="sd">    sig_fig : int, optional</span>
+<span class="sd">        Number of significant digits (Defaults = 2).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    output : str</span>
+<span class="sd">        String containing the number in scientific notation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">sig_fig</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ret_string</span> <span class="o">=</span> <span class="s2">&quot;{0:.</span><span class="si">{1:d}</span><span class="s2">e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">sig_fig</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ret_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\u207B</span><span class="s2">&quot;</span> <span class="c1"># superscript minus sign</span>
+            <span class="n">SUP</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;0123456789&quot;</span><span class="p">,</span> <span class="s2">&quot;⁰¹²³⁴⁵⁶⁷⁸⁹&quot;</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">SUP</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span><span class="n">a</span> <span class="o">+</span> <span class="s1">&#39; x 10&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">ret_string</span> <span class="o">=</span> <span class="s2">&quot;{0:.</span><span class="si">{1:d}</span><span class="s2">e}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">ret_string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">#removed leading &quot;+&quot; and strips leading zeros too.</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">b</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\u207B</span><span class="s2">&quot;</span> <span class="c1"># superscript minus sign</span>
+            <span class="n">SUP</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;0123456789&quot;</span><span class="p">,</span> <span class="s2">&quot;⁰¹²³⁴⁵⁶⁷⁸⁹&quot;</span><span class="p">)</span>
+            <span class="c1">#SUB = str.maketrans(&quot;0123456789&quot;, &quot;₀₁₂₃₄₅₆₇₈₉&quot;)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">SUP</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">b</span>    
+    <span class="k">return</span> <span class="n">output</span></div>
+
+
+
+<div class="viewcode-block" id="LinearFunc">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.LinearFunc">[docs]</a>
+<span class="k">def</span> <span class="nf">LinearFunc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Linear function</span>
+<span class="sd">    f(t) = a\*t + b</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        time</span>
+
+<span class="sd">    a : float</span>
+<span class="sd">        slope</span>
+
+<span class="sd">    b : float</span>
+<span class="sd">        offset</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        f(t)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">b</span></div>
+
+
+
+<div class="viewcode-block" id="MonoExpDecay">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpDecay">[docs]</a>
+<span class="k">def</span> <span class="nf">MonoExpDecay</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">f0</span> <span class="p">,</span> <span class="n">finf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Monoexponential decay function</span>
+<span class="sd">    f(t) = (f0-finf) \* np.exp(-(t/tau) ) + finf</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        time</span>
+
+<span class="sd">    k : float</span>
+<span class="sd">        lifetime</span>
+
+<span class="sd">    f0 : float</span>
+<span class="sd">        initial quantity</span>
+
+<span class="sd">    finf : float</span>
+<span class="sd">        offset</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        f(t)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">f0</span><span class="o">-</span><span class="n">finf</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">tau</span><span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="n">finf</span></div>
+
+    
+
+<div class="viewcode-block" id="MonoExpInc">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpInc">[docs]</a>
+<span class="k">def</span> <span class="nf">MonoExpInc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">f0</span><span class="p">,</span> <span class="n">finf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Monoexponential Inc function</span>
+<span class="sd">    f(t) = (finf-f0) \*(1-np.exp(-(t/tau))) + f0)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        time</span>
+
+<span class="sd">    k : float</span>
+<span class="sd">        lifetime</span>
+
+<span class="sd">    f0 : float</span>
+<span class="sd">        initial quantity</span>
+
+<span class="sd">    finf : float</span>
+<span class="sd">        offset</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        f(t)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">finf</span><span class="o">-</span><span class="n">f0</span><span class="p">)</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">tau</span><span class="p">)))</span> <span class="o">+</span> <span class="n">f0</span></div>
+
+
+<div class="viewcode-block" id="StretchedExp">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.StretchedExp">[docs]</a>
+<span class="k">def</span> <span class="nf">StretchedExp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Stretched decay function</span>
+<span class="sd">    f(t) = A \* np.exp(- (t/tau)^h ) + B</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        time</span>
+
+<span class="sd">    tau : float</span>
+<span class="sd">        lifetime</span>
+<span class="sd">    </span>
+<span class="sd">    h : float</span>
+<span class="sd">        heterogeneity parameter</span>
+
+<span class="sd">    A : float</span>
+<span class="sd">        initial quantity</span>
+
+<span class="sd">    B : float</span>
+<span class="sd">        offset</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        f(t)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">tau</span><span class="p">)</span><span class="o">**</span><span class="n">h</span> <span class="p">)</span> <span class="o">+</span> <span class="n">B</span></div>
+
+
+
+<div class="viewcode-block" id="get_Jsc">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Jsc">[docs]</a>
+<span class="k">def</span> <span class="nf">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Jsc : float</span>
+<span class="sd">        Short-circuit current value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Jsc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_Voc">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Voc">[docs]</a>
+<span class="k">def</span> <span class="nf">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Open-circuit voltage (Voc) from solar cell JV-curve by interpolating the Voltage when the current is 0</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Voc : float</span>
+<span class="sd">        Open-circuit voltage value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Curr</span><span class="p">,</span> <span class="n">Volt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Voc_dumb</span></div>
+
+
+<div class="viewcode-block" id="get_FF">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_FF">[docs]</a>
+<span class="k">def</span> <span class="nf">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the fill factor (FF) from solar cell JV-curve by calculating the maximum power point</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    FF : float</span>
+<span class="sd">        Fill factor value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Volt_oc</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Curr_sc</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">Volt_oc</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="n">Curr_sc</span><span class="p">):</span>
+            <span class="n">power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">power_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">power_max</span><span class="o">/</span><span class="p">(</span><span class="n">Volt_oc</span><span class="o">*</span><span class="n">Curr_sc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">FF_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_PCE">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_PCE">[docs]</a>
+<span class="k">def</span> <span class="nf">get_PCE</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">,</span><span class="n">suns</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the power conversion efficiency (PCE) from solar cell JV-curve</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Volt : 1-D sequence of floats</span>
+<span class="sd">        Array containing the voltages.</span>
+
+<span class="sd">    Curr : 1-D sequence of floats</span>
+<span class="sd">        Array containing the current-densities.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    PCE : float</span>
+<span class="sd">        Power conversion efficiency value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Voc_dumb</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span><span class="n">Curr</span><span class="p">)</span>
+    <span class="n">Jsc_dumb</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">FF_dumb</span> <span class="o">=</span> <span class="n">get_FF</span><span class="p">(</span><span class="n">Volt</span><span class="p">,</span> <span class="n">Curr</span><span class="p">)</span>
+    <span class="n">PCE_dumb</span> <span class="o">=</span> <span class="n">Voc_dumb</span><span class="o">*</span><span class="n">Jsc_dumb</span><span class="o">*</span><span class="n">FF_dumb</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">suns</span><span class="p">)</span> <span class="c1"># to get it in % when Jsc is in A/m2 and Voc in V</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">PCE_dumb</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_ideality_factor">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_ideality_factor">[docs]</a>
+<span class="k">def</span> <span class="nf">get_ideality_factor</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="mi">295</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)\*log(suns) + intercept</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    suns : 1-D sequence of floats</span>
+<span class="sd">        Array containing the intensity in sun.</span>
+
+<span class="sd">    Vocs : 1-D sequence of floats</span>
+<span class="sd">        Array containing the open-circuit voltages.</span>
+<span class="sd">    </span>
+<span class="sd">    T : float optional</span>
+<span class="sd">        Temperature in Kelvin (Default = 295 K).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nIF : float</span>
+<span class="sd">        Ideality factor value.</span>
+
+<span class="sd">    intercept : float</span>
+<span class="sd">        Intercept of the regression line.</span>
+
+<span class="sd">    rvalue : float</span>
+<span class="sd">        Correlation coefficient.</span>
+
+<span class="sd">    pvalue : float</span>
+<span class="sd">        Two-sided p-value for a hypothesis test whose null hypothesis is</span>
+<span class="sd">        that the slope is zero, using Wald Test with t-distribution of</span>
+<span class="sd">        the test statistic.</span>
+
+<span class="sd">    stderr : float</span>
+<span class="sd">        Standard error of the estimated gradient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="n">kb</span><span class="o">*</span><span class="n">T</span>
+    <span class="n">suns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">suns</span><span class="p">)</span>
+    <span class="n">slope_d</span><span class="p">,</span> <span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Vocs</span><span class="p">)</span>
+    <span class="n">nIF</span> <span class="o">=</span> <span class="n">slope_d</span><span class="o">/</span><span class="n">Vt</span>
+    <span class="k">return</span> <span class="n">nIF</span><span class="p">,</span><span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span></div>
+
+
+<div class="viewcode-block" id="get_alpha_factor">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_alpha_factor">[docs]</a>
+<span class="k">def</span> <span class="nf">get_alpha_factor</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Jscs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns alpha from suns-Jsc data linear fit of log(Jsc) = alpha\*log(suns) + b</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    suns : 1-D sequence of floats</span>
+<span class="sd">        Array containing the intensity in sun.</span>
+
+<span class="sd">    Vocs : 1-D sequence of floats</span>
+<span class="sd">        Array containing the open-circuit voltages.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        Alpha value.</span>
+
+<span class="sd">    intercept : float</span>
+<span class="sd">        Intercept of the regression line.</span>
+
+<span class="sd">    rvalue : float</span>
+<span class="sd">        Correlation coefficient.</span>
+
+<span class="sd">    pvalue : float</span>
+<span class="sd">        Two-sided p-value for a hypothesis test whose null hypothesis is</span>
+<span class="sd">        that the slope is zero, using Wald Test with t-distribution of</span>
+<span class="sd">        the test statistic.</span>
+
+<span class="sd">    stderr : float</span>
+<span class="sd">        Standard error of the estimated gradient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">suns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">suns</span><span class="p">)</span>
+    <span class="n">Jscs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Jscs</span><span class="p">)</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">suns</span><span class="p">,</span><span class="n">Jscs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">alpha</span><span class="p">,</span><span class="n">intercept_d</span><span class="p">,</span> <span class="n">r_value_d</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">p_value_d</span><span class="p">,</span> <span class="n">std_err_d</span></div>
+
+
+<div class="viewcode-block" id="get_random_value">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_random_value">[docs]</a>
+<span class="k">def</span> <span class="nf">get_random_value</span><span class="p">(</span><span class="n">val_min</span><span class="p">,</span><span class="n">val_max</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get random value between two boundaries</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    val_min : float</span>
+<span class="sd">        min value</span>
+<span class="sd">    </span>
+<span class="sd">    val_max : float</span>
+<span class="sd">        max value</span>
+
+<span class="sd">    scale : str, optional</span>
+<span class="sd">        scale type, by default &#39;lin&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        random value</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">val_min</span> <span class="o">&gt;</span> <span class="n">val_max</span><span class="p">:</span>
+        <span class="n">dum_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">val_min</span><span class="p">,</span><span class="n">val_max</span><span class="p">)</span>
+        <span class="n">dum_max</span> <span class="o">=</span>  <span class="nb">max</span><span class="p">(</span><span class="n">val_min</span><span class="p">,</span><span class="n">val_max</span><span class="p">)</span>
+        <span class="n">val_min</span> <span class="o">=</span> <span class="n">dum_min</span>
+        <span class="n">val_max</span> <span class="o">=</span> <span class="n">dum_max</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Careful, the val_min &gt; val_max, check the input for get_random_value&#39;</span><span class="p">)</span>
+
+    <span class="n">random_val</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">scale</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val_max</span> <span class="o">-</span> <span class="n">val_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">random_val</span> <span class="o">+</span> <span class="n">val_min</span>
+    <span class="k">elif</span> <span class="n">scale</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">val_max</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="n">random_val</span> <span class="o">*</span> <span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">val_max</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">val_min</span><span class="p">))</span> <span class="p">)</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">val_min</span><span class="p">))</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">scale</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">((</span><span class="n">val_max</span> <span class="o">-</span> <span class="n">val_min</span><span class="p">)</span> <span class="o">*</span> <span class="n">random_val</span> <span class="o">+</span> <span class="n">val_min</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The program will stop&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Wrong scale for the input parameters&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span></div>
+
+
+<div class="viewcode-block" id="valence_urbach">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.valence_urbach">[docs]</a>
+<span class="k">def</span> <span class="nf">valence_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a Urbach tail for the valence band (from VB to VB-(VB-CB)/2)</span>
+<span class="sd">    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim</span>
+
+<span class="sd">    Fomula: frac = exp(-(VB-E)/Eu)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CB : float</span>
+<span class="sd">        Conduction band edge value in eV</span>
+<span class="sd">    VB : float</span>
+<span class="sd">        Valence band edge value in eV</span>
+<span class="sd">    Eu : float</span>
+<span class="sd">        Urbach energy in eV</span>
+<span class="sd">    num_points : int</span>
+<span class="sd">        Number of points to be generated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    E : 1-D sequence of floats</span>
+<span class="sd">        Array containing the energy values in eV</span>
+<span class="sd">    frac : 1-D sequence of floats</span>
+<span class="sd">        Array containing the fraction of traps at each energy value</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">VB</span><span class="o">-</span><span class="p">(</span><span class="n">VB</span><span class="o">-</span><span class="n">CB</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">Erela</span> <span class="o">=</span> <span class="n">VB</span> <span class="o">-</span> <span class="n">E</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Erela</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Erela</span><span class="p">)):</span>
+        <span class="n">frac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Erela</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">Eu</span><span class="p">)</span>
+
+    <span class="c1"># drop last point</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1">#normalize the fraction</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span><span class="n">frac</span></div>
+
+
+<div class="viewcode-block" id="conduction_urbach">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.conduction_urbach">[docs]</a>
+<span class="k">def</span> <span class="nf">conduction_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a Urbach tail for the conduction band (from CB to CB+(VB-CB)/2)</span>
+<span class="sd">    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CB : float</span>
+<span class="sd">        Conduction band edge value in eV</span>
+<span class="sd">    VB : float</span>
+<span class="sd">        Valence band edge value in eV</span>
+<span class="sd">    Eu : float</span>
+<span class="sd">        Urbach energy in eV</span>
+<span class="sd">    num_points : int</span>
+<span class="sd">        Number of points to be generated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    E : 1-D sequence of floats</span>
+<span class="sd">        Array containing the energy values in eV</span>
+<span class="sd">    frac : 1-D sequence of floats</span>
+<span class="sd">        Array containing the fraction of traps at each energy value</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">CB</span><span class="o">+</span><span class="p">(</span><span class="n">VB</span><span class="o">-</span><span class="n">CB</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">Erela</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">CB</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Erela</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Erela</span><span class="p">)):</span>
+        <span class="n">frac</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Erela</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">Eu</span><span class="p">)</span>
+
+    <span class="c1"># drop first point</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c1">#normalize the fraction</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span><span class="n">frac</span></div>
+
+
+
+<div class="viewcode-block" id="double_urbach">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach">[docs]</a>
+<span class="k">def</span> <span class="nf">double_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a Urbach tail on both sides of the bandgap</span>
+<span class="sd">    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CB : float</span>
+<span class="sd">        Conduction band edge value in eV</span>
+<span class="sd">    VB : float</span>
+<span class="sd">        Valence band edge value in eV</span>
+<span class="sd">    Eu : float</span>
+<span class="sd">        Urbach energy in eV</span>
+<span class="sd">    num_points : int</span>
+<span class="sd">        Number of points to be generated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    E : 1-D sequence of floats</span>
+<span class="sd">        Array containing the energy values in eV</span>
+<span class="sd">    frac : 1-D sequence of floats</span>
+<span class="sd">        Array containing the fraction of traps at each energy value</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">num_points</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_points</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">E1</span><span class="p">,</span><span class="n">frac1</span> <span class="o">=</span> <span class="n">conduction_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">E2</span><span class="p">,</span><span class="n">frac2</span> <span class="o">=</span> <span class="n">valence_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">E1</span><span class="p">,</span><span class="n">E2</span><span class="p">))</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">frac1</span><span class="p">,</span><span class="n">frac2</span><span class="p">))</span>
+
+    <span class="c1"># check for duplicates in E and remove</span>
+    <span class="n">E</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># drop the points with duplicates</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1">#normalize the fraction</span>
+    <span class="n">frac</span> <span class="o">=</span> <span class="n">frac</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span><span class="n">frac</span></div>
+
+
+<div class="viewcode-block" id="double_urbach_midgap">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach_midgap">[docs]</a>
+<span class="k">def</span> <span class="nf">double_urbach_midgap</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">fracmid</span><span class="p">,</span><span class="n">num_points</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Creates a Urbach tail on both sides of the bandgap and add a state mid-gap</span>
+<span class="sd">    to be used as a BulkTrapFile or IntTrapFile for SIMsalabim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    CB : float</span>
+<span class="sd">        Conduction band edge value in eV</span>
+<span class="sd">    VB : float</span>
+<span class="sd">        Valence band edge value in eV</span>
+<span class="sd">    Eu : float</span>
+<span class="sd">        Urbach energy in eV</span>
+<span class="sd">    fracmid : float</span>
+<span class="sd">        Fraction of traps at mid-gap</span>
+<span class="sd">    num_points : int</span>
+<span class="sd">        Number of points to be generated</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    E : 1-D sequence of floats</span>
+<span class="sd">        Array containing the energy values in eV</span>
+<span class="sd">    frac : 1-D sequence of floats</span>
+<span class="sd">        Array containing the fraction of traps at each energy value</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">E</span><span class="p">,</span><span class="n">Ntraps</span> <span class="o">=</span> <span class="n">double_urbach</span><span class="p">(</span><span class="n">CB</span><span class="p">,</span><span class="n">VB</span><span class="p">,</span><span class="n">Eu</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+
+    <span class="n">Emid</span> <span class="o">=</span> <span class="n">CB</span><span class="o">+</span><span class="p">(</span><span class="n">VB</span><span class="o">-</span><span class="n">CB</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">Ntrap_mid</span> <span class="o">=</span> <span class="n">fracmid</span>
+
+    <span class="n">Norm_Ntraps</span> <span class="o">=</span> <span class="n">Ntraps</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Ntraps</span><span class="p">)</span>
+    <span class="n">Ntraps</span> <span class="o">=</span> <span class="n">Norm_Ntraps</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Ntrap_mid</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Emid</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">E</span><span class="o">==</span><span class="n">Emid</span><span class="p">)</span>
+        <span class="n">Ntraps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">Ntraps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ntrap_mid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># add Emid to E amd add Ntrap_mid to Ntraps sorted with respect to E</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">Emid</span><span class="p">)</span>
+        <span class="n">Ntraps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Ntraps</span><span class="p">,</span><span class="n">Ntrap_mid</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">Ntraps</span> <span class="o">=</span> <span class="n">Ntraps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># check for duplicates in E and remove</span>
+    <span class="n">E</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># drop the points with duplicates</span>
+    <span class="n">Ntraps</span> <span class="o">=</span> <span class="n">Ntraps</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1">#normalize the fraction</span>
+    <span class="n">Ntraps</span> <span class="o">=</span> <span class="n">Ntraps</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Ntraps</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">E</span><span class="p">,</span><span class="n">Ntraps</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

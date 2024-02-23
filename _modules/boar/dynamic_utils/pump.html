@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.dynamic_utils.pump &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.dynamic_utils.pump</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.dynamic_utils.pump</h1><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################</span>
+<span class="c1">############### Define the pump style for transient ##################</span>
+<span class="c1">################           experiments              ##################</span>
+<span class="c1">######################################################################</span>
+<span class="c1"># Version 0.1</span>
+<span class="c1"># (c) Larry Lueer, Vincent M. Le Corre, i-MEET 2021-2023</span>
+
+<span class="c1"># Package imports</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">trapz</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">square</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">constants</span>
+
+
+<span class="c1">## Physics constants</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;elementary charge&#39;</span><span class="p">)</span>
+<span class="n">eps_0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;electric constant&#39;</span><span class="p">)</span>
+<span class="n">kb</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Boltzmann constant in eV/K&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;speed of light in vacuum&#39;</span><span class="p">)</span>
+<span class="n">h_eV</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Planck constant in eV s&#39;</span><span class="p">)</span>
+<span class="n">h_J</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;Planck constant&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_flux_density">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.get_flux_density">[docs]</a>
+<span class="k">def</span> <span class="nf">get_flux_density</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">wvl</span><span class="p">,</span><span class="n">fpu</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;From the measured power, repetition rate and area, </span>
+<span class="sd">    get photons/m2 and approximate photons/m3 per pulse</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    P : float</span>
+<span class="sd">        total CW power of pulse in W</span>
+<span class="sd">    wvl : float</span>
+<span class="sd">        excitation wavelength in nm</span>
+<span class="sd">    fpu : float</span>
+<span class="sd">        repetition rate in s^-1</span>
+<span class="sd">    A : float</span>
+<span class="sd">        effective pump area in m^-2</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        penetration depth in m</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flux : float</span>
+<span class="sd">        flux in photons m^-2</span>
+<span class="sd">    density : float</span>
+<span class="sd">        average volume density in photons m^-3</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">E</span> <span class="o">=</span> <span class="n">h_J</span><span class="o">*</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="n">wvl</span><span class="o">*</span><span class="mf">1e-9</span><span class="p">)</span> <span class="c1"># convert wavelength to J for a single photon</span>
+    <span class="n">Epu</span> <span class="o">=</span> <span class="n">P</span><span class="o">/</span><span class="n">fpu</span> <span class="c1"># energy in J of a single pulse</span>
+    <span class="n">Nph</span> <span class="o">=</span> <span class="n">Epu</span><span class="o">/</span><span class="n">E</span> <span class="c1"># Photon number in pulse</span>
+    <span class="n">flux</span> <span class="o">=</span> <span class="n">Nph</span><span class="o">/</span><span class="n">A</span> <span class="c1"># flux in photons m^-2</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="n">flux</span><span class="o">/</span><span class="n">alpha</span> <span class="c1"># average absorbed density in photons m^-3</span>
+    <span class="k">return</span> <span class="n">flux</span><span class="p">,</span><span class="n">density</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="square_pump">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.square_pump">[docs]</a>
+<span class="k">def</span> <span class="nf">square_pump</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fpu</span><span class="p">,</span> <span class="n">pulse_width</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Gfrac</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Square pump pulse</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        array of time values in seconds</span>
+
+<span class="sd">    fpu : float</span>
+<span class="sd">        pump frequency in Hz</span>
+
+<span class="sd">    pulse_width : float</span>
+<span class="sd">        width of the pump pulse in seconds</span>
+
+<span class="sd">    P : float</span>
+<span class="sd">        total volume density of generated photons m^-3</span>
+<span class="sd">    </span>
+<span class="sd">    t0 : float, optional</span>
+<span class="sd">        time shift of the pump pulse, by default 0</span>
+<span class="sd">    </span>
+<span class="sd">    background : float, optional</span>
+<span class="sd">        background volume density of generated photons, by default 0</span>
+<span class="sd">    </span>
+<span class="sd">    Gfrac : float, optional</span>
+<span class="sd">        scaling for the power of the pulse, by default 1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        density of generated photons m^-3 at each time point</span>
+
+<span class="sd">    &quot;&quot;&quot;</span> 
+
+    <span class="c1">#convert pulse_width to fraction of the period</span>
+    <span class="n">pulse_width</span> <span class="o">=</span> <span class="n">pulse_width</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">)</span> 
+    
+    <span class="n">pump</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">square</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">fpu</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">t0</span><span class="p">),</span> <span class="n">pulse_width</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="c1"># pump pulse</span>
+    <span class="n">putot</span> <span class="o">=</span> <span class="n">trapz</span><span class="p">(</span><span class="n">pump</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1"># total pump power</span>
+    <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">/</span> <span class="n">putot</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Gfrac</span> <span class="c1"># normalize the pump pulse to the total pump power</span>
+    <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">+</span> <span class="n">background</span> <span class="c1"># add background</span>
+
+    <span class="k">return</span> <span class="n">pump</span></div>
+
+
+<div class="viewcode-block" id="gaussian_pulse_norm">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pulse_norm">[docs]</a>
+<span class="k">def</span> <span class="nf">gaussian_pulse_norm</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a gaussian pulse</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        t time axis (unit: s)</span>
+<span class="sd">    tpulse : float</span>
+<span class="sd">        tpulse center of the pulse (unit: s)</span>
+<span class="sd">    width : float</span>
+<span class="sd">        width of the pulse (unit: s)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        Vector containing the gaussian pulse</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">tpulse</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="gaussian_pump">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pump">[docs]</a>
+<span class="k">def</span> <span class="nf">gaussian_pump</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fpu</span><span class="p">,</span>  <span class="n">pulse_width</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Gfrac</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gaussian pump pulse</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        array of time values in seconds</span>
+<span class="sd">    </span>
+<span class="sd">    fpu : float</span>
+<span class="sd">        pump frequency in Hz</span>
+<span class="sd">    </span>
+<span class="sd">    pulse_width : float</span>
+<span class="sd">        width of the pump pulse in seconds</span>
+<span class="sd">    </span>
+<span class="sd">    P : float</span>
+<span class="sd">        total volume density of generated photons m^-3</span>
+<span class="sd">    </span>
+<span class="sd">    t0 : float</span>
+<span class="sd">        center of the pulse in seconds</span>
+
+<span class="sd">    background : float, optional</span>
+<span class="sd">        background volume density of generated photons, by default 0</span>
+
+<span class="sd">    Gfrac : float, optional</span>
+<span class="sd">        scaling for the power of the pulse, by default 1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        density of generated photons m^-3 at each time point</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+    <span class="c1"># find time step in t</span>
+    <span class="n">max_dt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="n">max_dt</span><span class="p">:</span>
+            <span class="n">max_dt</span> <span class="o">=</span> <span class="n">dt</span>
+    <span class="c1"># check if the pulse is smaller than the time step</span>
+    <span class="k">if</span> <span class="n">pulse_width</span> <span class="o">&lt;</span> <span class="n">max_dt</span><span class="p">:</span>
+        <span class="c1"># raise ValueError(&#39;The pulse width is smaller than the time step. Increase the pulse width or decrease the time step.&#39;)</span>
+        <span class="c1"># raise warning if the pulse is smaller than the time step</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;The pulse width is smaller than the max time step. If you are using s linear time step you need to increase the pulse width or decrease the time step. If you are using non-linear time step make sure that you have small enough time step around the pulse or some pulses might not appear.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">:</span>
+        <span class="c1"># number of pulses</span>
+        <span class="n">Np</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">fpu</span><span class="p">)</span>
+        <span class="c1"># time axis for the pulses</span>
+        <span class="n">tp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e4</span><span class="p">))</span>
+        <span class="c1"># pump pulse</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">gaussian_pulse_norm</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span> <span class="o">+</span><span class="n">t0</span><span class="p">,</span> <span class="n">pulse_width</span><span class="p">)</span>
+        <span class="c1"># total pump power</span>
+        <span class="n">putot</span> <span class="o">=</span> <span class="n">trapz</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span><span class="n">tp</span><span class="p">)</span>
+        <span class="c1"># normalize the pump pulse to the total pump power</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">pp</span> <span class="o">/</span> <span class="n">putot</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Gfrac</span>
+        <span class="c1"># add the pulses</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">pump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span> <span class="p">,</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span> <span class="p">,</span> <span class="n">pp</span><span class="p">)</span> 
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span> <span class="p">,</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span> <span class="p">,</span> <span class="n">pp</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">gaussian_pulse_norm</span><span class="p">(</span><span class="n">t</span> <span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">pulse_width</span><span class="p">)</span> <span class="c1"># pump pulse</span>
+
+        <span class="n">putot</span> <span class="o">=</span> <span class="n">trapz</span><span class="p">(</span><span class="n">pump</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1"># total pump power</span>
+
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">/</span> <span class="n">putot</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Gfrac</span><span class="c1"># normalize the pump pulse to the total pump power</span>
+
+     
+
+
+    <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">+</span> <span class="n">background</span> <span class="c1"># add background</span>
+
+    <span class="k">return</span> <span class="n">pump</span></div>
+
+
+
+<div class="viewcode-block" id="pump_from_file">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.pump_from_file">[docs]</a>
+<span class="k">def</span> <span class="nf">pump_from_file</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">Gfrac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pump pulse from file</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        array of time values in seconds</span>
+
+<span class="sd">    filename : str</span>
+<span class="sd">        path to the file containing the pump pulse</span>
+<span class="sd">    </span>
+<span class="sd">    P : float, optional</span>
+<span class="sd">        total volume density of generated photons m^-3, by default None</span>
+
+<span class="sd">    background : float, optional</span>
+<span class="sd">        background volume density of generated photons, by default 0</span>
+
+<span class="sd">    Gfrac : float, optional</span>
+<span class="sd">        scaling for the power of the pulse, by default 1</span>
+
+<span class="sd">    sep : str, optional</span>
+<span class="sd">        delimiter to use, by default None</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        density of generated photons m^-3 at each time point</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">if</span> <span class="n">sep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;pump&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;pump&#39;</span><span class="p">])</span>
+
+    <span class="n">pump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pump&#39;</span><span class="p">])</span>
+
+
+    <span class="k">if</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pump&#39;</span><span class="p">])</span>
+        <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pump</span><span class="p">)</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">-</span> <span class="n">baseline</span> <span class="c1"># remove baseline</span>
+        <span class="n">putot</span> <span class="o">=</span> <span class="n">trapz</span><span class="p">(</span><span class="n">pump</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1"># total pump power</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">/</span> <span class="n">putot</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Gfrac</span><span class="c1"># normalize the pump pulse to the total pump power</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">+</span> <span class="n">background</span> <span class="c1"># add background</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pump</span> <span class="o">=</span> <span class="n">pump</span> <span class="o">+</span> <span class="n">background</span> <span class="c1"># add background</span>
+
+    <span class="k">return</span> <span class="n">pump</span></div>
+
+
+<div class="viewcode-block" id="initial_carrier_density">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.pump.initial_carrier_density">[docs]</a>
+<span class="k">def</span> <span class="nf">initial_carrier_density</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fpu</span><span class="p">,</span> <span class="n">N0</span><span class="p">,</span> <span class="n">background</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Gfrac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initial carrier density</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        array of time values in seconds</span>
+<span class="sd">    </span>
+<span class="sd">    fpu : float</span>
+<span class="sd">        pump frequency in Hz</span>
+<span class="sd">    </span>
+<span class="sd">    N0 : float</span>
+<span class="sd">        initial carrier density in m^-3</span>
+<span class="sd">    </span>
+<span class="sd">    background : float, optional</span>
+<span class="sd">        background carrier density, by default 0</span>
+
+<span class="sd">    Gfrac : float, optional</span>
+<span class="sd">        scaling for the power of the pulse, by default 1    </span>
+<span class="sd">    </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        initial carrier density in m^-3</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="c1"># repeat the initial carrier density every 1/fpu</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">N0</span><span class="o">*</span><span class="n">Gfrac</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">tt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">tt</span> <span class="o">&gt;=</span> <span class="n">count</span><span class="o">/</span><span class="n">fpu</span> <span class="ow">and</span> <span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">count</span><span class="o">/</span><span class="n">fpu</span><span class="p">:</span>
+            <span class="n">n</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">N0</span> <span class="o">*</span> <span class="n">Gfrac</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">background</span> 
+    <span class="k">return</span> <span class="n">n</span></div>
+
+    <span class="c1"># if max(t) &gt; 1/fpu:</span>
+    <span class="c1">#     # number of pulses</span>
+    <span class="c1">#     Np = int(max(t) * fpu)</span>
+    <span class="c1">#     # time axis for the pulses</span>
+    <span class="c1">#     tp = np.linspace(0, 1/fpu, int(1e4))</span>
+    <span class="c1">#     idx = (np.abs(tp - 0.5/fpu)).argmin()</span>
+    <span class="c1">#     pp = np.zeros(len(tp))</span>
+    <span class="c1">#     pp[idx] = 1</span>
+    <span class="c1">#     # total pump power</span>
+    <span class="c1">#     putot = trapz(pp,tp)</span>
+    <span class="c1">#     # normalize the pump pulse to the total pump power</span>
+    <span class="c1">#     pp = pp / putot * N0</span>
+    <span class="c1">#     # add the pulses</span>
+    <span class="c1">#     count = 1</span>
+    <span class="c1">#     pump = np.zeros(len(t))</span>
+
+    <span class="c1">#     for idx, tt in enumerate(t):</span>
+    <span class="c1">#         if idx == 0:</span>
+    <span class="c1">#             pump[idx] = max(pp)</span>
+    <span class="c1">#             continue</span>
+    <span class="c1">#         if tt &gt;= count/fpu and t[idx-1] &lt;= count/fpu:</span>
+    <span class="c1">#             pump[idx] = max(pp)</span>
+    <span class="c1">#             count += 1</span>
+
+    <span class="c1"># else:</span>
+    <span class="c1">#     pump = np.zeros(len(t))</span>
+    <span class="c1">#     pump[0] = 1</span>
+  
+    <span class="c1">#     putot = trapz(pump,t) # total pump power</span>
+
+    <span class="c1">#     pump = pump / putot * N0 # normalize the pump pulse to the total pump power</span>
+
+    <span class="c1"># return pump + background</span>
+
+
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#     P = 0.0039  # real Power in W</span>
+<span class="c1">#     fpu = 10000 # pump frequency in Hz</span>
+<span class="c1">#     pulse_width = 0.2*(1/fpu) # pulse width in s</span>
+<span class="c1">#     wl = 850 # pump wavelength in nm</span>
+<span class="c1">#     A = 0.3*0.3 *1e-4 # pump area in m^-2 (a rough guess)</span>
+<span class="c1">#     alpha = 1e-5 * 1e-2  # pump penetration depth in m (a rough guess) </span>
+
+<span class="c1">#     flux,density = get_flux_density(P,wl,fpu,A,alpha)</span>
+
+<span class="c1">#     # Test the square pump pulse</span>
+<span class="c1">#     # plt.figure(0)</span>
+<span class="c1">#     # t = np.linspace(0, 1/fpu, 1000)</span>
+<span class="c1">#     # plt.plot(t, square_pump(t, fpu, pulse_width, density, t0=1e-5, background=0))</span>
+<span class="c1">#     # plt.plot(t, square_pump(t, fpu, pulse_width, density, t0=0, background=0))</span>
+<span class="c1">#     # plt.plot(t, square_pump(t, fpu, pulse_width, density, t0=0, background=1e28))</span>
+
+<span class="c1">#     plt.figure(2)</span>
+    
+<span class="c1">#     # plt.semilogx(t, gaussian_pump(t, fpu, pulse_width/2, 20e-7, density, background=0))</span>
+<span class="c1">#     # plt.semilogx(t, gaussian_pump(t, fpu, pulse_width/3, 10e-7, density, background=0))</span>
+<span class="c1">#     fpu = 1000000</span>
+<span class="c1">#     t = np.geomspace(1e-10, 0.98*1/fpu, 100000)</span>
+<span class="c1">#     # add 0 at the beginning of the time array</span>
+<span class="c1">#     t = np.insert(t, 0, 0)</span>
+<span class="c1">#     pulse_width = 5e-9</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*2,  background=0))</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*3,  background=0))</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*2,  background=1e29))</span>
+
+<span class="c1">#     plt.figure(3)</span>
+<span class="c1">#     t = np.linspace(0, 4.5/fpu, int(1e6))</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*2,  background=0))</span>
+<span class="c1">#     t = np.linspace(0, 4/fpu, 1000)</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*3, background=0))</span>
+<span class="c1">#     t = np.linspace(0, 1/fpu, 1000)</span>
+<span class="c1">#     plt.plot(t, gaussian_pump(t, fpu, pulse_width, density, pulse_width*2, background=0))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">fpu</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># pump frequency in Hz</span>
+    <span class="n">background</span> <span class="o">=</span> <span class="mf">1e20</span> <span class="c1"># background pump density in m^-3</span>
+    <span class="c1"># create a pump pulse</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2.99</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">N0</span> <span class="o">=</span> <span class="mf">1e21</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">initial_carrier_density</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fpu</span><span class="p">,</span> <span class="n">N0</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">))</span>
+    <span class="c1"># plt.ylim(1e19, 1e22)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

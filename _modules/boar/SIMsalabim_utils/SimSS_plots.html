@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.SIMsalabim_utils.SimSS_plots &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.SIMsalabim_utils.SimSS_plots</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.SIMsalabim_utils.SimSS_plots</h1><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################</span>
+<span class="c1">#################### Plot functions SIMsalabim #######################</span>
+<span class="c1">######################################################################</span>
+<span class="c1"># Author: Vincent M. Le Corre</span>
+<span class="c1"># Github: https://github.com/VMLC-PV</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">itertools</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.legend</span> <span class="kn">import</span> <span class="n">Legend</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="c1"># Import SIMsalabim_utils</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.GetInputPar</span> <span class="kn">import</span> <span class="n">ReadParameterFile</span>
+
+
+<div class="viewcode-block" id="PlotJV">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJV">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotJV</span><span class="p">(</span><span class="n">JV_files</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">data_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span> <span class="p">[],</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jext&#39;</span><span class="p">],</span><span class="n">xlimits</span><span class="o">=</span><span class="p">[],</span><span class="n">ylimits</span><span class="o">=</span><span class="p">[],</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;A/m^2&#39;</span><span class="p">,</span><span class="n">absx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">absy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">line_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">mark</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;JV.jpg&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Make JV_plot for SIMsalabim </span>
+<span class="sd">    Either from a list of JV files or from a dataframe containing JV data </span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    JV_files : list</span>
+<span class="sd">        List of files containing the JV filenames.</span>
+<span class="sd">    </span>
+<span class="sd">    labels : list</span>
+<span class="sd">        List of labels for the JV_files or string when plotting the data dataframe. </span>
+<span class="sd">    </span>
+<span class="sd">    data_type : int, optional</span>
+<span class="sd">        Type of data to plot. Either 0 a list of JV filenames or 1 a dataframe with the JV data. The default is 0.</span>
+<span class="sd">        </span>
+<span class="sd">    colors : list, optional</span>
+<span class="sd">        List of colors for the JV_files or string when plotting the data dataframe, by default [].</span>
+
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV, by default 0.</span>
+
+<span class="sd">    x : str, optional</span>
+<span class="sd">        xaxis data  (default = &#39;Vext&#39;), by default &#39;Vext&#39;</span>
+
+<span class="sd">    y : list of str, optional</span>
+<span class="sd">        yaxis data can be multiple like [&#39;Jext&#39;,&#39;Jbimo&#39;]  (default = [&#39;Jext&#39;]), by default [&#39;Jext&#39;]</span>
+
+<span class="sd">    xlimits : list, optional</span>
+<span class="sd">        x axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    ylimits : list, optional</span>
+<span class="sd">        y axis limits if = [] it lets python chose limits, by default []</span>
+<span class="sd">    </span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;mV&#39;,&#39;V&#39;], by default &#39;V&#39;</span>
+
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        unit to plot the y-axis, can be [&#39;mA/cm^2&#39;,&#39;A/m^2&#39;], by default &#39;A/m^2&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    absx : bool, optional</span>
+<span class="sd">        if True, plot the absolute value of x, by default False</span>
+
+<span class="sd">    absy : bool, optional</span>
+<span class="sd">        if True, plot the absolute value of y, by default False</span>
+
+<span class="sd">    plot_type : int, optional</span>
+<span class="sd">        type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0</span>
+
+<span class="sd">    line_type : list, optional</span>
+<span class="sd">        type of line for simulated data plot</span>
+<span class="sd">        size line_type need to be = size(y), by default [&#39;-&#39;]</span>
+
+<span class="sd">    mark : str, optional</span>
+<span class="sd">        type of Marker for the JV, by default &#39;&#39;</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    save_fig : bool, optional</span>
+<span class="sd">        If True, save JV as an image with the  file name defined by &quot;fig_name&quot;, by default False</span>
+
+<span class="sd">    fig_name : str, optional</span>
+<span class="sd">        name of the file where the figure is saved, by default &#39;JV.jpg&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="k">if</span> <span class="n">JV_files</span> <span class="ow">is</span> <span class="kc">None</span> <span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No JV files or data provided&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid line_type list, we meed len(y) == len(line_type)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We will use default line type instead&#39;</span><span class="p">)</span>
+        <span class="n">line_type</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">line_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">ax_JVs_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;mV&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e3</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Applied Voltage [mV]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;V&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Applied Voltage [V]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Applied Voltage [V]&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In SimssPlotJV function.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [V] is used. &#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Convert in y-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;mA/cm^2&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Current Density [mA cm$^{-2}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;A/m^2&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Current Density [A m$^{-2}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Current Density [A m$^{-2}$]&#39;</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In SimssPlotJV function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [A/m^2] is used. &#39;</span><span class="p">)</span> 
+    
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="n">JV_files</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]</span> <span class="p">:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+
+    <span class="k">if</span> <span class="n">data_type</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">JV</span><span class="p">,</span><span class="n">lab</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">JV_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)):</span>
+            <span class="n">data_JV</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">JV</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># load data</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">line_type</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">absx</span><span class="p">:</span>
+                    <span class="n">xplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">xplot</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">absy</span><span class="p">:</span>
+                    <span class="n">yplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">yplot</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="o">/</span><span class="n">xunit_fact</span><span class="p">,</span><span class="n">yplot</span><span class="o">/</span><span class="n">yunit_fact</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">c</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>  
+    <span class="k">elif</span> <span class="n">data_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data_JV</span> <span class="o">=</span> <span class="n">JV_files</span> <span class="c1"># load data</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">line_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">absx</span><span class="p">:</span>
+                <span class="n">xplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xplot</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">absy</span><span class="p">:</span>
+                <span class="n">yplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">yplot</span> <span class="o">=</span> <span class="n">data_JV</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="o">/</span><span class="n">xunit_fact</span><span class="p">,</span><span class="n">yplot</span><span class="o">/</span><span class="n">yunit_fact</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="n">mark</span><span class="p">,</span><span class="n">markeredgecolor</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">markeredgewidth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid data_type. It can be 0 or 1&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot settings</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax_JVs_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+
+    <span class="c1"># axis limits</span>
+    <span class="k">if</span> <span class="n">xlimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlimits</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylimits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># Save figure</span>
+    <span class="k">if</span> <span class="n">save_fig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PlotJVPerf">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJVPerf">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotJVPerf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">scPars_files</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;PCE&#39;</span><span class="p">,</span><span class="n">Gfrac</span><span class="o">=</span><span class="p">[],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;PCE [%]&#39;</span><span class="p">,</span><span class="n">norm_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">norm_factor</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xlimits</span><span class="o">=</span><span class="p">[],</span><span class="n">ylimits</span><span class="o">=</span><span class="p">[],</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;JV_perf.png&#39;</span><span class="p">,</span><span class="n">mark</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">line_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">],</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the performance of the JV curve from the scPars files</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : list</span>
+<span class="sd">        x-axis values</span>
+
+<span class="sd">    scPars_files : list</span>
+<span class="sd">        list of filenames containing the scPars</span>
+
+<span class="sd">    y : str, optional</span>
+<span class="sd">        performance name to plot, see scPars output to check available names, by default &#39;PCE&#39;</span>
+
+<span class="sd">    Gfrac : list, optional</span>
+<span class="sd">        list of Gfrac to correct MPP for light intensity and calculate PCE, need to be the same size as scPars_file, by default []</span>
+
+<span class="sd">    color : str, optional</span>
+<span class="sd">        color of the plot, by default &#39;b&#39;</span>
+
+<span class="sd">    xlabel : str, optional</span>
+<span class="sd">        x-axis label, by default &#39;Time [s]&#39;</span>
+
+<span class="sd">    ylabel : str, optional</span>
+<span class="sd">        y-axis label, by default &#39;PCE [%]&#39;</span>
+
+<span class="sd">    norm_plot : bool, optional</span>
+<span class="sd">        whether of not to normalize the plot, by default True</span>
+<span class="sd">    </span>
+<span class="sd">    norm_factor : float, optional</span>
+<span class="sd">        normalization factor if 0 then normalize using the maximum, by default 0</span>
+
+<span class="sd">    legend : str, optional</span>
+<span class="sd">        legend, by default &#39;&#39;</span>
+
+<span class="sd">    num_fig : int, optional</span>
+<span class="sd">        number of the fig to plot, by default 5</span>
+
+<span class="sd">    plot_type : int, optional</span>
+<span class="sd">        type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0, by default 0</span>
+
+<span class="sd">    xlimits : list, optional</span>
+<span class="sd">        x axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    ylimits : list, optional</span>
+<span class="sd">        y axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    save_fig : bool, optional</span>
+<span class="sd">        If True, save density plot as an image with the  file name defined by &quot;fig_name&quot;, by default False</span>
+
+<span class="sd">    fig_name : str, optional</span>
+<span class="sd">        name of the file where the figure is saved, by default &#39;perf.jpg&#39;</span>
+
+<span class="sd">    mark : str, optional</span>
+<span class="sd">        type of marker for the plot, by default &#39;o&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    line_type : list, optional</span>
+<span class="sd">        type of line for the plot</span>
+<span class="sd">        size line_type need to be = size(y), by default [&#39;-&#39;]</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">perf_lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">scpar_name</span> <span class="ow">in</span> <span class="n">scPars_files</span><span class="p">:</span>
+        
+        <span class="n">perf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">scpar_name</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">perf_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">perf</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">perf</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    
+    <span class="n">perfs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">perf_lst</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">Gfrac</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">Gfrac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Gfrac</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Gfrac</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;PCE&#39;</span><span class="p">:</span>
+        
+        <span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;PCE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;Voc&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;FF&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">Gfrac</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="s1">&#39;Jsc&#39;</span><span class="p">:</span>
+        <span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">perfs</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">])</span>
+        
+    <span class="k">if</span> <span class="n">norm_plot</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">norm_factor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">norm_factor</span> <span class="o">=</span> <span class="n">perfs</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">norm_factor</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">perfs</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">/</span><span class="n">norm_factor</span><span class="p">,</span><span class="n">mark</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+    <span class="c1"># Plot controls</span>
+    <span class="c1"># plot type</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1">#legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    <span class="c1"># axis control</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="c1"># Set axis limits</span>
+    <span class="k">if</span> <span class="n">xlimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlimits</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylimits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="PlotNrjDiagSimSS">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagSimSS">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotNrjDiagSimSS</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">path2simu</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[],</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Vext</span><span class="o">=</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">Background_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;energy_diagram.jpg&#39;</span><span class="p">,</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Make energy diagram plot from Var_file output SimSS</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Var_files : list</span>
+<span class="sd">        List of files containing the Var filenames.</span>
+<span class="sd">    </span>
+<span class="sd">    labels : list</span>
+<span class="sd">        List of labels for the Var_files.</span>
+<span class="sd">    </span>
+<span class="sd">    path2simu : str</span>
+<span class="sd">        Path to the simulation folder.</span>
+
+<span class="sd">    colors : list, optional</span>
+<span class="sd">        List of colors for the Var_files, by default [].</span>
+
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV, by default 0.</span>
+
+<span class="sd">    Vext : float</span>
+<span class="sd">        float to define the voltage at which the densities will be plotted if Vext=&#39;nan&#39; then take Vext as max(Vext), if Vext does not exist we plot the closest voltage, default &#39;nan&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+
+<span class="sd">    Background_color: bool, optional</span>
+<span class="sd">        Add nice background color to highlight the layer structure, default True</span>
+
+<span class="sd">    show_axis : bool, optional</span>
+<span class="sd">        Choose to show axis or not, default True</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    fig_name : str</span>
+<span class="sd">        name of the file where the figure is saved, default &#39;energy_diagram.jpg&#39;</span>
+
+<span class="sd">    save_fig : bool</span>
+<span class="sd">        If True, save energy diagram as an image with the  file name defined by &quot;fig_name&quot; , default False</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_pero</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;#999999&#39;</span>
+
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotNrjDiagSimSS function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+
+    <span class="c1"># Plotting</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">ax_nrj_diag</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">Var</span><span class="p">,</span><span class="n">lab</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)):</span>
+        
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Var</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># load data</span>
+
+        <span class="c1"># Find the voltage at which the diagrams will be plotted</span>
+        <span class="c1"># Check for specific &#39;Vext&#39;</span>
+        <span class="k">if</span> <span class="n">Vext</span> <span class="o">==</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span>
+            <span class="n">Vext</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotNrjDiagSimSS function&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vext was not specified so Vext = </span><span class="si">{:.2f}</span><span class="s1"> V was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vext</span><span class="p">))</span>
+        
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">Vext</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">Vext</span><span class="p">))]</span>
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">data_Var</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">Vext</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vext = </span><span class="si">{:.2f}</span><span class="s1"> V was not found so </span><span class="si">{:.2f}</span><span class="s1"> was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vext</span><span class="p">,</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+
+
+        <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">xunit_fact</span>
+        <span class="c1"># ax_nrj_diag.plot(&#39;x&#39;,&#39;Evac&#39;,data=data_Var,label = r&#39;E$_{vac}$&#39;,linestyle=&#39;-&#39;,linewidth=2,color = &#39;k&#39;)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Ec&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Ev&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;phin&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{fn}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;phip&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{fp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Background_color</span><span class="p">:</span>
+        <span class="c1"># Get the thickness of the transport layers</span>
+        <span class="n">ParFileDic</span> <span class="o">=</span> <span class="n">ReadParameterFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path2simu</span><span class="p">,</span> <span class="s1">&#39;device_parameters.txt&#39;</span><span class="p">))</span> <span class="c1"># read the parameters from the file</span>
+        <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+        <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+
+        <span class="n">TL_left</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">L_LTL</span><span class="p">]</span>
+        <span class="n">TL_right</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">L_RTL</span><span class="p">]</span>
+        <span class="n">AL</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">L_RTL</span><span class="p">]</span>
+        <span class="n">AL</span> <span class="o">=</span> <span class="n">AL</span><span class="p">[</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">L_LTL</span><span class="p">]</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pero</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pero</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">]),</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">])],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">10</span><span class="p">],[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">])],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">]),</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">])],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">10</span><span class="p">],[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">])],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span><span class="p">)</span>
+
+
+    <span class="c1"># Hide axis and spines</span>
+    <span class="k">if</span> <span class="n">show_axis</span><span class="p">:</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Energy [eV]&#39;</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sides</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">sides</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+
+    <span class="c1"># Legend</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$,E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">),</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$,E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)]</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># Save file</span>
+    <span class="k">if</span> <span class="n">save_fig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PlotNrjDiagWithTime">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagWithTime">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotNrjDiagWithTime</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">path2simu</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[],</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">Background_color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_axis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;energy_diagram.jpg&#39;</span><span class="p">,</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;Make energy diagram plot from Var_file output SimSS</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Var_files : list</span>
+<span class="sd">        List of files containing the Var filenames.</span>
+<span class="sd">    </span>
+<span class="sd">    labels : list</span>
+<span class="sd">        List of labels for the Var_files.</span>
+<span class="sd">    </span>
+<span class="sd">    path2simu : str</span>
+<span class="sd">        Path to the simulation folder.</span>
+
+<span class="sd">    colors : list, optional</span>
+<span class="sd">        List of colors for the Var_files, by default [].</span>
+
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV, by default 0.</span>
+
+<span class="sd">    time : float</span>
+<span class="sd">        float to define the time at which the densities will be plotted if time=&#39;nan&#39; then take time as max(time), if time does not exist we plot the closest time, default &#39;nan&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        unit to plot the x-axis, can be [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+
+<span class="sd">    Background_color: bool, optional</span>
+<span class="sd">        Add nice background color to highlight the layer structure, default True</span>
+
+<span class="sd">    show_axis : bool, optional</span>
+<span class="sd">        Choose to show axis or not, default True</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    fig_name : str</span>
+<span class="sd">        name of the file where the figure is saved, default &#39;energy_diagram.jpg&#39;</span>
+
+<span class="sd">    save_fig : bool</span>
+<span class="sd">        If True, save energy diagram as an image with the  file name defined by &quot;fig_name&quot; , default False</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">line_thick</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Color control for the different layers</span>
+    <span class="n">color_nTL</span> <span class="o">=</span> <span class="s1">&#39;#c7e6a3&#39;</span>
+    <span class="n">color_pTL</span> <span class="o">=</span> <span class="s1">&#39;#8cb5f0&#39;</span>
+    <span class="n">color_pero</span> <span class="o">=</span> <span class="s1">&#39;#ba0000&#39;</span>
+    <span class="n">color_electrode</span> <span class="o">=</span><span class="s1">&#39;#999999&#39;</span>
+
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotNrjDiagWithTime function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used. &#39;</span><span class="p">)</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+
+    <span class="c1"># Plotting</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">ax_nrj_diag</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">Var</span><span class="p">,</span><span class="n">lab</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)):</span>
+        
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Var</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># load data</span>
+
+        <span class="c1"># Find the voltage at which the diagrams will be plotted</span>
+        <span class="c1"># Check for specific &#39;time&#39;</span>
+        <span class="k">if</span> <span class="n">time</span> <span class="o">==</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotNrjDiagWithTime function&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time was not specified so time = </span><span class="si">{:.2f}</span><span class="s1"> s was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+        
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">time</span><span class="p">))]</span>
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">data_Var</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">time</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time = </span><span class="si">{:.2f}</span><span class="s1"> V was not found so </span><span class="si">{:.2f}</span><span class="s1"> was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+
+
+        <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">xunit_fact</span>
+        <span class="c1"># ax_nrj_diag.plot(&#39;x&#39;,&#39;Evac&#39;,data=data_Var,label = r&#39;E$_{vac}$&#39;,linestyle=&#39;-&#39;,linewidth=2,color = &#39;k&#39;)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Ec&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;Ev&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;phin&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{fn}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;phip&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data_Var</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;E$_</span><span class="si">{fp}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Background_color</span><span class="p">:</span>
+        <span class="c1"># Get the thickness of the transport layers</span>
+        <span class="n">ParFileDic</span> <span class="o">=</span> <span class="n">ReadParameterFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path2simu</span><span class="p">,</span> <span class="s1">&#39;device_parameters.txt&#39;</span><span class="p">))</span> <span class="c1"># read the parameters from the file</span>
+        <span class="n">L_LTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_LTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+        <span class="n">L_RTL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L_RTL&#39;</span><span class="p">])</span><span class="o">*</span><span class="n">xunit_fact</span>
+
+        <span class="n">TL_left</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">L_LTL</span><span class="p">]</span>
+        <span class="n">TL_right</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">L_RTL</span><span class="p">]</span>
+        <span class="n">AL</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">-</span><span class="n">L_RTL</span><span class="p">]</span>
+        <span class="n">AL</span> <span class="o">=</span> <span class="n">AL</span><span class="p">[</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">L_LTL</span><span class="p">]</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_left</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_nTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">TL_right</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pTL</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;Ec&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pero</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">AL</span><span class="p">[</span><span class="s1">&#39;Ev&#39;</span><span class="p">],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_pero</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">]),</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">])],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">10</span><span class="p">],[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">])],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">]),</span><span class="nb">min</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phin&#39;</span><span class="p">])],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span><span class="o">+</span><span class="mi">10</span><span class="p">],[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;phip&#39;</span><span class="p">])],</span><span class="n">y2</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color_electrode</span><span class="p">)</span>
+
+
+    <span class="c1"># Hide axis and spines</span>
+    <span class="k">if</span> <span class="n">show_axis</span><span class="p">:</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Energy [eV]&#39;</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sides</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">,</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="s1">&#39;top&#39;</span><span class="p">,</span><span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+            <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="n">sides</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+
+    <span class="c1"># Legend</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$,E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">),</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">line_thick</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;E$_</span><span class="si">{c}</span><span class="s1">$,E$_</span><span class="si">{v}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)]</span>
+        <span class="n">ax_nrj_diag</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="c1"># Save file</span>
+    <span class="k">if</span> <span class="n">save_fig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PlotDensSimSS">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensSimSS">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotDensSimSS</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[],</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Vext</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nan&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">],</span><span class="n">xlimits</span><span class="o">=</span><span class="p">[],</span><span class="n">ylimits</span><span class="o">=</span><span class="p">[],</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;cm^-3&#39;</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">colorbar_type</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">colorbar_display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">line_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">],</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;density.jpg&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make Var_plot for SIMsalabim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Var_files : list</span>
+<span class="sd">        List of files containing the Var filenames.</span>
+<span class="sd">    </span>
+<span class="sd">    labels : list</span>
+<span class="sd">        List of labels for the Var_files.</span>
+<span class="sd">    </span>
+<span class="sd">    colors : list, optional</span>
+<span class="sd">        List of colors for the Var_files, by default [].</span>
+
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV</span>
+
+<span class="sd">    Vext : float</span>
+<span class="sd">        float to define the voltage at which the densities will be plotted.</span>
+<span class="sd">        if Vext=[&#39;nan&#39;] then takes Vext as max(t), /</span>
+<span class="sd">        if Vext=[&#39;all&#39;] then plots all the Vext,/</span>
+<span class="sd">        if Vext does not exist we plot the closest voltage, default [&#39;nan&#39;]</span>
+
+<span class="sd">    y : list of str, optional</span>
+<span class="sd">        yaxis data can be multiple like [&#39;n&#39;,&#39;p&#39;], by default [&#39;n&#39;,&#39;p&#39;]</span>
+
+<span class="sd">    xlimits : list, optional</span>
+<span class="sd">        x axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    ylimits : list, optional</span>
+<span class="sd">        y axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        specify unit of the x-axis either [&#39;nm&#39;,&#39;um&#39;,&#39;m&#39;], by default &#39;nm&#39;</span>
+
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        specify unit of the y-axis either [&#39;cm^-3&#39;,&#39;m^-3&#39;], by default &#39;cm^-3&#39;</span>
+
+<span class="sd">    plot_type : int, optional</span>
+<span class="sd">        type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0</span>
+
+<span class="sd">    labels : str, optional</span>
+<span class="sd">        label of the line, by default &#39;&#39;</span>
+
+<span class="sd">    colors : str, optional</span>
+<span class="sd">        color for the line, by default &#39;b&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    colorbar_type : str, optional</span>
+<span class="sd">        define the type of colorbar to use for the plot [&#39;None&#39;,&#39;log&#39;,&#39;lin&#39;], by default &#39;None&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    colorbar_display : bool, optional</span>
+<span class="sd">        chose to display colormap or not, by default False</span>
+
+<span class="sd">    line_type : list, optional</span>
+<span class="sd">        type of line for the plot</span>
+<span class="sd">        size line_type need to be = size(y), by default [&#39;-&#39;]</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    save_fig : bool, optional</span>
+<span class="sd">        If True, save density plot as an image with the  file name defined by &quot;fig_name&quot;, by default False</span>
+
+<span class="sd">    fig_name : str, optional</span>
+<span class="sd">        name of the file where the figure is saved, by default &#39;density.jpg&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensSimSS function&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid line_type list, we meed len(y) == len(line_type)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We will use default line type instead&#39;</span><span class="p">)</span>
+        <span class="n">line_type</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">line_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensSimSS function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used.&#39;</span><span class="p">)</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;cm^-3&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [cm$^{-3}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;m^-3&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [m$^{-3}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensSimSS function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [m^-3] is used.&#39;</span><span class="p">)</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [m$^{-3}$]&#39;</span>
+    
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Line color is set with Vext value.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Line color is set with Var_file name.&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+    <span class="n">ax_Vars_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">Var</span><span class="p">,</span><span class="n">lab</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)):</span>
+            
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Var</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># load data</span>
+
+       
+        <span class="k">if</span> <span class="n">Vext</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span>
+            <span class="n">Vext</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">])]</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensSimSS function&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;V was not specified so Vext = </span><span class="si">{:.2e}</span><span class="s1"> V was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vext</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">Vext</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+            <span class="n">Vext</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+            
+
+        <span class="c1"># Prepare the colorbar is there is any</span>
+        <span class="k">if</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+            <span class="n">Vext_bar</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">]</span>
+            <span class="n">Vext_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vext_bar</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Vext_bar</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Vext_bar</span><span class="p">))</span>
+            <span class="n">c_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="c1"># choose a colormap</span>
+            <span class="n">s_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">c_m</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span><span class="c1"># create a ScalarMappable and initialize a data structure</span>
+            <span class="n">s_m</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">:</span>
+            <span class="n">Vext_bar</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">]</span>
+            <span class="n">Vext_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Vext_bar</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Vext_bar</span><span class="p">),</span><span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Vext_bar</span><span class="p">))</span>
+            <span class="n">c_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="c1"># choose a colormap</span>
+            <span class="n">s_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">c_m</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span> <span class="c1"># create a ScalarMappable and initialize a data structure</span>
+            <span class="n">s_m</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wrong colorbar_type input&#39;</span><span class="p">)</span>
+
+        
+        <span class="k">for</span> <span class="n">V</span> <span class="ow">in</span> <span class="n">Vext</span><span class="p">:</span>
+            <span class="n">data_Var_dum</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">V</span><span class="p">))]</span>
+            <span class="n">data_Var_dum</span> <span class="o">=</span> <span class="n">data_Var_dum</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">Vext</span> <span class="o">-</span><span class="n">V</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vext = </span><span class="si">{:.2e}</span><span class="s1"> V was not found so </span><span class="si">{:.2e}</span><span class="s1"> V was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+                <span class="n">colorline</span> <span class="o">=</span> <span class="n">s_m</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">colorline</span> <span class="o">=</span> <span class="n">c</span>
+
+
+            <span class="n">put_label</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">line_type</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">put_label</span><span class="p">:</span>
+                    <span class="n">lab</span> <span class="o">=</span> <span class="n">lab</span>
+                    <span class="n">put_label</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lab</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+                <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">xunit_fact</span><span class="p">,</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">yunit_fact</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colorline</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">)</span>
+            
+    
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># Add colorbar if needed</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+        <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s_m</span><span class="p">)</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Vext [V]&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot settings</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">):</span>
+            <span class="n">first_legend</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">first_legend</span><span class="p">)</span>  
+        <span class="c1"># plt.legend(handles=[line2], loc=&#39;lower right&#39;)</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s1">&#39;n&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Electron&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;p&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hole&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;nion&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Anion&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CPI&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;pion&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cation&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CNI&#39;</span><span class="p">))]))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+
+    <span class="c1"># Set axis limits</span>
+    <span class="k">if</span> <span class="n">xlimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlimits</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylimits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">save_fig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PlotDensWithTime">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensWithTime">[docs]</a>
+<span class="k">def</span> <span class="nf">PlotDensWithTime</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[],</span><span class="n">num_fig</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">time</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nan&#39;</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;p&#39;</span><span class="p">],</span><span class="n">xlimits</span><span class="o">=</span><span class="p">[],</span><span class="n">ylimits</span><span class="o">=</span><span class="p">[],</span><span class="n">x_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;cm^-3&#39;</span><span class="p">,</span> <span class="n">t_unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">colorbar_type</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span><span class="n">colorbar_display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">line_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">],</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_fig</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fig_name</span><span class="o">=</span><span class="s1">&#39;density.jpg&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make Var_plot for SIMsalabim</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Var_files : list</span>
+<span class="sd">        List of files containing the Var filenames.</span>
+<span class="sd">    </span>
+<span class="sd">    labels : list</span>
+<span class="sd">        List of labels for the Var_files.</span>
+<span class="sd">    </span>
+<span class="sd">    colors : list, optional</span>
+<span class="sd">        List of colors for the Var_files, by default [].</span>
+
+<span class="sd">    num_fig : int</span>
+<span class="sd">        number of the fig to plot JV</span>
+
+<span class="sd">    time : float</span>
+<span class="sd">        float to define the voltage at which the densities will be plotted.</span>
+<span class="sd">        if time=[&#39;nan&#39;] then takes time as max(time), /</span>
+<span class="sd">        if time=[&#39;all&#39;] then plots all the time,/</span>
+<span class="sd">        if time does not exist we plot the closest voltage, default [&#39;nan&#39;]</span>
+
+<span class="sd">    y : list of str, optional</span>
+<span class="sd">        yaxis data can be multiple like [&#39;n&#39;,&#39;p&#39;], by default [&#39;n&#39;,&#39;p&#39;]</span>
+
+<span class="sd">    xlimits : list, optional</span>
+<span class="sd">        x axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    ylimits : list, optional</span>
+<span class="sd">        y axis limits if = [] it lets python chose limits, by default []</span>
+
+<span class="sd">    x_unit : str, optional</span>
+<span class="sd">        specify unit of the x-axis either [&#39;ns&#39;,&#39;us&#39;,&#39;ms&#39;,&#39;s&#39;], by default &#39;s&#39;</span>
+
+<span class="sd">    y_unit : str, optional</span>
+<span class="sd">        specify unit of the y-axis either [&#39;cm^-3&#39;,&#39;m^-3&#39;], by default &#39;cm^-3&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    t_unit : str, optional</span>
+<span class="sd">        specify unit of the time either [&#39;ns&#39;,&#39;us&#39;,&#39;ms&#39;,&#39;s&#39;], by default &#39;s&#39;</span>
+
+<span class="sd">    plot_type : int, optional</span>
+<span class="sd">        type of plot 1 = logx, 2 = logy, 3 = loglog else linlin (default = linlin), by default 0</span>
+
+<span class="sd">    labels : str, optional</span>
+<span class="sd">        label of the line, by default &#39;&#39;</span>
+
+<span class="sd">    colors : str, optional</span>
+<span class="sd">        color for the line, by default &#39;b&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    colorbar_type : str, optional</span>
+<span class="sd">        define the type of colorbar to use for the plot [&#39;None&#39;,&#39;log&#39;,&#39;lin&#39;], by default &#39;None&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    colorbar_display : bool, optional</span>
+<span class="sd">        chose to display colormap or not, by default False</span>
+
+<span class="sd">    line_type : list, optional</span>
+<span class="sd">        type of line for the plot</span>
+<span class="sd">        size line_type need to be = size(y), by default [&#39;-&#39;]</span>
+
+<span class="sd">    legend : bool, optional</span>
+<span class="sd">        Display legend or not, by default True</span>
+
+<span class="sd">    save_fig : bool, optional</span>
+<span class="sd">        If True, save density plot as an image with the  file name defined by &quot;fig_name&quot;, by default False</span>
+
+<span class="sd">    fig_name : str, optional</span>
+<span class="sd">        name of the file where the figure is saved, by default &#39;density.jpg&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        If True, print some information, by default True</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensWithTime function&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid line_type list, we meed len(y) == len(line_type)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We will use default line type instead&#39;</span><span class="p">)</span>
+        <span class="n">line_type</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">line_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+
+    
+    <span class="c1"># Convert in x-axis</span>
+    <span class="k">if</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;nm&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [nm]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;um&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [$\mu$m]&#39;</span>
+    <span class="k">elif</span> <span class="n">x_unit</span> <span class="o">==</span> <span class="s1">&#39;m&#39;</span><span class="p">:</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensWithTime function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_unit is wrong so [m] is used.&#39;</span><span class="p">)</span>
+        <span class="n">xunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="s1">&#39;x [m]&#39;</span>
+    
+    <span class="c1"># Convert in y-axis</span>
+    <span class="k">if</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;cm^-3&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [cm$^{-3}$]&#39;</span>
+    <span class="k">elif</span> <span class="n">y_unit</span> <span class="o">==</span> <span class="s1">&#39;m^-3&#39;</span><span class="p">:</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [m$^{-3}$]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensWithTime function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y_unit is wrong so [m^-3] is used.&#39;</span><span class="p">)</span>
+        <span class="n">yunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">yaxis_label</span> <span class="o">=</span> <span class="s1">&#39;Density [m$^{-3}$]&#39;</span>
+
+    <span class="c1"># Convert in time</span>
+    <span class="k">if</span> <span class="n">t_unit</span> <span class="o">==</span> <span class="s1">&#39;ns&#39;</span><span class="p">:</span>
+        <span class="n">tunit_fact</span> <span class="o">=</span> <span class="mf">1e9</span>
+        <span class="n">tunit_label</span> <span class="o">=</span> <span class="s1">&#39;Time [ns]&#39;</span>
+    <span class="k">elif</span> <span class="n">t_unit</span> <span class="o">==</span> <span class="s1">&#39;us&#39;</span><span class="p">:</span>
+        <span class="n">tunit_fact</span> <span class="o">=</span> <span class="mf">1e6</span>
+        <span class="n">tunit_label</span> <span class="o">=</span> <span class="s1">&#39;Time [$\mu$s]&#39;</span>
+    <span class="k">elif</span> <span class="n">t_unit</span> <span class="o">==</span> <span class="s1">&#39;ms&#39;</span><span class="p">:</span>
+        <span class="n">tunit_fact</span> <span class="o">=</span> <span class="mf">1e3</span>
+        <span class="n">tunit_label</span> <span class="o">=</span> <span class="s1">&#39;Time [ms]&#39;</span>
+    <span class="k">elif</span> <span class="n">t_unit</span> <span class="o">==</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span>
+        <span class="n">tunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">tunit_label</span> <span class="o">=</span> <span class="s1">&#39;Time [s]&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensWithTime function.&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t_unit is wrong so [s] is used.&#39;</span><span class="p">)</span>
+        <span class="n">tunit_fact</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">tunit_label</span> <span class="o">=</span> <span class="s1">&#39;Time [s]&#39;</span>
+    
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Line color is set with time value.&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Line color is set with Var_file name.&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">Var</span><span class="p">,</span><span class="n">lab</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">Var_files</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="n">colors</span><span class="p">)):</span>
+            
+        <span class="n">data_Var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Var</span><span class="p">,</span><span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># load data</span>
+
+       
+        <span class="k">if</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">])]</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In PlotDensWithTime function&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time was not specified so time = </span><span class="si">{:.2e}</span><span class="s1"> s was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        
+        <span class="c1"># Prepare the colorbar is there is any</span>
+        <span class="k">if</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+            <span class="n">time_bar</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">tunit_fact</span> 
+            <span class="n">time_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time_bar</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">time_bar</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time_bar</span><span class="p">))</span>
+            <span class="n">c_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="c1"># choose a colormap</span>
+            <span class="n">s_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">c_m</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span><span class="c1"># create a ScalarMappable and initialize a data structure</span>
+            <span class="n">s_m</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">:</span>
+            <span class="n">time_bar</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">tunit_fact</span> 
+            <span class="n">time_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time_bar</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
+            <span class="n">norm</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">time_bar</span><span class="p">),</span><span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time_bar</span><span class="p">))</span>
+            <span class="n">c_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="c1"># choose a colormap</span>
+            <span class="n">s_m</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">c_m</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span> <span class="c1"># create a ScalarMappable and initialize a data structure</span>
+            <span class="n">s_m</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+        <span class="k">elif</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wrong colorbar_type input&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">num_fig</span><span class="p">)</span>
+        <span class="n">ax_Vars_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time</span><span class="p">:</span>
+            <span class="n">data_Var_dum</span> <span class="o">=</span> <span class="n">data_Var</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">t</span><span class="p">))]</span>
+            <span class="n">data_Var_dum</span> <span class="o">=</span> <span class="n">data_Var_dum</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">data_Var</span><span class="o">.</span><span class="n">time</span> <span class="o">-</span><span class="n">t</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time = </span><span class="si">{:.2e}</span><span class="s1"> s was not found so </span><span class="si">{:.2e}</span><span class="s1"> s was plotted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+                <span class="n">colorline</span> <span class="o">=</span> <span class="n">s_m</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">tunit_fact</span> <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">colorline</span> <span class="o">=</span> <span class="n">c</span>
+
+
+            <span class="n">put_label</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">line</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">line_type</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">put_label</span><span class="p">:</span>
+                    <span class="n">lab</span> <span class="o">=</span> <span class="n">lab</span>
+                    <span class="n">put_label</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">lab</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+                <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">xunit_fact</span><span class="p">,</span><span class="n">data_Var_dum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">yunit_fact</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colorline</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line</span><span class="p">)</span>
+            
+    
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># Add colorbar if needed</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">:</span>
+        <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s_m</span><span class="p">)</span>
+        <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">tunit_label</span><span class="p">)</span>
+
+    <span class="c1"># Plot settings</span>
+    <span class="k">if</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_type</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax_Vars_plot</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># legend</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span> <span class="ow">or</span> <span class="n">colorbar_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">colorbar_display</span><span class="p">):</span>
+            <span class="n">first_legend</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">first_legend</span><span class="p">)</span>  
+        <span class="c1"># plt.legend(handles=[line2], loc=&#39;lower right&#39;)</span>
+        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s1">&#39;n&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Electron&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;p&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hole&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;nion&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Anion&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CPI&#39;</span><span class="p">))]))</span>
+        <span class="k">if</span> <span class="s1">&#39;pion&#39;</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cation&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="n">line_type</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;CNI&#39;</span><span class="p">))]))</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ncol</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+
+    <span class="c1"># Set axis limits</span>
+    <span class="k">if</span> <span class="n">xlimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlimits</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylimits</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylimits</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">save_fig</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_name</span><span class="p">,</span><span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span><span class="n">transparent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=377e76b0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/genindex" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent">Agent (class in boar.agents.Agent)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_Detrapping_equation">Bimolecular_Trapping_Detrapping_equation() (in module boar.dynamic_utils.rate_eq)</a>
+</li>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_equation">Bimolecular_Trapping_equation() (in module boar.dynamic_utils.rate_eq)</a>
+</li>
+      <li>
+    boar
+
+      <ul>
+        <li><a href="boar.html#module-boar">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.Agent
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.Agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.DD_agents
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.DD_agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.NonIdealDiode_agents
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.NonIdealDiode_agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.TAS_agent
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.TAS_agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.TranferMatrix_agent
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.TranferMatrix_agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.TrMC_agent
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.TrMC_agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.agents.TrPL_agent
+
+      <ul>
+        <li><a href="boar.agents.html#module-boar.agents.TrPL_agent">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core.FitParams
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core.FitParams">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core.funcs
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core.funcs">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core.optimization
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core.optimization">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core.optimization_botorch
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core.optimization_botorch">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.core.optimizer
+
+      <ul>
+        <li><a href="boar.core.html#module-boar.core.optimizer">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.dynamic_utils
+
+      <ul>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    boar.dynamic_utils.pump
+
+      <ul>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils.pump">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.dynamic_utils.rate_eq
+
+      <ul>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils.rate_eq">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.aux_func
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.aux_func">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.CalcFom
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CalcFom">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.CleanFolder
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CleanFolder">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.CompileProg
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CompileProg">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.Download_SIMsalabim
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.Download_SIMsalabim">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.GetInputPar
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.GetInputPar">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.MakeDevParFile
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.MakeDevParFile">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.plot_settings_screen
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.plot_settings_screen">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.PlotInputPar
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.PlotInputPar">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.RunSim
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.RunSim">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.SimSS_plots
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.SimSS_plots">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.tVG_gen
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.tVG_gen">module</a>
+</li>
+      </ul></li>
+      <li>
+    boar.SIMsalabim_utils.ZimT_plots
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.ZimT_plots">module</a>
+</li>
+      </ul></li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer">BoarOptimizer (class in boar.core.optimizer)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.BoTorchOpti">BoTorchOpti() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.funcs.callable_name">callable_name() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Check_fit_params">Check_fit_params() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.CheckProgVersion">CheckProgVersion() (in module boar.SIMsalabim_utils.MakeDevParFile)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.ChosePar">ChosePar() (in module boar.SIMsalabim_utils.GetInputPar)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.clean_file_type">clean_file_type() (in module boar.SIMsalabim_utils.CleanFolder)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.clean_up_output">clean_up_output() (in module boar.SIMsalabim_utils.CleanFolder)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_exp">Compare_JVs_exp() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_simu">Compare_JVs_simu() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.conduction_urbach">conduction_urbach() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.ConvertParams">ConvertParams() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.cost_from_old_xy">cost_from_old_xy() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.DegradationPrepareSimuInputs">DegradationPrepareSimuInputs() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.delta_B">delta_B() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.delta_T">delta_T() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialIdealityFactor">DifferentialIdealityFactor() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialResistance">DifferentialResistance() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.do_grid_posterior">do_grid_posterior() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+
+      <ul>
+        <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.do_grid_posterior">(boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach">double_urbach() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach_midgap">double_urbach_midgap() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.Download_SIMsalabim.download_simsalabim">download_simsalabim() (in module boar.SIMsalabim_utils.Download_SIMsalabim)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent">Drift_diffusion_agent (class in boar.agents.DD_agents)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion">DriftDiffusion() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion4fit">DriftDiffusion4fit() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist">DriftDiffusion_rela_nrj_Trap_dist() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_relative">DriftDiffusion_relative() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.evaluate">evaluate() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.evaluate_custom">evaluate_custom() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.expected_minimum_BOAR">expected_minimum_BOAR() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.FitNonIdealDiode">FitNonIdealDiode() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.FitParams.Fitparam">Fitparam (class in boar.core.FitParams)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.FitParams.FOMparam">FOMparam (class in boar.core.FitParams)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.format_func">format_func() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CompileProg.fpc_prog">fpc_prog() (in module boar.SIMsalabim_utils.CompileProg)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.funcs.gauss">gauss() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.gauss_sk">gauss_sk() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.gaussian_pulse">gaussian_pulse() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.gaussian_pulse_norm">gaussian_pulse_norm() (in module boar.core.funcs)</a>
+
+      <ul>
+        <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pulse_norm">(in module boar.dynamic_utils.pump)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pump">gaussian_pump() (in module boar.dynamic_utils.pump)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_alpha_factor">get_alpha_factor() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_FF">get_FF() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.get_fitval">get_fitval() (boar.agents.Agent.Agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.get_flux_density">get_flux_density() (in module boar.core.funcs)</a>
+
+      <ul>
+        <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.get_flux_density">(in module boar.dynamic_utils.pump)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.get_FOM">get_FOM() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.get_FOMs">get_FOMs() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_ideality_factor">get_ideality_factor() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Jsc">get_Jsc() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Jsc">(in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.get_model">get_model() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.get_ntotal">get_ntotal() (boar.agents.TranferMatrix_agent.Transfer_Matrix_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.get_param_dict">get_param_dict() (boar.agents.Agent.Agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_PCE">get_PCE() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.get_pseudo_JV">get_pseudo_JV() (boar.agents.TAS_agent.TAS_agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_random_value">get_random_value() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.get_Rseries">get_Rseries() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.get_Rshunt">get_Rshunt() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.get_unique_X">get_unique_X() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.get_unique_X_and_xaxis_values">get_unique_X_and_xaxis_values() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Voc">get_Voc() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Voc">(in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.GetParFromStr">GetParFromStr() (in module boar.SIMsalabim_utils.GetInputPar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.I_mat">I_mat() (boar.agents.TranferMatrix_agent.Transfer_Matrix_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.init_args_flux_pump_models">init_args_flux_pump_models() (boar.agents.TAS_agent.TAS_agent method)</a>
+
+      <ul>
+        <li><a href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent.init_args_flux_pump_models">(boar.agents.TrMC_agent.TrMC_agent method)</a>
+</li>
+        <li><a href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.init_args_flux_pump_models">(boar.agents.TrPL_agent.TrPL_agent method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.initial_carrier_density">initial_carrier_density() (in module boar.dynamic_utils.pump)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.invert_lossfunc">invert_lossfunc() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.L_mat">L_mat() (boar.agents.TranferMatrix_agent.Transfer_Matrix_agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.LH">LH() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.LH_torch">LH_torch() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.LinearFunc">LinearFunc() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.LLH">LLH() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.load_old_xy">load_old_xy() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.lossfunc">lossfunc() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.MakeDevParFileCopy">MakeDevParFileCopy() (in module boar.SIMsalabim_utils.MakeDevParFile)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.makeobjectives">makeobjectives() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_1D">marginal_posterior_1D() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+
+      <ul>
+        <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_1D">(boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_2D">marginal_posterior_2D() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+
+      <ul>
+        <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_2D">(boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      </ul></li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="boar.html#module-boar">boar</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents">boar.agents</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.Agent">boar.agents.Agent</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.DD_agents">boar.agents.DD_agents</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.NonIdealDiode_agents">boar.agents.NonIdealDiode_agents</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.TAS_agent">boar.agents.TAS_agent</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.TranferMatrix_agent">boar.agents.TranferMatrix_agent</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.TrMC_agent">boar.agents.TrMC_agent</a>
+</li>
+        <li><a href="boar.agents.html#module-boar.agents.TrPL_agent">boar.agents.TrPL_agent</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core">boar.core</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core.FitParams">boar.core.FitParams</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core.funcs">boar.core.funcs</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core.optimization">boar.core.optimization</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core.optimization_botorch">boar.core.optimization_botorch</a>
+</li>
+        <li><a href="boar.core.html#module-boar.core.optimizer">boar.core.optimizer</a>
+</li>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils">boar.dynamic_utils</a>
+</li>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils.pump">boar.dynamic_utils.pump</a>
+</li>
+        <li><a href="boar.dynamic_utils.html#module-boar.dynamic_utils.rate_eq">boar.dynamic_utils.rate_eq</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils">boar.SIMsalabim_utils</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.aux_func">boar.SIMsalabim_utils.aux_func</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CalcFom">boar.SIMsalabim_utils.CalcFom</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CleanFolder">boar.SIMsalabim_utils.CleanFolder</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CompileProg">boar.SIMsalabim_utils.CompileProg</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.Download_SIMsalabim">boar.SIMsalabim_utils.Download_SIMsalabim</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.GetInputPar">boar.SIMsalabim_utils.GetInputPar</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.MakeDevParFile">boar.SIMsalabim_utils.MakeDevParFile</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.plot_settings_screen">boar.SIMsalabim_utils.plot_settings_screen</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.PlotInputPar">boar.SIMsalabim_utils.PlotInputPar</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.RunSim">boar.SIMsalabim_utils.RunSim</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.SimSS_plots">boar.SIMsalabim_utils.SimSS_plots</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.tVG_gen">boar.SIMsalabim_utils.tVG_gen</a>
+</li>
+        <li><a href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.ZimT_plots">boar.SIMsalabim_utils.ZimT_plots</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpDecay">MonoExpDecay() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpInc">MonoExpInc() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch">MooBOtorch (class in boar.core.optimization_botorch)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer">MultiObjectiveOptimizer (class in boar.core.optimization)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent">Non_Ideal_Diode_agent (class in boar.agents.NonIdealDiode_agents)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark">NonIdealDiode_dark() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark_log">NonIdealDiode_dark_log() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light">NonIdealDiode_light() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light_log">NonIdealDiode_light_log() (boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_curvefit">obj_func_curvefit() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_metric">obj_func_metric() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_scipy">obj_func_scipy() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.obj_func_sko">obj_func_sko() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.openFile">openFile() (boar.agents.TranferMatrix_agent.Transfer_Matrix_agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_basin_hopping">optimize_basin_hopping() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_curvefit">optimize_curvefit() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_dual_annealing">optimize_dual_annealing() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.optimize_sko_parallel">optimize_sko_parallel() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.params_r">params_r() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimizer.BoarOptimizer.params_w">params_w() (boar.core.optimizer.BoarOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_all_objectives">plot_all_objectives() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_density">plot_density() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.plot_fit_res">plot_fit_res() (boar.agents.Agent.Agent method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_hypervolume">plot_hypervolume() (boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_dens">plot_input_dens() (in module boar.SIMsalabim_utils.PlotInputPar)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_mob">plot_input_mob() (in module boar.SIMsalabim_utils.PlotInputPar)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_nrj_diag">plot_input_nrj_diag() (in module boar.SIMsalabim_utils.PlotInputPar)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_SRH_lifetime">plot_input_SRH_lifetime() (in module boar.SIMsalabim_utils.PlotInputPar)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.plot_objective_function">plot_objective_function() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.plot_params">plot_params() (boar.agents.Agent.Agent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.plot_results">plot_results() (boar.agents.Agent.Agent method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensSimSS">PlotDensSimSS() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensWithTime">PlotDensWithTime() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJV">PlotJV() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJVPerf">PlotJVPerf() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagSimSS">PlotNrjDiagSimSS() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagWithTime">PlotNrjDiagWithTime() (in module boar.SIMsalabim_utils.SimSS_plots)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.polynom">polynom() (in module boar.core.funcs)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.posterior">posterior() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+
+      <ul>
+        <li><a href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.posterior">(boar.core.optimization_botorch.MooBOtorch method)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.PrepareSimuInputs">PrepareSimuInputs() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.pump_from_file">pump_from_file() (in module boar.dynamic_utils.pump)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.randomize_grid_posterior">randomize_grid_posterior() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.ReadParameterFile">ReadParameterFile() (in module boar.SIMsalabim_utils.GetInputPar)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.return_FOM">return_FOM() (boar.agents.DD_agents.Drift_diffusion_agent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_code">run_code() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_multiprocess_simu">run_multiprocess_simu() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_parallel_simu">run_parallel_simu() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.RunSimulation">RunSimulation() (in module boar.SIMsalabim_utils.RunSim)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.save_old_xy">save_old_xy() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.sci_notation">sci_notation() (in module boar.core.funcs)</a>
+
+      <ul>
+        <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.sci_notation">(in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+      </ul></li>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy.should_stop_optimization">should_stop_optimization() (boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy method)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.funcs.sigmoid">sigmoid() (in module boar.core.funcs)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy">SimpleThresholdGlobalStoppingStrategy (class in boar.core.optimization_botorch)</a>
+</li>
+      <li><a href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.single_point">single_point() (boar.core.optimization.MultiObjectiveOptimizer method)</a>
+</li>
+      <li><a href="boar.dynamic_utils.html#boar.dynamic_utils.pump.square_pump">square_pump() (in module boar.dynamic_utils.pump)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.Store_output_in_folder">Store_output_in_folder() (in module boar.SIMsalabim_utils.CleanFolder)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.StretchedExp">StretchedExp() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.TAS">TAS() (boar.agents.TAS_agent.TAS_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TAS_agent.TAS_agent">TAS_agent (class in boar.agents.TAS_agent)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_B">Theta_B() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_T">Theta_T() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_T2">Theta_T2() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.TM">TM() (boar.agents.TranferMatrix_agent.Transfer_Matrix_agent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.to_excel">to_excel() (boar.agents.Agent.Agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent">Transfer_Matrix_agent (class in boar.agents.TranferMatrix_agent)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent.trMC">trMC() (boar.agents.TrMC_agent.TrMC_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent">TrMC_agent (class in boar.agents.TrMC_agent)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.trPL">trPL() (boar.agents.TrPL_agent.TrPL_agent method)</a>
+</li>
+      <li><a href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent">TrPL_agent (class in boar.agents.TrPL_agent)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.core.html#boar.core.FitParams.FOMparam.update_FOMparam">update_FOMparam() (boar.core.FitParams.FOMparam method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.UpdateDevParFile">UpdateDevParFile() (in module boar.SIMsalabim_utils.MakeDevParFile)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.valence_urbach">valence_urbach() (in module boar.SIMsalabim_utils.aux_func)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Vbi">Vbi() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.VisualizeDevParFile">VisualizeDevParFile() (in module boar.SIMsalabim_utils.PlotInputPar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.w_int_L">w_int_L() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.w_int_R">w_int_R() (in module boar.SIMsalabim_utils.CalcFom)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.agents.html#boar.agents.Agent.Agent.Xy_to_dict">Xy_to_dict() (boar.agents.Agent.Agent method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_BACE">zimt_BACE() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_CELIV">zimt_CELIV() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_dens_plot">zimt_dens_plot() (in module boar.SIMsalabim_utils.ZimT_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_impedance">zimt_impedance() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_double_sweep">zimt_JV_double_sweep() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_sweep">zimt_JV_sweep() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_light_decay">zimt_light_decay() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_tdcf">zimt_tdcf() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_tj_JV_plot">zimt_tj_JV_plot() (in module boar.SIMsalabim_utils.ZimT_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_tj_plot">zimt_tj_plot() (in module boar.SIMsalabim_utils.ZimT_plots)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_Gauss_pulse">zimt_TPC_Gauss_pulse() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_square_pulse">zimt_TPC_square_pulse() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPV">zimt_TPV() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TrPL">zimt_TrPL() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_voltage_step">zimt_voltage_step() (in module boar.SIMsalabim_utils.tVG_gen)</a>
+</li>
+      <li><a href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_Voltage_transient_plot">zimt_Voltage_transient_plot() (in module boar.SIMsalabim_utils.ZimT_plots)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.SIMsalabim_utils.tVG_gen &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.SIMsalabim_utils.tVG_gen</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.SIMsalabim_utils.tVG_gen</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################</span>
+<span class="c1">############### Function to format tVG files ###################</span>
+<span class="c1">################################################################</span>
+<span class="c1"># Author: Vincent M. Le Corre</span>
+<span class="c1"># Github: https://github.com/VMLC-PV</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">math</span><span class="o">,</span><span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pds</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+
+<div class="viewcode-block" id="gaussian_pulse">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.gaussian_pulse">[docs]</a>
+<span class="k">def</span> <span class="nf">gaussian_pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">Imax</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a gaussian pulse</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : 1-D sequence of floats</span>
+<span class="sd">        t time axis (unit: s)</span>
+<span class="sd">    tpulse : float</span>
+<span class="sd">        tpulse center of the pulse (unit: s)</span>
+<span class="sd">    width : float</span>
+<span class="sd">        width of the pulse (unit: s)</span>
+<span class="sd">    Imax : float</span>
+<span class="sd">        Imax maximum of the pulse</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    1-D sequence of floats</span>
+<span class="sd">        Vector containing the gaussian pulse</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">return</span> <span class="n">Imax</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">tpulse</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)))</span></div>
+
+
+
+<div class="viewcode-block" id="zimt_light_decay">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_light_decay">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_light_decay</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gstart</span><span class="p">,</span><span class="n">Gfinal</span><span class="p">,</span><span class="n">Va</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">trf</span> <span class="o">=</span> <span class="mf">20e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for light decay experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Gstart : float</span>
+<span class="sd">        initial generation rate, i.e. light intensity (steady-state) (unit: m^-3 s^-1)</span>
+<span class="sd">    Gfinal : float</span>
+<span class="sd">        final generation rate (unit: m^-3 s^-1)</span>
+<span class="sd">    Va : float</span>
+<span class="sd">        applied voltage (unit: V)</span>
+<span class="sd">    steps : float</span>
+<span class="sd">        number of time steps</span>
+<span class="sd">    trf : float, optional</span>
+<span class="sd">        LED/laser fall/rise time, by default 20e-9 (unit: s)</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        If True exponential time step is used, else linear time step, by default False</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Chose between exponential or linear time step</span>
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="c1"># Calculate the light decay assuming and exponential decay of the generation rate</span>
+    <span class="c1"># with a lifetime (trf) of the LED/laser fall/rise time</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Gstart</span><span class="o">-</span><span class="n">Gfinal</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">trf</span><span class="p">)</span><span class="o">+</span><span class="n">Gfinal</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Va</span><span class="p">)</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zimt_voltage_step">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_voltage_step">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_voltage_step</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Vstart</span><span class="p">,</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">trf</span> <span class="o">=</span> <span class="mf">10e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for Voltage decay experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Vstart : float</span>
+<span class="sd">        initial applied voltage (steady-state) (unit: V)</span>
+<span class="sd">    Vfinal : float</span>
+<span class="sd">        final applied voltage (unit: V)</span>
+<span class="sd">    Gen : float</span>
+<span class="sd">        constant generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        number of time steps, by default 100</span>
+<span class="sd">    trf : float, optional</span>
+<span class="sd">        Voltage pulse fall/rise time , by default 10e-9 (unit: s)</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        If True exponential time step is used, else linear time step, by default False</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+
+    <span class="c1"># Chose between exponential or linear time step</span>
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="c1"># Calculate the voltage decay assuming and exponential decay of the voltage</span>
+    <span class="c1"># with a lifetime (trf) of the voltage pulse fall/rise time</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vstart</span><span class="o">-</span><span class="n">Vfinal</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">trf</span><span class="p">)</span><span class="o">+</span><span class="n">Vfinal</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zimt_JV_sweep">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_sweep">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_JV_sweep</span><span class="p">(</span><span class="n">Vstart</span><span class="p">,</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for one JV sweep experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vstart : float</span>
+<span class="sd">        initial applied voltage (steady-state) (unit: V)</span>
+<span class="sd">    Vfinal : float</span>
+<span class="sd">        final applied voltage (unit: V)</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        scan speed (unit: V/s)</span>
+<span class="sd">    Gen : float</span>
+<span class="sd">        constant generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    steps : int</span>
+<span class="sd">        number of JV points</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        If True exponential time step is used, else linear time step, by default False</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># Calculate duration of the JV sweep depending on the scan speed</span>
+    <span class="n">tmax</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Vfinal</span> <span class="o">-</span> <span class="n">Vstart</span><span class="p">)</span><span class="o">/</span><span class="n">scan_speed</span>
+
+    <span class="c1"># Chose between exponential or linear time step</span>
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="p">))</span>
+        <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="p">),</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scan_speed</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">Vstart</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># def zimt_JV_double_sweep_old(Vstart,Vfinal,scan_speed,Gen,steps,Vacc=-0.1,time_exp = False,tVG_name=&#39;tVG.txt&#39;):</span>
+<span class="c1">#     &quot;&quot;&quot;Make tVG file for double JV sweep experiment</span>
+<span class="c1">#     Scan voltage back and forth</span>
+
+<span class="c1">#     Parameters</span>
+<span class="c1">#     ----------</span>
+<span class="c1">#     Vstart : float</span>
+<span class="c1">#         initial applied voltage (steady-state) (unit: V)</span>
+<span class="c1">#     Vfinal : float</span>
+<span class="c1">#         final applied voltage (unit: V)</span>
+<span class="c1">#     scan_speed : float</span>
+<span class="c1">#         scan speed (unit: V/s)</span>
+<span class="c1">#     Gen : float</span>
+<span class="c1">#         constant generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="c1">#     steps : int</span>
+<span class="c1">#         number of JV points </span>
+<span class="c1">#     Vacc : float, optional</span>
+<span class="c1">#         point of accumulation of row of V&#39;s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin (unit: V)</span>
+<span class="c1">#     time_exp  : bool, optional</span>
+<span class="c1">#         If True exponential time step is used, else linear time step, by default False</span>
+<span class="c1">#     tVG_name : str, optional</span>
+<span class="c1">#         tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+    
+<span class="c1">#     V,G = [],[]</span>
+<span class="c1">#     if time_exp == True:</span>
+<span class="c1">#         if Vacc &gt; Vstart and Vacc &lt; Vfinal:</span>
+<span class="c1">#             print(&#39;/!\ Error /!\ &#39;)</span>
+<span class="c1">#             print(&#39;Vacc should be slightly larger than Vmax or slightly lower than Vmin&#39;)</span>
+<span class="c1">#             print(&#39;We are stopping the program, change the value of Vacc&#39;)</span>
+<span class="c1">#             sys.exit()</span>
+<span class="c1">#         # Vacc = -0.1</span>
+<span class="c1">#         d = Vacc - Vfinal</span>
+<span class="c1">#         idx = 0</span>
+<span class="c1">#         t = [0]</span>
+<span class="c1">#         for i in range(int(steps/2)):</span>
+<span class="c1">#             LogarithmicV = Vacc - d*np.exp((1-i/(int(steps/2)-1))*np.log((Vacc-Vstart)/d))</span>
+<span class="c1">#             if abs(LogarithmicV) &lt; 1e-10: # to correct for numerical approx around 0</span>
+<span class="c1">#                 LogarithmicV = 0 </span>
+<span class="c1">#             V.append(LogarithmicV)</span>
+<span class="c1">#             if idx &gt; 0:</span>
+<span class="c1">#                 t.append(t[idx-1] + (abs(LogarithmicV-V[idx-1]))/scan_speed)</span>
+<span class="c1">#             G.append(Gen)</span>
+<span class="c1">#             idx += 1</span>
+
+<span class="c1">#         Vrev = V[::-1]</span>
+<span class="c1">#         Vrev.pop(0)</span>
+<span class="c1">#         V.extend(Vrev)</span>
+<span class="c1">#         for i in Vrev:</span>
+<span class="c1">#             t.append(t[idx-1] + (abs(i-V[idx-1]))/scan_speed)</span>
+<span class="c1">#             G.append(Gen)</span>
+<span class="c1">#             idx += 1</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         # Calculate duration of one sweep, the total experiment duration will be 2*tmax  </span>
+<span class="c1">#         tmax = abs((Vfinal - Vstart)/scan_speed)</span>
+<span class="c1">#         t1 = np.linspace(0,tmax,int(steps/2),endpoint=True)</span>
+<span class="c1">#         t2 = np.linspace(tmax,2*tmax,int(steps/2),endpoint=True)</span>
+<span class="c1">#         t2 = np.delete(t2,[0])</span>
+<span class="c1">#         t = np.append(t1,t2)</span>
+<span class="c1">#         for i in t:</span>
+<span class="c1">#             if i &lt; tmax:</span>
+<span class="c1">#                 V.append(np.sign(Vfinal-Vstart)*scan_speed*i + Vstart)</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 V.append(-np.sign(Vfinal-Vstart)*(scan_speed*i) + np.sign(Vfinal-Vstart)*Vstart +2*Vfinal)</span>
+<span class="c1">#             G.append(Gen)</span>
+        
+
+<span class="c1">#     tVG = pds.DataFrame(np.stack([t,np.asarray(V),np.asarray(G)]).T,columns=[&#39;t&#39;,&#39;Vext&#39;,&#39;Gehp&#39;])</span>
+
+<span class="c1">#     tVG.to_csv(tVG_name,sep=&#39; &#39;,index=False,float_format=&#39;%.3e&#39;)</span>
+<div class="viewcode-block" id="zimt_JV_double_sweep">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_double_sweep">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_JV_double_sweep</span><span class="p">(</span><span class="n">Vstart</span><span class="p">,</span><span class="n">Vfinal</span><span class="p">,</span><span class="n">scan_speed</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">steps</span><span class="p">,</span><span class="n">Vacc</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for double JV sweep experiment</span>
+<span class="sd">    Scan voltage back and forth</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vstart : float</span>
+<span class="sd">        initial applied voltage (steady-state) (unit: V)</span>
+<span class="sd">    Vfinal : float</span>
+<span class="sd">        final applied voltage (unit: V)</span>
+<span class="sd">    scan_speed : float</span>
+<span class="sd">        scan speed (unit: V/s)</span>
+<span class="sd">    Gen : float</span>
+<span class="sd">        constant generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    steps : int</span>
+<span class="sd">        number of JV points </span>
+<span class="sd">    Vacc : float, optional</span>
+<span class="sd">        point of accumulation of row of V&#39;s, note: Vacc should be slightly larger than Vmax or slightly lower than Vmin (unit: V)</span>
+<span class="sd">    time_exp  : bool, optional</span>
+<span class="sd">        If True exponential time step is used, else linear time step, by default False</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Vacc</span> <span class="o">&gt;</span> <span class="n">Vstart</span> <span class="ow">and</span> <span class="n">Vacc</span> <span class="o">&lt;</span> <span class="n">Vfinal</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/!\ Error /!\ &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Vacc should be slightly larger than Vmax or slightly lower than Vmin&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We are stopping the program, change the value of Vacc&#39;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="c1"># Vacc = -0.1</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">Vacc</span> <span class="o">-</span> <span class="n">Vfinal</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span>
+            <span class="n">LogarithmicV</span> <span class="o">=</span> <span class="n">Vacc</span> <span class="o">-</span> <span class="n">d</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">Vacc</span><span class="o">-</span><span class="n">Vstart</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">LogarithmicV</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span> <span class="c1"># to correct for numerical approx around 0</span>
+                <span class="n">LogarithmicV</span> <span class="o">=</span> <span class="mi">0</span> 
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LogarithmicV</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">LogarithmicV</span><span class="o">-</span><span class="n">V</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">Vrev</span> <span class="o">=</span> <span class="n">V</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Vrev</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Vrev</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Vrev</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">V</span><span class="p">[</span><span class="n">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Calculate duration of one sweep, the total experiment duration will be 2*tmax  </span>
+        <span class="n">tmax</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">Vfinal</span> <span class="o">-</span> <span class="n">Vstart</span><span class="p">)</span><span class="o">/</span><span class="n">scan_speed</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmax</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">tmax</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">t2</span><span class="p">,[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">Vfinal</span><span class="o">-</span><span class="n">Vstart</span><span class="p">)</span><span class="o">*</span><span class="n">scan_speed</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">Vstart</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">Vfinal</span><span class="o">-</span><span class="n">Vstart</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">scan_speed</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tmax</span><span class="p">))</span>  <span class="o">+</span> <span class="n">Vfinal</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+        
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zimt_tdcf">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_tdcf">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_tdcf</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Vpre</span><span class="p">,</span><span class="n">Vcol</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">tstep</span><span class="p">,</span><span class="n">tdelay</span><span class="p">,</span><span class="n">width_pulse</span> <span class="o">=</span> <span class="mf">2e-9</span><span class="p">,</span><span class="n">tVp</span> <span class="o">=</span> <span class="mf">10e-9</span><span class="p">,</span><span class="n">time_exp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for time-delayed collection field (TDCF)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+
+<span class="sd">    Vpre : float</span>
+<span class="sd">        initial applied voltage (steady-state) or pre-bias in typical TDCF language (unit: V)</span>
+
+<span class="sd">    Vcol : float</span>
+<span class="sd">        final applied voltage or collection bias in typical TDCF language (unit: V)</span>
+
+<span class="sd">    Gen : float</span>
+<span class="sd">        Total number of carrier generated by the gaussian pulse (unit: m^-3)</span>
+
+<span class="sd">    tpulse : float</span>
+<span class="sd">        middle of the gaussian pulse (unit: s)</span>
+
+<span class="sd">    tstep : float</span>
+<span class="sd">        time step for the linear regime (unit: s)</span>
+
+<span class="sd">    tdelay : float</span>
+<span class="sd">        delay between middle of laser pulse and voltage switch (unit: s)</span>
+
+<span class="sd">    width_pulse : float, optional</span>
+<span class="sd">        width of the light pulse (unit: s), by default 2e-9</span>
+
+<span class="sd">    tVp : float, optional</span>
+<span class="sd">        Voltage pulse fall/rise time (unit: s), by default 10e-9</span>
+
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">        </span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">tswitch</span> <span class="o">=</span> <span class="n">width_pulse</span> <span class="o">+</span> <span class="n">tdelay</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="c1"># Define laser pulse by a Gaussian and always keep tstep to 1e-10 for during the pulse to ensure that the amount of photon is consistent when changing tstep</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">width_pulse</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vpre</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vpre</span><span class="o">-</span><span class="n">Vcol</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tVp</span><span class="p">)</span><span class="o">+</span><span class="n">Vcol</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">1.5</span><span class="o">*</span><span class="n">width_pulse</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">width_pulse</span><span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+        <span class="c1"># time step before voltage delay </span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">width_pulse</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span><span class="n">tswitch</span><span class="o">-</span><span class="n">tstep</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vpre</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vpre</span><span class="o">-</span><span class="n">Vcol</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tVp</span><span class="p">)</span><span class="o">+</span><span class="n">Vcol</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Begin of the voltage voltage delay </span>
+        <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tswitch</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tswitch</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vpre</span><span class="o">-</span><span class="n">Vcol</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tVp</span><span class="p">)</span><span class="o">+</span><span class="n">Vcol</span><span class="p">)</span>
+                <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Begin of the voltage voltage delay </span>
+        <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vpre</span><span class="o">-</span><span class="n">Vcol</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tVp</span><span class="p">)</span><span class="o">+</span><span class="n">Vcol</span><span class="p">)</span>
+                <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+
+    <span class="c1"># Insert initial conditions</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Vpre</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Gen</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># ensure that the total number of generated charges is equal to Gen</span>
+        <span class="n">int_G</span>  <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Gen</span><span class="o">/</span><span class="n">int_G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="n">G</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span> </div>
+
+
+
+<div class="viewcode-block" id="zimt_BACE">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_BACE">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_BACE</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">Vpre</span><span class="p">,</span><span class="n">Vextr</span><span class="p">,</span><span class="n">tLp</span> <span class="o">=</span> <span class="mf">20e-9</span><span class="p">,</span><span class="n">tVp</span> <span class="o">=</span> <span class="mf">10e-9</span><span class="p">,</span><span class="n">time_exp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for bias-assisted charge extraction (BACE)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Gen : float</span>
+<span class="sd">        initial generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    Vpre : float</span>
+<span class="sd">        initial applied voltage (or pre-bias) (unit: V)</span>
+<span class="sd">    Vextr : float</span>
+<span class="sd">        extraction voltage (unit: V)</span>
+<span class="sd">    tLp : float, optional</span>
+<span class="sd">        LED pulse fall/rise time (unit: s), by default 20e-9</span>
+<span class="sd">    tVp : float, optional</span>
+<span class="sd">        Voltage pulse fall/rise time (unit: s), by default 10e-9</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Vpre</span><span class="o">-</span><span class="n">Vextr</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tVp</span><span class="p">)</span><span class="o">+</span><span class="n">Vextr</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,(</span><span class="n">Gen</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tLp</span><span class="p">))</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span> </div>
+
+
+<div class="viewcode-block" id="zimt_TPV">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPV">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_TPV</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gen_pulse</span><span class="p">,</span><span class="n">G0</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span> <span class="o">=</span> <span class="mf">2e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for transient photovoltage (TPV) experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Gen_pulse : float</span>
+<span class="sd">        Total number of carrier generated by the gaussian pulse (unit: m^-3)</span>
+<span class="sd">    G0 : float</span>
+<span class="sd">        background generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    tpulse : float</span>
+<span class="sd">        middle of the gaussian pulse (unit: s)</span>
+<span class="sd">    width_pulse : float, optional</span>
+<span class="sd">        width of the light pulse (unit: s), by default 2e-9</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Define laser pulse by a Gaussian and always keep tstep to 1e-9 for during the pulse to ensure that the amount of photon is consistent when changing tstep</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;oc&#39;</span><span class="p">)</span>   
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">Gen_pulse</span><span class="p">)</span>
+    <span class="c1"># G[0] = G0 #set G = G0 at t = 0</span>
+
+    <span class="k">if</span> <span class="n">Gen_pulse</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># ensure that the total number of generated charges is equal to Gen</span>
+        <span class="n">int_G</span>  <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Gen_pulse</span><span class="o">/</span><span class="n">int_G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G0</span>
+
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">G0</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;oc&#39;</span><span class="p">)</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="c1">#set G = 0 when G is too small (for stability in ZimT)</span>
+        <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">G0</span><span class="p">:</span>
+            <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">G0</span>
+    
+    
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zimt_TPC_Gauss_pulse">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_Gauss_pulse">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_TPC_Gauss_pulse</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gen_pulse</span><span class="p">,</span><span class="n">G0</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span> <span class="o">=</span> <span class="mf">2e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for transient photocurrent (TPC) experiment with a gaussian pulse for the light excitation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Gen_pulse : float</span>
+<span class="sd">        Total number of carrier generated by the gaussian pulse (unit: m^-3)</span>
+<span class="sd">    G0 : float</span>
+<span class="sd">        background generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    tpulse : float</span>
+<span class="sd">        middle of the gaussian pulse (unit: s)</span>
+<span class="sd">    width_pulse : float, optional</span>
+<span class="sd">        width of the light pulse (unit: s), by default 2e-9</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="c1"># Define laser pulse by a Gaussian and always keep tstep to 1e-9 for during the pulse to ensure that the amount of photon is consistent when changing tstep</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">Gen_pulse</span><span class="p">)</span>
+    <span class="c1"># G[0] = G0 #set G = G0 at t = 0</span>
+
+    <span class="k">if</span> <span class="n">Gen_pulse</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># ensure that the total number of generated charges is equal to Gen</span>
+        <span class="n">int_G</span>  <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Gen_pulse</span><span class="o">/</span><span class="n">int_G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G0</span>
+
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">G0</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="c1">#set G = 0 when G is too small (for stability in ZimT)</span>
+        <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">G0</span><span class="p">:</span>
+            <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">G0</span>
+    
+    
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zimt_TPC_square_pulse">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_square_pulse">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_TPC_square_pulse</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gen_pulse</span><span class="p">,</span><span class="n">G0</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">tLp</span> <span class="o">=</span> <span class="mf">20e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for transient photocurrent (TPC) experiment with a gaussian pulse for the light excitation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+<span class="sd">    Gen_pulse : float</span>
+<span class="sd">        Generation rate at the top of the squared pulse __--__ (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    G0 : float</span>
+<span class="sd">        background generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    width_pulse : float</span>
+<span class="sd">        width of the light pulse (unit: s)</span>
+<span class="sd">    tLp : float, optional</span>
+<span class="sd">        LED pulse fall/rise time (unit: s), by default 20e-9</span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="o">-</span><span class="n">width_pulse</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">steps</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="o">+</span><span class="n">width_pulse</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">steps</span><span class="p">)</span>
+
+    
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">width_pulse</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">Gen_pulse</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tLp</span><span class="p">))</span><span class="o">+</span><span class="n">G0</span> <span class="o">&gt;</span> <span class="mf">1e10</span><span class="p">:</span> <span class="c1">#set G = 0 when G is too small (for stability in ZimT)</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Gen_pulse</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="o">/</span><span class="n">tLp</span><span class="p">))</span><span class="o">+</span><span class="n">G0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Gen_pulse</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">width_pulse</span><span class="p">)</span><span class="o">/</span><span class="n">tLp</span><span class="p">)</span><span class="o">+</span><span class="n">G0</span> <span class="o">&gt;</span> <span class="mf">1e10</span><span class="p">:</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen_pulse</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">width_pulse</span><span class="p">)</span><span class="o">/</span><span class="n">tLp</span><span class="p">)</span><span class="o">+</span><span class="n">G0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1">#set starting condition for t = 0, G = G0</span>
+    <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">G0</span><span class="p">)</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">G</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.7e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zimt_CELIV">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_CELIV">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_CELIV</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Voffset</span><span class="p">,</span><span class="n">slopeV</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">tstep</span><span class="p">,</span><span class="n">tdelay</span><span class="p">,</span><span class="n">width_pulse</span> <span class="o">=</span> <span class="mf">2e-9</span><span class="p">,</span><span class="n">time_exp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for charge extraction by linearly increasing voltage (CELIV) experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+
+<span class="sd">    Voffset : float</span>
+<span class="sd">        initial applied voltage (steady-state) (unit: V)</span>
+
+<span class="sd">    slopeV : float</span>
+<span class="sd">        slope of the applied voltage increase (V/s)</span>
+
+<span class="sd">    Gen : float</span>
+<span class="sd">        Total number of carrier generated by the gaussian pulse (unit: m^-3)</span>
+
+<span class="sd">    tpulse : float</span>
+<span class="sd">        middle of the gaussian pulse (unit: s)</span>
+
+<span class="sd">    tstep : float</span>
+<span class="sd">        time step for the linear regime (unit: s)</span>
+
+<span class="sd">    tdelay : float</span>
+<span class="sd">        delay between middle of laser pulse and voltage switch (unit: s)</span>
+
+<span class="sd">    width_pulse : float, optional</span>
+<span class="sd">        width of the light pulse (unit: s), by default 2e-9</span>
+
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+    <span class="n">tswitch</span> <span class="o">=</span> <span class="n">tpulse</span> <span class="o">+</span> <span class="n">tdelay</span>
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="c1"># Define laser pulse by a Gaussian and always keep tstep to 1e-9 for during the pulse to ensure that the amount of photon is consitent when changing tstep</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">)</span>
+    
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Voffset</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slopeV</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tswitch</span><span class="p">)</span><span class="o">+</span><span class="n">Voffset</span><span class="p">)</span>
+        <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">Gen</span><span class="p">))</span>
+    
+
+    <span class="k">if</span> <span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span> <span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+        <span class="c1"># time step before voltage delay </span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tswitch</span><span class="o">-</span><span class="n">tstep</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">tswitch</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Voffset</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slopeV</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tswitch</span><span class="p">)</span><span class="o">+</span><span class="n">Voffset</span><span class="p">)</span>
+            <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Begin of the voltage voltage delay </span>
+        <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tswitch</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tswitch</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slopeV</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tswitch</span><span class="p">)</span><span class="o">+</span><span class="n">Voffset</span><span class="p">)</span>
+                <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Begin of the voltage voltage delay </span>
+        <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">steps</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+                <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slopeV</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">tswitch</span><span class="p">)</span><span class="o">+</span><span class="n">Voffset</span><span class="p">)</span>
+                <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+
+
+    <span class="c1"># Insert initial conditions</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Voffset</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Gen</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># ensure that the total number of generated charges is equal to Gen</span>
+        <span class="n">int_G</span>  <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Gen</span><span class="o">/</span><span class="n">int_G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="mi">0</span><span class="o">*</span><span class="n">G</span>
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zimt_impedance">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_impedance">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_impedance</span><span class="p">(</span><span class="n">Vapp</span><span class="p">,</span><span class="n">Vamp</span><span class="p">,</span><span class="n">freq</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for impedance experiment</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vapp : [type]</span>
+<span class="sd">        offset applied voltage (steady-state) (unit: V)</span>
+<span class="sd">    Vamp : [type]</span>
+<span class="sd">        amplitude of the voltage perturbation (unit: V) </span>
+<span class="sd">    freq : [type]</span>
+<span class="sd">        frequency of the oscillation (unit: Hz)</span>
+<span class="sd">    Gen : [type]</span>
+<span class="sd">        max generation rate (i.e. light intensity) of the gaussian pulse (unit: m^-3 s^-1)</span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        number of time step, by default 100</span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">freq</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="o">/</span><span class="n">freq</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+
+    <span class="n">G</span><span class="p">,</span><span class="n">V</span> <span class="o">=</span> <span class="p">[],[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Gen</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vapp</span> <span class="o">+</span> <span class="n">Vamp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">i</span><span class="p">))</span>
+ 
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="zimt_TrPL">
+<a class="viewcode-back" href="../../../boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TrPL">[docs]</a>
+<span class="k">def</span> <span class="nf">zimt_TrPL</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">Gen</span><span class="p">,</span><span class="n">G0</span><span class="p">,</span><span class="n">Vapp</span><span class="p">,</span><span class="n">tstep</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span> <span class="o">=</span> <span class="mf">2e-9</span><span class="p">,</span><span class="n">time_exp</span> <span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">tVG_name</span><span class="o">=</span><span class="s1">&#39;tVG.txt&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make tVG file for transient photovoltage (TPV) experiment</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tmin : float</span>
+<span class="sd">        first time step after 0 (unit: s)</span>
+
+<span class="sd">    tmax : float</span>
+<span class="sd">        final time step (unit: s)</span>
+
+<span class="sd">    Gen : float</span>
+<span class="sd">        Total number of carrier generated by the gaussian pulse (unit: m^-3)</span>
+
+<span class="sd">    G0 : float</span>
+<span class="sd">        background generation rate (i.e. light intensity) (unit: m^-3 s^-1)</span>
+<span class="sd">    </span>
+<span class="sd">    Vapp : float</span>
+<span class="sd">        Applied voltage (unit: V)</span>
+<span class="sd">    </span>
+<span class="sd">    tstep : float</span>
+<span class="sd">        time step for the linear regime (unit: s)</span>
+<span class="sd">    </span>
+<span class="sd">    tpulse : float</span>
+<span class="sd">        middle of the gaussian pulse (unit: s)</span>
+<span class="sd">    </span>
+<span class="sd">    width_pulse : float, optional</span>
+<span class="sd">        width of the light pulse (unit: s), by default 2e-9</span>
+<span class="sd">    </span>
+<span class="sd">    time_exp : bool, optional</span>
+<span class="sd">        if True chose exponential time step else keep time step linear, by default False</span>
+<span class="sd">    </span>
+<span class="sd">    steps : int, optional</span>
+<span class="sd">        if time_exp = True number of exponential time step after voltage switch, by default 100</span>
+<span class="sd">    </span>
+<span class="sd">    tVG_name : str, optional</span>
+<span class="sd">        tVG_file name, by default &#39;tVG.txt&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+     <span class="c1"># Define laser pulse by a Gaussian and always keep tstep to 1e-9 for during the pulse to ensure that the amount of photon is consitent when changing tstep</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tmin</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">)</span>
+    
+    <span class="n">V</span><span class="p">,</span><span class="n">G</span> <span class="o">=</span> <span class="p">[],[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vapp</span><span class="p">)</span>   
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pulse</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">tpulse</span><span class="p">,</span><span class="n">width_pulse</span><span class="p">,</span><span class="n">Gen</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">time_exp</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">tpulse</span> <span class="o">+</span> <span class="n">width_pulse</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">tstep</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">t1</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">V</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Vapp</span><span class="p">)</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">t1</span><span class="p">)</span>
+
+    <span class="c1"># Insert initial conditions</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">Vapp</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># ensure that the total number of generated charges is equal to Gen</span>
+    <span class="n">int_G</span>  <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Gen</span><span class="o">/</span><span class="n">int_G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">G0</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span> <span class="c1">#set G = G0 as background illumination, including during the light pulse</span>
+            <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">G0</span><span class="p">:</span>
+                <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">G0</span>
+            <span class="k">if</span> <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+    <span class="n">tVG</span> <span class="o">=</span> <span class="n">pds</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">G</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">])</span>
+
+    <span class="n">tVG</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">tVG_name</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.3e</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

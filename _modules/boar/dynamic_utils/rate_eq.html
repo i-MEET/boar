@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.dynamic_utils.rate_eq &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.dynamic_utils.rate_eq</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.dynamic_utils.rate_eq</h1><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################</span>
+<span class="c1">############## Functions to solve rate equations #####################</span>
+<span class="c1">######################################################################</span>
+<span class="c1"># Version 0.1</span>
+<span class="c1"># (c) Larry Lueer, Vincent M. Le Corre, i-MEET 2021-2023</span>
+
+<span class="c1"># Package imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span><span class="p">,</span> <span class="n">odeint</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="c1"># ignore warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="c1"># warnings.filterwarnings(&quot;ignore&quot;)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<div class="viewcode-block" id="Bimolecular_Trapping_equation">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_equation">[docs]</a>
+<span class="k">def</span> <span class="nf">Bimolecular_Trapping_equation</span><span class="p">(</span><span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">ninit</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="n">equilibrate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">maxcount</span><span class="o">=</span><span class="mf">1e3</span><span class="p">,</span> <span class="n">solver_func</span> <span class="o">=</span> <span class="s1">&#39;solve_ivp&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve the bimolecular trapping equation :\\</span>
+<span class="sd">    </span>
+<span class="sd">    dn/dt = G - ktrap * n - kdirect * n^2</span>
+<span class="sd">   </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        array of time values</span>
+
+<span class="sd">    G :  ndarray of shape (n,)</span>
+<span class="sd">        array of values of the charge carrier generation rate m^-3 s^-1</span>
+
+<span class="sd">    ktrap : float</span>
+<span class="sd">        trapping rate constant</span>
+
+<span class="sd">    kdirect : float</span>
+<span class="sd">        Bimolecular/direct recombination rate constant</span>
+
+<span class="sd">    tpulse : ndarray of shape (n,), optional</span>
+<span class="sd">        array of time values for the pulse time step in case it is different from t, by default None</span>
+
+<span class="sd">    ninit : list of floats, optional</span>
+<span class="sd">        initial value of the charge carrier density, by default [0]</span>
+<span class="sd">    </span>
+<span class="sd">    equilibrate : bool, optional</span>
+<span class="sd">        make sure equilibrium is reached?, by default True</span>
+<span class="sd">    </span>
+<span class="sd">    eq_limit : float, optional</span>
+<span class="sd">        relative change of the last time point to the previous one, by default 1e-2</span>
+<span class="sd">    </span>
+<span class="sd">    maxcount : int, optional</span>
+<span class="sd">        maximum number of iterations to reach equilibrium, by default 1e3</span>
+<span class="sd">    </span>
+<span class="sd">    solver_func : str, optional</span>
+<span class="sd">        solver function to use can be [&#39;odeint&#39;,&#39;solve_ivp&#39;], by default &#39;solve_ivp&#39;</span>
+
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        additional keyword arguments for the solver function</span>
+<span class="sd">        &#39;method&#39; : str, optional</span>
+<span class="sd">            method to use for the solver, by default &#39;RK45&#39;</span>
+<span class="sd">        &#39;rtol&#39; : float, optional</span>
+<span class="sd">            relative tolerance, by default 1e-3</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        array of values of the charge carrier density m^-3</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="c1"># check solver function</span>
+    <span class="k">if</span> <span class="n">solver_func</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;odeint&#39;</span><span class="p">,</span><span class="s1">&#39;solve_ivp&#39;</span><span class="p">]:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;solver function not recognized, using odeint&#39;</span><span class="p">)</span>
+        <span class="n">solver_func</span> <span class="o">=</span> <span class="s1">&#39;odeint&#39;</span>
+
+    <span class="c1"># kwargs</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;RK45&#39;</span><span class="p">)</span>
+    <span class="n">rtol</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rtol&#39;</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">)</span>
+
+    <span class="c1"># check if the pulse time step is different from the time vector</span>
+    <span class="k">if</span> <span class="n">tpulse</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tpulse</span> <span class="o">=</span> <span class="n">t</span>
+
+    <span class="k">def</span> <span class="nf">dndt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Bimolecular trapping equation</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">)</span> <span class="c1"># interpolate the generation rate at the current time point</span>
+        
+        <span class="n">S</span> <span class="o">=</span> <span class="n">gen</span> <span class="o">-</span> <span class="n">ktrap</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">kdirect</span> <span class="o">*</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Solve the ODE</span>
+    <span class="k">if</span> <span class="n">equilibrate</span><span class="p">:</span> <span class="c1"># make sure the system is in equilibrium </span>
+        <span class="c1"># to be sure we equilibrate the system properly we need to solve the dynamic equation over the full range of 1/fpu in time</span>
+        <span class="n">rend</span> <span class="o">=</span> <span class="mf">1e-20</span> <span class="c1"># last time point</span>
+        <span class="n">RealChange</span> <span class="o">=</span> <span class="mf">1e19</span> <span class="c1"># initialize the relative change with a high number</span>
+        <span class="n">rstart</span> <span class="o">=</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">rend</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">RealChange</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">eq_limit</span><span class="p">)</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">maxcount</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;odeint&#39;</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">dndt</span><span class="p">,</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">),</span> <span class="n">tfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">RealChange</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span><span class="n">rend</span><span class="p">)</span><span class="o">/</span><span class="n">rend</span> <span class="c1"># relative change of mean</span>
+                <span class="n">rend</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># last time point</span>
+            <span class="k">elif</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;solve_ivp&#39;</span><span class="p">:</span>
+                <span class="c1"># r = solve_ivp(dndt, [t[0], t[-1]], rstart, args=(tpulse, Gpulse, ktrap, kdirect), method = method, rtol=rtol)</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">dndt</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">=</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span> <span class="o">=</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span> <span class="o">=</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span> <span class="o">=</span> <span class="n">kdirect</span><span class="p">),</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">ninit</span><span class="p">,</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    
+                <span class="n">RealChange</span>  <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span><span class="n">rend</span><span class="p">)</span><span class="o">/</span><span class="n">rend</span> <span class="c1"># relative change of mean</span>
+                <span class="n">rend</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># last time point</span>
+            <span class="n">rstart</span> <span class="o">=</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">rend</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rstart</span> <span class="o">=</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># solve the ODE again with the new initial conditions with the equilibrated system and the original time vector</span>
+    <span class="n">Gpulse_eq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">)</span> <span class="c1"># interpolate the generation rate at the current time point</span>
+    <span class="k">if</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;odeint&#39;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">dndt</span><span class="p">,</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Gpulse_eq</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">),</span> <span class="n">tfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;solve_ivp&#39;</span><span class="p">:</span>
+        <span class="c1"># r = solve_ivp(dndt, [t[0], t[-1]], rstart, t_eval = t, args=(t, Gpulse_eq, ktrap, kdirect), method = method, rtol=rtol)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">dndt</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">Gpulse</span> <span class="o">=</span> <span class="n">Gpulse_eq</span><span class="p">,</span> <span class="n">ktrap</span> <span class="o">=</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span> <span class="o">=</span> <span class="n">kdirect</span><span class="p">),</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">rend</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+    
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="Bimolecular_Trapping_Detrapping_equation">
+<a class="viewcode-back" href="../../../boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_Detrapping_equation">[docs]</a>
+<span class="k">def</span> <span class="nf">Bimolecular_Trapping_Detrapping_equation</span><span class="p">(</span><span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">ninit</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">equilibrate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span><span class="n">maxcount</span><span class="o">=</span><span class="mf">1e3</span><span class="p">,</span> <span class="n">solver_func</span> <span class="o">=</span> <span class="s1">&#39;odeint&#39;</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve the bimolecular trapping and detrapping equation :</span>
+
+<span class="sd">    dn/dt = G - ktrap * n * (Bulk_tr - n_t) - kdirect * n * (p + p_0)</span>
+<span class="sd">    dn_t/dt = k_trap * n * (Bulk_tr - n_t) - kdetrap * n_t * (p + p_0)</span>
+<span class="sd">    dp/dt = G - kdetrap * n_t * (p + p_0) - kdirect * n * (p + p_0)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ktrap : float</span>
+<span class="sd">        Trapping rate constant in m^3 s^-1</span>
+<span class="sd">    kdirect : float</span>
+<span class="sd">        Bimolecular/direct recombination rate constant in m^3 s^-1</span>
+<span class="sd">    kdetrap : float</span>
+<span class="sd">        Detrapping rate constant in m^3 s^-1</span>
+<span class="sd">    Bulk_tr : float</span>
+<span class="sd">        Bulk trap density in m^-3</span>
+<span class="sd">    p_0 : float</span>
+<span class="sd">        Ionized p-doping concentration in m^-3</span>
+<span class="sd">    t : ndarray of shape (n,)</span>
+<span class="sd">        time values in s</span>
+<span class="sd">    Gpulse : ndarray of shape (n,)</span>
+<span class="sd">        array of values of the charge carrier generation rate m^-3 s^-1</span>
+<span class="sd">    tpulse : ndarray of shape (n,), optional</span>
+<span class="sd">        time values for the pulse time step in case it is different from t, by default None</span>
+<span class="sd">    ninit : list of floats, optional</span>
+<span class="sd">        initial electron, trapped electron and hole concentrations in m^-3, by default [0,0,0]</span>
+<span class="sd">    equilibrate : bool, optional</span>
+<span class="sd">        whether to equilibrate the system, by default True</span>
+<span class="sd">    eq_limit : float, optional</span>
+<span class="sd">        limit for the relative change of the last time point to the previous one to consider the system in equilibrium, by default 1e-2</span>
+<span class="sd">    maxcount : int, optional</span>
+<span class="sd">        maximum number of iterations to reach equilibrium, by default 1e3</span>
+<span class="sd">    solver_func : str, optional</span>
+<span class="sd">        solver function to use can be [&#39;odeint&#39;,&#39;solve_ivp&#39;], by default &#39;odeint&#39;</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        additional keyword arguments for the solver function</span>
+<span class="sd">        &#39;method&#39; : str, optional</span>
+<span class="sd">            method to use for the solver, by default &#39;RK45&#39;</span>
+<span class="sd">        &#39;rtol&#39; : float, optional</span>
+<span class="sd">            relative tolerance, by default 1e-3</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        electron concentration in m^-3</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        trapped electron concentration in m^-3</span>
+<span class="sd">    ndarray of shape (n,)</span>
+<span class="sd">        hole concentration in m^-3</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+
+    <span class="c1"># check solver function</span>
+    <span class="k">if</span> <span class="n">solver_func</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;odeint&#39;</span><span class="p">,</span><span class="s1">&#39;solve_ivp&#39;</span><span class="p">]:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;solver function not recognized, using odeint&#39;</span><span class="p">)</span>
+        <span class="n">solver_func</span> <span class="o">=</span> <span class="s1">&#39;odeint&#39;</span>
+
+    <span class="c1"># kwargs</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="s1">&#39;RK45&#39;</span><span class="p">)</span>
+    <span class="n">rtol</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rtol&#39;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">)</span>
+
+    <span class="c1"># check if the pulse time step is different from the time vector</span>
+    <span class="k">if</span> <span class="n">tpulse</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tpulse</span> <span class="o">=</span> <span class="n">t</span>
+    
+    <span class="k">def</span> <span class="nf">rate_equations</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Rate equation of the BTD model (PEARS) </span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            t : float</span>
+<span class="sd">                time in s</span>
+<span class="sd">            n : list of floats</span>
+<span class="sd">                electron, trapped electron and hole concentrations in m^-3</span>
+<span class="sd">            Gpulse : ndarray of shape (n,)</span>
+<span class="sd">                array of values of the charge carrier generation rate m^-3 s^-1</span>
+<span class="sd">            tpulse : ndarray of shape (n,), optional</span>
+<span class="sd">                array of time values for the pulse time step in case it is different from t, by default None</span>
+<span class="sd">            ktrap : float</span>
+<span class="sd">                trapping rate constant in m^3 s^-1</span>
+<span class="sd">            kdirect : float</span>
+<span class="sd">                Bimolecular/direct recombination rate constant in m^3 s^-1</span>
+<span class="sd">            kdetrap : float</span>
+<span class="sd">                detrapping rate constant in m^3 s^-1</span>
+<span class="sd">            Bulk_tr : float</span>
+<span class="sd">                bulk trap density in m^-3</span>
+<span class="sd">            p_0 : float</span>
+<span class="sd">                ionized p-doping concentration in m^-3</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            list</span>
+<span class="sd">                Fractional change of electron, trapped electron and hole concentrations at times t</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">gen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">)</span> <span class="c1"># interpolate the generation rate at the current time point</span>
+            
+            <span class="n">n_e</span><span class="p">,</span> <span class="n">n_t</span><span class="p">,</span> <span class="n">n_h</span> <span class="o">=</span> <span class="n">n</span>
+            
+            <span class="n">B</span> <span class="o">=</span> <span class="n">kdirect</span> <span class="o">*</span> <span class="n">n_e</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_h</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">ktrap</span> <span class="o">*</span> <span class="n">n_e</span> <span class="o">*</span> <span class="p">(</span><span class="n">Bulk_tr</span> <span class="o">-</span> <span class="n">n_t</span><span class="p">)</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">kdetrap</span> <span class="o">*</span> <span class="n">n_t</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_h</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span>
+            <span class="n">dne_dt</span> <span class="o">=</span> <span class="n">gen</span> <span class="o">-</span> <span class="n">B</span> <span class="o">-</span> <span class="n">T</span>
+            <span class="n">dnt_dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">-</span> <span class="n">D</span>
+            <span class="n">dnh_dt</span> <span class="o">=</span> <span class="n">gen</span> <span class="o">-</span> <span class="n">B</span> <span class="o">-</span> <span class="n">D</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">dne_dt</span><span class="p">,</span> <span class="n">dnt_dt</span><span class="p">,</span> <span class="n">dnh_dt</span><span class="p">]</span>
+
+    <span class="c1"># Solve the ODE</span>
+    <span class="k">if</span> <span class="n">equilibrate</span><span class="p">:</span> <span class="c1"># equilibrate the system</span>
+        <span class="c1"># to be sure we equilibrate the system properly we need to solve the dynamic equation over the full range of 1/fpu in time </span>
+        <span class="n">rend</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-20</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">]</span> <span class="c1"># initial conditions</span>
+        <span class="n">rstart</span> <span class="o">=</span> <span class="p">[</span><span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rend</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rend</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="c1"># initial conditions for the next integration</span>
+        <span class="n">RealChange</span> <span class="o">=</span> <span class="mf">1e19</span> <span class="c1"># initialize the relative change with a high number</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">RealChange</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">eq_limit</span><span class="p">)</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&lt;</span> <span class="n">maxcount</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;solve_ivp&#39;</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">rate_equations</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">=</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span> <span class="o">=</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span> <span class="o">=</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span> <span class="o">=</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span> <span class="o">=</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span> <span class="o">=</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span> <span class="o">=</span> <span class="n">p_0</span><span class="p">),</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span> <span class="n">rtol</span><span class="p">)</span> <span class="c1"># method=&#39;LSODA&#39;,&#39;RK45&#39;</span>
+                <span class="c1"># monitor only the electron concentration           </span>
+                <span class="n">RealChange</span>  <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># relative change of mean</span>
+                <span class="n">rend</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="c1"># last time point</span>
+            <span class="k">elif</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;odeint&#39;</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rate_equations</span><span class="p">,</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span><span class="p">),</span> <span class="n">tfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+                <span class="n">RealChange</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># relative change of mean</span>
+                <span class="n">rend</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span> <span class="c1"># last time point</span>
+
+            <span class="n">rstart</span> <span class="o">=</span> <span class="p">[</span><span class="n">rend</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rend</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rend</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">ninit</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="c1"># initial conditions for the next integration</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rstart</span> <span class="o">=</span> <span class="n">ninit</span>
+
+
+    <span class="c1"># solve the ODE again with the new initial conditions with the equilibrated system and the original time vector</span>
+    <span class="n">Gpulse_eq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tpulse</span><span class="p">,</span> <span class="n">Gpulse</span><span class="p">)</span> <span class="c1"># interpolate the generation rate at the current time point</span>
+    <span class="k">if</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;solve_ivp&#39;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">rate_equations</span><span class="p">,</span><span class="n">tpulse</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">Gpulse</span> <span class="o">=</span> <span class="n">Gpulse_eq</span><span class="p">,</span> <span class="n">ktrap</span> <span class="o">=</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span> <span class="o">=</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span> <span class="o">=</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span> <span class="o">=</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span> <span class="o">=</span> <span class="n">p_0</span><span class="p">),</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span> <span class="n">rtol</span><span class="p">)</span> <span class="c1"># method=&#39;LSODA&#39;,&#39;RK45&#39;</span>
+        <span class="n">n_e</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_t</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n_h</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">solver_func</span> <span class="o">==</span> <span class="s1">&#39;odeint&#39;</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">rate_equations</span><span class="p">,</span> <span class="n">rstart</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Gpulse_eq</span><span class="p">,</span> <span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span><span class="p">),</span> <span class="n">tfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">)</span>
+        <span class="n">n_e</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_t</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">n_h</span> <span class="o">=</span> <span class="n">r</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">n_e</span><span class="p">,</span> <span class="n">n_t</span><span class="p">,</span> <span class="n">n_h</span></div>
+
+
+
+
+
+        
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="c1"># add boar to the path</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">boar.dynamic_utils.pump</span> <span class="kn">import</span> <span class="n">get_flux_density</span><span class="p">,</span> <span class="n">gaussian_pump</span><span class="p">,</span> <span class="n">square_pump</span>
+    
+    <span class="n">P</span> <span class="o">=</span> <span class="mf">0.0039</span>  <span class="c1"># real Power in W</span>
+    <span class="n">fpu</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># pump frequency in Hz</span>
+    <span class="n">pulse_width</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">)</span> <span class="c1"># pulse width in s</span>
+    <span class="n">wl</span> <span class="o">=</span> <span class="mi">850</span> <span class="c1"># pump wavelength in nm</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="mf">0.3</span> <span class="o">*</span><span class="mf">1e-4</span> <span class="c1"># pump area in m^-2 (a rough guess)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="mf">1e-2</span>  <span class="c1"># pump penetration depth in m (a rough guess) </span>
+
+    <span class="n">flux</span><span class="p">,</span><span class="n">density</span> <span class="o">=</span> <span class="n">get_flux_density</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">wl</span><span class="p">,</span><span class="n">fpu</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="c1">#     # Define the time array</span>
+<span class="c1">#     t = np.linspace(0, 0.98*1/fpu, 1000)</span>
+
+<span class="c1">#     G = square_pump(t, fpu, pulse_width, density)</span>
+<span class="c1">#     # Define the trapping rate</span>
+<span class="c1">#     ktrap = 1e5</span>
+
+<span class="c1">#     # Define the bimolecular recombination rate</span>
+<span class="c1">#     kdirect = 1e-18 # m^-3 s^-1 </span>
+<span class="c1">#     line_types = [&#39;-&#39;, &#39;--&#39;, &#39;-.&#39;, &#39;:&#39;]</span>
+<span class="c1">#     plt.figure(0)</span>
+<span class="c1">#     for idx1, ktrap in enumerate([1e4,1e5,1e6,1e7]):</span>
+<span class="c1">#         for idx, kdirect in enumerate([1e-17,1e-18,1e-19]):</span>
+
+<span class="c1">#             # Solve the bimolecular trapping equation</span>
+<span class="c1">#             n = Bimolecular_Trapping_equation(ktrap, kdirect, t, G )</span>
+
+<span class="c1">#             # Plot the results</span>
+<span class="c1">#             plt.plot(t, n, label = &#39;ktrap = {} 1/s, kdirect = {} m^-3 s^-1&#39;.format(ktrap,kdirect), linestyle = line_types[idx1])</span>
+
+<span class="c1">#     plt.figure(1)</span>
+
+<span class="c1">#     t = np.geomspace(1e-10, 0.98*1/fpu, 100000)</span>
+<span class="c1">#     # add 0 at the beginning of the time array</span>
+<span class="c1">#     t = np.insert(t, 0, 0)</span>
+<span class="c1">#     G = gaussian_pump(t, fpu, 5e-9,  density, 10e-9, background=0)</span>
+<span class="c1">#     for idx1, ktrap in enumerate([1e4,1e5,1e6,1e7]):</span>
+<span class="c1">#         for idx, kdirect in enumerate([1e-17,1e-18,1e-19]):</span>
+
+<span class="c1">#             # Solve the bimolecular trapping equation</span>
+<span class="c1">#             n = Bimolecular_Trapping_equation(ktrap, kdirect, t, G, )</span>
+
+<span class="c1">#             # Plot the results</span>
+            
+<span class="c1">#             plt.semilogx(t, n/max(n), label = &#39;ktrap = {} 1/s, kdirect = {} m^-3 s^-1&#39;.format(ktrap,kdirect), linestyle = line_types[idx1])</span>
+<span class="c1">#     plt.semilogx(t, G/max(G), &#39;k&#39;,label = &#39;pulse&#39;)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mf">0.98</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mf">0.98</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span>
+    <span class="c1"># add 0 at the beginning of the time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="mf">0.039</span>  <span class="c1"># real Power in W</span>
+    <span class="n">flux</span><span class="p">,</span><span class="n">density</span> <span class="o">=</span> <span class="n">get_flux_density</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">wl</span><span class="p">,</span><span class="n">fpu</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">gaussian_pump</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fpu</span><span class="p">,</span> <span class="mf">5e-9</span><span class="p">,</span>  <span class="n">density</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="mf">5e-9</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ktrap</span> <span class="o">=</span> <span class="mf">3e-12</span>
+    <span class="n">kdirect</span> <span class="o">=</span> <span class="mf">4e-16</span>
+    <span class="n">kdetrap</span> <span class="o">=</span> <span class="mf">8e-15</span>
+    <span class="n">Bulk_tr</span> <span class="o">=</span> <span class="mf">1e20</span>
+    <span class="n">p_0</span> <span class="o">=</span> <span class="mf">0e18</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+    <span class="c1"># colors = cm.virisdis(10)</span>
+    <span class="c1"># import viridis</span>
+    <span class="n">viridis</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">kdetrap</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">8e-15</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">kdirect</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">4e-16</span><span class="p">]:</span>
+            <span class="n">n_e</span><span class="p">,</span> <span class="n">n_t</span><span class="p">,</span> <span class="n">n_h</span> <span class="o">=</span> <span class="n">Bimolecular_Trapping_Detrapping_equation</span><span class="p">(</span><span class="n">ktrap</span><span class="p">,</span> <span class="n">kdirect</span><span class="p">,</span> <span class="n">kdetrap</span><span class="p">,</span> <span class="n">Bulk_tr</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">equilibrate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">eq_limit</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">)</span>
+            <span class="c1"># Relation between charge carrier concentration and TRPL signal</span>
+            <span class="n">trpl</span> <span class="o">=</span> <span class="n">n_e</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_h</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span>
+            <span class="c1"># Take into account normalization and background</span>
+            <span class="c1"># signal_trpl = 1e-5 * trpl / (n_e[0] * (n_h[0] + p_0))</span>
+            <span class="n">signal_trpl</span> <span class="o">=</span> <span class="n">kdirect</span> <span class="o">*</span> <span class="mf">0.8e-31</span> <span class="o">*</span> <span class="n">n_e</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_h</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">signal_trpl</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;TRPL&#39;</span><span class="p">)</span>
+            <span class="n">signal_trpl</span> <span class="o">=</span> <span class="mf">1e-24</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-2</span><span class="o">*</span><span class="n">n_e</span> <span class="o">+</span> <span class="n">n_h</span> <span class="o">+</span> <span class="n">p_0</span><span class="p">)</span>
+            <span class="c1"># find idx max of the signal</span>
+            <span class="n">idx_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">signal_trpl</span><span class="p">)</span>
+            <span class="c1"># find the time of the max</span>
+            <span class="n">t_max</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">idx_max</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">signal_trpl</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;TRMC&#39;</span><span class="p">)</span>
+            <span class="c1"># plt.plot(t-t_max, signal_trpl/max(signal_trpl),label = &#39;TRPL&#39;, color = viridis(count))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">5e-10</span><span class="p">,</span><span class="mf">5e-5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;test.png&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

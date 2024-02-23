@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.core package &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=377e76b0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="boar.dynamic_utils package" href="boar.dynamic_utils.html" />
+    <link rel="prev" title="boar.agents package" href="boar.agents.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">boar</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="boar.html">boar package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="boar.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="boar.SIMsalabim_utils.html">boar.SIMsalabim_utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html">boar.agents package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">boar.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.dynamic_utils.html">boar.dynamic_utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="boar.html#module-boar">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">boar</a></li>
+          <li class="breadcrumb-item"><a href="boar.html">boar package</a></li>
+      <li class="breadcrumb-item active">boar.core package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/boar.core.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="boar-core-package">
+<h1>boar.core package<a class="headerlink" href="#boar-core-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-boar.core.FitParams">
+<span id="boar-core-fitparams-module"></span><h2>boar.core.FitParams module<a class="headerlink" href="#module-boar.core.FitParams" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.FitParams.FOMparam">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.FitParams.</span></span><span class="sig-name descname"><span class="pre">FOMparam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relRange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optim_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/FitParams.html#FOMparam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.FitParams.FOMparam" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.FitParams.FOMparam.update_FOMparam">
+<span class="sig-name descname"><span class="pre">update_FOMparam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">FOM_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/FitParams.html#FOMparam.update_FOMparam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.FitParams.FOMparam.update_FOMparam" title="Link to this definition"></a></dt>
+<dd><p>Update the FOM_param object with lims and startVal based on the FOM_list
+set the lims to the min and max of the FOM_list and the startVal to the mean
+set the relRange to 1
+set the lim_type to absolute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>FOM_list</strong> (<em>list</em>) – list of FOMs</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.FitParams.Fitparam">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.FitParams.</span></span><span class="sig-name descname"><span class="pre">Fitparam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startVal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relRange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'log'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lim_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'absolute'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optim_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'float'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rescale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stepsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/FitParams.html#Fitparam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.FitParams.Fitparam" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</section>
+<section id="module-boar.core.funcs">
+<span id="boar-core-funcs-module"></span><h2>boar.core.funcs module<a class="headerlink" href="#module-boar.core.funcs" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.callable_name">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">callable_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">any_callable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/boar/core/funcs.html#callable_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.callable_name" title="Link to this definition"></a></dt>
+<dd><p>Returns the name of a callable object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>any_callable</strong> (<em>Callable</em><em>[</em><em>...</em><em>, </em><em>Any</em><em>]</em>) – Callable object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Name of the callable object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.gauss">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">gauss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#gauss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.gauss" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.gauss_sk">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">gauss_sk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#gauss_sk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.gauss_sk" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.gaussian_pulse_norm">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">gaussian_pulse_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tpulse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#gaussian_pulse_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.gaussian_pulse_norm" title="Link to this definition"></a></dt>
+<dd><p>Returns a gaussian pulse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – t time axis (unit: s)</p></li>
+<li><p><strong>tpulse</strong> (<em>float</em>) – tpulse center of the pulse (unit: s)</p></li>
+<li><p><strong>width</strong> (<em>float</em>) – width of the pulse (unit: s)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vector containing the gaussian pulse</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.get_flux_density">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">get_flux_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#get_flux_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.get_flux_density" title="Link to this definition"></a></dt>
+<dd><p>From the measured power and reprate and area,
+get photons/cm2 and approximate photons/cm3 per pulse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> (<em>float</em>) – total CW power of pulse in W</p></li>
+<li><p><strong>wl</strong> (<em>float</em>) – excitation wavelength in nm</p></li>
+<li><p><strong>nu</strong> (<em>float</em>) – repetition rate in s-1</p></li>
+<li><p><strong>A</strong> (<em>float</em>) – effective pump area in cm2</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – penetration depth in cm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>flux in photons per cm2
+density (float): average volume density in photons/cm3</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>flux (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.get_unique_X">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">get_unique_X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#get_unique_X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.get_unique_X" title="Link to this definition"></a></dt>
+<dd><p>Get the unique values of the independent variable (X) in the dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – the experimental dimensions</p></li>
+<li><p><strong>xaxis</strong> (<em>str</em><em>, </em><em>optional</em>) – the name of the independent variable</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – names of the X columns</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_unique</strong> (<em>ndarray</em>) – the unique values of the independent variable</p></li>
+<li><p><strong>X_dimensions_uni</strong> (<em>list</em>) – the names of the columns of X_unique</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – if xaxis is not in X_dimensions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.get_unique_X_and_xaxis_values">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">get_unique_X_and_xaxis_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#get_unique_X_and_xaxis_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.get_unique_X_and_xaxis_values" title="Link to this definition"></a></dt>
+<dd><p>Get the values of the independent variable (X) in the dataset for each unique value of the other dimensions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – the experimental dimensions</p></li>
+<li><p><strong>xaxis</strong> (<em>str</em><em>, </em><em>optional</em>) – the name of the independent variable</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – the names of the columns of X</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>xs</strong> – the values of the independent variable for each unique value of the other dimensions</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of ndarrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.polynom">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">polynom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#polynom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.polynom" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.sci_notation">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">sci_notation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#sci_notation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.sci_notation" title="Link to this definition"></a></dt>
+<dd><p>Make proper scientific notation for graphs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number</strong> (<em>float</em>) – Number to put in scientific notation.</p></li>
+<li><p><strong>sig_fig</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of significant digits (Defaults = 2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>output</strong> – String containing the number in scientific notation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="boar.core.funcs.sigmoid">
+<span class="sig-prename descclassname"><span class="pre">boar.core.funcs.</span></span><span class="sig-name descname"><span class="pre">sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/funcs.html#sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.funcs.sigmoid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-boar.core.optimization">
+<span id="boar-core-optimization-module"></span><h2>boar.core.optimization module<a class="headerlink" href="#module-boar.core.optimization" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.optimization.</span></span><span class="sig-name descname"><span class="pre">MultiObjectiveOptimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmstart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Path2OldXY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SaveOldXY2file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.core.optimizer.BoarOptimizer" title="boar.core.optimizer.BoarOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoarOptimizer</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.LH">
+<span class="sig-name descname"><span class="pre">LH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.LH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.LH" title="Link to this definition"></a></dt>
+<dd><p>Compute the positive log likelihood from the negative log likelihood
+Be careful here! The loss and threshold used here are the ones define as arguments of the optimize_sko_parallel and not the one defined in the targets so for the calculation of the MSE to be consistent we need all targets to have the same loss and threshold!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em>) – 1 / minimum of scaled surrogate function
+will be multiplied with fscale to give 1/ the unscaled minimum which is the MSE of the best fit
+If there are no systematic deviations, and if the noise in y is Gaussian, then this should yield
+the variance of the Gaussian distribution of target values</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of data points</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – a trained regressor which has a .predict() method</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor to keep the surrogate function between 0 and 100 (yields best results in BO but
+here we need the unscaled surrogate function, that is, MSE)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the likelihood</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.LLH">
+<span class="sig-name descname"><span class="pre">LLH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.LLH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.LLH" title="Link to this definition"></a></dt>
+<dd><p>Return the negative log likelihood -ln(p(t|w,beta)) where t are the measured target values,
+w is the set of model parameters, and beta is the target uncertainty.</p>
+<p>Be careful here! The loss and threshold used here are the ones defined as arguments of
+the optimize_sko_parallel and not the ones defined in the targets so for the calculation
+of the MSE to be consistent, we need all targets to have the same loss and threshold!</p>
+<p>For reference check:
+Christopher M. Bishop: Pattern Recognition and Machine Learning, Springer Information
+Science and statistics 2006, Chapter 1.2.5 pg 29</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – Data array of size (n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em>) – 1 / minimum of scaled surrogate function
+will be multiplied with fscale to give 1/ the unscaled minimum which is the MSE
+of the best fit
+If there are no systematic deviations, and if the noise in y is Gaussian, then
+this should yield the variance of the Gaussian distribution of target values</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of data points</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – a trained regressor which has a .predict() method</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor to keep the surrogate function between 0 and 100 (yields best
+results in BO but here we need the unscaled surrogate function, that is, MSE)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the negative log likelihood</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.cost_from_old_xy">
+<span class="sig-name descname"><span class="pre">cost_from_old_xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.cost_from_old_xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.cost_from_old_xy" title="Link to this definition"></a></dt>
+<dd><p>Calculate the cost function from old data points</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>yfs</strong> (<em>1D-array</em>) – array of size (n,) with the model function values from old data points</p></li>
+<li><p><strong>y</strong> (<em>1D-array</em>) – data array of size (n,) to fit</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – a scaling factor to keep y between 0 and 100 so the length scales can be compared</p></li>
+<li><p><strong>weight</strong> (<em>int</em><em>, </em><em>optional</em>) – weight array of size (n,) to weight the data points, by default 1</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>objective function type, can be [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’larry’,’nRMSE_VLC’], by default ‘MSE’</dt><dd><p>’MSE’: mean squared error
+‘RMSE’: root mean squared error
+‘MSLE’: mean squared log error
+‘nRMSE’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
+‘MAE’: mean absolute error
+‘RAE’: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
+‘larry’: mean squared error legacy version
+‘nRMSE_VLC’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’], by default ‘linear’</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – critical value above which loss sets in, by default 1000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the loss function values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.do_grid_posterior">
+<span class="sig-name descname"><span class="pre">do_grid_posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.do_grid_posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.do_grid_posterior" title="Link to this definition"></a></dt>
+<dd><p>Obtain the posterior probability distribution p(w|y) by brute force gridding
+where w is the set of model parameters and y is the data
+For each fitparameter, return mean and standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step</strong> (<em>int</em>) – Number of zooming steps</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – Figure to plot on</p></li>
+<li><p><strong>axes</strong> (<em>list</em>) – List of axes to plot on</p></li>
+<li><p><strong>gs</strong> (<em>matplotlib.gridspec.GridSpec</em>) – Gridspec to plot on</p></li>
+<li><p><strong>lb</strong> (<em>list</em>) – Lower bounds of the grid</p></li>
+<li><p><strong>ub</strong> (<em>list</em>) – Upper bounds of the grid</p></li>
+<li><p><strong>pf</strong> (<em>list</em>) – List of parameters</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of datasets</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – trained regressor</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>Nres</strong> (<em>integer</em>) – Sampling resolution. Number of data points per dimension.</p></li>
+<li><p><strong>logscale</strong> (<em>boolean</em>) – display in log scale?</p></li>
+<li><p><strong>vmin</strong> (<em>float</em>) – lower cutoff (in terms of exp(vmin) if logscale==True)</p></li>
+<li><p><strong>zoom</strong> (<em>int</em><em>, </em><em>optional</em>) – number of time to zoom in, by default 1.</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p></li>
+<li><p><strong>clear_axis</strong> (<em>boolean</em><em>, </em><em>optional</em>) – clear the axis before plotting the zoomed in data, by default False.</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary of true values of the parameters, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array of explored points in the parameter space during the optimization, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.load_old_xy">
+<span class="sig-name descname"><span class="pre">load_old_xy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.load_old_xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.load_old_xy" title="Link to this definition"></a></dt>
+<dd><p>Load old xy data from file from self.SaveOldXY2file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_1D">
+<span class="sig-name descname"><span class="pre">marginal_posterior_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ninteg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bottom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.marginal_posterior_1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_1D" title="Link to this definition"></a></dt>
+<dd><p>calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated</p></li>
+<li><p><strong>lb</strong> (<em>float</em><em>, </em><em>optional</em>) – lower bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>ub</strong> (<em>float</em><em>, </em><em>optional</em>) – upper bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib figure</em><em>, </em><em>optional</em>) – figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em><em>, </em><em>optional</em>) – axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary with the true values of the parameters, by default None</p></li>
+<li><p><strong>gpr</strong> (<em>sklearn regressor</em><em>, </em><em>optional</em>) – regressor to calculate the likelihood, if None we use the self.gpr, by default None</p></li>
+<li><p><strong>N</strong> (<em>int</em><em>, </em><em>optional</em>) – number of samples to calculate the likelihood, if None we use the self.N, by default None</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.beta_scaled, by default None</p></li>
+<li><p><strong>fscale</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.fscale, by default None</p></li>
+<li><p><strong>Nres</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to calculate the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>Ninteg</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to marginalize the prob, by default 1e5</p></li>
+<li><p><strong>vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – value used for the cut off probability when zooming in, note that for now this is not in used, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array with the points to plot the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we plot the marginal posterior probability distribution in log scale, by default False</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we show the plot, by default True</p></li>
+<li><p><strong>clear_axis</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we clear the axis, by default False</p></li>
+<li><p><strong>xlabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the xlabel, by default ‘bottom’</p></li>
+<li><p><strong>ylabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the ylabel, by default ‘left’</p></li>
+<li><p><strong>'**kwargs'</strong> – <p>additional arguments to pass to the plot function, by default None</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_2D">
+<span class="sig-name descname"><span class="pre">marginal_posterior_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ninteg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bottom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.marginal_posterior_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_2D" title="Link to this definition"></a></dt>
+<dd><p>calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated on the x-axis</p></li>
+<li><p><strong>y_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated on the y-axis</p></li>
+<li><p><strong>lb</strong> (<em>float</em><em>, </em><em>optional</em>) – lower bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>ub</strong> (<em>float</em><em>, </em><em>optional</em>) – upper bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib figure</em><em>, </em><em>optional</em>) – figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em><em>, </em><em>optional</em>) – axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary with the true values of the parameters, by default None</p></li>
+<li><p><strong>gpr</strong> (<em>sklearn regressor</em><em>, </em><em>optional</em>) – regressor to calculate the likelihood, if None we use the self.gpr, by default None</p></li>
+<li><p><strong>N</strong> (<em>int</em><em>, </em><em>optional</em>) – number of samples to calculate the likelihood, if None we use the self.N, by default None</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.beta_scaled, by default None</p></li>
+<li><p><strong>fscale</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.fscale, by default None</p></li>
+<li><p><strong>Nres</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to calculate the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>Ninteg</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to marginalize the prob, by default 1e5</p></li>
+<li><p><strong>vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – value used for the cut off probability when zooming in, note that for now this is not in used, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array with the points to plot the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we plot the marginal posterior probability distribution in log scale, by default False</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we show the plot, by default True</p></li>
+<li><p><strong>clear_axis</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we clear the axis, by default False</p></li>
+<li><p><strong>xlabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the xlabel, by default ‘bottom’</p></li>
+<li><p><strong>ylabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the ylabel, by default ‘left’</p></li>
+<li><p><strong>'**kwargs'</strong> – <dl class="simple">
+<dt>additional arguments to pass to the plot function, by default None</dt><dd><dl class="simple">
+<dt>show_points<span class="classifier">bool, optional</span></dt><dd><p>if True we show the points, by default True</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.obj_func_sko">
+<span class="sig-name descname"><span class="pre">obj_func_sko</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.obj_func_sko"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.obj_func_sko" title="Link to this definition"></a></dt>
+<dd><p>Objective function directly returning the loss function
+for use with the Bayesian Optimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>'*p'</strong> – <p>the parameters as passed by the Bayesian Optimizer</p>
+</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p></li>
+<li><p><strong>model</strong> (<em>callable</em>) – Model function yf = f(X) to compare to y</p></li>
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>y</strong> (<em>1D-array</em>) – data array of size (n,) to fit</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – a scaling factor to keep y between 0 and 100 so the length scales can be compared</p></li>
+<li><p><strong>weight</strong> (<em>1D-array</em><em>, </em><em>optional</em>) – weight array of size (n,) to weight the data points, by default 1</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>objective function type, can be [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’larry’,’nRMSE_VLC’], by default ‘MSE’</p>
+<blockquote>
+<div><p>’MSE’: mean squared error
+‘RMSE’: root mean squared error
+‘MSLE’: mean squared log error
+‘nRMSE’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
+‘MAE’: mean absolute error
+‘RAE’: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
+‘larry’: mean squared error legacy version
+‘nRMSE_VLC’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’], by default ‘linear’</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – critical value above which loss sets in, by default 1000.
+Wisely select so that the loss function affects only outliers.
+If threshold is set too low, then the value will be suppressed even fon non-outliers
+falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the loss function values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.optimize_sko_parallel">
+<span class="sig-name descname"><span class="pre">optimize_sko_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_yscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_BO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_initial_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_BO_warmstart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_objective_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_plot_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.optimize_sko_parallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.optimize_sko_parallel" title="Link to this definition"></a></dt>
+<dd><p>Multi-objective optimization of the parameters of the model using the scikit-optimize package</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – number of parallel jobs to run, by default 4</p></li>
+<li><p><strong>n_yscale</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points used to estimate the scaling factor yscale, by default 20</p></li>
+<li><p><strong>n_BO</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to run in the Bayesian optimization, by default 10</p></li>
+<li><p><strong>n_initial_points</strong> (<em>int</em><em>, </em><em>optional</em>) – number of initial points to run, by default 10</p></li>
+<li><p><strong>n_BO_warmstart</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to run in the Bayesian optimization after warmstart, by default 5</p></li>
+<li><p><strong>n_jobs_init</strong> (<em>int</em><em>, </em><em>optional</em>) – number of parallel jobs to run for the initial points, by default None
+if None, then n_jobs is used</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>objective function type, can be [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’larry’,’nRMSE_VLC’], by default ‘MSE’</dt><dd><p>’MSE’: mean squared error
+‘RMSE’: root mean squared error
+‘MSLE’: mean squared log error
+‘nRMSE’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
+‘MAE’: mean absolute error
+‘RAE’: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
+‘larry’: mean squared error legacy version
+‘nRMSE_VLC’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’], by default ‘linear’</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – critical value above which loss sets in, by default 1000.
+Wisely select so that the loss function affects only outliers.
+If threshold is set too low, then the value will be suppressed even fon non-outliers
+falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</p></li>
+<li><p><strong>suggest_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – only suggest the next point and does not evaluate it, by default False</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>dictionary of keyword argument to check for the improvement of the model, by default None
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>max_loop_no_improvement<span class="classifier">int, optional</span></dt><dd><p>maximum number of loops without improvement, by default 10</p>
+</dd>
+<dt>check_improvement<span class="classifier">bool, optional</span></dt><dd><p>check for improvement can be either None, ‘relax’, ‘strict’, by default None
+if None, then no check is performed
+if ‘relax’, then the check is performed by checking if abs(fun_new - fun_best)/fun_new &gt; ftol or if norm(dx) &lt; xtol*(xtol + norm(x))
+if ‘strict’, then the check is performed by checking if abs(fun_new - fun_best)/fun_new &gt; ftol only</p>
+</dd>
+<dt>ftol<span class="classifier">float, optional</span></dt><dd><p>monitor the change in the minimum of the objective function value, by default 1e-3</p>
+</dd>
+<dt>xtol<span class="classifier">float, optional</span></dt><dd><p>Monitor the change of the fitting results, by default 1e-3</p>
+</dd>
+<dt>initial_point_generator<span class="classifier">str, optional</span></dt><dd><p>type of initial point generator, can be [‘random’,’sobol’,’halton’,’hammersly’,’lhs’,’grid’], by default ‘lhs’</p>
+</dd>
+<dt>acq_func<span class="classifier">str, optional</span></dt><dd><p>type of acquisition function, can be [‘LCB’,’EI’,’PI’,’gp_hedge’], by default ‘gp_hedge’</p>
+</dd>
+<dt>acq_optimizer<span class="classifier">str, optional</span></dt><dd><p>type of acquisition optimizer, can be [‘auto’,’sampling’,’lbfgs’], by default ‘auto’</p>
+</dd>
+<dt>acq_func_kwargs<span class="classifier">dict, optional</span></dt><dd><p>dictionary of keyword arguments for the acquisition function, by default {}</p>
+</dd>
+<dt>acq_optimizer_kwargs<span class="classifier">dict, optional</span></dt><dd><p>dictionary of keyword arguments for the acquisition optimizer, by default {}</p>
+</dd>
+<dt>switch2exploit<span class="classifier">bool, optional</span></dt><dd><p>switch to exploitation after reaching max_loop_no_improvement loops without improvement and reset the counter, by default True</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>show_objective_func<span class="classifier">bool, optional</span></dt><dd><p>plot the objective function, by default True</p>
+</dd>
+<dt>kwargs_plot_obj<span class="classifier">dict, optional</span></dt><dd><p>dictionary of keyword arguments for plot_objective_function, by default None
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>zscale: str, optional</dt><dd><p>type of scaling to use for the objective function, can be [‘linear’,’log’], by default ‘log’</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>show_posterior<span class="classifier">bool, optional</span></dt><dd><p>calculate &amp; show posterior distribution, by default True</p>
+</dd>
+<dt>kwargs_posterior<span class="classifier">dict</span></dt><dd><p>dictionary of keyword arguments for posterior function, by default None
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Nres<span class="classifier">integer, optional</span></dt><dd><p>Sampling resolution. Number of data points per dimension, by default 30</p>
+</dd>
+<dt>Ninteg<span class="classifier">integer, optional</span></dt><dd><p>Number of points for the marginalization over the other parameters when full_grid = False, by default 100</p>
+</dd>
+<dt>full_grid<span class="classifier">boolean, optional</span></dt><dd><p>If True, use a full grid for the posterior, by default False</p>
+</dd>
+<dt>randomize<span class="classifier">boolean, optional</span></dt><dd><p>If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False</p>
+</dd>
+<dt>logscale<span class="classifier">boolean, optional</span></dt><dd><p>display in log scale?, by default True</p>
+</dd>
+<dt>vmin<span class="classifier">float, optional</span></dt><dd><p>lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100</p>
+</dd>
+<dt>zoom<span class="classifier">int, optional</span></dt><dd><p>number of time to zoom in, only used if full_grid = True, by default 0</p>
+</dd>
+<dt>min_prob<span class="classifier">float, optional</span></dt><dd><p>minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p>
+</dd>
+<dt>clear_axis<span class="classifier">boolean, optional</span></dt><dd><p>clear the axis before plotting the zoomed in data, by default False.</p>
+</dd>
+<dt>True_values<span class="classifier">dict, optional</span></dt><dd><p>dictionary of true values of the parameters, by default None</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>verbose<span class="classifier">bool, optional</span></dt><dd><p>display progress and results, by default True</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary with the optimized parameters (‘popt’) and the corresponding covariance (‘pcov’) and standard deviation (‘std’) values</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.plot_objective_function">
+<span class="sig-name descname"><span class="pre">plot_objective_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rrr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pnames_display</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_plot_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.plot_objective_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.plot_objective_function" title="Link to this definition"></a></dt>
+<dd><p>Plot the objective function as a contour plot using skopt plt_objective function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rrr</strong> (<em>skopt.optimizer.OptimizeResult</em>) – result of the optimization</p></li>
+<li><p><strong>pnames_display</strong> (<em>list</em>) – list of strings with the display names of the parameters</p></li>
+<li><p><strong>kwargs_plot_obj</strong> (<em>dict</em><em>, </em><em>optional</em>) – kwargs for the plot_objective function, by default {}</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.posterior" title="Link to this definition"></a></dt>
+<dd><p>Obtain the posterior probability distribution p(w|y) by brute force gridding
+where w is the set of model parameters and y is the data
+For each fitparameter, return mean and standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>list</em><em> of </em><em>fitparameter objects</em>) – list of fitparameters</p></li>
+<li><p><strong>lb_main</strong> (<em>list</em><em> of </em><em>floats</em>) – lower bound for the fitparameters</p></li>
+<li><p><strong>ub_main</strong> (<em>list</em><em> of </em><em>floats</em>) – upper bound for the fitparameters</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em>) – 1/minimum of the scaled surrogate function</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of datasets</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – trained regressor</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>kwargs_posterior</strong> (<em>dict</em>) – <p>dictionary of keyword arguments for posterior function
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Nres<span class="classifier">integer, optional</span></dt><dd><p>Sampling resolution. Number of data points per dimension, by default 30</p>
+</dd>
+<dt>Ninteg<span class="classifier">integer, optional</span></dt><dd><p>Number of points for the marginalization over the other parameters when full_grid = False, by default 100</p>
+</dd>
+<dt>full_grid<span class="classifier">boolean, optional</span></dt><dd><p>If True, use a full grid for the posterior, by default False</p>
+</dd>
+<dt>randomize<span class="classifier">boolean, optional</span></dt><dd><p>If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False</p>
+</dd>
+<dt>logscale<span class="classifier">boolean, optional</span></dt><dd><p>display in log scale?, by default True</p>
+</dd>
+<dt>vmin<span class="classifier">float, optional</span></dt><dd><p>lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100</p>
+</dd>
+<dt>zoom<span class="classifier">int, optional</span></dt><dd><p>number of time to zoom in, only used if full_grid = True, by default 0</p>
+</dd>
+<dt>min_prob<span class="classifier">float, optional</span></dt><dd><p>minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p>
+</dd>
+<dt>clear_axis<span class="classifier">boolean, optional</span></dt><dd><p>clear the axis before plotting the zoomed in data, by default False.</p>
+</dd>
+<dt>True_values<span class="classifier">dict, optional</span></dt><dd><p>dictionary of true values of the parameters, by default None</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array of explored points in the parameter space during the optimization, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Contour plots for each pair of fit parameters</em></p></li>
+<li><p><em>list of float, list of float</em> – the mean and the square root of the second central moment
+(generalized standard deviation for arbitrary probability distribution)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.randomize_grid_posterior">
+<span class="sig-name descname"><span class="pre">randomize_grid_posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.randomize_grid_posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.randomize_grid_posterior" title="Link to this definition"></a></dt>
+<dd><p>Obtain the posterior probability distribution p(w|y) by brute force gridding
+where w is the set of model parameters and y is the data
+For each fitparameter, return mean and standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>list</em><em> of </em><em>fitparameter objects</em>) – list of fitparameters</p></li>
+<li><p><strong>lb_main</strong> (<em>list</em><em> of </em><em>floats</em>) – lower bound for the fitparameters</p></li>
+<li><p><strong>ub_main</strong> (<em>list</em><em> of </em><em>floats</em>) – upper bound for the fitparameters</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em>) – 1/minimum of the scaled surrogate function</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of datasets</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – trained regressor</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>kwargs_posterior</strong> (<em>dict</em>) – <p>dictionary of keyword arguments for posterior function
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Nres<span class="classifier">integer, optional</span></dt><dd><p>Sampling resolution. Number of data points per dimension, by default 30</p>
+</dd>
+<dt>Ninteg<span class="classifier">integer, optional</span></dt><dd><p>Number of points for the marginalization over the other parameters when full_grid = False, by default 100</p>
+</dd>
+<dt>full_grid<span class="classifier">boolean, optional</span></dt><dd><p>If True, use a full grid for the posterior, by default False</p>
+</dd>
+<dt>logscale<span class="classifier">boolean, optional</span></dt><dd><p>display in log scale?, by default True</p>
+</dd>
+<dt>vmin<span class="classifier">float, optional</span></dt><dd><p>lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100</p>
+</dd>
+<dt>zoom<span class="classifier">int, optional</span></dt><dd><p>number of time to zoom in, only used if full_grid = True, by default 0</p>
+</dd>
+<dt>min_prob<span class="classifier">float, optional</span></dt><dd><p>minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p>
+</dd>
+<dt>clear_axis<span class="classifier">boolean, optional</span></dt><dd><p>clear the axis before plotting the zoomed in data, by default False.</p>
+</dd>
+<dt>True_values<span class="classifier">dict, optional</span></dt><dd><p>dictionary of true values of the parameters, by default None</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array of explored points in the parameter space during the optimization, by default None</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary of true values of the parameters, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Contour plots for each pair of fit parameters</em></p></li>
+<li><p><em>list of float, list of float</em> – the mean and the square root of the second central moment
+(generalized standard deviation for arbitrary probability distribution)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.save_old_xy">
+<span class="sig-name descname"><span class="pre">save_old_xy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.save_old_xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.save_old_xy" title="Link to this definition"></a></dt>
+<dd><p>Save the old X and y values to self.SaveOldXY2file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization.MultiObjectiveOptimizer.single_point">
+<span class="sig-name descname"><span class="pre">single_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GP'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_initial_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_objective_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_plot_obj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization.html#MultiObjectiveOptimizer.single_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization.MultiObjectiveOptimizer.single_point" title="Link to this definition"></a></dt>
+<dd><p>Do a single Gaussian Process Regression on the X,y data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>y</strong> (<em>1D-array</em>) – data array of size (n,) to fit</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p></li>
+<li><p><strong>base_estimator</strong> (<em>str</em><em>, </em><em>optional</em>) – base estimator for the Gaussian Process Regression, by default ‘GP’</p></li>
+<li><p><strong>n_initial_points</strong> (<em>int</em><em>, </em><em>optional</em>) – number of initial points to use for the Gaussian Process Regression, by default 100</p></li>
+<li><p><strong>show_objective_func</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to plot the objective function or not, by default True</p></li>
+<li><p><strong>kwargs_plot_obj</strong> (<em>dict</em><em>, </em><em>optional</em>) – kwargs arguments for the plot_objective_function function, by default None</p></li>
+<li><p><strong>axis_type</strong> (<em>list</em><em>, </em><em>optional</em>) – list of strings with the type of axis to use for each dimension. Either ‘linear’ or ‘log’, by default []</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to display progress and results or not, by default True</p></li>
+<li><p><strong>zscale</strong> (<em>str</em><em>, </em><em>optional</em>) – scale to use for the z axis of the contour plots. Either ‘linear’ or ‘log’, by default ‘linear’</p></li>
+<li><p><strong>show_plots</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to show the plots or not, by default True</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.core.optimization_botorch">
+<span id="boar-core-optimization-botorch-module"></span><h2>boar.core.optimization_botorch module<a class="headerlink" href="#module-boar.core.optimization_botorch" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.optimization_botorch.</span></span><span class="sig-name descname"><span class="pre">MooBOtorch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_constraints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmstart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Path2OldXY</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SaveOldXY2file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluate_custom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.core.optimizer.BoarOptimizer" title="boar.core.optimizer.BoarOptimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">BoarOptimizer</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.BoTorchOpti">
+<span class="sig-name descname"><span class="pre">BoTorchOpti</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[4,</span> <span class="pre">4]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_step_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[5,</span> <span class="pre">10]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Sobol',</span> <span class="pre">'GPEI']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_kwargs_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_gen_kwargs_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_MOO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_custom_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suggest_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_stopping_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.BoTorchOpti"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.BoTorchOpti" title="Link to this definition"></a></dt>
+<dd><p>Optimize the model using the Ax/Botorch library
+Uses the Expected Hypervolume Improvement (EHVI) algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_jobs</strong> (<em>list</em><em>, </em><em>optional</em>) – number of parallel jobs for each step, by default [4,4]</p></li>
+<li><p><strong>n_step_points</strong> (<em>list</em><em>, </em><em>optional</em>) – number of points to sample for each step, by default [5, 10]</p></li>
+<li><p><strong>models</strong> (<em>list</em><em>, </em><em>optional</em>) – list of models to use for each step, by default [‘Sobol’,’GPEI’]</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – type of objective function to be used, by default ‘MSE’</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – loss function to be used, by default ‘linear’</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – threshold for the loss function, by default 1</p></li>
+<li><p><strong>model_kwargs_list</strong> (<em>list</em><em>, </em><em>optional</em>) – list of dictionaries of model kwargs to use for each step, by default None
+Can contains :
+‘surrogate’ : Surrogate model to use.
+‘botorch_acqf_class’ : BoTorch acquisition function class to use.</p></li>
+<li><p><strong>model_gen_kwargs_list</strong> (<em>list</em><em>, </em><em>optional</em>) – list of dictionaries of model generation kwargs to use for each step, by default None</p></li>
+<li><p><strong>use_CUDA</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use CUDA or not, by default True</p></li>
+<li><p><strong>is_MOO</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use multi-objective optimization or enforce single-objective optimization, by default False</p></li>
+<li><p><strong>use_custom_func</strong> (<em>bool</em><em>, </em><em>optional</em>) – use a custom evaluation function instead of the default one, this is useful when the same model is used for different targets, by default False</p></li>
+<li><p><strong>suggest_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – only suggest the next point and does not evaluate it, by default False</p></li>
+<li><p><strong>global_stopping_strategy</strong> (<em>class</em><em>, </em><em>optional</em>) – global stopping strategy based on BaseGlobalStoppingStrategy, see <a class="reference external" href="https://ax.dev/tutorials/gss.html">https://ax.dev/tutorials/gss.html</a>, by default None</p></li>
+<li><p><strong>show_posterior</strong> (<em>bool</em><em>, </em><em>optional</em>) – calculate &amp; show posterior distribution, by default True</p></li>
+<li><p><strong>kwargs_posterior</strong> (<em>dict</em>) – <p>dictionary of keyword arguments for posterior function, by default None
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Nres<span class="classifier">integer, optional</span></dt><dd><p>Sampling resolution. Number of data points per dimension, by default 30</p>
+</dd>
+<dt>Ninteg<span class="classifier">integer, optional</span></dt><dd><p>Number of points for the marginalization over the other parameters when full_grid = False, by default 100</p>
+</dd>
+<dt>full_grid<span class="classifier">boolean, optional</span></dt><dd><p>If True, use a full grid for the posterior, by default False</p>
+</dd>
+<dt>randomize<span class="classifier">boolean, optional</span></dt><dd><p>If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False</p>
+</dd>
+<dt>logscale<span class="classifier">boolean, optional</span></dt><dd><p>display in log scale?, by default True</p>
+</dd>
+<dt>vmin<span class="classifier">float, optional</span></dt><dd><p>lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100</p>
+</dd>
+<dt>zoom<span class="classifier">int, optional</span></dt><dd><p>number of time to zoom in, only used if full_grid = True, by default 0</p>
+</dd>
+<dt>min_prob<span class="classifier">float, optional</span></dt><dd><p>minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p>
+</dd>
+<dt>clear_axis<span class="classifier">boolean, optional</span></dt><dd><p>clear the axis before plotting the zoomed in data, by default False.</p>
+</dd>
+<dt>True_values<span class="classifier">dict, optional</span></dt><dd><p>dictionary of true values of the parameters, by default None</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print the optimization steps or not, by default True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the AxClient object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>AxClient</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if n_jobs, n_step_points and models are not lists of the same length</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.ConvertParams">
+<span class="sig-name descname"><span class="pre">ConvertParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.ConvertParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.ConvertParams" title="Link to this definition"></a></dt>
+<dd><p>Convert the params to the format required by the Ax/Botorch library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>list</em><em> of </em><a class="reference internal" href="#boar.core.FitParams.Fitparam" title="boar.core.FitParams.Fitparam"><em>Fitparam</em></a><em>(</em><em>) </em><em>objects</em>) – list of Fitparam() objects</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>list of dictionaries with the following keys:</dt><dd><p>’name’: string: the name of the parameter‘type’: string: ‘range’ or ‘fixed’‘bounds’: list of float: the lower and upper bounds of the parameter</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.LH_torch">
+<span class="sig-name descname"><span class="pre">LH_torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.LH_torch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.LH_torch" title="Link to this definition"></a></dt>
+<dd><p>Compute the positive log likelihood from the negative log likelihood
+Be careful here! The loss and threshold used here are the ones define as arguments of the optimize_sko_parallel and not the one defined in the targets so for the calculation of the MSE to be consistent we need all targets to have the same loss and threshold!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – 1 / minimum of scaled surrogate function</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of data points</p></li>
+<li><p><strong>gpr</strong> (<em>regressor</em>) – a trained regressor which has a .predict() method</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor to keep the surrogate function between 0 and 100 (yields best results in BO but
+here we need the unscaled surrogate function, that is, MSE), Not used here but might be later, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the positive log likelihood</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.do_grid_posterior">
+<span class="sig-name descname"><span class="pre">do_grid_posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.do_grid_posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.do_grid_posterior" title="Link to this definition"></a></dt>
+<dd><p>Obtain the posterior probability distribution p(w|y) by brute force gridding
+where w is the set of model parameters and y is the data
+For each fitparameter, return mean and standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>step</strong> (<em>int</em>) – Number of zooming steps</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – Figure to plot on</p></li>
+<li><p><strong>axes</strong> (<em>list</em>) – List of axes to plot on</p></li>
+<li><p><strong>gs</strong> (<em>matplotlib.gridspec.GridSpec</em>) – Gridspec to plot on</p></li>
+<li><p><strong>lb</strong> (<em>list</em>) – Lower bounds of the grid</p></li>
+<li><p><strong>ub</strong> (<em>list</em>) – Upper bounds of the grid</p></li>
+<li><p><strong>pf</strong> (<em>list</em>) – List of parameters</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of datasets</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – trained regressor</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>Nres</strong> (<em>integer</em>) – Sampling resolution. Number of data points per dimension.</p></li>
+<li><p><strong>logscale</strong> (<em>boolean</em>) – display in log scale?</p></li>
+<li><p><strong>vmin</strong> (<em>float</em>) – lower cutoff (in terms of exp(vmin) if logscale==True)</p></li>
+<li><p><strong>zoom</strong> (<em>int</em><em>, </em><em>optional</em>) – number of time to zoom in, by default 1.</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p></li>
+<li><p><strong>clear_axis</strong> (<em>boolean</em><em>, </em><em>optional</em>) – clear the axis before plotting the zoomed in data, by default False.</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary of true values of the parameters, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array of explored points in the parameter space during the optimization, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">px</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_MOO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Evaluate the target at a given set of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>px</strong> (<em>list</em>) – list of parameters values</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em>) – type of objective function to be used, see self.obj_func_metric</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – loss function to be used, see self.lossfunc</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – threshold for the loss function, by default 1</p></li>
+<li><p><strong>is_MOO</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use multi-objective optimization or enforce single-objective optimization, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the model output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.evaluate_custom">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_custom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">px</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_MOO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.evaluate_custom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.evaluate_custom" title="Link to this definition"></a></dt>
+<dd><p>Create a custom evaluation function that can be used with the Ax/Botorch library and needs to be implemented by the user
+should return a dictionary with the following format:
+{‘metric_name’:metric_value}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>px</strong> (<em>list</em>) – list of parameters values</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em>) – type of objective function to be used, see self.obj_func_metric</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – loss function to be used, see self.lossfunc</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – threshold for the loss function, by default 1</p></li>
+<li><p><strong>is_MOO</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to use multi-objective optimization or enforce single-objective optimization, by default False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.expected_minimum_BOAR">
+<span class="sig-name descname"><span class="pre">expected_minimum_BOAR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">triedX</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_random_starts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.expected_minimum_BOAR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.expected_minimum_BOAR" title="Link to this definition"></a></dt>
+<dd><p>Compute the minimum over the predictions of the last surrogate model.</p>
+<p>Note: that this will be useful only from single objective optimization and if the goal is to minimize the surrogate function.</p>
+<p>This was adapted from the scikit-optimize package. The original code can be found here:
+[scikit-optimize](<a class="reference external" href="https://scikit-optimize.github.io/stable/index.html">https://scikit-optimize.github.io/stable/index.html</a>) in the file scikit-optimize/skopt/utils.py</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax_client</strong> (<em>AxClient</em>) – AxClient object.</p></li>
+<li><p><strong>n_random_starts</strong> (<em>int</em><em>, </em><em>default=20</em>) – Number of points to sample randomly before fitting the surrogate
+model. If n_random_starts=0, then the initial point is taken as the
+best point seen so far (usually the last point in the GP model).</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>optional</em><em> (</em><em>default=None</em><em>)</em>) – Set random state to something other than None for reproducible
+results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray, shape (n_features,)</em>) – The point which minimizes the surrogate function.</p></li>
+<li><p><strong>fun</strong> (<em>float</em>) – The surrogate function value at the minimum.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GPEI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_CUDA</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.get_model" title="Link to this definition"></a></dt>
+<dd><p>Get the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>str</em><em>, </em><em>optional</em>) – Estimator to use. The default is ‘GPEI’.</p></li>
+<li><p><strong>use_CUDA</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use CUDA. The default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the estimator is not implemented yet.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>model</strong> (<em>class</em>) – Model class.</p></li>
+<li><p><strong>tkwargs</strong> (<em>dict</em>) – Dictionary of keyword arguments for the model.</p></li>
+<li><p><strong>opt</strong> (<em>str</em>) – type of optimization either ‘random’, ‘single’ or ‘multi’</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.makeobjectives">
+<span class="sig-name descname"><span class="pre">makeobjectives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_MOO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.makeobjectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.makeobjectives" title="Link to this definition"></a></dt>
+<dd><p>Convert the targets to the format required by the Ax/Botorch library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>targets</strong> (<em>list</em><em> of </em><em>dict</em>) – <p>list of dictionaries with the following keys:</p>
+<blockquote>
+<div><p>’model’: a pointer to a function y = f(X) where X has m dimensions
+‘data’: dictionary with keys
+‘X’:ndarray with shape (n,m) where n is the number of evaluations for X
+‘y’:ndarray with shape (n,)
+‘X_dimensions’: list of string: the names of the dimensions in X
+‘X_units’: list of string: the units of the dimensions in X
+‘y_dimension’: string: the name of the dimension y
+‘y_unit’: string: the unit of the dimension y
+‘weight’: float: the weight of the target
+‘loss’: string: the loss function to be used
+‘threshold’: float: the threshold for the loss function</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – the type of objective function to be used, by default ‘MSE’</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – the loss function to be used, by default ‘linear’</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – the threshold for the loss function, by default 1000</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of Metric() objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of Metric() objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.marginal_posterior_1D">
+<span class="sig-name descname"><span class="pre">marginal_posterior_1D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ninteg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bottom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.marginal_posterior_1D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_1D" title="Link to this definition"></a></dt>
+<dd><p>calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated</p></li>
+<li><p><strong>lb</strong> (<em>float</em><em>, </em><em>optional</em>) – lower bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>ub</strong> (<em>float</em><em>, </em><em>optional</em>) – upper bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib figure</em><em>, </em><em>optional</em>) – figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em><em>, </em><em>optional</em>) – axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary with the true values of the parameters, by default None</p></li>
+<li><p><strong>gpr</strong> (<em>sklearn regressor</em><em>, </em><em>optional</em>) – regressor to calculate the likelihood, if None we use the self.gpr, by default None</p></li>
+<li><p><strong>N</strong> (<em>int</em><em>, </em><em>optional</em>) – number of samples to calculate the likelihood, if None we use the self.N, by default None</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.beta_scaled, by default None</p></li>
+<li><p><strong>fscale</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.fscale, by default None</p></li>
+<li><p><strong>Nres</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to calculate the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>Ninteg</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to marginalize the prob, by default 1e5</p></li>
+<li><p><strong>vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – value used for the cut off probability when zooming in, note that for now this is not in used, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array with the points to plot the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we plot the marginal posterior probability distribution in log scale, by default False</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we show the plot, by default True</p></li>
+<li><p><strong>clear_axis</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we clear the axis, by default False</p></li>
+<li><p><strong>xlabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the xlabel, by default ‘bottom’</p></li>
+<li><p><strong>ylabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the ylabel, by default ‘left’</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – additional arguments to pass to the plot function, by default None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.marginal_posterior_2D">
+<span class="sig-name descname"><span class="pre">marginal_posterior_2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nres</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ninteg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logscale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bottom'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel_pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'left'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.marginal_posterior_2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_2D" title="Link to this definition"></a></dt>
+<dd><p>calculate and plot the marginal posterior probability distribution p(w|y) for parameter x_name by integrating over the other parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated on the x-axis</p></li>
+<li><p><strong>y_name</strong> (<em>str</em>) – name of the parameter for which the marginal posterior probability distribution is calculated on the y-axis</p></li>
+<li><p><strong>lb</strong> (<em>float</em><em>, </em><em>optional</em>) – lower bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>ub</strong> (<em>float</em><em>, </em><em>optional</em>) – upper bound of the parameter x_name, if None we use the main boundaries, by default None</p></li>
+<li><p><strong>fig</strong> (<em>matplotlib figure</em><em>, </em><em>optional</em>) – figure to plot the marginal posterior probability distribution, if None we create a new figure, by default None</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axis</em><em>, </em><em>optional</em>) – axis to plot the marginal posterior probability distribution, if None we create a new axis, by default None</p></li>
+<li><p><strong>True_values</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary with the true values of the parameters, by default None</p></li>
+<li><p><strong>gpr</strong> (<em>sklearn regressor</em><em>, </em><em>optional</em>) – regressor to calculate the likelihood, if None we use the self.gpr, by default None</p></li>
+<li><p><strong>N</strong> (<em>int</em><em>, </em><em>optional</em>) – number of samples to calculate the likelihood, if None we use the self.N, by default None</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.beta_scaled, by default None</p></li>
+<li><p><strong>fscale</strong> (<em>float</em><em>, </em><em>optional</em>) – scaling factor for the likelihood, if None we use the self.fscale, by default None</p></li>
+<li><p><strong>Nres</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to calculate the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>Ninteg</strong> (<em>int</em><em>, </em><em>optional</em>) – number of points to marginalize the prob, by default 1e5</p></li>
+<li><p><strong>vmin</strong> (<em>float</em><em>, </em><em>optional</em>) – minimum value of the marginal posterior probability distribution, only used if logscale = True as for linscale the min probability is 0, by default None</p></li>
+<li><p><strong>min_prob</strong> (<em>float</em><em>, </em><em>optional</em>) – value used for the cut off probability when zooming in, note that for now this is not in used, by default None</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array with the points to plot the marginal posterior probability distribution, by default None</p></li>
+<li><p><strong>logscale</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we plot the marginal posterior probability distribution in log scale, by default False</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we show the plot, by default True</p></li>
+<li><p><strong>clear_axis</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True we clear the axis, by default False</p></li>
+<li><p><strong>xlabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the xlabel, by default ‘bottom’</p></li>
+<li><p><strong>ylabel_pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of the ylabel, by default ‘left’</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>additional arguments to pass to the plot function, by default None</dt><dd><dl class="simple">
+<dt>show_points<span class="classifier">bool, optional</span></dt><dd><p>if True we show the points, by default True</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.plot_all_objectives">
+<span class="sig-name descname"><span class="pre">plot_all_objectives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax_client</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.plot_all_objectives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.plot_all_objectives" title="Link to this definition"></a></dt>
+<dd><p>Plot all objectives</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax_client</strong> (<em>AxClient</em><em>(</em><em>) </em><em>object</em>) – AxClient() object</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>keyword arguments for the plot, by default {}</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘’objectives’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.plot_density">
+<span class="sig-name descname"><span class="pre">plot_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax_client</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.plot_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.plot_density" title="Link to this definition"></a></dt>
+<dd><p>Plot the density of the of the points in the search space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax_client</strong> (<em>AxClient</em><em>(</em><em>) </em><em>object</em>) – AxClient() object</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>keyword arguments for the plot, by default {}</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘’objectives’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – axis_type must be either log or linear</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.plot_hypervolume">
+<span class="sig-name descname"><span class="pre">plot_hypervolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hv_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.plot_hypervolume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.plot_hypervolume" title="Link to this definition"></a></dt>
+<dd><p>Plot the hypervolume trace</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hv_list</strong> (<em>list</em><em>, </em><em>optional</em>) – list of hypervolumes, by default None</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>keyword arguments for the plot, by default {}</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘’objectives’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+<dt>logscale<span class="classifier">bool, optional</span></dt><dd><p>use logscale, by default False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.MooBOtorch.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta_scaled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fscale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs_posterior</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#MooBOtorch.posterior"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.MooBOtorch.posterior" title="Link to this definition"></a></dt>
+<dd><p>Obtain the posterior probability distribution p(w|y) by brute force gridding
+where w is the set of model parameters and y is the data
+For each fitparameter, return mean and standard deviation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>list</em><em> of </em><em>fitparameter objects</em>) – list of fitparameters</p></li>
+<li><p><strong>lb_main</strong> (<em>list</em><em> of </em><em>floats</em>) – lower bound for the fitparameters</p></li>
+<li><p><strong>ub_main</strong> (<em>list</em><em> of </em><em>floats</em>) – upper bound for the fitparameters</p></li>
+<li><p><strong>beta_scaled</strong> (<em>float</em>) – 1/minimum of the scaled surrogate function</p></li>
+<li><p><strong>N</strong> (<em>integer</em>) – number of datasets</p></li>
+<li><p><strong>gpr</strong> (<em>scikit-optimize estimator</em>) – trained regressor</p></li>
+<li><p><strong>fscale</strong> (<em>float</em>) – scaling factor</p></li>
+<li><p><strong>kwargs_posterior</strong> (<em>dict</em>) – <p>dictionary of keyword arguments for posterior function
+including:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Nres<span class="classifier">integer, optional</span></dt><dd><p>Sampling resolution. Number of data points per dimension, by default 30</p>
+</dd>
+<dt>Ninteg<span class="classifier">integer, optional</span></dt><dd><p>Number of points for the marginalization over the other parameters when full_grid = False, by default 100</p>
+</dd>
+<dt>full_grid<span class="classifier">boolean, optional</span></dt><dd><p>If True, use a full grid for the posterior, by default False</p>
+</dd>
+<dt>randomize<span class="classifier">boolean, optional</span></dt><dd><p>If True, calculate the posterior for all the dimension but draw the marginalization points randomly and do not use a corse grid, by default False</p>
+</dd>
+<dt>logscale<span class="classifier">boolean, optional</span></dt><dd><p>display in log scale?, by default True</p>
+</dd>
+<dt>vmin<span class="classifier">float, optional</span></dt><dd><p>lower cutoff (in terms of exp(vmin) if logscale==True), by default 1e-100</p>
+</dd>
+<dt>zoom<span class="classifier">int, optional</span></dt><dd><p>number of time to zoom in, only used if full_grid = True, by default 0</p>
+</dd>
+<dt>min_prob<span class="classifier">float, optional</span></dt><dd><p>minimum probability to consider when zooming in we will zoom on the parameter space with a probability higher than min_prob, by default 1e-40.</p>
+</dd>
+<dt>clear_axis<span class="classifier">boolean, optional</span></dt><dd><p>clear the axis before plotting the zoomed in data, by default False.</p>
+</dd>
+<dt>True_values<span class="classifier">dict, optional</span></dt><dd><p>dictionary of true values of the parameters, by default None</p>
+</dd>
+<dt>show_points<span class="classifier">boolean, optional</span></dt><dd><p>show the explored points in the parameter space during the optimization, by default False</p>
+</dd>
+<dt>savefig<span class="classifier">boolean, optional</span></dt><dd><p>save the figure, by default False</p>
+</dd>
+<dt>savefig_name<span class="classifier">str, optional</span></dt><dd><p>name of the file to save the figure, by default ‘posterior.png’</p>
+</dd>
+<dt>savefig_dir<span class="classifier">str, optional</span></dt><dd><p>directory to save the figure, by default self.res_dir</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (5*nb_params,5*nb_params)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>points</strong> (<em>array</em><em>, </em><em>optional</em>) – array of explored points in the parameter space during the optimization, by default None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Contour plots for each pair of fit parameters</em></p></li>
+<li><p><em>list of float, list of float</em> – the mean and the square root of the second central moment
+(generalized standard deviation for arbitrary probability distribution)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.optimization_botorch.</span></span><span class="sig-name descname"><span class="pre">SimpleThresholdGlobalStoppingStrategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_trials</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inactive_when_pending_trials</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#SimpleThresholdGlobalStoppingStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseGlobalStoppingStrategy</span></code></p>
+<p>A GSS that stops when we observe a point better than <cite>threshold</cite>.
+Taken from : <a class="reference external" href="https://ax.dev/tutorials/gss.html">https://ax.dev/tutorials/gss.html</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy.should_stop_optimization">
+<span class="sig-name descname"><span class="pre">should_stop_optimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Experiment</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/boar/core/optimization_botorch.html#SimpleThresholdGlobalStoppingStrategy.should_stop_optimization"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy.should_stop_optimization" title="Link to this definition"></a></dt>
+<dd><p>Check if the best seen is better than <cite>self.threshold</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.core.optimizer">
+<span id="boar-core-optimizer-module"></span><h2>boar.core.optimizer module<a class="headerlink" href="#module-boar.core.optimizer" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.core.optimizer.</span></span><span class="sig-name descname"><span class="pre">BoarOptimizer</span></span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides a default class for the different optimizers in BOAR. This class is not intended to be used directly, but rather to be inherited by the different optimizer classes. It provides the basic functionality for the optimizer classes, such as the different objective functions, the functions to handle the Fitparam() objects, and the functions to handle the different plotting options. </p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.format_func">
+<span class="sig-name descname"><span class="pre">format_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.format_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.format_func" title="Link to this definition"></a></dt>
+<dd><p>Format function for the x and y axis ticks
+to be passed to axo[ii,jj].xaxis.set_major_formatter(plt.FuncFormatter(format_func))
+to get the logarithmic ticks looking good on the plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em>) – value to convert</p></li>
+<li><p><strong>tick_number</strong> (<em>int</em>) – tick position</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>string representation of the value in scientific notation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.invert_lossfunc">
+<span class="sig-name descname"><span class="pre">invert_lossfunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.invert_lossfunc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.invert_lossfunc" title="Link to this definition"></a></dt>
+<dd><p>Invert the loss function to get the mean squared error values back</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z0</strong> (<em>1D-array</em>) – data array of size (n,) with the loss function values</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’]</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – critical value above which loss sets in, by default 1000.
+Wisely select so that the loss function affects only outliers.
+If threshold is set too low, then c&lt;z0 even fon non-outliers
+falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the mean squared error values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.lossfunc">
+<span class="sig-name descname"><span class="pre">lossfunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.lossfunc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.lossfunc" title="Link to this definition"></a></dt>
+<dd><p>Define the different loss functions that can be used to calculate the
+objective function value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z0</strong> (<em>1D-array</em>) – data array of size (n,) with the mean squared error values</p></li>
+<li><p><strong>loss</strong> (<em>str</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’]</p></li>
+<li><p><strong>threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – critical value above which loss sets in, by default 1000.
+Wisely select so that the loss function affects only outliers.
+If threshold is set too low, then c&lt;z0 even fon non-outliers
+falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the loss function values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.obj_func_curvefit">
+<span class="sig-name descname"><span class="pre">obj_func_curvefit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.obj_func_curvefit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.obj_func_curvefit" title="Link to this definition"></a></dt>
+<dd><p>Objective function as desired by scipy.curve_fit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>*p</strong> (<em>ndarray</em>) – list of float; values of the fit parameters as supplied by the optimizer</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p></li>
+<li><p><strong>model</strong> (<em>callable</em>) – Model function yf = f(X) to compare to y</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the model values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.obj_func_metric">
+<span class="sig-name descname"><span class="pre">obj_func_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.obj_func_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.obj_func_metric" title="Link to this definition"></a></dt>
+<dd><p>Method to calculate the objective function valueDifferent objective functions can be used, see below</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>target object</em>) – target object with data and weight</p></li>
+<li><p><strong>yf</strong> (<em>array</em>) – model output</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – objective function type, can be [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’MAPE’,’larry’,’nRMSE_VLC’], by default ‘MSE’
+‘MSE’: mean squared error
+‘RMSE’: root mean squared error
+‘MSLE’: mean squared log error
+‘nRMSE’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
+‘MAE’: mean absolute error
+‘MAPE’: mean absolute percentage error
+‘RAE’: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
+‘larry’: mean squared error legacy version
+‘nRMSE_VLC’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>objective function value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if obj_type is not in [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’larry’,’nRMSE_VLC’]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.obj_func_scipy">
+<span class="sig-name descname"><span class="pre">obj_func_scipy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.obj_func_scipy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.obj_func_scipy" title="Link to this definition"></a></dt>
+<dd><p>Objective function directly returning the loss function
+for use with the Bayesian Optimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>'*p'</strong> – <p>the parameters as passed by the Bayesian Optimizer</p>
+</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p></li>
+<li><p><strong>model</strong> (<em>callable</em>) – Model function yf = f(X) to compare to y</p></li>
+<li><p><strong>X</strong> (<em>ndarray</em>) – X Data array of size(n,m): n=number of data points, m=number of dimensions</p></li>
+<li><p><strong>y</strong> (<em>1D-array</em>) – data array of size (n,) to fit</p></li>
+<li><p><strong>obj_type</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>objective function type, can be [‘MSE’, ‘RMSE’, ‘MSLE’,’nRMSE’,’MAE’,’larry’,’nRMSE_VLC’], by default ‘MSE’</p>
+<blockquote>
+<div><p>’MSE’: mean squared error
+‘RMSE’: root mean squared error
+‘MSLE’: mean squared log error
+‘nRMSE’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))
+‘MAE’: mean absolute error
+‘RAE’: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)
+‘larry’: mean squared error legacy version
+‘nRMSE_VLC’: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>loss</strong> (<em>str</em><em>, </em><em>optional</em>) – type of loss function to use, can be [‘linear’,’soft_l1’,’huber’,’cauchy’,’arctan’], by default ‘linear’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>array of size (n,) with the loss function values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1D-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.optimize_basin_hopping">
+<span class="sig-name descname"><span class="pre">optimize_basin_hopping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.optimize_basin_hopping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.optimize_basin_hopping" title="Link to this definition"></a></dt>
+<dd><p>Use basin_hopping to optimize a function y = f(x) where x can be multi-dimensional.
+See scipy.optimize.basin_hopping documentation for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Keyword arguments for basin_hopping, see scipy.optimize.basin_hopping documentation for more information, by default None.
+If no kwargs is provided, use:
+kwargs = {‘niter’: 100, ‘T’: 1.0, ‘stepsize’: 0.5, ‘interval’: 50, ‘minimizer_kwargs’: None, ‘take_step’: None, ‘accept_test’: None, ‘callback’: None, ‘niter_success’: None, ‘seed’: None, ‘disp’: False, ‘niter_success’: 10}</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with the optimized parameters (‘x’) and the corresponding function value (‘fun’).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.optimize_curvefit">
+<span class="sig-name descname"><span class="pre">optimize_curvefit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.optimize_curvefit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.optimize_curvefit" title="Link to this definition"></a></dt>
+<dd><p>Use curvefit to optimize a function y = f(x) where x can be multi-dimensional
+use this function if the loss function is deterministic
+do not use this function if loss function has uncertainty (e.g from numerical simulation)
+in this case, use optimize_sko</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – kwargs aruguments for curve_fit, see scipy.optimize.curve_fit documentation for more information, by default NoneIf no kwargs is provided use:kwargs = {‘ftol’:1e-8, ‘xtol’:1e-6, ‘gtol’: 1e-8, ‘diff_step’:0.001,’loss’:’linear’,’max_nfev’:5000}</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary with the optimized parameters (‘popt’) and the corresponding covariance (‘pcov’) and standard deviation (‘std’) values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.optimize_dual_annealing">
+<span class="sig-name descname"><span class="pre">optimize_dual_annealing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MSE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.optimize_dual_annealing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.optimize_dual_annealing" title="Link to this definition"></a></dt>
+<dd><p>Use dual_annealing to optimize a function y = f(x) where x can be multi-dimensional.
+See scipy.optimize.dual_annealing documentation for more information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Keyword arguments for dual_annealing, see scipy.optimize.dual_annealing documentation for more information, by default None.
+If no kwargs is provided, use:
+kwargs = {‘maxiter’: 100, ‘local_search_options’: None, ‘initial_temp’: 5230.0, ‘restart_temp_ratio’: 2e-05, ‘visit’: 2.62, ‘accept’: -5.0, ‘maxfun’: 1000, ‘no_local_search’: False, ‘x0’: None, ‘bounds’: None, ‘args’: ()}</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary with the optimized parameters (‘x’) and the corresponding function value (‘fun’).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.params_r">
+<span class="sig-name descname"><span class="pre">params_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.params_r"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.params_r" title="Link to this definition"></a></dt>
+<dd><p>Prepare starting guess and bounds for optimizer
+Considering settings of Fitparameters:</p>
+<blockquote>
+<div><dl>
+<dt>optim_type:</dt><dd><p>if ‘linear’: abstract the order of magnitude (number between 1 and 10)
+if ‘log’: bring to decadic logarithm (discarding the negative sign, if any!)</p>
+</dd>
+<dt>lim_type:   if ‘absolute’, respect user settings in Fitparam.lims</dt><dd><p>if ‘relative’, respect user settings in Fitparam.relRange:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if Fitparam.range_type==’linear’:</dt><dd><p>interpret Fitparam.relRange as factor</p>
+</dd>
+<dt>if Fitparam.range_type==’log’:</dt><dd><p>interpret Fitparam.relRange as order of magnitude</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt>relRange:   if zero, Fitparam is not included into starting guess and bounds</dt><dd><p>(but still available to the objective function)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>set of lists with:  p0 = initial guesses</dt><dd><p>lb = lower boundsub = upper bounds</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set of lists</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.core.optimizer.BoarOptimizer.params_w">
+<span class="sig-name descname"><span class="pre">params_w</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">which</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'val'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/core/optimizer.html#BoarOptimizer.params_w"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.core.optimizer.BoarOptimizer.params_w" title="Link to this definition"></a></dt>
+<dd><p>Method to interact with Fitparam objectsUsed by all Obj_funcs to write desired parameter from optimizer
+so the model can have the parameters in the physically correct units
+The fitparams objects are in a nested list at self.include_params</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>1D-sequence</em><em> of </em><em>floats</em>) – fit parameters as requested by optimizer</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam() objects</p></li>
+<li><p><strong>std</strong> (<em>list</em><em>, </em><em>optional</em>) – Contains the 95% confidence interval of the parameters, by default []</p></li>
+<li><p><strong>which</strong> (<em>str</em><em>, </em><em>optional</em>) – ‘val’: x =&gt; Fitparam.val‘startVal’: x=&gt; Fitparam.startValdefaults to Fitparam.val (which is used by the obj_funcsto pass to the model function), by default ‘val’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-boar.core" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="boar.agents.html" class="btn btn-neutral float-left" title="boar.agents package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boar.dynamic_utils.html" class="btn btn-neutral float-right" title="boar.dynamic_utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

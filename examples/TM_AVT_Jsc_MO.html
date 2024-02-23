@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOAR with Transfer Matrix Method &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="boar" href="../modules.html" />
+    <link rel="prev" title="BOAR with Transfer Matrix Method" href="TM_LUE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TM_LUE.html">BOAR with Transfer Matrix Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">BOAR with Transfer Matrix Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+      <li class="breadcrumb-item active">BOAR with Transfer Matrix Method</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/TM_AVT_Jsc_MO.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="BOAR-with-Transfer-Matrix-Method">
+<h1>BOAR with Transfer Matrix Method<a class="headerlink" href="#BOAR-with-Transfer-Matrix-Method" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<div class="line-block">
+<div class="line">This notebook is made to use BOAR in combination with transfer matrix modeling (TMM) to optimize the thickness of the layers in a multilayer stack to optimize the average visible transmittance (AVT) and maximize the current density (Jsc) of a solar cell.</div>
+<div class="line">To perform the transfer matrix modeling we use a modified version of the open-source program devoloped by <a class="reference external" href="https://web.stanford.edu/group/mcgehee/transfermatrix/">McGehee’s group</a> (Stanford University) and adapted to python by Kamil Mielczarek (University of Texas).</div>
+<div class="line">For more information about the transfer matrix modeling, please refer to the <a class="reference external" href="https://doi.org/10.1002/adma.201000883">original paper</a>.</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span> <span class="c1"># comment out to only render png</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># import additional libraries from Ax</span>
+<span class="kn">from</span> <span class="nn">ax.utils.notebook.plotting</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">init_notebook_plotting</span> <span class="c1"># for plotting in notebook</span>
+<span class="kn">from</span> <span class="nn">ax.plot.slice</span> <span class="kn">import</span> <span class="n">plot_slice</span>
+<span class="kn">from</span> <span class="nn">ax.plot.scatter</span> <span class="kn">import</span> <span class="n">interact_fitted</span><span class="p">,</span><span class="n">plot_objective_vs_constraints</span><span class="p">,</span><span class="n">tile_fitted</span>
+<span class="kn">from</span> <span class="nn">ax.modelbridge.cross_validation</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">ax.plot.contour</span> <span class="kn">import</span> <span class="n">interact_contour</span>
+<span class="kn">from</span> <span class="nn">ax.plot.diagnostic</span> <span class="kn">import</span> <span class="n">interact_cross_validation</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_utils</span> <span class="kn">import</span> <span class="n">compute_posterior_pareto_frontier</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_frontier</span> <span class="kn">import</span> <span class="n">plot_pareto_frontier</span>
+<span class="c1"># Import homemade package by VLC</span>
+<span class="c1"># import boar.SIMsalabim_utils.plot_settings_screen # to set default plot settings</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># current directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+<span class="n">mat_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;Example_Data/matdata&#39;</span><span class="p">)</span> <span class="c1"># path to the mat files directory, comment if not in Notebooks folder</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the agent and default device stack</span>
+<span class="n">layers</span>                      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SiOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;ITO&#39;</span> <span class="p">,</span> <span class="s1">&#39;ZnO&#39;</span> <span class="p">,</span> <span class="s1">&#39;PCE10_FOIC_1to1&#39;</span> <span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span> <span class="p">,</span> <span class="s1">&#39;Ag&#39;</span><span class="p">,</span> <span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;MoOx&#39;</span><span class="p">,</span> <span class="s1">&#39;LiF&#39;</span><span class="p">,</span><span class="s1">&#39;Air&#39;</span><span class="p">]</span> <span class="c1"># list of layers (need to be the same than the name nk_*.csv file in the matdata folder)</span>
+<span class="n">thicknesses</span>         <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">30</span>  <span class="p">,</span> <span class="mi">100</span> <span class="p">,</span> <span class="mi">9</span> <span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span> <span class="c1"># list of thicknesses in nm</span>
+
+<span class="n">tm</span> <span class="o">=</span> <span class="n">Transfer_Matrix_agent</span><span class="p">(</span><span class="n">layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">thicknesses</span><span class="o">=</span><span class="n">thicknesses</span><span class="p">,</span><span class="n">mat_dir</span><span class="o">=</span><span class="n">mat_dir</span><span class="p">)</span> <span class="c1"># initialize the agent</span>
+</pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">d_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">80</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;AL thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_3</span><span class="p">)</span>
+<span class="n">d_4</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_4&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_4</span><span class="p">)</span>
+<span class="n">d_5</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_5&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Ag thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_5</span><span class="p">)</span>
+<span class="n">d_6</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_6&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_6</span><span class="p">)</span>
+<span class="n">d_7</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_7&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 1 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_7</span><span class="p">)</span>
+<span class="n">d_8</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_8&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;MoOx 3 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_8</span><span class="p">)</span>
+<span class="n">d_9</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d_9&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;LiF 2 thickness&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d_9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model on the default stack configuration</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># we need to provide a list of inputs even if it is not used later</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Jsc = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LUE = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LUE&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AVT = &#39;</span><span class="p">,</span> <span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Jsc =  10.53248308747983
+LUE =  3.5542800166757664
+AVT =  0.337458886679895
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the targets and the model for the TM problem</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;Jsc&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Jsc&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;Jsc&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;AVT&#39;</span>
+<span class="n">target2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">TM</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;AVT&#39;</span><span class="p">],</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;AVT&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;obj_type&#39;</span><span class="p">:</span><span class="s1">&#39;diff&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mf">0.4</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">,</span><span class="n">target2</span><span class="p">]</span>
+<span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;identity&#39;</span>
+<span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span>
+<span class="n">threshold</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mf">0.05</span><span class="p">]</span>
+
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MooBOtorch</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span> <span class="n">targets</span><span class="p">)</span> <span class="c1"># initialize the optimization object</span>
+<span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;Ninteg&#39;</span><span class="p">:</span><span class="mf">1e3</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;True_values&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span><span class="p">,</span><span class="s1">&#39;full_grid&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;randomize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+
+<span class="n">ax_client</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">BoTorchOpti</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">n_step_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sobol&#39;</span><span class="p">,</span><span class="s1">&#39;MOO&#39;</span><span class="p">],</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span><span class="n">use_CUDA</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">kwargs_posterior</span><span class="o">=</span><span class="n">kwargs_posterior</span><span class="p">,</span><span class="n">use_custom_func</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 10:46:41] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 6 decimal points.
+[INFO 09-20 10:46:41] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#39;d_3&#39;, parameter_type=FLOAT, range=[4.0, 10.0]), RangeParameter(name=&#39;d_4&#39;, parameter_type=FLOAT, range=[0.0, 2.0]), RangeParameter(name=&#39;d_5&#39;, parameter_type=FLOAT, range=[0.0, 1.5]), RangeParameter(name=&#39;d_6&#39;, parameter_type=FLOAT, range=[0.0, 2.0]), RangeParameter(name=&#39;d_7&#39;, parameter_type=FLOAT, range=[0.0, 20.0]), RangeParameter(name=&#39;d_8&#39;, parameter_type=FLOAT, range=[0.0, 2.0])], parameter_constraints=[]).
+[INFO 09-20 10:46:41] ax.service.ax_client: Generated new trial 0 with parameters {&#39;d_3&#39;: 9.020724, &#39;d_4&#39;: 0.936252, &#39;d_5&#39;: 0.966917, &#39;d_6&#39;: 1.48143, &#39;d_7&#39;: 19.038279, &#39;d_8&#39;: 1.630564}.
+[INFO 09-20 10:46:44] ax.service.ax_client: Completed trial 0 with data: {&#39;identity_Jsc&#39;: (11.703561, None), &#39;diff_AVT&#39;: (0.00393, None)}.
+[INFO 09-20 10:46:44] ax.service.ax_client: Generated new trial 1 with parameters {&#39;d_3&#39;: 5.138952, &#39;d_4&#39;: 1.578441, &#39;d_5&#39;: 1.144287, &#39;d_6&#39;: 0.337209, &#39;d_7&#39;: 9.009017, &#39;d_8&#39;: 1.546516}.
+[INFO 09-20 10:46:46] ax.service.ax_client: Completed trial 1 with data: {&#39;identity_Jsc&#39;: (9.27102, None), &#39;diff_AVT&#39;: (0.091688, None)}.
+[INFO 09-20 10:46:46] ax.service.ax_client: Generated new trial 2 with parameters {&#39;d_3&#39;: 8.223837, &#39;d_4&#39;: 1.039153, &#39;d_5&#39;: 0.761982, &#39;d_6&#39;: 0.947079, &#39;d_7&#39;: 11.827406, &#39;d_8&#39;: 1.550443}.
+[INFO 09-20 10:46:49] ax.service.ax_client: Completed trial 2 with data: {&#39;identity_Jsc&#39;: (10.900742, None), &#39;diff_AVT&#39;: (0.122311, None)}.
+[INFO 09-20 10:46:49] ax.service.ax_client: Generated new trial 3 with parameters {&#39;d_3&#39;: 6.499142, &#39;d_4&#39;: 1.510833, &#39;d_5&#39;: 1.023326, &#39;d_6&#39;: 0.197069, &#39;d_7&#39;: 11.22625, &#39;d_8&#39;: 0.394366}.
+[INFO 09-20 10:46:52] ax.service.ax_client: Completed trial 3 with data: {&#39;identity_Jsc&#39;: (12.31666, None), &#39;diff_AVT&#39;: (0.006789, None)}.
+[INFO 09-20 10:46:52] ax.service.ax_client: Generated new trial 4 with parameters {&#39;d_3&#39;: 8.117737, &#39;d_4&#39;: 0.255769, &#39;d_5&#39;: 0.423529, &#39;d_6&#39;: 1.114231, &#39;d_7&#39;: 5.046815, &#39;d_8&#39;: 0.73487}.
+[INFO 09-20 10:46:55] ax.service.ax_client: Completed trial 4 with data: {&#39;identity_Jsc&#39;: (13.630647, None), &#39;diff_AVT&#39;: (0.117345, None)}.
+[INFO 09-20 10:46:55] ax.service.ax_client: Generated new trial 5 with parameters {&#39;d_3&#39;: 9.831194, &#39;d_4&#39;: 1.936722, &#39;d_5&#39;: 0.556734, &#39;d_6&#39;: 1.131629, &#39;d_7&#39;: 4.585898, &#39;d_8&#39;: 0.50322}.
+[INFO 09-20 10:46:58] ax.service.ax_client: Completed trial 5 with data: {&#39;identity_Jsc&#39;: (13.847323, None), &#39;diff_AVT&#39;: (0.074005, None)}.
+[INFO 09-20 10:46:58] ax.service.ax_client: Generated new trial 6 with parameters {&#39;d_3&#39;: 5.630388, &#39;d_4&#39;: 0.083902, &#39;d_5&#39;: 0.694812, &#39;d_6&#39;: 1.827896, &#39;d_7&#39;: 16.507244, &#39;d_8&#39;: 0.642629}.
+[INFO 09-20 10:47:00] ax.service.ax_client: Completed trial 6 with data: {&#39;identity_Jsc&#39;: (11.406661, None), &#39;diff_AVT&#39;: (0.001738, None)}.
+[INFO 09-20 10:47:00] ax.service.ax_client: Generated new trial 7 with parameters {&#39;d_3&#39;: 8.714574, &#39;d_4&#39;: 1.250202, &#39;d_5&#39;: 1.016877, &#39;d_6&#39;: 1.496748, &#39;d_7&#39;: 10.585078, &#39;d_8&#39;: 1.937218}.
+[INFO 09-20 10:47:03] ax.service.ax_client: Completed trial 7 with data: {&#39;identity_Jsc&#39;: (13.509219, None), &#39;diff_AVT&#39;: (0.057628, None)}.
+[INFO 09-20 10:47:03] ax.service.ax_client: Generated new trial 8 with parameters {&#39;d_3&#39;: 6.472755, &#39;d_4&#39;: 0.71319, &#39;d_5&#39;: 0.318117, &#39;d_6&#39;: 1.408587, &#39;d_7&#39;: 5.747892, &#39;d_8&#39;: 1.755175}.
+[INFO 09-20 10:47:06] ax.service.ax_client: Completed trial 8 with data: {&#39;identity_Jsc&#39;: (8.441458, None), &#39;diff_AVT&#39;: (0.019346, None)}.
+[INFO 09-20 10:47:06] ax.service.ax_client: Generated new trial 9 with parameters {&#39;d_3&#39;: 7.437895, &#39;d_4&#39;: 0.264758, &#39;d_5&#39;: 1.24595, &#39;d_6&#39;: 1.76761, &#39;d_7&#39;: 13.614399, &#39;d_8&#39;: 0.485486}.
+[INFO 09-20 10:47:09] ax.service.ax_client: Completed trial 9 with data: {&#39;identity_Jsc&#39;: (14.636389, None), &#39;diff_AVT&#39;: (0.071646, None)}.
+[INFO 09-20 10:47:12] ax.service.ax_client: Generated new trial 10 with parameters {&#39;d_3&#39;: 7.622315, &#39;d_4&#39;: 1.734148, &#39;d_5&#39;: 1.032279, &#39;d_6&#39;: 0.098903, &#39;d_7&#39;: 11.843584, &#39;d_8&#39;: 0.0}.
+[INFO 09-20 10:47:14] ax.service.ax_client: Completed trial 10 with data: {&#39;identity_Jsc&#39;: (12.546832, None), &#39;diff_AVT&#39;: (0.02645, None)}.
+[INFO 09-20 10:47:16] ax.service.ax_client: Generated new trial 11 with parameters {&#39;d_3&#39;: 9.372198, &#39;d_4&#39;: 1.216091, &#39;d_5&#39;: 1.145736, &#39;d_6&#39;: 1.783941, &#39;d_7&#39;: 18.731133, &#39;d_8&#39;: 2.0}.
+[INFO 09-20 10:47:18] ax.service.ax_client: Completed trial 11 with data: {&#39;identity_Jsc&#39;: (14.152921, None), &#39;diff_AVT&#39;: (0.097452, None)}.
+[INFO 09-20 10:47:21] ax.service.ax_client: Generated new trial 12 with parameters {&#39;d_3&#39;: 7.253646, &#39;d_4&#39;: 0.226984, &#39;d_5&#39;: 0.871101, &#39;d_6&#39;: 1.862741, &#39;d_7&#39;: 19.260949, &#39;d_8&#39;: 0.524589}.
+[INFO 09-20 10:47:23] ax.service.ax_client: Completed trial 12 with data: {&#39;identity_Jsc&#39;: (13.168928, None), &#39;diff_AVT&#39;: (0.03507, None)}.
+[INFO 09-20 10:47:26] ax.service.ax_client: Generated new trial 13 with parameters {&#39;d_3&#39;: 7.826475, &#39;d_4&#39;: 1.15692, &#39;d_5&#39;: 0.955749, &#39;d_6&#39;: 0.189319, &#39;d_7&#39;: 10.442449, &#39;d_8&#39;: 0.199809}.
+[INFO 09-20 10:47:28] ax.service.ax_client: Completed trial 13 with data: {&#39;identity_Jsc&#39;: (11.541834, None), &#39;diff_AVT&#39;: (0.054004, None)}.
+[INFO 09-20 10:47:32] ax.service.ax_client: Generated new trial 14 with parameters {&#39;d_3&#39;: 5.541491, &#39;d_4&#39;: 1.853138, &#39;d_5&#39;: 1.049177, &#39;d_6&#39;: 0.1885, &#39;d_7&#39;: 11.97966, &#39;d_8&#39;: 0.133711}.
+[INFO 09-20 10:47:34] ax.service.ax_client: Completed trial 14 with data: {&#39;identity_Jsc&#39;: (10.720879, None), &#39;diff_AVT&#39;: (0.055213, None)}.
+[INFO 09-20 10:47:37] ax.service.ax_client: Generated new trial 15 with parameters {&#39;d_3&#39;: 7.022134, &#39;d_4&#39;: 0.093332, &#39;d_5&#39;: 0.564841, &#39;d_6&#39;: 1.840454, &#39;d_7&#39;: 14.179393, &#39;d_8&#39;: 0.595838}.
+[INFO 09-20 10:47:39] ax.service.ax_client: Completed trial 15 with data: {&#39;identity_Jsc&#39;: (12.922361, None), &#39;diff_AVT&#39;: (0.065848, None)}.
+[INFO 09-20 10:47:41] ax.service.ax_client: Generated new trial 16 with parameters {&#39;d_3&#39;: 7.766751, &#39;d_4&#39;: 0.345559, &#39;d_5&#39;: 1.173217, &#39;d_6&#39;: 1.419859, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.562726}.
+[INFO 09-20 10:47:44] ax.service.ax_client: Completed trial 16 with data: {&#39;identity_Jsc&#39;: (13.92903, None), &#39;diff_AVT&#39;: (0.034803, None)}.
+[INFO 09-20 10:47:46] ax.service.ax_client: Generated new trial 17 with parameters {&#39;d_3&#39;: 7.76575, &#39;d_4&#39;: 0.349562, &#39;d_5&#39;: 1.366015, &#39;d_6&#39;: 1.964556, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.534994}.
+[INFO 09-20 10:47:49] ax.service.ax_client: Completed trial 17 with data: {&#39;identity_Jsc&#39;: (13.726136, None), &#39;diff_AVT&#39;: (0.071939, None)}.
+[INFO 09-20 10:47:51] ax.service.ax_client: Generated new trial 18 with parameters {&#39;d_3&#39;: 8.113653, &#39;d_4&#39;: 0.477611, &#39;d_5&#39;: 0.786217, &#39;d_6&#39;: 1.409517, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.670585}.
+[INFO 09-20 10:47:53] ax.service.ax_client: Completed trial 18 with data: {&#39;identity_Jsc&#39;: (11.851903, None), &#39;diff_AVT&#39;: (0.002794, None)}.
+[INFO 09-20 10:47:56] ax.service.ax_client: Generated new trial 19 with parameters {&#39;d_3&#39;: 7.453591, &#39;d_4&#39;: 0.045713, &#39;d_5&#39;: 0.858374, &#39;d_6&#39;: 1.347662, &#39;d_7&#39;: 18.874335, &#39;d_8&#39;: 0.458993}.
+[INFO 09-20 10:47:59] ax.service.ax_client: Completed trial 19 with data: {&#39;identity_Jsc&#39;: (15.037391, None), &#39;diff_AVT&#39;: (0.056406, None)}.
+[INFO 09-20 10:48:01] ax.service.ax_client: Generated new trial 20 with parameters {&#39;d_3&#39;: 8.123057, &#39;d_4&#39;: 0.025675, &#39;d_5&#39;: 0.90527, &#39;d_6&#39;: 1.432285, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.972213}.
+[INFO 09-20 10:48:04] ax.service.ax_client: Completed trial 20 with data: {&#39;identity_Jsc&#39;: (14.819331, None), &#39;diff_AVT&#39;: (0.045623, None)}.
+[INFO 09-20 10:48:07] ax.service.ax_client: Generated new trial 21 with parameters {&#39;d_3&#39;: 9.013017, &#39;d_4&#39;: 1.330034, &#39;d_5&#39;: 0.944295, &#39;d_6&#39;: 1.417508, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.271917}.
+[INFO 09-20 10:48:10] ax.service.ax_client: Completed trial 21 with data: {&#39;identity_Jsc&#39;: (13.774134, None), &#39;diff_AVT&#39;: (0.005266, None)}.
+[INFO 09-20 10:48:14] ax.service.ax_client: Generated new trial 22 with parameters {&#39;d_3&#39;: 8.45579, &#39;d_4&#39;: 1.154687, &#39;d_5&#39;: 0.824063, &#39;d_6&#39;: 1.455477, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.001206}.
+[INFO 09-20 10:48:17] ax.service.ax_client: Completed trial 22 with data: {&#39;identity_Jsc&#39;: (12.306301, None), &#39;diff_AVT&#39;: (0.028691, None)}.
+[INFO 09-20 10:48:21] ax.service.ax_client: Generated new trial 23 with parameters {&#39;d_3&#39;: 9.416607, &#39;d_4&#39;: 1.372028, &#39;d_5&#39;: 1.078937, &#39;d_6&#39;: 1.384887, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.704759}.
+[INFO 09-20 10:48:23] ax.service.ax_client: Completed trial 23 with data: {&#39;identity_Jsc&#39;: (14.564912, None), &#39;diff_AVT&#39;: (0.050464, None)}.
+[INFO 09-20 10:48:27] ax.service.ax_client: Generated new trial 24 with parameters {&#39;d_3&#39;: 8.866981, &#39;d_4&#39;: 0.114082, &#39;d_5&#39;: 0.977706, &#39;d_6&#39;: 1.499573, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.434987}.
+[INFO 09-20 10:48:30] ax.service.ax_client: Completed trial 24 with data: {&#39;identity_Jsc&#39;: (15.54305, None), &#39;diff_AVT&#39;: (0.038934, None)}.
+[INFO 09-20 10:48:33] ax.service.ax_client: Generated new trial 25 with parameters {&#39;d_3&#39;: 9.007368, &#39;d_4&#39;: 0.079504, &#39;d_5&#39;: 1.089731, &#39;d_6&#39;: 1.225407, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.44505}.
+[INFO 09-20 10:48:36] ax.service.ax_client: Completed trial 25 with data: {&#39;identity_Jsc&#39;: (16.493566, None), &#39;diff_AVT&#39;: (0.015086, None)}.
+[INFO 09-20 10:48:40] ax.service.ax_client: Generated new trial 26 with parameters {&#39;d_3&#39;: 9.113565, &#39;d_4&#39;: 0.020694, &#39;d_5&#39;: 1.316462, &#39;d_6&#39;: 1.065655, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.366654}.
+[INFO 09-20 10:48:43] ax.service.ax_client: Completed trial 26 with data: {&#39;identity_Jsc&#39;: (17.378046, None), &#39;diff_AVT&#39;: (0.069695, None)}.
+[INFO 09-20 10:48:46] ax.service.ax_client: Generated new trial 27 with parameters {&#39;d_3&#39;: 9.598199, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.833517, &#39;d_6&#39;: 1.06259, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.626796}.
+[INFO 09-20 10:48:48] ax.service.ax_client: Completed trial 27 with data: {&#39;identity_Jsc&#39;: (16.647131, None), &#39;diff_AVT&#39;: (0.020361, None)}.
+[INFO 09-20 10:48:51] ax.service.ax_client: Generated new trial 28 with parameters {&#39;d_3&#39;: 9.598842, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.885803, &#39;d_6&#39;: 0.600781, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.348964}.
+[INFO 09-20 10:48:54] ax.service.ax_client: Completed trial 28 with data: {&#39;identity_Jsc&#39;: (15.343613, None), &#39;diff_AVT&#39;: (0.115344, None)}.
+[INFO 09-20 10:48:58] ax.service.ax_client: Generated new trial 29 with parameters {&#39;d_3&#39;: 9.729392, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.905096, &#39;d_6&#39;: 1.269931, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.800446}.
+[INFO 09-20 10:49:00] ax.service.ax_client: Completed trial 29 with data: {&#39;identity_Jsc&#39;: (16.337635, None), &#39;diff_AVT&#39;: (0.097667, None)}.
+[INFO 09-20 10:49:03] ax.service.ax_client: Generated new trial 30 with parameters {&#39;d_3&#39;: 8.632502, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 1.5, &#39;d_6&#39;: 1.394814, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.558807}.
+[INFO 09-20 10:49:06] ax.service.ax_client: Completed trial 30 with data: {&#39;identity_Jsc&#39;: (17.092501, None), &#39;diff_AVT&#39;: (0.114725, None)}.
+[INFO 09-20 10:49:10] ax.service.ax_client: Generated new trial 31 with parameters {&#39;d_3&#39;: 9.000942, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.912233, &#39;d_6&#39;: 1.417174, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.0}.
+[INFO 09-20 10:49:13] ax.service.ax_client: Completed trial 31 with data: {&#39;identity_Jsc&#39;: (15.560846, None), &#39;diff_AVT&#39;: (0.010667, None)}.
+[INFO 09-20 10:49:16] ax.service.ax_client: Generated new trial 32 with parameters {&#39;d_3&#39;: 8.779596, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.945437, &#39;d_6&#39;: 1.199063, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.190513}.
+[INFO 09-20 10:49:19] ax.service.ax_client: Completed trial 32 with data: {&#39;identity_Jsc&#39;: (16.09269, None), &#39;diff_AVT&#39;: (0.010825, None)}.
+[INFO 09-20 10:49:23] ax.service.ax_client: Generated new trial 33 with parameters {&#39;d_3&#39;: 8.87227, &#39;d_4&#39;: 0.232226, &#39;d_5&#39;: 0.848719, &#39;d_6&#39;: 1.245105, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.034039}.
+[INFO 09-20 10:49:26] ax.service.ax_client: Completed trial 33 with data: {&#39;identity_Jsc&#39;: (14.604427, None), &#39;diff_AVT&#39;: (0.00588, None)}.
+[INFO 09-20 10:49:30] ax.service.ax_client: Generated new trial 34 with parameters {&#39;d_3&#39;: 8.98357, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.966861, &#39;d_6&#39;: 1.206713, &#39;d_7&#39;: 16.043616, &#39;d_8&#39;: 0.262203}.
+[INFO 09-20 10:49:33] ax.service.ax_client: Completed trial 34 with data: {&#39;identity_Jsc&#39;: (16.534258, None), &#39;diff_AVT&#39;: (0.109406, None)}.
+[INFO 09-20 10:49:36] ax.service.ax_client: Generated new trial 35 with parameters {&#39;d_3&#39;: 8.631247, &#39;d_4&#39;: 0.054236, &#39;d_5&#39;: 0.681752, &#39;d_6&#39;: 1.32478, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.212757}.
+[INFO 09-20 10:49:39] ax.service.ax_client: Completed trial 35 with data: {&#39;identity_Jsc&#39;: (14.953521, None), &#39;diff_AVT&#39;: (0.065441, None)}.
+[INFO 09-20 10:49:44] ax.service.ax_client: Generated new trial 36 with parameters {&#39;d_3&#39;: 9.43282, &#39;d_4&#39;: 1.34628, &#39;d_5&#39;: 0.717898, &#39;d_6&#39;: 1.391693, &#39;d_7&#39;: 18.869814, &#39;d_8&#39;: 1.533561}.
+[INFO 09-20 10:49:46] ax.service.ax_client: Completed trial 36 with data: {&#39;identity_Jsc&#39;: (13.962892, None), &#39;diff_AVT&#39;: (0.013509, None)}.
+[INFO 09-20 10:49:50] ax.service.ax_client: Generated new trial 37 with parameters {&#39;d_3&#39;: 8.638854, &#39;d_4&#39;: 0.392977, &#39;d_5&#39;: 0.983086, &#39;d_6&#39;: 1.301467, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.168395}.
+[INFO 09-20 10:49:53] ax.service.ax_client: Completed trial 37 with data: {&#39;identity_Jsc&#39;: (13.393027, None), &#39;diff_AVT&#39;: (0.054965, None)}.
+[INFO 09-20 10:49:57] ax.service.ax_client: Generated new trial 38 with parameters {&#39;d_3&#39;: 9.780286, &#39;d_4&#39;: 1.505437, &#39;d_5&#39;: 0.843477, &#39;d_6&#39;: 1.338268, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.047009}.
+[INFO 09-20 10:49:59] ax.service.ax_client: Completed trial 38 with data: {&#39;identity_Jsc&#39;: (14.885701, None), &#39;diff_AVT&#39;: (0.061533, None)}.
+[INFO 09-20 10:50:05] ax.service.ax_client: Generated new trial 39 with parameters {&#39;d_3&#39;: 10.0, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.976832, &#39;d_6&#39;: 1.28043, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.023903}.
+[INFO 09-20 10:50:07] ax.service.ax_client: Completed trial 39 with data: {&#39;identity_Jsc&#39;: (16.394255, None), &#39;diff_AVT&#39;: (0.069947, None)}.
+[INFO 09-20 10:50:11] ax.service.ax_client: Generated new trial 40 with parameters {&#39;d_3&#39;: 8.620459, &#39;d_4&#39;: 1.623045, &#39;d_5&#39;: 0.697273, &#39;d_6&#39;: 1.583184, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.396965}.
+[INFO 09-20 10:50:14] ax.service.ax_client: Completed trial 40 with data: {&#39;identity_Jsc&#39;: (12.943691, None), &#39;diff_AVT&#39;: (0.07008, None)}.
+[INFO 09-20 10:50:18] ax.service.ax_client: Generated new trial 41 with parameters {&#39;d_3&#39;: 9.56416, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 1.5, &#39;d_6&#39;: 1.161202, &#39;d_7&#39;: 8.028368, &#39;d_8&#39;: 0.447077}.
+[INFO 09-20 10:50:20] ax.service.ax_client: Completed trial 41 with data: {&#39;identity_Jsc&#39;: (17.754328, None), &#39;diff_AVT&#39;: (0.286672, None)}.
+[INFO 09-20 10:50:25] ax.service.ax_client: Generated new trial 42 with parameters {&#39;d_3&#39;: 6.360676, &#39;d_4&#39;: 0.073401, &#39;d_5&#39;: 0.953864, &#39;d_6&#39;: 1.596738, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.0}.
+[INFO 09-20 10:50:27] ax.service.ax_client: Completed trial 42 with data: {&#39;identity_Jsc&#39;: (13.358382, None), &#39;diff_AVT&#39;: (0.132922, None)}.
+[INFO 09-20 10:50:30] ax.service.ax_client: Generated new trial 43 with parameters {&#39;d_3&#39;: 6.431529, &#39;d_4&#39;: 0.195479, &#39;d_5&#39;: 0.848687, &#39;d_6&#39;: 1.757115, &#39;d_7&#39;: 17.330573, &#39;d_8&#39;: 1.173606}.
+[INFO 09-20 10:50:33] ax.service.ax_client: Completed trial 43 with data: {&#39;identity_Jsc&#39;: (11.819211, None), &#39;diff_AVT&#39;: (0.120365, None)}.
+[INFO 09-20 10:50:37] ax.service.ax_client: Generated new trial 44 with parameters {&#39;d_3&#39;: 8.513296, &#39;d_4&#39;: 0.218824, &#39;d_5&#39;: 0.881081, &#39;d_6&#39;: 1.087453, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.70327}.
+[INFO 09-20 10:50:40] ax.service.ax_client: Completed trial 44 with data: {&#39;identity_Jsc&#39;: (15.16915, None), &#39;diff_AVT&#39;: (0.00241, None)}.
+[INFO 09-20 10:50:45] ax.service.ax_client: Generated new trial 45 with parameters {&#39;d_3&#39;: 8.993889, &#39;d_4&#39;: 1.050447, &#39;d_5&#39;: 0.845582, &#39;d_6&#39;: 1.235753, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.390144}.
+[INFO 09-20 10:50:47] ax.service.ax_client: Completed trial 45 with data: {&#39;identity_Jsc&#39;: (12.219058, None), &#39;diff_AVT&#39;: (0.01597, None)}.
+[INFO 09-20 10:50:52] ax.service.ax_client: Generated new trial 46 with parameters {&#39;d_3&#39;: 9.516499, &#39;d_4&#39;: 1.25207, &#39;d_5&#39;: 1.023102, &#39;d_6&#39;: 1.435749, &#39;d_7&#39;: 17.498929, &#39;d_8&#39;: 1.339746}.
+[INFO 09-20 10:50:54] ax.service.ax_client: Completed trial 46 with data: {&#39;identity_Jsc&#39;: (14.183171, None), &#39;diff_AVT&#39;: (0.026396, None)}.
+[INFO 09-20 10:50:58] ax.service.ax_client: Generated new trial 47 with parameters {&#39;d_3&#39;: 8.232578, &#39;d_4&#39;: 0.090046, &#39;d_5&#39;: 0.594727, &#39;d_6&#39;: 0.955, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.853071}.
+[INFO 09-20 10:51:01] ax.service.ax_client: Completed trial 47 with data: {&#39;identity_Jsc&#39;: (14.887262, None), &#39;diff_AVT&#39;: (0.02814, None)}.
+[INFO 09-20 10:51:05] ax.service.ax_client: Generated new trial 48 with parameters {&#39;d_3&#39;: 8.441218, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 0.918284, &#39;d_6&#39;: 1.060268, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.576814}.
+[INFO 09-20 10:51:08] ax.service.ax_client: Completed trial 48 with data: {&#39;identity_Jsc&#39;: (16.203839, None), &#39;diff_AVT&#39;: (0.007339, None)}.
+[INFO 09-20 10:51:13] ax.service.ax_client: Generated new trial 49 with parameters {&#39;d_3&#39;: 9.67944, &#39;d_4&#39;: 1.092521, &#39;d_5&#39;: 0.802803, &#39;d_6&#39;: 1.563446, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 1.466271}.
+[INFO 09-20 10:51:16] ax.service.ax_client: Completed trial 49 with data: {&#39;identity_Jsc&#39;: (13.291958, None), &#39;diff_AVT&#39;: (0.006537, None)}.
+[INFO 09-20 10:51:22] ax.service.ax_client: Generated new trial 50 with parameters {&#39;d_3&#39;: 7.115541, &#39;d_4&#39;: 1.577344, &#39;d_5&#39;: 1.002237, &#39;d_6&#39;: 0.225984, &#39;d_7&#39;: 15.205392, &#39;d_8&#39;: 0.38468}.
+[INFO 09-20 10:51:25] ax.service.ax_client: Completed trial 50 with data: {&#39;identity_Jsc&#39;: (12.31185, None), &#39;diff_AVT&#39;: (0.100261, None)}.
+[INFO 09-20 10:51:30] ax.service.ax_client: Generated new trial 51 with parameters {&#39;d_3&#39;: 6.714054, &#39;d_4&#39;: 1.563515, &#39;d_5&#39;: 1.103725, &#39;d_6&#39;: 0.0, &#39;d_7&#39;: 8.64392, &#39;d_8&#39;: 0.256334}.
+[INFO 09-20 10:51:33] ax.service.ax_client: Completed trial 51 with data: {&#39;identity_Jsc&#39;: (12.994268, None), &#39;diff_AVT&#39;: (0.130798, None)}.
+[INFO 09-20 10:51:41] ax.service.ax_client: Generated new trial 52 with parameters {&#39;d_3&#39;: 9.274065, &#39;d_4&#39;: 1.092379, &#39;d_5&#39;: 0.950646, &#39;d_6&#39;: 1.513335, &#39;d_7&#39;: 19.11871, &#39;d_8&#39;: 1.320826}.
+[INFO 09-20 10:51:44] ax.service.ax_client: Completed trial 52 with data: {&#39;identity_Jsc&#39;: (12.851945, None), &#39;diff_AVT&#39;: (0.011053, None)}.
+[INFO 09-20 10:51:50] ax.service.ax_client: Generated new trial 53 with parameters {&#39;d_3&#39;: 9.821614, &#39;d_4&#39;: 1.223517, &#39;d_5&#39;: 0.969776, &#39;d_6&#39;: 1.057858, &#39;d_7&#39;: 18.701358, &#39;d_8&#39;: 1.451701}.
+[INFO 09-20 10:51:52] ax.service.ax_client: Completed trial 53 with data: {&#39;identity_Jsc&#39;: (14.456, None), &#39;diff_AVT&#39;: (0.106461, None)}.
+[INFO 09-20 10:52:00] ax.service.ax_client: Generated new trial 54 with parameters {&#39;d_3&#39;: 8.034151, &#39;d_4&#39;: 0.357626, &#39;d_5&#39;: 0.832056, &#39;d_6&#39;: 1.201635, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.923679}.
+[INFO 09-20 10:52:03] ax.service.ax_client: Completed trial 54 with data: {&#39;identity_Jsc&#39;: (13.036769, None), &#39;diff_AVT&#39;: (0.020091, None)}.
+[INFO 09-20 10:52:10] ax.service.ax_client: Generated new trial 55 with parameters {&#39;d_3&#39;: 9.119671, &#39;d_4&#39;: 1.013924, &#39;d_5&#39;: 0.724583, &#39;d_6&#39;: 1.443613, &#39;d_7&#39;: 19.102578, &#39;d_8&#39;: 1.393656}.
+[INFO 09-20 10:52:13] ax.service.ax_client: Completed trial 55 with data: {&#39;identity_Jsc&#39;: (12.179281, None), &#39;diff_AVT&#39;: (0.03253, None)}.
+[INFO 09-20 10:52:21] ax.service.ax_client: Generated new trial 56 with parameters {&#39;d_3&#39;: 8.947641, &#39;d_4&#39;: 0.102944, &#39;d_5&#39;: 0.780942, &#39;d_6&#39;: 1.027164, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.398278}.
+[INFO 09-20 10:52:24] ax.service.ax_client: Completed trial 56 with data: {&#39;identity_Jsc&#39;: (15.932783, None), &#39;diff_AVT&#39;: (0.009376, None)}.
+[INFO 09-20 10:52:30] ax.service.ax_client: Generated new trial 57 with parameters {&#39;d_3&#39;: 6.378641, &#39;d_4&#39;: 0.063007, &#39;d_5&#39;: 0.794484, &#39;d_6&#39;: 2.0, &#39;d_7&#39;: 16.420412, &#39;d_8&#39;: 0.275708}.
+[INFO 09-20 10:52:33] ax.service.ax_client: Completed trial 57 with data: {&#39;identity_Jsc&#39;: (12.431949, None), &#39;diff_AVT&#39;: (0.062322, None)}.
+[INFO 09-20 10:52:40] ax.service.ax_client: Generated new trial 58 with parameters {&#39;d_3&#39;: 8.492161, &#39;d_4&#39;: 0.31414, &#39;d_5&#39;: 0.803181, &#39;d_6&#39;: 1.053318, &#39;d_7&#39;: 20.0, &#39;d_8&#39;: 0.499897}.
+[INFO 09-20 10:52:43] ax.service.ax_client: Completed trial 58 with data: {&#39;identity_Jsc&#39;: (14.543714, None), &#39;diff_AVT&#39;: (0.041873, None)}.
+[INFO 09-20 10:52:51] ax.service.ax_client: Generated new trial 59 with parameters {&#39;d_3&#39;: 9.024661, &#39;d_4&#39;: 0.0, &#39;d_5&#39;: 1.003942, &#39;d_6&#39;: 1.048976, &#39;d_7&#39;: 19.34503, &#39;d_8&#39;: 0.496139}.
+[INFO 09-20 10:52:54] ax.service.ax_client: Completed trial 59 with data: {&#39;identity_Jsc&#39;: (16.820282, None), &#39;diff_AVT&#39;: (0.021802, None)}.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the optimized stack structure</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AL thickness 56 nm
+MoOx 1 thickness 8 nm
+Ag thickness 7 nm
+MoOx 2 thickness 183 nm
+LiF 1 thickness 165 nm
+MoOx 3 thickness 64 nm
+LiF 2 thickness 10 nm
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all tried data from the ax_client</span>
+<span class="n">triedX</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">trials_as_df</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">triedX</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">triedY</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">()</span><span class="o">.</span><span class="n">df</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">triedY</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 10:52:58] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   Generation Step Generation Model  Trial Index Trial Status  \
+0                0            Sobol            0    COMPLETED
+1                0            Sobol            1    COMPLETED
+2                0            Sobol            2    COMPLETED
+3                0            Sobol            3    COMPLETED
+4                0            Sobol            4    COMPLETED
+
+                               Arm Parameterizations
+0  {&#39;0_0&#39;: {&#39;d_3&#39;: 9.02, &#39;d_4&#39;: 0.94, &#39;d_5&#39;: 0.97...
+1  {&#39;1_0&#39;: {&#39;d_3&#39;: 5.14, &#39;d_4&#39;: 1.58, &#39;d_5&#39;: 1.14...
+2  {&#39;2_0&#39;: {&#39;d_3&#39;: 8.22, &#39;d_4&#39;: 1.04, &#39;d_5&#39;: 0.76...
+3  {&#39;3_0&#39;: {&#39;d_3&#39;: 6.5, &#39;d_4&#39;: 1.51, &#39;d_5&#39;: 1.02,...
+4  {&#39;4_0&#39;: {&#39;d_3&#39;: 8.12, &#39;d_4&#39;: 0.26, &#39;d_5&#39;: 0.42...
+  arm_name   metric_name       mean  sem  trial_index
+0      0_0  identity_Jsc  11.703561  NaN            0
+1      0_0      diff_AVT   0.003930  NaN            0
+2      1_0  identity_Jsc   9.271020  NaN            1
+3      1_0      diff_AVT   0.091688  NaN            1
+4      2_0  identity_Jsc  10.900742  NaN            2
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Pareto front of the test problem</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_all_objectives</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_12_0.png" src="../_images/examples_TM_AVT_Jsc_MO_12_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plotting of the objective function tradeoffs</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">model</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_objective_vs_constraints</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;identity_Jsc&#39;</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_13_0.png" src="../_images/examples_TM_AVT_Jsc_MO_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the density of points that were sampled during the optimization process</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_density</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_14_0.png" src="../_images/examples_TM_AVT_Jsc_MO_14_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the contour of the objective function for a given target</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="s2">&quot;d_6&quot;</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="s2">&quot;d_7&quot;</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 10:53:02] ax.service.ax_client: Retrieving contour plot with parameter &#39;d_6&#39; on X-axis and &#39;d_7&#39; on Y-axis, for metric &#39;identity_Jsc&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_15_1.png" src="../_images/examples_TM_AVT_Jsc_MO_15_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the slice (i.e., 1D projection) of the model along the a single dimension</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;d_7&quot;</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;d_3&quot;</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_16_0.png" src="../_images/examples_TM_AVT_Jsc_MO_16_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_16_1.png" src="../_images/examples_TM_AVT_Jsc_MO_16_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results of cross validation</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_cross_validation</span><span class="p">(</span><span class="n">cv_results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_17_0.png" src="../_images/examples_TM_AVT_Jsc_MO_17_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plot of the target during the optimization process</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_fitted</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_18_0.png" src="../_images/examples_TM_AVT_Jsc_MO_18_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the hypervolume evolution during the optimization</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_hypervolume</span><span class="p">(</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_19_0.png" src="../_images/examples_TM_AVT_Jsc_MO_19_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute and plot the Pareto frontier</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">optimization_config</span><span class="o">.</span><span class="n">objective</span><span class="o">.</span><span class="n">objectives</span>
+<span class="n">frontier</span> <span class="o">=</span> <span class="n">compute_posterior_pareto_frontier</span><span class="p">(</span>
+    <span class="n">experiment</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">(),</span>
+    <span class="n">primary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">secondary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">absolute_metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;diff_AVT&quot;</span><span class="p">,</span> <span class="s2">&quot;identity_Jsc&quot;</span><span class="p">],</span>
+    <span class="n">num_points</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_pareto_frontier</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="n">CI_level</span><span class="o">=</span><span class="mf">0.90</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TM_AVT_Jsc_MO_20_0.png" src="../_images/examples_TM_AVT_Jsc_MO_20_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TM_LUE.html" class="btn btn-neutral float-left" title="BOAR with Transfer Matrix Method" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../modules.html" class="btn btn-neutral float-right" title="boar" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

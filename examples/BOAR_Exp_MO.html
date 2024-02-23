@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-objective optimization for perovskite material composition &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example" href="TM_AVT_Jsc_MO_custom_func.html" />
+    <link rel="prev" title="Design of Experiments to optimize perovskite solar cells efficiency" href="BOAR_Exp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Multi-objective optimization for perovskite material composition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Multi-objective optimization for perovskite material composition</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/BOAR_Exp_MO.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Multi-objective-optimization-for-perovskite-material-composition">
+<h1>Multi-objective optimization for perovskite material composition<a class="headerlink" href="#Multi-objective-optimization-for-perovskite-material-composition" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<p>This notebook is made to use BOAR to design experiments. Here, we show how to load some data from a presampling, and how to use BOAR to suggest the next set of experiment using Bayesian optimization. The goal here is to do multi-objective optimization (MO) to maximize the phololuminescence quantum yield (PLQY) and minimize the full width at half maximum (FWHM) of a perovskite thin film.</p>
+<p>Note: The data used here is real data generated in the <a class="reference external" href="https://www.i-meet.ww.uni-erlangen.de/">i-MEET</a> and <a class="reference external" href="https://www.hi-ern.de/de">HI-ERN</a> labs at the university of Erlangen-Nuremberg (FAU) by Frederik Schmitt. The data is not published yet, and is only used here for demonstration purposes. For more information, please contact us.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># # comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span> <span class="c1"># comment out to only render png</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">types</span><span class="o">,</span><span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># import additional libraries from Ax</span>
+<span class="kn">from</span> <span class="nn">ax.utils.notebook.plotting</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">init_notebook_plotting</span> <span class="c1"># for plotting in notebook</span>
+<span class="kn">from</span> <span class="nn">ax.plot.slice</span> <span class="kn">import</span> <span class="n">plot_slice</span>
+<span class="kn">from</span> <span class="nn">ax.plot.scatter</span> <span class="kn">import</span> <span class="n">interact_fitted</span><span class="p">,</span><span class="n">plot_objective_vs_constraints</span><span class="p">,</span><span class="n">tile_fitted</span>
+<span class="kn">from</span> <span class="nn">ax.modelbridge.cross_validation</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">ax.plot.contour</span> <span class="kn">import</span> <span class="n">interact_contour</span>
+<span class="kn">from</span> <span class="nn">ax.plot.diagnostic</span> <span class="kn">import</span> <span class="n">interact_cross_validation</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_utils</span> <span class="kn">import</span> <span class="n">compute_posterior_pareto_frontier</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_frontier</span> <span class="kn">import</span> <span class="n">plot_pareto_frontier</span>
+<span class="c1"># Import homemade package by VLC</span>
+<span class="c1"># import boar.SIMsalabim_utils.plot_settings_screen # to set default plot settings</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># current directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;Example_Data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;campaign_name&#39;</span><span class="p">,</span> <span class="s1">&#39;iteration&#39;</span><span class="p">,</span> <span class="s1">&#39;batch_number&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Cs_fraction&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Fa_fraction&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Ma_fraction&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Spin_duration_Antisolvent&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Spin_duration_High_Speed&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Spin_speed&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;FWHM&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;PLQY&#39;</span><span class="p">,</span> <span class="s1">&#39;merit&#39;</span><span class="p">,</span> <span class="s1">&#39;updated_date&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;Frederik&#39;</span><span class="p">,</span><span class="s1">&#39;Pero_PLQY_FWHM.csv&#39;</span><span class="p">),</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  status   campaign_name  iteration  batch_number  Cs_fraction  Fa_fraction  \
+0     ok  Pero 2 Targets          0             0         0.15         0.40
+1     ok  Pero 2 Targets          0             1         0.30         0.60
+2     ok  Pero 2 Targets          0             2         0.70         0.15
+3     ok  Pero 2 Targets          0             3         0.20         0.40
+4     ok  Pero 2 Targets          0             4         0.85         0.00
+
+   Ma_fraction  Spin_duration_Antisolvent  Spin_duration_High_Speed  \
+0         0.45                       17.0                      56.0
+1         0.10                       24.0                      54.0
+2         0.15                       26.0                      27.0
+3         0.40                       27.0                      25.0
+4         0.15                       30.0                      54.0
+
+   Spin_speed    FWHM  PLQY     merit                 updated_date
+0      1000.0   52.38  1.02  0.567051  2023-05-03T12:41:14.581252Z
+1      3900.0   49.11  0.37  0.572715  2023-05-03T12:41:14.591554Z
+2      2200.0   47.44  1.30  0.564611  2023-05-03T12:41:14.599691Z
+3      4300.0   53.54  0.60  0.570711  2023-05-03T12:41:14.606672Z
+4      3400.0  194.23  0.00  0.699095  2023-05-03T12:41:14.613394Z
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">,</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">,</span><span class="s1">&#39;Spin_duration_Antisolvent&#39;</span><span class="p">,</span><span class="s1">&#39;Spin_duration_High_Speed&#39;</span><span class="p">,</span><span class="s1">&#39;Spin_speed&#39;</span><span class="p">]</span>
+<span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;FWHM&#39;</span><span class="p">,</span><span class="s1">&#39;PLQY&#39;</span><span class="p">]</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">params_names</span><span class="o">+</span><span class="n">target_names</span><span class="p">])</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">stepsize_fraction</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">stepsize_spin_speed</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># transform the data to the right format</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">stepsize_fraction</span><span class="p">)))</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">stepsize_fraction</span><span class="p">)))</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_duration_Antisolvent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_duration_Antisolvent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_duration_High_Speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_duration_High_Speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Spin_speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">stepsize_spin_speed</span><span class="p">))</span>
+
+<span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:[],</span><span class="s1">&#39;y_0&#39;</span><span class="p">:[],</span><span class="s1">&#39;ydyn_0&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;y_1&#39;</span><span class="p">:[],</span><span class="s1">&#39;ydyn_1&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">)):</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="n">params_names</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s1">&#39;y_0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="n">target_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s1">&#39;y_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="n">target_names</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+
+<span class="c1"># save to res_dir</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">Cs_fraction</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Cs_fraction&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">0</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">stepsize_fraction</span><span class="p">)],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Cs fraction&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Cs_fraction</span><span class="p">)</span>
+<span class="n">Fa_fraction</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Fa_fraction&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">0</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">stepsize_fraction</span><span class="p">)],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;FA fraction&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Fa_fraction</span><span class="p">)</span>
+<span class="n">Spin_duration_Antisolvent</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_duration_Antisolvent&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">5</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin duration Antisolvent&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_duration_Antisolvent</span><span class="p">)</span>
+<span class="n">Spin_duration_High_Speed</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_duration_High_Speed&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">20</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin duration High Speed&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_duration_High_Speed</span><span class="p">)</span>
+<span class="n">Spin_speed</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_speed&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">20</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin speed&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;RPM&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">)</span> <span class="c1"># reall spin speed is param*100</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_speed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an excel file with len(params) columns and nb_new_exp rows filled with nan</span>
+<span class="n">nb_new_exp</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">dat_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_new_exp</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># replace all with &#39;nan&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dat_array</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dat_array</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+        <span class="n">dat_array</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nan&#39;</span>
+<span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span> <span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dat_array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">pnames</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp.xlsx&#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp.xlsx&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">exp_to_df</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   Cs_fraction  Fa_fraction  Spin_duration_Antisolvent  \
+0          NaN          NaN                        NaN
+1          NaN          NaN                        NaN
+2          NaN          NaN                        NaN
+3          NaN          NaN                        NaN
+4          NaN          NaN                        NaN
+5          NaN          NaN                        NaN
+6          NaN          NaN                        NaN
+7          NaN          NaN                        NaN
+8          NaN          NaN                        NaN
+
+   Spin_duration_High_Speed  Spin_speed
+0                       NaN         NaN
+1                       NaN         NaN
+2                       NaN         NaN
+3                       NaN         NaN
+4                       NaN         NaN
+5                       NaN         NaN
+6                       NaN         NaN
+7                       NaN         NaN
+8                       NaN         NaN
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the targets and the model for the TM problem</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;FWHM&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">exp_to_df</span><span class="p">,</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;FWHM&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;nm&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;PLQY&#39;</span>
+<span class="n">target2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">exp_to_df</span><span class="p">,</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;PLQY&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;%&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">,</span><span class="n">target2</span><span class="p">]</span>
+<span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;identity&#39;</span>
+<span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span>
+<span class="n">threshold</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]</span>
+
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MooBOtorch</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span> <span class="n">targets</span><span class="p">)</span> <span class="c1"># initialize the optimization object</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;recall&#39;</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># needed if number of cores is lower than number of CPU - 1 to ensure we output the right number of points</span>
+<span class="c1"># mo.SaveOldXY2file = os.path.join(res_dir,&#39;old_XY.json&#39;)</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">Path2OldXY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">parameter_constraints</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">stepsize_fraction</span><span class="si">}</span><span class="s1">*Cs_fraction + </span><span class="si">{</span><span class="n">stepsize_fraction</span><span class="si">}</span><span class="s1">*Fa_fraction &lt;= 1&#39;</span><span class="p">]</span>
+
+<span class="c1"># Define custom evaluation function</span>
+<span class="k">def</span> <span class="nf">evaluate_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">px</span><span class="p">,</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+
+<span class="n">mo</span><span class="o">.</span><span class="n">evaluate_custom</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">evaluate_custom</span><span class="p">,</span> <span class="n">mo</span><span class="p">)</span> <span class="c1"># add the method to the object FullyBayesianMOO</span>
+<span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;Ninteg&#39;</span><span class="p">:</span><span class="mf">1e3</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;True_values&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span><span class="p">,</span><span class="s1">&#39;full_grid&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;randomize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+
+<span class="n">ax_client</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">BoTorchOpti</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="p">[</span><span class="n">nb_new_exp</span><span class="p">],</span> <span class="n">n_step_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">nb_new_exp</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MOO&#39;</span><span class="p">],</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span><span class="n">use_CUDA</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">kwargs_posterior</span><span class="o">=</span><span class="n">kwargs_posterior</span><span class="p">,</span><span class="n">use_custom_func</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">suggest_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 09:59:35] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 6 decimal points.
+[INFO 09-20 09:59:35] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#39;Cs_fraction&#39;, parameter_type=FLOAT, range=[0.0, 20.0]), RangeParameter(name=&#39;Fa_fraction&#39;, parameter_type=FLOAT, range=[0.0, 20.0]), RangeParameter(name=&#39;Spin_duration_Antisolvent&#39;, parameter_type=INT, range=[5, 30]), RangeParameter(name=&#39;Spin_duration_High_Speed&#39;, parameter_type=INT, range=[15, 60]), RangeParameter(name=&#39;Spin_speed&#39;, parameter_type=INT, range=[10, 60])], parameter_constraints=[ParameterConstraint(0.05*Cs_fraction + 0.05*Fa_fraction &lt;= 1.0)]).
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 8.0, &#39;Spin_duration_Antisolvent&#39;: 17, &#39;Spin_duration_High_Speed&#39;: 56, &#39;Spin_speed&#39;: 10}] as trial 0.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 0 with data: {&#39;identity_FWHM&#39;: (52.38, None), &#39;identity_PLQY&#39;: (1.02, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 6.0, &#39;Fa_fraction&#39;: 12.0, &#39;Spin_duration_Antisolvent&#39;: 24, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 39}] as trial 1.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 1 with data: {&#39;identity_FWHM&#39;: (49.11, None), &#39;identity_PLQY&#39;: (0.37, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 14.0, &#39;Fa_fraction&#39;: 3.0, &#39;Spin_duration_Antisolvent&#39;: 26, &#39;Spin_duration_High_Speed&#39;: 27, &#39;Spin_speed&#39;: 22}] as trial 2.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 2 with data: {&#39;identity_FWHM&#39;: (47.44, None), &#39;identity_PLQY&#39;: (1.3, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 8.0, &#39;Spin_duration_Antisolvent&#39;: 27, &#39;Spin_duration_High_Speed&#39;: 25, &#39;Spin_speed&#39;: 43}] as trial 3.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 3 with data: {&#39;identity_FWHM&#39;: (53.54, None), &#39;identity_PLQY&#39;: (0.6, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 17.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 34}] as trial 4.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 4 with data: {&#39;identity_FWHM&#39;: (194.23, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 9.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 57, &#39;Spin_speed&#39;: 49}] as trial 5.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 5 with data: {&#39;identity_FWHM&#39;: (81.66, None), &#39;identity_PLQY&#39;: (0.2, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 9.0, &#39;Fa_fraction&#39;: 4.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 57, &#39;Spin_speed&#39;: 41}] as trial 6.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 6 with data: {&#39;identity_FWHM&#39;: (48.49, None), &#39;identity_PLQY&#39;: (0.75, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 31}] as trial 7.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 7 with data: {&#39;identity_FWHM&#39;: (48.74, None), &#39;identity_PLQY&#39;: (12.81, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 3.0, &#39;Spin_duration_Antisolvent&#39;: 28, &#39;Spin_duration_High_Speed&#39;: 39, &#39;Spin_speed&#39;: 24}] as trial 8.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 8 with data: {&#39;identity_FWHM&#39;: (58.35, None), &#39;identity_PLQY&#39;: (0.32, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 10.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 25, &#39;Spin_duration_High_Speed&#39;: 21, &#39;Spin_speed&#39;: 43}] as trial 9.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 9 with data: {&#39;identity_FWHM&#39;: (60.18, None), &#39;identity_PLQY&#39;: (0.24, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 10.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 27, &#39;Spin_duration_High_Speed&#39;: 46, &#39;Spin_speed&#39;: 18}] as trial 10.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 10 with data: {&#39;identity_FWHM&#39;: (45.74, None), &#39;identity_PLQY&#39;: (0.68, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 6.0, &#39;Fa_fraction&#39;: 9.0, &#39;Spin_duration_Antisolvent&#39;: 27, &#39;Spin_duration_High_Speed&#39;: 53, &#39;Spin_speed&#39;: 14}] as trial 11.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 11 with data: {&#39;identity_FWHM&#39;: (52.21, None), &#39;identity_PLQY&#39;: (0.23, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 46, &#39;Spin_speed&#39;: 40}] as trial 12.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 12 with data: {&#39;identity_FWHM&#39;: (52.67, None), &#39;identity_PLQY&#39;: (1.15, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 6.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 38, &#39;Spin_speed&#39;: 34}] as trial 13.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 13 with data: {&#39;identity_FWHM&#39;: (55.4, None), &#39;identity_PLQY&#39;: (0.75, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 6.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 42, &#39;Spin_speed&#39;: 25}] as trial 14.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 14 with data: {&#39;identity_FWHM&#39;: (55.11, None), &#39;identity_PLQY&#39;: (0.2, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 5.0, &#39;Fa_fraction&#39;: 4.0, &#39;Spin_duration_Antisolvent&#39;: 18, &#39;Spin_duration_High_Speed&#39;: 45, &#39;Spin_speed&#39;: 44}] as trial 15.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 15 with data: {&#39;identity_FWHM&#39;: (61.16, None), &#39;identity_PLQY&#39;: (0.25, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 8, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 26}] as trial 16.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 16 with data: {&#39;identity_FWHM&#39;: (50.45, None), &#39;identity_PLQY&#39;: (14.13, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 29, &#39;Spin_speed&#39;: 27}] as trial 17.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 17 with data: {&#39;identity_FWHM&#39;: (47.65, None), &#39;identity_PLQY&#39;: (6.29, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 17.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 47}] as trial 18.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 18 with data: {&#39;identity_FWHM&#39;: (54.2, None), &#39;identity_PLQY&#39;: (7.04, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 31, &#39;Spin_speed&#39;: 27}] as trial 19.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 19 with data: {&#39;identity_FWHM&#39;: (47.42, None), &#39;identity_PLQY&#39;: (11.44, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 33, &#39;Spin_speed&#39;: 20}] as trial 20.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 20 with data: {&#39;identity_FWHM&#39;: (47.37, None), &#39;identity_PLQY&#39;: (7.01, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 15.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 34, &#39;Spin_speed&#39;: 50}] as trial 21.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 21 with data: {&#39;identity_FWHM&#39;: (47.76, None), &#39;identity_PLQY&#39;: (8.72, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 18.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 31, &#39;Spin_speed&#39;: 14}] as trial 22.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 22 with data: {&#39;identity_FWHM&#39;: (47.65, None), &#39;identity_PLQY&#39;: (9.72, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 18, &#39;Spin_duration_High_Speed&#39;: 34, &#39;Spin_speed&#39;: 48}] as trial 23.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 23 with data: {&#39;identity_FWHM&#39;: (55.05, None), &#39;identity_PLQY&#39;: (5.96, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 19, &#39;Spin_speed&#39;: 31}] as trial 24.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 24 with data: {&#39;identity_FWHM&#39;: (48.9, None), &#39;identity_PLQY&#39;: (3.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 21, &#39;Spin_speed&#39;: 31}] as trial 25.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 25 with data: {&#39;identity_FWHM&#39;: (49.29, None), &#39;identity_PLQY&#39;: (1.73, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 30}] as trial 26.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 26 with data: {&#39;identity_FWHM&#39;: (48.92, None), &#39;identity_PLQY&#39;: (10.31, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 32}] as trial 27.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 27 with data: {&#39;identity_FWHM&#39;: (49.61, None), &#39;identity_PLQY&#39;: (15.65, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 14, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 31}] as trial 28.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 28 with data: {&#39;identity_FWHM&#39;: (48.79, None), &#39;identity_PLQY&#39;: (9.79, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 16, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 31}] as trial 29.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 29 with data: {&#39;identity_FWHM&#39;: (48.66, None), &#39;identity_PLQY&#39;: (11.17, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 22, &#39;Spin_speed&#39;: 31}] as trial 30.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 30 with data: {&#39;identity_FWHM&#39;: (49.87, None), &#39;identity_PLQY&#39;: (6.65, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 31}] as trial 31.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 31 with data: {&#39;identity_FWHM&#39;: (49.4, None), &#39;identity_PLQY&#39;: (10.6, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 19.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 44, &#39;Spin_speed&#39;: 11}] as trial 32.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 32 with data: {&#39;identity_FWHM&#39;: (308.45, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 15.0, &#39;Fa_fraction&#39;: 5.0, &#39;Spin_duration_Antisolvent&#39;: 14, &#39;Spin_duration_High_Speed&#39;: 40, &#39;Spin_speed&#39;: 14}] as trial 33.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 33 with data: {&#39;identity_FWHM&#39;: (152.2, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 18.0, &#39;Fa_fraction&#39;: 2.0, &#39;Spin_duration_Antisolvent&#39;: 12, &#39;Spin_duration_High_Speed&#39;: 16, &#39;Spin_speed&#39;: 42}] as trial 34.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 34 with data: {&#39;identity_FWHM&#39;: (251.45, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 19.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 21, &#39;Spin_speed&#39;: 20}] as trial 35.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 35 with data: {&#39;identity_FWHM&#39;: (197.45, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 17.0, &#39;Fa_fraction&#39;: 3.0, &#39;Spin_duration_Antisolvent&#39;: 11, &#39;Spin_duration_High_Speed&#39;: 44, &#39;Spin_speed&#39;: 10}] as trial 36.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 36 with data: {&#39;identity_FWHM&#39;: (303.85, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 16.0, &#39;Fa_fraction&#39;: 4.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 38, &#39;Spin_speed&#39;: 16}] as trial 37.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 37 with data: {&#39;identity_FWHM&#39;: (217.65, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 20.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 14, &#39;Spin_duration_High_Speed&#39;: 22, &#39;Spin_speed&#39;: 15}] as trial 38.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 38 with data: {&#39;identity_FWHM&#39;: (193.05, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 20.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 25, &#39;Spin_speed&#39;: 10}] as trial 39.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 39 with data: {&#39;identity_FWHM&#39;: (201.95, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 40.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 40 with data: {&#39;identity_FWHM&#39;: (94.35, None), &#39;identity_PLQY&#39;: (18.89, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 8, &#39;Spin_duration_High_Speed&#39;: 44, &#39;Spin_speed&#39;: 24}] as trial 41.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 41 with data: {&#39;identity_FWHM&#39;: (100.2, None), &#39;identity_PLQY&#39;: (24.65, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 33}] as trial 42.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 42 with data: {&#39;identity_FWHM&#39;: (47.95, None), &#39;identity_PLQY&#39;: (6.05, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 34}] as trial 43.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 43 with data: {&#39;identity_FWHM&#39;: (49.15, None), &#39;identity_PLQY&#39;: (5.77, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 6.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 32}] as trial 44.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 44 with data: {&#39;identity_FWHM&#39;: (48.7, None), &#39;identity_PLQY&#39;: (6.61, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 8.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 32}] as trial 45.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 45 with data: {&#39;identity_FWHM&#39;: (48.7, None), &#39;identity_PLQY&#39;: (6.26, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 6.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 32}] as trial 46.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 46 with data: {&#39;identity_FWHM&#39;: (48.35, None), &#39;identity_PLQY&#39;: (8.44, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 20, &#39;Spin_speed&#39;: 32}] as trial 47.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 47 with data: {&#39;identity_FWHM&#39;: (47.35, None), &#39;identity_PLQY&#39;: (7.45, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 6.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 50, &#39;Spin_speed&#39;: 17}] as trial 48.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 48 with data: {&#39;identity_FWHM&#39;: (301.5, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 13.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 42, &#39;Spin_speed&#39;: 29}] as trial 49.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 49 with data: {&#39;identity_FWHM&#39;: (218.25, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 14.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 48, &#39;Spin_speed&#39;: 28}] as trial 50.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 50 with data: {&#39;identity_FWHM&#39;: (249.9, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 12.0, &#39;Fa_fraction&#39;: 6.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 51, &#39;Spin_speed&#39;: 36}] as trial 51.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 51 with data: {&#39;identity_FWHM&#39;: (260.7, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 12.0, &#39;Fa_fraction&#39;: 2.0, &#39;Spin_duration_Antisolvent&#39;: 20, &#39;Spin_duration_High_Speed&#39;: 39, &#39;Spin_speed&#39;: 33}] as trial 52.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 52 with data: {&#39;identity_FWHM&#39;: (228.45, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:35] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 9.0, &#39;Fa_fraction&#39;: 8.0, &#39;Spin_duration_Antisolvent&#39;: 19, &#39;Spin_duration_High_Speed&#39;: 31, &#39;Spin_speed&#39;: 35}] as trial 53.
+[INFO 09-20 09:59:35] ax.service.ax_client: Completed trial 53 with data: {&#39;identity_FWHM&#39;: (45.75, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 60, &#39;Spin_speed&#39;: 35}] as trial 54.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 54 with data: {&#39;identity_FWHM&#39;: (52.0, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 6.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 30, &#39;Spin_speed&#39;: 34}] as trial 55.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 55 with data: {&#39;identity_FWHM&#39;: (316.4, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 28}] as trial 56.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 56 with data: {&#39;identity_FWHM&#39;: (100.5, None), &#39;identity_PLQY&#39;: (17.21, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 11, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 57.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 57 with data: {&#39;identity_FWHM&#39;: (105.75, None), &#39;identity_PLQY&#39;: (16.91, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 56, &#39;Spin_speed&#39;: 27}] as trial 58.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 58 with data: {&#39;identity_FWHM&#39;: (107.25, None), &#39;identity_PLQY&#39;: (15.05, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 27}] as trial 59.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 59 with data: {&#39;identity_FWHM&#39;: (108.8, None), &#39;identity_PLQY&#39;: (38.62, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 29}] as trial 60.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 60 with data: {&#39;identity_FWHM&#39;: (106.1, None), &#39;identity_PLQY&#39;: (21.33, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 11, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 28}] as trial 61.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 61 with data: {&#39;identity_FWHM&#39;: (106.3, None), &#39;identity_PLQY&#39;: (13.18, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 20.0, &#39;Spin_duration_Antisolvent&#39;: 12, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 62.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 62 with data: {&#39;identity_FWHM&#39;: (83.15, None), &#39;identity_PLQY&#39;: (8.08, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 63.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 63 with data: {&#39;identity_FWHM&#39;: (57.15, None), &#39;identity_PLQY&#39;: (40.92, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 22, &#39;Spin_duration_High_Speed&#39;: 40, &#39;Spin_speed&#39;: 49}] as trial 64.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 64 with data: {&#39;identity_FWHM&#39;: (47.3, None), &#39;identity_PLQY&#39;: (5.25, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 11.0, &#39;Spin_duration_Antisolvent&#39;: 23, &#39;Spin_duration_High_Speed&#39;: 60, &#39;Spin_speed&#39;: 16}] as trial 65.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 65 with data: {&#39;identity_FWHM&#39;: (46.25, None), &#39;identity_PLQY&#39;: (4.79, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 12.0, &#39;Spin_duration_Antisolvent&#39;: 25, &#39;Spin_duration_High_Speed&#39;: 50, &#39;Spin_speed&#39;: 23}] as trial 66.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 66 with data: {&#39;identity_FWHM&#39;: (51.05, None), &#39;identity_PLQY&#39;: (10.83, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 3.0, &#39;Spin_duration_Antisolvent&#39;: 29, &#39;Spin_duration_High_Speed&#39;: 50, &#39;Spin_speed&#39;: 11}] as trial 67.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 67 with data: {&#39;identity_FWHM&#39;: (48.9, None), &#39;identity_PLQY&#39;: (4.91, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 13.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 24, &#39;Spin_speed&#39;: 16}] as trial 68.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 68 with data: {&#39;identity_FWHM&#39;: (48.65, None), &#39;identity_PLQY&#39;: (7.22, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 6.0, &#39;Spin_duration_Antisolvent&#39;: 12, &#39;Spin_duration_High_Speed&#39;: 15, &#39;Spin_speed&#39;: 18}] as trial 69.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 69 with data: {&#39;identity_FWHM&#39;: (52.3, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 13.0, &#39;Spin_duration_Antisolvent&#39;: 25, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 18}] as trial 70.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 70 with data: {&#39;identity_FWHM&#39;: (48.75, None), &#39;identity_PLQY&#39;: (7.04, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 7.0, &#39;Fa_fraction&#39;: 13.0, &#39;Spin_duration_Antisolvent&#39;: 17, &#39;Spin_duration_High_Speed&#39;: 59, &#39;Spin_speed&#39;: 30}] as trial 71.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 71 with data: {&#39;identity_FWHM&#39;: (52.0, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 18.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 72.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 72 with data: {&#39;identity_FWHM&#39;: (93.9, None), &#39;identity_PLQY&#39;: (16.74, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 18.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 73.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 73 with data: {&#39;identity_FWHM&#39;: (50.8, None), &#39;identity_PLQY&#39;: (8.85, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 17.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 74.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 74 with data: {&#39;identity_FWHM&#39;: (104.85, None), &#39;identity_PLQY&#39;: (7.81, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 2.0, &#39;Fa_fraction&#39;: 17.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 75.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 75 with data: {&#39;identity_FWHM&#39;: (52.45, None), &#39;identity_PLQY&#39;: (4.91, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 17.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 76.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 76 with data: {&#39;identity_FWHM&#39;: (52.45, None), &#39;identity_PLQY&#39;: (11.68, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 2.0, &#39;Fa_fraction&#39;: 16.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 77.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 77 with data: {&#39;identity_FWHM&#39;: (48.31, None), &#39;identity_PLQY&#39;: (3.5, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 16.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 78.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 78 with data: {&#39;identity_FWHM&#39;: (53.61, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 1.0, &#39;Fa_fraction&#39;: 16.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 79.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 79 with data: {&#39;identity_FWHM&#39;: (51.0, None), &#39;identity_PLQY&#39;: (3.59, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 13.0, &#39;Fa_fraction&#39;: 7.0, &#39;Spin_duration_Antisolvent&#39;: 22, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 47}] as trial 80.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 80 with data: {&#39;identity_FWHM&#39;: (302.6, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 13, &#39;Spin_duration_High_Speed&#39;: 35, &#39;Spin_speed&#39;: 45}] as trial 81.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 81 with data: {&#39;identity_FWHM&#39;: (48.3, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 11.0, &#39;Spin_duration_Antisolvent&#39;: 6, &#39;Spin_duration_High_Speed&#39;: 28, &#39;Spin_speed&#39;: 43}] as trial 82.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 82 with data: {&#39;identity_FWHM&#39;: (53.7, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 11.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 24, &#39;Spin_speed&#39;: 49}] as trial 83.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 83 with data: {&#39;identity_FWHM&#39;: (48.05, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 11.0, &#39;Fa_fraction&#39;: 5.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 48}] as trial 84.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 84 with data: {&#39;identity_FWHM&#39;: (289.6, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 10.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 36, &#39;Spin_speed&#39;: 45}] as trial 85.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 85 with data: {&#39;identity_FWHM&#39;: (209.95, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 7.0, &#39;Fa_fraction&#39;: 5.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 36, &#39;Spin_speed&#39;: 27}] as trial 86.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 86 with data: {&#39;identity_FWHM&#39;: (49.55, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 9.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 37, &#39;Spin_speed&#39;: 46}] as trial 87.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 87 with data: {&#39;identity_FWHM&#39;: (335.9, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 26}] as trial 88.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 88 with data: {&#39;identity_FWHM&#39;: (60.25, None), &#39;identity_PLQY&#39;: (27.55, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 25}] as trial 89.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 89 with data: {&#39;identity_FWHM&#39;: (58.95, None), &#39;identity_PLQY&#39;: (34.63, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 24}] as trial 90.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 90 with data: {&#39;identity_FWHM&#39;: (81.6, None), &#39;identity_PLQY&#39;: (38.61, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 91.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 91 with data: {&#39;identity_FWHM&#39;: (73.3, None), &#39;identity_PLQY&#39;: (35.86, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 23}] as trial 92.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 92 with data: {&#39;identity_FWHM&#39;: (70.0, None), &#39;identity_PLQY&#39;: (39.76, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 26}] as trial 93.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 93 with data: {&#39;identity_FWHM&#39;: (50.55, None), &#39;identity_PLQY&#39;: (19.12, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 22}] as trial 94.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 94 with data: {&#39;identity_FWHM&#39;: (53.45, None), &#39;identity_PLQY&#39;: (3.28, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 25}] as trial 95.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 95 with data: {&#39;identity_FWHM&#39;: (52.5, None), &#39;identity_PLQY&#39;: (5.71, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 26, &#39;Spin_duration_High_Speed&#39;: 34, &#39;Spin_speed&#39;: 10}] as trial 96.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 96 with data: {&#39;identity_FWHM&#39;: (321.3, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 13.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 13, &#39;Spin_duration_High_Speed&#39;: 29, &#39;Spin_speed&#39;: 12}] as trial 97.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 97 with data: {&#39;identity_FWHM&#39;: (207.45, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 11.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 11, &#39;Spin_duration_High_Speed&#39;: 33, &#39;Spin_speed&#39;: 12}] as trial 98.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 98 with data: {&#39;identity_FWHM&#39;: (258.95, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 3.0, &#39;Fa_fraction&#39;: 2.0, &#39;Spin_duration_Antisolvent&#39;: 24, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 50}] as trial 99.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 99 with data: {&#39;identity_FWHM&#39;: (70.65, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 4.0, &#39;Spin_duration_Antisolvent&#39;: 6, &#39;Spin_duration_High_Speed&#39;: 41, &#39;Spin_speed&#39;: 45}] as trial 100.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 100 with data: {&#39;identity_FWHM&#39;: (47.45, None), &#39;identity_PLQY&#39;: (16.02, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 2.0, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 18, &#39;Spin_speed&#39;: 39}] as trial 101.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 101 with data: {&#39;identity_FWHM&#39;: (300.2, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 15.0, &#39;Fa_fraction&#39;: 0.0, &#39;Spin_duration_Antisolvent&#39;: 17, &#39;Spin_duration_High_Speed&#39;: 31, &#39;Spin_speed&#39;: 48}] as trial 102.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 102 with data: {&#39;identity_FWHM&#39;: (204.25, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 1.0, &#39;Spin_duration_Antisolvent&#39;: 20, &#39;Spin_duration_High_Speed&#39;: 25, &#39;Spin_speed&#39;: 48}] as trial 103.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 103 with data: {&#39;identity_FWHM&#39;: (66.5, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 56, &#39;Spin_speed&#39;: 24}] as trial 104.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 104 with data: {&#39;identity_FWHM&#39;: (55.05, None), &#39;identity_PLQY&#39;: (18.38, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 11, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 24}] as trial 105.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 105 with data: {&#39;identity_FWHM&#39;: (50.1, None), &#39;identity_PLQY&#39;: (13.58, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 24}] as trial 106.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 106 with data: {&#39;identity_FWHM&#39;: (53.4, None), &#39;identity_PLQY&#39;: (7.76, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 56, &#39;Spin_speed&#39;: 23}] as trial 107.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 107 with data: {&#39;identity_FWHM&#39;: (54.65, None), &#39;identity_PLQY&#39;: (12.77, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 53, &#39;Spin_speed&#39;: 24}] as trial 108.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 108 with data: {&#39;identity_FWHM&#39;: (55.0, None), &#39;identity_PLQY&#39;: (9.91, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 52, &#39;Spin_speed&#39;: 24}] as trial 109.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 109 with data: {&#39;identity_FWHM&#39;: (60.4, None), &#39;identity_PLQY&#39;: (17.46, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 57, &#39;Spin_speed&#39;: 24}] as trial 110.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 110 with data: {&#39;identity_FWHM&#39;: (53.65, None), &#39;identity_PLQY&#39;: (7.65, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 10, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 23}] as trial 111.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 111 with data: {&#39;identity_FWHM&#39;: (52.15, None), &#39;identity_PLQY&#39;: (10.04, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 15.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 34, &#39;Spin_speed&#39;: 41}] as trial 112.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 112 with data: {&#39;identity_FWHM&#39;: (51.55, None), &#39;identity_PLQY&#39;: (7.15, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 5.0, &#39;Fa_fraction&#39;: 15.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 27, &#39;Spin_speed&#39;: 34}] as trial 113.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 113 with data: {&#39;identity_FWHM&#39;: (56.65, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 5.0, &#39;Fa_fraction&#39;: 15.0, &#39;Spin_duration_Antisolvent&#39;: 22, &#39;Spin_duration_High_Speed&#39;: 37, &#39;Spin_speed&#39;: 10}] as trial 114.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 114 with data: {&#39;identity_FWHM&#39;: (52.9, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 7.0, &#39;Fa_fraction&#39;: 4.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 50, &#39;Spin_speed&#39;: 36}] as trial 115.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 115 with data: {&#39;identity_FWHM&#39;: (47.35, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 14.0, &#39;Spin_duration_Antisolvent&#39;: 18, &#39;Spin_duration_High_Speed&#39;: 38, &#39;Spin_speed&#39;: 21}] as trial 116.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 116 with data: {&#39;identity_FWHM&#39;: (55.3, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 2.0, &#39;Spin_duration_Antisolvent&#39;: 29, &#39;Spin_duration_High_Speed&#39;: 15, &#39;Spin_speed&#39;: 35}] as trial 117.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 117 with data: {&#39;identity_FWHM&#39;: (308.5, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 4.0, &#39;Fa_fraction&#39;: 16.0, &#39;Spin_duration_Antisolvent&#39;: 25, &#39;Spin_duration_High_Speed&#39;: 24, &#39;Spin_speed&#39;: 33}] as trial 118.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 118 with data: {&#39;identity_FWHM&#39;: (45.9, None), &#39;identity_PLQY&#39;: (7.48, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 8.0, &#39;Fa_fraction&#39;: 3.0, &#39;Spin_duration_Antisolvent&#39;: 30, &#39;Spin_duration_High_Speed&#39;: 27, &#39;Spin_speed&#39;: 35}] as trial 119.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 119 with data: {&#39;identity_FWHM&#39;: (219.25, None), &#39;identity_PLQY&#39;: (0.0, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 8, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 120.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 120 with data: {&#39;identity_FWHM&#39;: (80.95, None), &#39;identity_PLQY&#39;: (24.67, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 7, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 121.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 121 with data: {&#39;identity_FWHM&#39;: (85.4, None), &#39;identity_PLQY&#39;: (25.59, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 122.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 122 with data: {&#39;identity_FWHM&#39;: (51.65, None), &#39;identity_PLQY&#39;: (20.1, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 6, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 27}] as trial 123.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 123 with data: {&#39;identity_FWHM&#39;: (51.75, None), &#39;identity_PLQY&#39;: (15.16, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 28}] as trial 124.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 124 with data: {&#39;identity_FWHM&#39;: (56.75, None), &#39;identity_PLQY&#39;: (14.29, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 56, &#39;Spin_speed&#39;: 27}] as trial 125.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 125 with data: {&#39;identity_FWHM&#39;: (54.7, None), &#39;identity_PLQY&#39;: (17.98, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 54, &#39;Spin_speed&#39;: 27}] as trial 126.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 126 with data: {&#39;identity_FWHM&#39;: (57.15, None), &#39;identity_PLQY&#39;: (33.2, None)}.
+[INFO 09-20 09:59:36] ax.core.experiment: Attached custom parameterizations [{&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 19.0, &#39;Spin_duration_Antisolvent&#39;: 8, &#39;Spin_duration_High_Speed&#39;: 55, &#39;Spin_speed&#39;: 28}] as trial 127.
+[INFO 09-20 09:59:36] ax.service.ax_client: Completed trial 127 with data: {&#39;identity_FWHM&#39;: (51.75, None), &#39;identity_PLQY&#39;: (24.47, None)}.
+[INFO 09-20 09:59:43] ax.service.ax_client: Generated new trial 128 with parameters {&#39;Cs_fraction&#39;: 0.061834, &#39;Fa_fraction&#39;: 18.824199, &#39;Spin_duration_Antisolvent&#39;: 17, &#39;Spin_duration_High_Speed&#39;: 51, &#39;Spin_speed&#39;: 27}.
+[INFO 09-20 09:59:43] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 09:59:47] ax.service.ax_client: Generated new trial 129 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 13.751038, &#39;Spin_duration_Antisolvent&#39;: 9, &#39;Spin_duration_High_Speed&#39;: 38, &#39;Spin_speed&#39;: 30}.
+[INFO 09-20 09:59:47] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 09:59:52] ax.service.ax_client: Generated new trial 130 with parameters {&#39;Cs_fraction&#39;: 0.375818, &#39;Fa_fraction&#39;: 17.176035, &#39;Spin_duration_Antisolvent&#39;: 14, &#39;Spin_duration_High_Speed&#39;: 33, &#39;Spin_speed&#39;: 31}.
+[INFO 09-20 09:59:52] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 09:59:56] ax.service.ax_client: Generated new trial 131 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 9.659854, &#39;Spin_duration_Antisolvent&#39;: 21, &#39;Spin_duration_High_Speed&#39;: 37, &#39;Spin_speed&#39;: 25}.
+[INFO 09-20 09:59:56] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 10:00:00] ax.service.ax_client: Generated new trial 132 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 14.533551, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 51, &#39;Spin_speed&#39;: 30}.
+[INFO 09-20 10:00:00] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 10:00:05] ax.service.ax_client: Generated new trial 133 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 18.949249, &#39;Spin_duration_Antisolvent&#39;: 16, &#39;Spin_duration_High_Speed&#39;: 47, &#39;Spin_speed&#39;: 13}.
+[INFO 09-20 10:00:05] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 10:00:10] ax.service.ax_client: Generated new trial 134 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 15.447093, &#39;Spin_duration_Antisolvent&#39;: 5, &#39;Spin_duration_High_Speed&#39;: 33, &#39;Spin_speed&#39;: 27}.
+[INFO 09-20 10:00:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 10:00:14] ax.service.ax_client: Generated new trial 135 with parameters {&#39;Cs_fraction&#39;: 0.181032, &#39;Fa_fraction&#39;: 0.650511, &#39;Spin_duration_Antisolvent&#39;: 23, &#39;Spin_duration_High_Speed&#39;: 34, &#39;Spin_speed&#39;: 55}.
+[INFO 09-20 10:00:14] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-20 10:00:19] ax.service.ax_client: Generated new trial 136 with parameters {&#39;Cs_fraction&#39;: 0.0, &#39;Fa_fraction&#39;: 14.426457, &#39;Spin_duration_Antisolvent&#39;: 15, &#39;Spin_duration_High_Speed&#39;: 52, &#39;Spin_speed&#39;: 39}.
+[INFO 09-20 10:00:21] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the optimized stack structure</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">val_type</span> <span class="o">!=</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">lims</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Cs fraction 0
+[0, 20]
+FA fraction 4
+[0, 20]
+Spin duration Antisolvent 6
+[5, 30]
+Spin duration High Speed 41
+[15, 60]
+Spin speed 45
+[10, 60]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all tried data from the ax_client</span>
+<span class="n">triedX</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">trials_as_df</span>
+<span class="c1"># print(triedX.tail())</span>
+<span class="n">triedY</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">()</span><span class="o">.</span><span class="n">df</span>
+<span class="c1"># print(triedY.tail())</span>
+
+<span class="c1"># find Trial Status ABANDONED</span>
+<span class="n">abandoned_trials</span> <span class="o">=</span> <span class="n">triedX</span><span class="p">[</span><span class="n">triedX</span><span class="p">[</span><span class="s1">&#39;Trial Status&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ABANDONED&#39;</span><span class="p">]</span>
+<span class="n">dics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">abandoned_trials</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="n">dic_dum</span> <span class="o">=</span> <span class="n">abandoned_trials</span><span class="p">[</span><span class="s1">&#39;Arm Parameterizations&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dic_dum</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">dic_dum</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">dics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+<span class="c1"># put in a dataframe</span>
+<span class="n">df2try</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dics</span><span class="p">)</span>
+
+<span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">stepsize_fraction</span>
+<span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">stepsize_fraction</span>
+<span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Ma_fraction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Cs_fraction&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Fa_fraction&#39;</span><span class="p">]</span>
+<span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Spin_speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">df2try</span><span class="p">[</span><span class="s1">&#39;Spin_speed&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">stepsize_spin_speed</span>
+
+<span class="c1"># save to excel</span>
+<span class="n">df2try</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp_2_try.xlsx&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df2try</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 10:00:21] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   Cs_fraction  Fa_fraction  Spin_duration_Antisolvent  \
+0          0.0         0.95                         17
+1          0.0         0.70                          9
+2          0.0         0.85                         14
+3          0.0         0.50                         21
+4          0.0         0.75                          5
+5          0.0         0.95                         16
+6          0.0         0.75                          5
+7          0.0         0.05                         23
+8          0.0         0.70                         15
+
+   Spin_duration_High_Speed  Spin_speed  Ma_fraction
+0                        51        2700         0.05
+1                        38        3000         0.30
+2                        33        3100         0.15
+3                        37        2500         0.50
+4                        51        3000         0.25
+5                        47        1300         0.05
+6                        33        2700         0.25
+7                        34        5500         0.95
+8                        52        3900         0.30
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Pareto front of the test problem</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_all_objectives</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_13_0.png" src="../_images/examples_BOAR_Exp_MO_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plotting of the objective function tradeoffs</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">model</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_objective_vs_constraints</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;identity_PLQY&#39;</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_14_0.png" src="../_images/examples_BOAR_Exp_MO_14_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the density of points that were sampled during the optimization process</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_density</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_15_0.png" src="../_images/examples_BOAR_Exp_MO_15_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the contour of the objective function for a given target</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-20 10:00:25] ax.service.ax_client: Retrieving contour plot with parameter &#39;Cs_fraction&#39; on X-axis and &#39;Spin_speed&#39; on Y-axis, for metric &#39;identity_FWHM&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_16_1.png" src="../_images/examples_BOAR_Exp_MO_16_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the slice (i.e., 1D projection) of the model along the a single dimension</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_17_0.png" src="../_images/examples_BOAR_Exp_MO_17_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results of cross validation</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_cross_validation</span><span class="p">(</span><span class="n">cv_results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_18_0.png" src="../_images/examples_BOAR_Exp_MO_18_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plot of the target during the optimization process</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_fitted</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_19_0.png" src="../_images/examples_BOAR_Exp_MO_19_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute and plot the Pareto frontier</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">optimization_config</span><span class="o">.</span><span class="n">objective</span><span class="o">.</span><span class="n">objectives</span>
+<span class="n">frontier</span> <span class="o">=</span> <span class="n">compute_posterior_pareto_frontier</span><span class="p">(</span>
+    <span class="n">experiment</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">(),</span>
+    <span class="n">primary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">secondary_objective</span><span class="o">=</span><span class="n">objectives</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metric</span><span class="p">,</span>
+    <span class="n">absolute_metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;identity_PLQY&#39;</span><span class="p">,</span> <span class="s1">&#39;identity_FWHM&#39;</span><span class="p">],</span>
+    <span class="n">num_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_pareto_frontier</span><span class="p">(</span><span class="n">frontier</span><span class="p">,</span> <span class="n">CI_level</span><span class="o">=</span><span class="mf">0.90</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_MO_20_0.png" src="../_images/examples_BOAR_Exp_MO_20_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="BOAR_Exp.html" class="btn btn-neutral float-left" title="Design of Experiments to optimize perovskite solar cells efficiency" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TM_AVT_Jsc_MO_custom_func.html" class="btn btn-neutral float-right" title="Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

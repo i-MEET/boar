@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.core.optimizer &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.core.optimizer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.core.optimizer</h1><div class="highlight"><pre>
+<span></span><span class="c1">######################################################################</span>
+<span class="c1">#################### BOAR Optimizer Class ############################</span>
+<span class="c1">######################################################################</span>
+<span class="c1"># Authors: </span>
+<span class="c1"># Larry Lueer (https://github.com/larryluer)</span>
+<span class="c1"># Vincent M. Le Corre (https://github.com/VMLC-PV)</span>
+<span class="c1"># (c) i-MEET, University of Erlangen-Nuremberg, 2021-2022-2023 </span>
+
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span><span class="n">mean_squared_log_error</span><span class="p">,</span><span class="n">mean_absolute_error</span><span class="p">,</span><span class="n">mean_absolute_percentage_error</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">directed_hausdorff</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span><span class="p">,</span><span class="n">basinhopping</span><span class="p">,</span><span class="n">dual_annealing</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
+<span class="c1"># Import boar libraries</span>
+<span class="kn">from</span> <span class="nn">boar.core.funcs</span> <span class="kn">import</span> <span class="n">sci_notation</span>
+<span class="kn">from</span> <span class="nn">boar.core.funcs</span> <span class="kn">import</span> <span class="n">get_unique_X</span>
+
+
+<div class="viewcode-block" id="BoarOptimizer">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer">[docs]</a>
+<span class="k">class</span> <span class="nc">BoarOptimizer</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Provides a default class for the different optimizers in BOAR. \\</span>
+<span class="sd">    This class is not intended to be used directly, but rather to be inherited by the different optimizer classes. \\</span>
+<span class="sd">    It provides the basic functionality for the optimizer classes, such as the different objective functions, \\</span>
+<span class="sd">    the functions to handle the Fitparam() objects, and the functions to handle the different plotting options. \\</span>
+
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># a class for multi-objective optimization</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    
+<div class="viewcode-block" id="BoarOptimizer.params_r">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.params_r">[docs]</a>
+    <span class="k">def</span> <span class="nf">params_r</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Prepare starting guess and bounds for optimizer  </span>
+<span class="sd">        Considering settings of Fitparameters:  </span>
+
+<span class="sd">            optim_type: </span>
+<span class="sd">                if &#39;linear&#39;: abstract the order of magnitude (number between 1 and 10)  </span>
+<span class="sd">                if &#39;log&#39;: bring to decadic logarithm (discarding the negative sign, if any!)  </span>
+<span class="sd">            lim_type:   if &#39;absolute&#39;, respect user settings in Fitparam.lims  </span>
+<span class="sd">                if &#39;relative&#39;, respect user settings in Fitparam.relRange: </span>
+
+<span class="sd">                    if Fitparam.range_type==&#39;linear&#39;:  </span>
+<span class="sd">                        interpret Fitparam.relRange as factor  </span>
+<span class="sd">                    if Fitparam.range_type==&#39;log&#39;:  </span>
+<span class="sd">                        interpret Fitparam.relRange as order of magnitude  </span>
+<span class="sd">            relRange:   if zero, Fitparam is not included into starting guess and bounds  </span>
+<span class="sd">                        (but still available to the objective function)  </span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        params : list</span>
+<span class="sd">            list of Fitparam() objects</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set of lists</span>
+<span class="sd">            set of lists with:  p0 = initial guesses\\</span>
+<span class="sd">                                lb = lower bounds\\</span>
+<span class="sd">                                ub = upper bounds\\       </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">lb</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize vector for lower bounds</span>
+        <span class="n">ub</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize vector for upper bounds</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize vector for initial guess</span>
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span> <span class="c1"># walk across all parameter lists</span>
+            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">val_type</span> <span class="o">==</span> <span class="s1">&#39;float&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">optim_type</span><span class="o">==</span><span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">rescale</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="n">p0m</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))))</span> <span class="c1"># the order of magnitude of the parameters</span>
+                                        <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="n">p0m</span> <span class="c1"># save it in the Fitparam so it does not need to be calculated again</span>
+                                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="n">p0m</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]))))</span> <span class="c1"># the order of magnitude of the parameters</span>
+                                        <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="n">p0m</span> <span class="c1"># save it in the Fitparam so it does not need to be calculated again</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mi">1</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">p0m</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))))</span> <span class="c1"># the order of magnitude of the parameters</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="n">p0m</span> <span class="c1"># save it in the Fitparam so it does not need to be calculated again</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">p0m</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                            <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">/</span><span class="n">p0m</span><span class="p">)</span> <span class="c1"># optimizer can&#39;t handle very large besides very small numbers</span>
+                                                        <span class="c1"># therefore, bring values to same order of magnitude</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                <span class="n">lb0</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                <span class="n">ub0</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                    <span class="n">lb0</span> <span class="o">=</span> <span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>   <span class="c1"># this is linear version</span>
+                                    <span class="n">ub0</span> <span class="o">=</span> <span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>   <span class="c1"># this is linear version    </span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lb0</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ub0</span>                            
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                    <span class="n">lb0</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span>  <span class="c1"># this is logarithmic version</span>
+                                    <span class="n">ub0</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span>  <span class="c1"># this is logarithmic version</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lb0</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ub0</span>
+                            <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lb0</span><span class="o">/</span><span class="n">p0m</span><span class="p">)</span>
+                            <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ub0</span><span class="o">/</span><span class="n">p0m</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mf">1.0</span>
+                            <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                                <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                            <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">))</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">))</span>
+
+
+                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">optim_type</span><span class="o">==</span><span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">rescale</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="c1"># optimizer won&#39;t have problems with logarithmic quantities</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mf">1e-10</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING: negative start value for parameter &#39;</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; will be converted to positive value for optimization&#39;</span><span class="p">)</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)))</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)))</span>   <span class="c1"># this is linear version</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)))</span>    <span class="c1"># this is linear version                                </span>
+                                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)))</span>  <span class="c1"># this is logarithmic version</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)))</span>  <span class="c1"># this is logarithmic version</span>
+                                
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1e-10</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING: negative start value for parameter &#39;</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; will be converted to positive value for optimization&#39;</span><span class="p">)</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)))</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="c1"># optimizer won&#39;t have problems with logarithmic quantities</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">)</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mf">1e-10</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING: negative start value for parameter &#39;</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; will be converted to positive value for optimization&#39;</span><span class="p">)</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span>
+                                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">))</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">))</span>
+                                
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">1e-10</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING: negative start value for parameter &#39;</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; will be converted to positive value for optimization&#39;</span><span class="p">)</span>
+                                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;absolute&#39;</span><span class="p">:</span>
+                                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">lim_type</span> <span class="o">==</span> <span class="s1">&#39;relative&#39;</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">-</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">+</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">))</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">range_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                                        <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                                        <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">relRange</span><span class="p">)</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">val_type</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">stepsize</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">par</span><span class="o">.</span><span class="n">rescale</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                        <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">stepsize</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mi">1</span>
+
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">lb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                    <span class="n">ub</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">))</span>
+                    <span class="n">p0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">startVal</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1">#print(&#39;params_r returns p0, lb, ub&#39;)</span>
+        <span class="c1">#print(p0, lb, ub)</span>
+        <span class="k">return</span> <span class="n">p0</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.params_w">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.params_w">[docs]</a>
+    <span class="k">def</span> <span class="nf">params_w</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to interact with Fitparam objects\\</span>
+<span class="sd">        Used by all Obj_funcs to write desired parameter from optimizer </span>
+<span class="sd">        so the model can have the parameters in the physically correct units</span>
+<span class="sd">        The fitparams objects are in a nested list at self.include_params</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : 1D-sequence of floats</span>
+<span class="sd">            fit parameters as requested by optimizer</span>
+<span class="sd">        params : list</span>
+<span class="sd">            list of Fitparam() objects</span>
+<span class="sd">        std : list, optional</span>
+<span class="sd">            Contains the 95% confidence interval of the parameters, by default []</span>
+<span class="sd">        which : str, optional</span>
+<span class="sd">            &#39;val&#39;: x =&gt; Fitparam.val\\</span>
+<span class="sd">            &#39;startVal&#39;: x=&gt; Fitparam.startVal\\</span>
+<span class="sd">            defaults to Fitparam.val (which is used by the obj_funcs\\</span>
+<span class="sd">            to pass to the model function), by default &#39;val&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>  
+
+        <span class="n">ip</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># initialize param counter</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">std</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># if no standard deviation is given, set lims to x</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">std</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+            <span class="c1"># std = x</span>
+
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">val_type</span> <span class="o">==</span> <span class="s1">&#39;float&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">optim_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                            <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">*</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="c1"># bring back to correct order of magnitude, if necessary</span>
+                        <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                            <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">*</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                        <span class="n">par</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="c1">#* par.p0m</span>
+
+                    <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">optim_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">rescale</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">])</span>
+                                <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">])</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">])</span><span class="o">*</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                                <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">])</span><span class="o">*</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span>
+                                <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span><span class="o">*</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+                                <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span><span class="o">*</span><span class="n">par</span><span class="o">.</span><span class="n">p0m</span>
+
+                        <span class="n">par</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="c1"># !!!!!! This is logarithmic while par.val is delogarithmized!!!!!</span>
+                    <span class="k">else</span><span class="p">:</span> 
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ERROR. &#39;</span><span class="p">,</span><span class="n">par</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39; optim_type needs to be &#39;&#39;linear&#39;&#39; or &#39;&#39;log&#39;&#39; not &#39;</span><span class="p">,</span><span class="n">par</span><span class="o">.</span><span class="n">optim_type</span><span class="p">,</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>      
+                    <span class="n">ip</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">par</span><span class="o">.</span><span class="n">val_type</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                        <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">*</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                        <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span> <span class="o">*</span> <span class="n">par</span><span class="o">.</span><span class="n">p0m</span><span class="p">)</span>
+                    <span class="n">par</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span>
+                    <span class="n">ip</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;val&#39;</span><span class="p">:</span>
+                    <span class="n">par</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ip</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">which</span><span class="o">==</span><span class="s1">&#39;startVal&#39;</span><span class="p">:</span>
+                    <span class="n">par</span><span class="o">.</span><span class="n">startVal</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">startVal</span>
+                <span class="n">par</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">ip</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.obj_func_metric">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_metric">[docs]</a>
+    <span class="k">def</span> <span class="nf">obj_func_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Method to calculate the objective function value\\</span>
+<span class="sd">        Different objective functions can be used, see below</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target : target object</span>
+<span class="sd">            target object with data and weight</span>
+<span class="sd">        yf : array</span>
+<span class="sd">            model output</span>
+<span class="sd">        obj_type : str, optional</span>
+<span class="sd">            objective function type, can be [&#39;MSE&#39;, &#39;RMSE&#39;, &#39;MSLE&#39;,&#39;nRMSE&#39;,&#39;MAE&#39;,&#39;MAPE&#39;,&#39;larry&#39;,&#39;nRMSE_VLC&#39;], by default &#39;MSE&#39;</span>
+<span class="sd">            &#39;MSE&#39;: mean squared error</span>
+<span class="sd">            &#39;RMSE&#39;: root mean squared error</span>
+<span class="sd">            &#39;MSLE&#39;: mean squared log error</span>
+<span class="sd">            &#39;nRMSE&#39;: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))</span>
+<span class="sd">            &#39;MAE&#39;: mean absolute error</span>
+<span class="sd">            &#39;MAPE&#39;: mean absolute percentage error</span>
+<span class="sd">            &#39;RAE&#39;: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)</span>
+<span class="sd">            &#39;larry&#39;: mean squared error legacy version</span>
+<span class="sd">            &#39;nRMSE_VLC&#39;: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments</span>
+<span class="sd">            </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            objective function value</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            if obj_type is not in [&#39;MSE&#39;, &#39;RMSE&#39;, &#39;MSLE&#39;,&#39;nRMSE&#39;,&#39;MAE&#39;,&#39;larry&#39;,&#39;nRMSE_VLC&#39;]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span> <span class="c1"># if yf is a list convert to array</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+        <span class="c1"># set weight rigth for the sklearn functions</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> <span class="c1"># if weight is a number</span>
+            <span class="k">if</span> <span class="n">weight</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># if no weight is given</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="c1"># mean squared error</span>
+            <span class="k">return</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span><span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;MSLE&#39;</span><span class="p">:</span> <span class="c1"># mean squared log error</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">yf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># if the sign of the model and data are different</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;WARNING: more than 80$%$ of the data has different sign in model and data. The calculation will continue but we recommand  using a different objective function.&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mean_squared_log_error</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;nRMSE&#39;</span><span class="p">:</span> <span class="c1"># normalized root mean squared error</span>
+            <span class="n">maxi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yf</span><span class="p">))</span>
+            <span class="n">mini</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yf</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span><span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">maxi</span><span class="o">-</span><span class="n">mini</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="c1"># mean absolute error</span>
+            <span class="k">return</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="c1"># mean absolute percentage error</span>
+            <span class="k">return</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;RAE&#39;</span><span class="p">:</span> <span class="c1"># relative absolute error</span>
+            <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">weight</span><span class="p">)</span>
+            <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">weight</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">numerator</span><span class="o">/</span><span class="n">denominator</span>
+        
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;larry&#39;</span><span class="p">:</span> <span class="c1"># legacy </span>
+            <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># if no weight is given</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(((</span><span class="n">yf</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">weight</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;nRMSE_VLC&#39;</span><span class="p">:</span> <span class="c1"># normalized root mean squared error</span>
+            <span class="c1"># split the data for unique values of X</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+            <span class="n">X_dimensions</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;xaxis&#39;</span> <span class="ow">in</span> <span class="n">X_dimensions</span><span class="p">:</span>
+                <span class="n">xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="p">[</span><span class="s1">&#39;xaxis&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># if no xaxis is given, take the first dimension</span>
+
+            <span class="n">X_unique</span><span class="p">,</span><span class="n">X_dimensions_uni</span> <span class="o">=</span> <span class="n">get_unique_X</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">xaxis</span><span class="p">,</span><span class="n">X_dimensions</span><span class="p">)</span>
+
+            <span class="c1"># calculate the nRMSE for each unique value of X</span>
+            <span class="n">nRMSE</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_unique</span><span class="p">)):</span>
+                <span class="n">X_dum</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+                <span class="c1">#remove xaxis column from X</span>
+                <span class="n">idx_xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+                <span class="n">X_dum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">X_dum</span><span class="p">,</span><span class="n">idx_xaxis</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#remove xaxis column from X</span>
+
+                <span class="c1"># find index of all of the rows where X_dum == X_unique[i]</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">X_dum</span><span class="o">==</span><span class="n">X_unique</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">weight_dum</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">weight_dum</span> <span class="o">=</span> <span class="n">weight</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">maxi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+                <span class="n">mini</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+                <span class="n">nRMSE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight_dum</span><span class="p">,</span><span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">maxi</span><span class="o">-</span><span class="n">mini</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">nRMSE</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;hausdorff&#39;</span><span class="p">:</span>
+
+            <span class="c1"># split the data for unique values of X</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+            <span class="n">X_dimensions</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;xaxis&#39;</span> <span class="ow">in</span> <span class="n">X_dimensions</span><span class="p">:</span>
+                <span class="n">xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="p">[</span><span class="s1">&#39;xaxis&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># if no xaxis is given, take the first dimension</span>
+
+            <span class="n">X_unique</span><span class="p">,</span><span class="n">X_dimensions_uni</span> <span class="o">=</span> <span class="n">get_unique_X</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">xaxis</span><span class="p">,</span><span class="n">X_dimensions</span><span class="p">)</span>
+
+            <span class="c1"># calculate the nRMSE for each unique value of X</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_unique</span><span class="p">)):</span>
+                <span class="n">X_dum</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+                <span class="c1">#remove xaxis column from X</span>
+                <span class="n">idx_xaxis</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">xaxis</span><span class="p">)</span>
+                <span class="n">X_dum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">X_dum</span><span class="p">,</span><span class="n">idx_xaxis</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#remove xaxis column from X</span>
+
+                <span class="c1"># find index of all of the rows where X_dum == X_unique[i]</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">X_dum</span><span class="o">==</span><span class="n">X_unique</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">X_</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">idx_xaxis</span><span class="p">]</span>
+                <span class="n">y_</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">yf_</span> <span class="o">=</span> <span class="n">yf</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+                <span class="n">dist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">directed_hausdorff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">y_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">yf_</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+            
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;identity&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">yf</span>
+        <span class="k">elif</span> <span class="n">obj_type</span> <span class="o">==</span> <span class="s1">&#39;diff&#39;</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">:</span>
+                <span class="k">return</span>  <span class="nb">abs</span><span class="p">(</span><span class="n">yf</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;yf is not a float or int&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;WARNING: obj_func type not recognized. Using MSE instead.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">yf</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sample_weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>     </div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.lossfunc">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.lossfunc">[docs]</a>
+    <span class="k">def</span> <span class="nf">lossfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">z0</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define the different loss functions that can be used to calculate the </span>
+<span class="sd">        objective function value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        z0 : 1D-array</span>
+<span class="sd">            data array of size (n,) with the mean squared error values</span>
+<span class="sd">        loss : str</span>
+<span class="sd">            type of loss function to use, can be [&#39;linear&#39;,&#39;soft_l1&#39;,&#39;huber&#39;,&#39;cauchy&#39;,&#39;arctan&#39;]</span>
+<span class="sd">        threshold : int, optional</span>
+<span class="sd">            critical value above which loss sets in, by default 1000. </span>
+<span class="sd">            Wisely select so that the loss function affects only outliers.</span>
+<span class="sd">            If threshold is set too low, then c&lt;z0 even fon non-outliers</span>
+<span class="sd">            falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        1D-array</span>
+<span class="sd">            array of size (n,) with the loss function values</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z0</span><span class="o">/</span><span class="n">threshold</span> <span class="c1"># we know the obj func is between 0 and 100 </span>
+        <span class="k">if</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">z</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;soft_l1&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;huber&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span>  <span class="n">z</span> <span class="k">if</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="o">*</span><span class="n">z</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;cauchy&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;arctan&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Loss function not recognized (choose from linear, soft_l1, huber, cauchy, arctan)&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">threshold</span><span class="o">*</span><span class="n">c</span> <span class="c1"># make sure the cost is between 0 and 100 too</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.invert_lossfunc">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.invert_lossfunc">[docs]</a>
+    <span class="k">def</span> <span class="nf">invert_lossfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">z0</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Invert the loss function to get the mean squared error values back</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        z0 : 1D-array</span>
+<span class="sd">            data array of size (n,) with the loss function values</span>
+<span class="sd">        loss : str</span>
+<span class="sd">            type of loss function to use, can be [&#39;linear&#39;,&#39;soft_l1&#39;,&#39;huber&#39;,&#39;cauchy&#39;,&#39;arctan&#39;]</span>
+<span class="sd">        threshold : int, optional</span>
+<span class="sd">            critical value above which loss sets in, by default 1000. </span>
+<span class="sd">            Wisely select so that the loss function affects only outliers.</span>
+<span class="sd">            If threshold is set too low, then c&lt;z0 even fon non-outliers</span>
+<span class="sd">            falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        1D-array</span>
+<span class="sd">            array of size (n,) with the mean squared error values</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z0</span><span class="o">/</span><span class="n">threshold</span>
+        <span class="k">if</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">threshold</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;soft_l1&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="p">((</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">threshold</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;huber&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">z</span><span class="o">*</span><span class="n">threshold</span> <span class="k">if</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">((</span><span class="n">z</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">threshold</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;cauchy&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">threshold</span>
+        <span class="k">elif</span> <span class="n">loss</span><span class="o">==</span><span class="s1">&#39;arctan&#39;</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">*</span><span class="n">threshold</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Loss function not recognized (choose from linear, soft_l1, huber, cauchy, arctan)&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">c</span></div>
+
+    
+<div class="viewcode-block" id="BoarOptimizer.format_func">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.format_func">[docs]</a>
+    <span class="k">def</span> <span class="nf">format_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span> <span class="n">tick_number</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format function for the x and y axis ticks  </span>
+<span class="sd">        to be passed to axo[ii,jj].xaxis.set_major_formatter(plt.FuncFormatter(format_func))  </span>
+<span class="sd">        to get the logarithmic ticks looking good on the plot  </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            value to convert</span>
+<span class="sd">        tick_number : int</span>
+<span class="sd">            tick position</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            string representation of the value in scientific notation</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="k">return</span> <span class="n">sci_notation</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">value</span><span class="p">,</span> <span class="n">sig_fig</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">###############################################################################</span>
+    <span class="c1">################################# Curve fit ###################################</span>
+    <span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="BoarOptimizer.obj_func_curvefit">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_curvefit">[docs]</a>
+    <span class="k">def</span> <span class="nf">obj_func_curvefit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">model</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Objective function as desired by scipy.curve_fit</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : ndarray</span>
+<span class="sd">            X Data array of size(n,m): n=number of data points, m=number of dimensions</span>
+<span class="sd">        *p : ndarray</span>
+<span class="sd">            list of float; values of the fit parameters as supplied by the optimizer</span>
+<span class="sd">        params : list</span>
+<span class="sd">            list of Fitparam() objects</span>
+<span class="sd">        model : callable</span>
+<span class="sd">            Model function yf = f(X) to compare to y</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        1D-array</span>
+<span class="sd">            array of size (n,) with the model values</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+
+        <span class="n">yfit</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">:</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="c1"># get array of experimental X values</span>
+            <span class="n">ydata</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="c1"># get vector of experimental y values</span>
+
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="c1"># write variable parameters into params, respecting user settings</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">](</span><span class="n">xdata</span><span class="p">,</span><span class="n">params</span><span class="p">))</span>
+            <span class="n">yfit</span> <span class="o">=</span> <span class="n">yfit</span> <span class="o">+</span> <span class="n">y</span>
+
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">yfit</span><span class="p">)</span>
+        <span class="c1">#print(&#39;errsq&#39;, np.sum(((yfit-self.yfull)/self.weightfull))**2)</span>
+        <span class="k">return</span> <span class="n">yfit</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.optimize_curvefit">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_curvefit">[docs]</a>
+    <span class="k">def</span> <span class="nf">optimize_curvefit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use curvefit to optimize a function y = f(x) where x can be multi-dimensional</span>
+<span class="sd">        use this function if the loss function is deterministic</span>
+<span class="sd">        do not use this function if loss function has uncertainty (e.g from numerical simulation)</span>
+<span class="sd">        in this case, use optimize_sko</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            kwargs aruguments for curve_fit, see scipy.optimize.curve_fit documentation for more information, by default None\\</span>
+<span class="sd">            If no kwargs is provided use:\\</span>
+<span class="sd">            kwargs = {&#39;ftol&#39;:1e-8, &#39;xtol&#39;:1e-6, &#39;gtol&#39;: 1e-8, &#39;diff_step&#39;:0.001,&#39;loss&#39;:&#39;linear&#39;,&#39;max_nfev&#39;:5000}</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            dictionary with the optimized parameters (&#39;popt&#39;) and the corresponding covariance (&#39;pcov&#39;) and standard deviation (&#39;std&#39;) values</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="n">xfull</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">yfull</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">weightfull</span> <span class="o">=</span> <span class="p">[]</span>
+        
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">:</span>
+            <span class="n">xdata</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="c1"># get array of experimental X values</span>
+            <span class="n">ydata</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="c1"># get vector of experimental y values</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> <span class="c1"># if weight is a number</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ydata</span><span class="p">))</span> <span class="c1"># set weight to a vector of the same size as ydata</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]))</span>
+            <span class="c1"># check if weight is a number or a vector</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xfull</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">xfull</span> <span class="o">=</span> <span class="n">xdata</span>
+                <span class="n">yfull</span> <span class="o">=</span> <span class="n">ydata</span> 
+                <span class="n">weightfull</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">weight</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xfull</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">xfull</span><span class="p">,</span><span class="n">xdata</span><span class="p">))</span>
+                <span class="n">yfull</span> <span class="o">=</span> <span class="n">yfull</span> <span class="o">+</span> <span class="n">ydata</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">weight</span><span class="p">)</span>
+                <span class="n">weightfull</span> <span class="o">=</span> <span class="n">weightfull</span> <span class="o">+</span> <span class="n">weight</span>
+                
+            <span class="k">if</span> <span class="n">kwargs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ftol&#39;</span><span class="p">:</span><span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;xtol&#39;</span><span class="p">:</span><span class="mf">1e-6</span><span class="p">,</span> <span class="s1">&#39;gtol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;diff_step&#39;</span><span class="p">:</span><span class="mf">0.001</span><span class="p">,</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;max_nfev&#39;</span><span class="p">:</span><span class="mi">5000</span><span class="p">}</span>
+
+
+        <span class="n">p0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_r</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># read out Fitparams &amp; respect settings    </span>
+        <span class="c1"># using partial functions allows passing extra parameters</span>
+        <span class="n">pfunc</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_func_curvefit</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">pfunc</span><span class="p">,</span><span class="n">xfull</span><span class="p">,</span><span class="n">yfull</span><span class="p">,</span><span class="n">p0</span><span class="o">=</span><span class="n">p0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="n">weightfull</span><span class="p">,</span><span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">check_finite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">),</span><span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">jac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">popt</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">pcov</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">infodict</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">mesg</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pcov</span><span class="p">))</span>
+        
+        <span class="c1"># make tuple with (std,std) for each parameter</span>
+        <span class="n">stdx</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">par</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">relRange</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">optim_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">val</span>
+                    <span class="n">s</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="n">s1</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">+</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span> <span class="c1"># upper error bars</span>
+                    <span class="n">s2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">-</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span> <span class="c1"># lower error bars </span>
+                    <span class="n">stdx</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s2</span><span class="p">,</span><span class="n">s1</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">s</span> <span class="o">=</span> <span class="n">std</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                    <span class="n">stdx</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">,</span><span class="n">s</span><span class="p">))</span>
+                <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">std</span><span class="o">=</span><span class="n">stdx</span><span class="p">)</span> <span class="c1"># write variable parameters into params, respecting user settings</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;popt&#39;</span><span class="p">:</span><span class="n">popt</span><span class="p">,</span><span class="s1">&#39;pcov&#39;</span><span class="p">:</span><span class="n">pcov</span><span class="p">,</span><span class="s1">&#39;std&#39;</span><span class="p">:</span><span class="n">std</span><span class="p">,</span><span class="s1">&#39;infodict&#39;</span><span class="p">:</span><span class="n">infodict</span><span class="p">}</span></div>
+
+
+    <span class="c1">###############################################################################</span>
+    <span class="c1">########################## scipy Optimizers ###################################</span>
+    <span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="BoarOptimizer.obj_func_scipy">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_scipy">[docs]</a>
+    <span class="k">def</span> <span class="nf">obj_func_scipy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Objective function directly returning the loss function</span>
+<span class="sd">        for use with the Bayesian Optimizer</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        &#39;*p&#39; : 1D-sequence of floats</span>
+<span class="sd">            the parameters as passed by the Bayesian Optimizer</span>
+<span class="sd">        params : list</span>
+<span class="sd">            list of Fitparam() objects</span>
+<span class="sd">        model : callable</span>
+<span class="sd">            Model function yf = f(X) to compare to y</span>
+<span class="sd">        X : ndarray</span>
+<span class="sd">            X Data array of size(n,m): n=number of data points, m=number of dimensions</span>
+<span class="sd">        y : 1D-array</span>
+<span class="sd">            data array of size (n,) to fit </span>
+<span class="sd">        obj_type : str, optional</span>
+<span class="sd">            objective function type, can be [&#39;MSE&#39;, &#39;RMSE&#39;, &#39;MSLE&#39;,&#39;nRMSE&#39;,&#39;MAE&#39;,&#39;larry&#39;,&#39;nRMSE_VLC&#39;], by default &#39;MSE&#39;  </span>
+
+<span class="sd">                &#39;MSE&#39;: mean squared error  </span>
+<span class="sd">                &#39;RMSE&#39;: root mean squared error  </span>
+<span class="sd">                &#39;MSLE&#39;: mean squared log error  </span>
+<span class="sd">                &#39;nRMSE&#39;: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))  </span>
+<span class="sd">                &#39;MAE&#39;: mean absolute error  </span>
+<span class="sd">                &#39;RAE&#39;: relative absolute error sum(abs(yf-y))/sum(mean(y)-y)  </span>
+<span class="sd">                &#39;larry&#39;: mean squared error legacy version  </span>
+<span class="sd">                &#39;nRMSE_VLC&#39;: normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments  </span>
+<span class="sd">        loss : str, optional</span>
+<span class="sd">            type of loss function to use, can be [&#39;linear&#39;,&#39;soft_l1&#39;,&#39;huber&#39;,&#39;cauchy&#39;,&#39;arctan&#39;], by default &#39;linear&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        1D-array</span>
+<span class="sd">            array of size (n,) with the loss function values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">px</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># scikit-optimize provide 2d array of X values </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="c1"># write variable parameters into params, respecting user settings</span>
+        <span class="n">zs</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of losses</span>
+        <span class="n">target_weights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;weight&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> 
+                <span class="n">weight</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">](</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">)</span>
+            <span class="c1"># yf = model(X,params)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;loss&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="c1"># if loss is specified in targets, use it</span>
+                <span class="n">loss_dum</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">loss_dum</span> <span class="o">=</span> <span class="n">loss</span>
+            
+            <span class="k">if</span> <span class="s1">&#39;obj_type&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">obj_type_dum</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;obj_type&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">obj_type_dum</span> <span class="o">=</span> <span class="n">obj_type</span>
+            
+            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_func_metric</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type_dum</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;target_weight&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_weight&#39;</span><span class="p">],</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_weight&#39;</span><span class="p">],</span> <span class="nb">int</span><span class="p">)):</span> <span class="c1"># if target_weight is specified in targets, use it</span>
+                <span class="c1">#check if target_weight is a float</span>
+                <span class="c1"># if isinstance(t[&#39;target_weight&#39;], float) or isinstance(t[&#39;target_weight&#39;], int):</span>
+                    <span class="n">target_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_weight&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">target_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;target_weight for target &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; must be a float or int. Using default value of 1.&#39;</span><span class="p">)</span>
+
+            <span class="n">zs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lossfunc</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">loss_dum</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># cost is the weigthed average of the losses</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">target_weights</span><span class="p">)</span>    
+
+        <span class="k">return</span> <span class="n">cost</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.optimize_dual_annealing">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_dual_annealing">[docs]</a>
+    <span class="k">def</span> <span class="nf">optimize_dual_annealing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use dual_annealing to optimize a function y = f(x) where x can be multi-dimensional.</span>
+<span class="sd">        See scipy.optimize.dual_annealing documentation for more information.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            Keyword arguments for dual_annealing, see scipy.optimize.dual_annealing documentation for more information, by default None.</span>
+<span class="sd">            If no kwargs is provided, use:</span>
+<span class="sd">            kwargs = {&#39;maxiter&#39;: 100, &#39;local_search_options&#39;: None, &#39;initial_temp&#39;: 5230.0, &#39;restart_temp_ratio&#39;: 2e-05, &#39;visit&#39;: 2.62, &#39;accept&#39;: -5.0, &#39;maxfun&#39;: 1000, &#39;no_local_search&#39;: False, &#39;x0&#39;: None, &#39;bounds&#39;: None, &#39;args&#39;: ()}</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary with the optimized parameters (&#39;x&#39;) and the corresponding function value (&#39;fun&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;local_search_options&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;initial_temp&#39;</span><span class="p">:</span> <span class="mf">5230.0</span><span class="p">,</span> <span class="s1">&#39;restart_temp_ratio&#39;</span><span class="p">:</span> <span class="mf">2e-05</span><span class="p">,</span> <span class="s1">&#39;visit&#39;</span><span class="p">:</span> <span class="mf">2.62</span><span class="p">,</span> <span class="s1">&#39;accept&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;maxfun&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;no_local_search&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">()}</span>
+
+
+        <span class="n">p0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_r</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># read out Fitparams &amp; respect settings</span>
+        <span class="c1"># using partial functions allows passing extra parameters</span>
+        <span class="n">pfunc</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_func_scipy</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">targets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">dual_annealing</span><span class="p">(</span><span class="n">pfunc</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">p0</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">)),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">popt</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">fun</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fun</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># write variable parameters into params, respecting user settings</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">popt</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">fun</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="BoarOptimizer.optimize_basin_hopping">
+<a class="viewcode-back" href="../../../boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_basin_hopping">[docs]</a>
+    <span class="k">def</span> <span class="nf">optimize_basin_hopping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use basin_hopping to optimize a function y = f(x) where x can be multi-dimensional.</span>
+<span class="sd">        See scipy.optimize.basin_hopping documentation for more information.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            Keyword arguments for basin_hopping, see scipy.optimize.basin_hopping documentation for more information, by default None.</span>
+<span class="sd">            If no kwargs is provided, use:</span>
+<span class="sd">            kwargs = {&#39;niter&#39;: 100, &#39;T&#39;: 1.0, &#39;stepsize&#39;: 0.5, &#39;interval&#39;: 50, &#39;minimizer_kwargs&#39;: None, &#39;take_step&#39;: None, &#39;accept_test&#39;: None, &#39;callback&#39;: None, &#39;niter_success&#39;: None, &#39;seed&#39;: None, &#39;disp&#39;: False, &#39;niter_success&#39;: 10}</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Dictionary with the optimized parameters (&#39;x&#39;) and the corresponding function value (&#39;fun&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;niter&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;stepsize&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;minimizer_kwargs&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;take_step&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;accept_test&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;callback&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;niter_success&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;seed&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;niter_success&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+
+        <span class="n">p0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params_r</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="c1"># using partial functions allows passing extra parameters</span>
+        <span class="n">pfunc</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_func_scipy</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">targets</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">targets</span><span class="p">,</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+        
+        <span class="c1"># if &#39;minimizer_kwargs&#39; in kwargs.keys() or kwargs[&#39;minimizer_kwargs&#39;] == None:</span>
+        <span class="c1">#     minimizer_kwargs = {&quot;method&quot;: &quot;L-BFGS-B&quot;, &quot;bounds&quot;: list(zip(lb, ub))}</span>
+        <span class="c1">#     kwargs[&#39;minimizer_kwargs&#39;] = minimizer_kwargs</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">basinhopping</span><span class="p">(</span><span class="n">pfunc</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">p0</span><span class="p">,</span> <span class="n">minimizer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bounds&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">))},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">popt</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">fun</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fun</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">params_w</span><span class="p">(</span><span class="n">popt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># write variable parameters into params, respecting user settings</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">popt</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="n">fun</span><span class="p">}</span></div>
+</div>
+
+
+
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

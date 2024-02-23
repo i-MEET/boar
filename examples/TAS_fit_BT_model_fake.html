@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOAR for TAS fitting &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multi-Objective Fitting of TrPL and TrMC Data" href="MO_TrPL_TrMC.html" />
+    <link rel="prev" title="BOAR with SIMsalabim Organic Photovoltaic (OPV) example" href="DD_Fit_real_OPV.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BOAR for TAS fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BOAR for TAS fitting</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/TAS_fit_BT_model_fake.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="BOAR-for-TAS-fitting">
+<h1>BOAR for TAS fitting<a class="headerlink" href="#BOAR-for-TAS-fitting" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<p>This notebook is made to use BOAR for fitting transient absorption spectroscopy (TAS) data with rate equations.</p>
+<p>Here we use the following rate equations:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dn}{dt} = G - k_{trap} n - k_{direct} n^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the charge carrier density, <span class="math notranslate nohighlight">\(G\)</span> is the generation rate in m⁻³ s⁻¹, ktrap is the trapping rate in s⁻¹, and kdirect is the bimolecular/band-to-bad recombination rate in m³ s⁻¹.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">default_rng</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="c1"># import one folder up</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data directory</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr_dir</span><span class="p">,</span> <span class="s1">&#39;../&#39;</span><span class="p">))</span> <span class="c1"># path to the parent directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+</pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define Fitparameters</span>
+<span class="c1"># create fit parameters for the various processes we have to consider</span>
+<span class="n">True_values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ktrap&#39;</span><span class="p">:</span> <span class="mf">1e5</span><span class="p">,</span> <span class="s1">&#39;kdirect&#39;</span><span class="p">:</span> <span class="mf">2e-19</span><span class="p">,</span> <span class="s1">&#39;QE&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;crossec&#39;</span><span class="p">:</span> <span class="mf">2.1e-21</span><span class="p">}</span>
+<span class="n">ktrap</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ktrap&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">True_values</span><span class="p">[</span><span class="s1">&#39;ktrap&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">axis_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;relative&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;k$_1$&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">kdirect</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;kdirect&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="n">True_values</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">axis_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;relative&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;k$_2$&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;m$^</span><span class="si">{3}</span><span class="s1">$ s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">QE</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;QE&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="n">True_values</span><span class="p">[</span><span class="s1">&#39;QE&#39;</span><span class="p">],</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">axis_type</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;QE&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
+<span class="n">crossec</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;crossec&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="n">True_values</span><span class="p">[</span><span class="s1">&#39;crossec&#39;</span><span class="p">],</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-21</span><span class="p">,</span> <span class="mf">5e-21</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">axis_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">display_name</span><span class="o">=</span> <span class="s1">&#39;$\sigma$&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;m$^2$&#39;</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">ktrap</span><span class="p">,</span><span class="n">kdirect</span><span class="p">,</span><span class="n">QE</span><span class="p">,</span><span class="n">crossec</span><span class="p">]</span> <span class="c1"># pass all these fit parameters to the system.</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Prepare-fake-data-for-fitting">
+<h2>Prepare fake data for fitting<a class="headerlink" href="#Prepare-fake-data-for-fitting" title="Link to this heading"></a></h2>
+<p>In the next block we create some fake data with some random noise and plot it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make fake data</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">default_rng</span><span class="p">()</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="mf">1e-7</span>
+<span class="n">preals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.00055</span><span class="p">,</span> <span class="mf">0.0019</span><span class="p">,</span> <span class="mf">0.0039</span><span class="p">]</span> <span class="c1"># real Power in W</span>
+<span class="n">fpu</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># pump frequency in Hz</span>
+<span class="n">wvl</span> <span class="o">=</span> <span class="mi">850</span> <span class="c1"># excitation wavelength in nm</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="mf">0.3</span><span class="o">*</span><span class="mf">1e-4</span> <span class="c1"># effective pump area in m^-2</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">1e-5</span><span class="o">*</span><span class="mf">1e-2</span> <span class="c1"># penetration depth in m</span>
+<span class="n">pulse_width</span> <span class="o">=</span> <span class="mf">0.2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">)</span> <span class="c1"># width of the pump pulse in seconds</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># time offset of the pump pulse in seconds</span>
+<span class="n">background</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># background pump density in m^-3</span>
+<span class="n">thickness</span> <span class="o">=</span> <span class="mf">100e-9</span>
+<span class="c1"># create a pump pulse</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="o">/</span><span class="mi">200</span><span class="p">,</span><span class="mf">0.99</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">fpu</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+
+<span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">weight</span> <span class="o">=</span> <span class="p">[],[],[]</span>
+<span class="n">tas</span> <span class="o">=</span> <span class="n">TAS_agent</span><span class="p">()</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;fpu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fpu</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;wvl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wvl</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;pulse_width&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pulse_width</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;t0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">background</span>
+<span class="n">tas</span><span class="o">.</span><span class="n">pump_params</span><span class="p">[</span><span class="s1">&#39;thickness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">thickness</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">prealx</span> <span class="ow">in</span> <span class="n">preals</span><span class="p">:</span>
+    <span class="c1"># get absorbed density ( in cm-3) of pump photons</span>
+    <span class="n">X1</span> <span class="o">=</span>  <span class="p">[[</span><span class="n">xx</span><span class="p">,</span> <span class="n">prealx</span><span class="p">]</span> <span class="k">for</span> <span class="n">xx</span> <span class="ow">in</span> <span class="n">x1</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span>  <span class="n">X1</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">tas</span><span class="o">.</span><span class="n">TAS</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X1</span><span class="p">),</span> <span class="n">params</span><span class="p">,</span> <span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">)</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X1</span><span class="p">))</span><span class="o">*</span><span class="n">noise</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+    <span class="c1">#weight = weight + list(1/np.abs(y1)) # careful! Can become zero!</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span><span class="o">**</span><span class="mf">0.0</span><span class="p">))</span> <span class="c1">#</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="o">*</span><span class="mf">1e6</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prealx</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> mW&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta T/T$ [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [$\mu$s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+<span class="n">weight</span><span class="o">/=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+<span class="n">weight</span><span class="p">[</span><span class="n">weight</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TAS_fit_BT_model_fake_7_0.png" src="../_images/examples_TAS_fit_BT_model_fake_7_0.png" />
+</div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># start multiobjective optimization</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\Delta T/T$&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">tas</span><span class="o">.</span><span class="n">TAS</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;TAS&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">}</span>
+            <span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MultiObjectiveOptimizer</span><span class="p">(</span><span class="n">targets</span> <span class="o">=</span> <span class="n">targets</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># was 4</span>
+<span class="n">n_jobs_init</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># was 4</span>
+<span class="n">n_yscale</span><span class="o">=</span><span class="mi">20</span> <span class="c1"># was 20</span>
+<span class="n">n_BO</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># was 60</span>
+<span class="n">n_initial_points</span> <span class="o">=</span> <span class="mi">60</span> <span class="c1"># was 200</span>
+<span class="n">n_BO_warmstart</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># was 5</span>
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MultiObjectiveOptimizer</span><span class="p">(</span><span class="n">targets</span> <span class="o">=</span> <span class="n">targets</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">res_dir</span><span class="o">=</span><span class="n">res_dir</span><span class="p">)</span>
+
+<span class="c1"># define the optimization parameters</span>
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n_jobs_init</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">n_yscale</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">n_initial_points</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">n_BO</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">n_BO_warmstart</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">mo</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span> <span class="c1"># whether to use warmstart to recall or collect points or not</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">SaveOldXY2file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span> <span class="c1"># path to the file where old points are saved</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">Path2OldXY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span> <span class="c1"># path to the file where old points are saved</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;check_improvement&#39;</span><span class="p">:</span><span class="s1">&#39;relax&#39;</span><span class="p">,</span><span class="s1">&#39;max_loop_no_improvement&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">,</span><span class="s1">&#39;ftol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">}</span>
+<span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;Ninteg&#39;</span><span class="p">:</span><span class="mf">1e5</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span><span class="p">,</span><span class="s1">&#39;True_values&#39;</span><span class="p">:</span><span class="n">True_values</span><span class="p">,</span><span class="s1">&#39;full_grid&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+<span class="n">kwargs_plot_obj</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;zscale&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">optimize_sko_parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span><span class="n">n_yscale</span><span class="o">=</span><span class="n">n_yscale</span><span class="p">,</span> <span class="n">n_BO</span><span class="o">=</span><span class="n">n_BO</span><span class="p">,</span> <span class="n">n_initial_points</span> <span class="o">=</span> <span class="n">n_initial_points</span><span class="p">,</span><span class="n">n_BO_warmstart</span><span class="o">=</span><span class="n">n_BO_warmstart</span><span class="p">,</span><span class="n">n_jobs_init</span><span class="o">=</span><span class="n">n_jobs_init</span><span class="p">,</span><span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">base_estimator</span> <span class="o">=</span> <span class="s1">&#39;GP&#39;</span><span class="p">,</span><span class="n">show_objective_func</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="n">kwargs_posterior</span><span class="p">,</span><span class="n">kwargs_plot_obj</span><span class="o">=</span><span class="n">kwargs_plot_obj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d6b6aa452a474290adeea0b1673e9297", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Starting with initial points
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "6fc712f58a7d4668ae7e320d5556e79b", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial points done in 4.52 s
+Starting with BO
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b29b10bcecd84009853328702fd3089a", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+BO done in 84.28 s
+Ground truth minimum at: [4.994019055672747, -18.698352204002852, 2.0983188347936905] with function value: 0.0014448162013030548
+Minimum of surrogate function: [4.994243599925428, -18.698055697229833, 2.0986959629449156] with function value 0.0014854977793419266
+Sampling for posterior distribution done in  0.08959674835205078 s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TAS_fit_BT_model_fake_9_6.png" src="../_images/examples_TAS_fit_BT_model_fake_9_6.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot and save the results</span>
+<span class="n">fit_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kwargs_plot_res</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x_scaling&#39;</span><span class="p">:</span><span class="mf">1e6</span><span class="p">,</span><span class="s1">&#39;xaxis_label&#39;</span><span class="p">:</span><span class="s1">&#39;Time [$\mu$s]&#39;</span><span class="p">,</span><span class="s1">&#39;xscale_type&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;yscale_type&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;norm_data&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;delog&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figsize&#39;</span><span class="p">:(</span><span class="mi">14</span><span class="p">,</span><span class="mi">12</span><span class="p">)}</span>
+
+<span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+    <span class="n">kwargs_plot_res</span><span class="p">[</span><span class="s1">&#39;figname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_fit_</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">tas</span><span class="o">.</span><span class="n">plot_fit_res</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="p">[],</span><span class="n">ylim</span><span class="o">=</span><span class="p">[],</span><span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs_plot_res</span><span class="p">)</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+    <span class="n">X_dimensions</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span>
+    <span class="n">yfit</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">](</span><span class="n">X</span><span class="p">,</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">)</span> <span class="c1"># get the best fits</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span> <span class="n">yfit</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yfit</span><span class="p">),</span><span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fit_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># prepare the data for saving</span>
+<span class="n">param_dict</span> <span class="o">=</span> <span class="n">tas</span><span class="o">.</span><span class="n">get_param_dict</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># get fitparameters (and fixed ones)</span>
+
+<span class="n">pout</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.3E</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">pp</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">]</span>
+
+<span class="n">save_output</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">if</span> <span class="n">save_output</span><span class="p">:</span>
+    <span class="c1"># produce output excel file with data, fitparameters and FOMs</span>
+    <span class="n">fn_xlsx</span> <span class="o">=</span> <span class="s1">&#39;fits_results.xlsx&#39;</span>
+    <span class="n">namecols</span> <span class="o">=</span> <span class="n">X_dimensions</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;TASexp&#39;</span><span class="p">,</span><span class="s1">&#39;TASfit&#39;</span><span class="p">]</span>
+    <span class="c1"># delete old file if it exists</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">)):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;target_name&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">tname</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+            <span class="n">namecols</span> <span class="o">=</span> <span class="n">X_dimensions</span> <span class="o">+</span> <span class="p">[</span><span class="n">tname</span><span class="o">+</span><span class="s1">&#39;_exp&#39;</span><span class="p">,</span><span class="n">tname</span><span class="o">+</span><span class="s1">&#39;_fit&#39;</span><span class="p">]</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fit_results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">namecols</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="n">tname</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pout</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;params&#39;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TAS_fit_BT_model_fake_10_0.png" src="../_images/examples_TAS_fit_BT_model_fake_10_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the pseudo-JV curve</span>
+<span class="n">Ps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># make a power sweep</span>
+<span class="n">Eg</span> <span class="o">=</span> <span class="mf">1.39</span> <span class="c1"># eV</span>
+<span class="n">Nc</span> <span class="o">=</span> <span class="mf">5e26</span> <span class="c1"># m^-3</span>
+<span class="n">currents</span><span class="p">,</span><span class="n">QFLS</span><span class="o">=</span> <span class="n">tas</span><span class="o">.</span><span class="n">get_pseudo_JV</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">Eg</span><span class="p">,</span> <span class="n">Nc</span><span class="p">,</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">293</span><span class="p">)</span>
+<span class="n">P1sun</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># W/m^2</span>
+<span class="n">Pw</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">*</span><span class="n">A</span> <span class="c1"># W  convert to W</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P1sun = </span><span class="si">{</span><span class="n">P1sun</span><span class="si">}</span><span class="s1"> W/m^2, Pw = </span><span class="si">{</span><span class="n">Pw</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1"> W&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">J1sun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">Pw</span><span class="p">,</span><span class="n">Ps</span><span class="p">,</span><span class="n">currents</span><span class="p">)</span>
+<span class="n">J1sun</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">QFLS</span><span class="p">,</span><span class="n">currents</span><span class="o">-</span><span class="n">J1sun</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.aux_func</span> <span class="kn">import</span> <span class="n">get_Voc</span><span class="p">,</span><span class="n">get_FF</span><span class="p">,</span><span class="n">get_Jsc</span>
+<span class="n">Voc</span> <span class="o">=</span> <span class="n">get_Voc</span><span class="p">(</span><span class="n">QFLS</span><span class="p">,</span><span class="n">currents</span><span class="o">-</span><span class="n">J1sun</span><span class="p">)</span>
+<span class="n">FF</span> <span class="o">=</span> <span class="n">get_FF</span><span class="p">(</span><span class="n">QFLS</span><span class="p">,</span><span class="n">currents</span><span class="o">-</span><span class="n">J1sun</span><span class="p">)</span>
+<span class="n">Jsc</span> <span class="o">=</span> <span class="n">get_Jsc</span><span class="p">(</span><span class="n">QFLS</span><span class="p">,</span><span class="n">currents</span><span class="o">-</span><span class="n">J1sun</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Voc = </span><span class="si">{</span><span class="n">Voc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> V, Jsc = </span><span class="si">{</span><span class="n">Jsc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> A m$^</span><span class="si">{</span><span class="o">-</span><span class="mi">2</span><span class="si">}</span><span class="s1">$, FF = </span><span class="si">{</span><span class="n">FF</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;QFLS [V]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Current density [A m$^{-2}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">210</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+P1sun = 1000 W/m^2, Pw = 9.00e-03 W
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(-210.0, 20.0)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_TAS_fit_BT_model_fake_11_2.png" src="../_images/examples_TAS_fit_BT_model_fake_11_2.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean output files from simulation folders</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.CleanFolder</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">Do_Cleaning</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Careful, this will delete all files in the folder</span>
+<span class="k">if</span> <span class="n">Do_Cleaning</span><span class="p">:</span>
+    <span class="c1"># delete old_xy.json file if it exists</span>
+    <span class="c1"># os.remove(mo.path2oldxy) # remove the old_xy.json file if it exists</span>
+    <span class="c1"># delete warmstart folder if it exists</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span><span class="s1">&#39;warmstart/&#39;</span><span class="p">)):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;warmstart/&#39;</span><span class="p">))</span>
+    <span class="c1"># delete temp folder if it exists</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">res_dir</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">res_dir</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DD_Fit_real_OPV.html" class="btn btn-neutral float-left" title="BOAR with SIMsalabim Organic Photovoltaic (OPV) example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MO_TrPL_TrMC.html" class="btn btn-neutral float-right" title="Multi-Objective Fitting of TrPL and TrMC Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

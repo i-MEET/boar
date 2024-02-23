@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOAR with SIMsalabim &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BOAR for TrPL fitting" href="TrPL_Fit_BTD_model_fake.html" />
+    <link rel="prev" title="Notebooks gallery" href="../gallery_fitting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">BOAR with SIMsalabim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Check-the-structure-of-the-device-for-SIMsalabim">Check the structure of the device for SIMsalabim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TrPL_Fit_BTD_model_fake.html">BOAR for TrPL fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../gallery_fitting.html">Notebooks gallery</a></li>
+      <li class="breadcrumb-item active">BOAR with SIMsalabim</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/DD_Fit_fake_OPV_torch.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="BOAR-with-SIMsalabim">
+<h1>BOAR with SIMsalabim<a class="headerlink" href="#BOAR-with-SIMsalabim" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<div class="line-block">
+<div class="line">This notebook is made to use BOAR in combination with drift-diffusion modeling to fit of ‘fake’ JV curves.</div>
+<div class="line">To perform the drift-diffusion simulation in the background we use the open-source program <a class="reference external" href="https://github.com/kostergroup/SIMsalabim">SIMsalabim</a>, for more information about SIMsalabim please check the <a class="reference external" href="https://github.com/kostergroup/SIMsalabim">GitHub repository</a></div>
+<div class="line">Make sure you have SIMsalabim installed before running this Notebook.</div>
+<div class="line">Here we are fitting some ‘fake’ data that are generated by the drift-diffusion model.</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">default_rng</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar package</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">))</span> <span class="c1"># add directory containing boar package to path</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define path to SIMsalabim</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr_dir</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span> <span class="c1"># path to the parent directory</span>
+<span class="n">path2simu</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span> <span class="s1">&#39;SIMsalabim&#39;</span><span class="p">,</span><span class="s1">&#39;SimSS&#39;</span><span class="p">)</span> <span class="c1"># path to the SIMsalabim directory</span>
+<span class="c1"># Directory where the results are stored</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curr_dir</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># absolute path to the results directory (note that this will be delete in the last cell of this notebook)</span>
+<span class="n">dev_par_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span><span class="s1">&#39;Example_Data&#39;</span><span class="p">,</span><span class="s1">&#39;Data_test&#39;</span><span class="p">,</span><span class="s1">&#39;device_parameters_fake_OPV.txt&#39;</span><span class="p">)</span> <span class="c1"># absolute path to the device parameter file (here we use a fake OPV device for illustration purposes)</span>
+</pre></div>
+</div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define Fitparameters</span>
+<span class="n">True_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kdirect&#39;</span><span class="p">:</span><span class="mf">5e-18</span><span class="p">,</span><span class="s1">&#39;mun_0&#39;</span><span class="p">:</span><span class="mf">2e-8</span><span class="p">,</span><span class="s1">&#39;mup_0&#39;</span><span class="p">:</span><span class="mf">8e-8</span><span class="p">,</span><span class="s1">&#39;Nc&#39;</span><span class="p">:</span><span class="mf">5e26</span><span class="p">,</span><span class="s1">&#39;Gehp&#39;</span><span class="p">:</span><span class="mf">1.28e28</span><span class="p">,</span><span class="s1">&#39;W_L&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span><span class="c1">#,&#39;Rseries&#39;:3e-4,&#39;Bulk_tr&#39;:1e20,&#39;Gehp&#39;:1.28e28}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">kdirect</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;kdirect&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">True_params</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">lims</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-18</span><span class="p">,</span><span class="mf">1e-16</span><span class="p">],</span><span class="n">range_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">display_name</span><span class="o">=</span><span class="s1">&#39;k$_</span><span class="si">{2}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m$^</span><span class="si">{3}</span><span class="s1">$ s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kdirect</span><span class="p">)</span>
+
+<span class="n">mun_0</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mun_0&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">True_params</span><span class="p">[</span><span class="s1">&#39;mun_0&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">lims</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-8</span><span class="p">,</span><span class="mf">1e-7</span><span class="p">],</span><span class="n">range_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">display_name</span><span class="o">=</span><span class="s1">&#39;$\mu_n$&#39;</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m$^</span><span class="si">{2}</span><span class="s1">$ V$^{-1}$ s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mun_0</span><span class="p">)</span>
+
+<span class="n">mup_0</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;mup_0&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">True_params</span><span class="p">[</span><span class="s1">&#39;mup_0&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">lims</span><span class="o">=</span><span class="p">[</span><span class="mf">1e-8</span><span class="p">,</span><span class="mf">1e-7</span><span class="p">],</span><span class="n">range_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">display_name</span><span class="o">=</span><span class="s1">&#39;$\mu_p$&#39;</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m$^</span><span class="si">{2}</span><span class="s1">$ V$^{-1}$ s$^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mup_0</span><span class="p">)</span>
+
+<span class="n">params_true</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+</section>
+<section id="Check-the-structure-of-the-device-for-SIMsalabim">
+<h2>Check the structure of the device for SIMsalabim<a class="headerlink" href="#Check-the-structure-of-the-device-for-SIMsalabim" title="Link to this heading"></a></h2>
+<p>Here we check the structure of the device for SIMsalabim and you can adjust the parameters if needed.</p>
+<p>For example, if you want to change the thickness of the active layer (AL) you can do this by changing the value of the variable <code class="docutils literal notranslate"><span class="pre">L</span></code> in the cell below. To do so you need to update the value of the variable ParFileDic[‘L’] and set MakeUpdate to True.</p>
+<div class="line-block">
+<div class="line">By convention LTL is the ETL and RTL is the HTL.</div>
+<div class="line">Note that L is the <strong>total</strong> thickness of the ETL, HTL and active layer, so if you want to change the thickness of the active layer you need to subtract the thickness of the ETL and HTL from the total thickness. Such that:</div>
+</div>
+<p><span class="math notranslate nohighlight">\(L_{AL} = L - L_{LTL} - L_{RTL}\)</span></p>
+<p>To check the name of the parameters in SIMsalabim please refer to the <a class="reference external" href="https://github.com/kostergroup/SIMsalabim">SIMsalabim documentation</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vizualize the stack defined for the simulation</span>
+<span class="n">check_SIMsalabim_input</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># from boar.SIMsalabim_utils.MakeDevParFile import *</span>
+<span class="c1"># from boar.SIMsalabim_utils.GetInputPar import *</span>
+
+<span class="k">if</span> <span class="n">check_SIMsalabim_input</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.PlotInputPar</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="c1"># Load Device parameters file and update parameters</span>
+    <span class="n">ParFileDic</span> <span class="o">=</span> <span class="n">ReadParameterFile</span><span class="p">(</span><span class="n">dev_par_file</span><span class="p">)</span> <span class="c1"># read the parameters from the file</span>
+
+    <span class="c1"># Change parameters in the dictionary</span>
+    <span class="n">ParFileDic</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">100e-9</span>
+
+    <span class="n">MakeUpdate</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># set to True to update the parameters in the file</span>
+    <span class="k">if</span> <span class="n">MakeUpdate</span><span class="p">:</span>
+        <span class="n">UpdateDevParFile</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span> <span class="n">path2simu</span><span class="p">)</span> <span class="c1"># update the parameters in the file</span>
+
+    <span class="c1"># Visualize the parameters</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">plot_input_nrj_diag</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plot_input_mob</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">plot_input_dens</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">plot_input_SRH_lifetime</span><span class="p">(</span><span class="n">ParFileDic</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="n">y_unit</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span><span class="n">y2_unit</span><span class="o">=</span><span class="s1">&#39;cm&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_7_0.png" src="../_images/examples_DD_Fit_fake_OPV_torch_7_0.png" />
+</div>
+</div>
+</section>
+<section id="Prepare-fake-data-for-fitting">
+<h2>Prepare fake data for fitting<a class="headerlink" href="#Prepare-fake-data-for-fitting" title="Link to this heading"></a></h2>
+<p>In the next block we create some fake data with some random noise and plot it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # create some fake data</span>
+<span class="n">Nc</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># number of fake datasets</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># voltage</span>
+<span class="n">Gfrac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Gfrac, i.e. light intensity</span>
+
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gfrac&#39;</span><span class="p">]</span> <span class="c1"># dimensions of the X array</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Gfrac</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">V</span> <span class="p">]</span> <span class="p">)</span> <span class="c1"># X array</span>
+<span class="n">Xplot</span> <span class="o">=</span> <span class="n">Gfrac</span> <span class="c1"># X array for plotting</span>
+
+<span class="c1"># Generate the fake data to fit</span>
+<span class="n">degradation_run</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">True_paramsList</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># define the degradation of kdirect</span>
+<span class="n">kvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mf">5e-18</span><span class="p">,</span><span class="mf">5e-17</span><span class="p">,</span><span class="n">Nc</span><span class="p">)</span> <span class="c1"># simulate degradation of kdirect</span>
+
+<span class="n">dda</span> <span class="o">=</span> <span class="n">Drift_diffusion_agent</span><span class="p">(</span><span class="n">path2simu</span><span class="o">=</span><span class="n">path2simu</span><span class="p">)</span> <span class="c1"># instantiate the agent</span>
+
+<span class="n">ys</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">True_vals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">True_FOMs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">kval</span> <span class="ow">in</span> <span class="n">kvals</span><span class="p">:</span>
+    <span class="n">kdirect</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">kval</span>
+    <span class="n">True_paramsList</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;kdirect&#39;</span><span class="p">:</span><span class="n">kval</span><span class="p">})</span>
+    <span class="n">True_params</span><span class="p">[</span><span class="s1">&#39;kdirect&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kval</span>
+    <span class="c1"># store the true values for plotting later</span>
+    <span class="n">True_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">True_params</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dda</span><span class="o">.</span><span class="n">DriftDiffusion_relative</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">,</span> <span class="n">max_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">dev_par_fname</span><span class="o">=</span><span class="n">dev_par_file</span><span class="p">)</span> <span class="c1"># simulate the data</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">default_rng</span><span class="p">()</span><span class="c1">#</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.9</span>
+    <span class="c1">#noise = noise * X[:,1] # try this: higher T - higher noise</span>
+    <span class="n">y</span><span class="o">+=</span><span class="n">noise</span> <span class="c1"># add some noise</span>
+    <span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Voltage [V]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Current Density [A m$^{-2}$]&#39;</span><span class="p">)</span>
+<span class="c1"># save params list to be modified later to store true values</span>
+<span class="n">params_true</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_9_0.png" src="../_images/examples_DD_Fit_fake_OPV_torch_9_0.png" />
+</div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit the datasets one by one</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list to store the fit results</span>
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MooBOtorch</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">res_dir</span><span class="o">=</span><span class="n">res_dir</span><span class="p">)</span> <span class="c1"># initialize the optimization objectMultiObjectiveOptimizer(params=params,res_dir=res_dir) # instantiate the optimizer</span>
+
+<span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">n_jobs_init</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">n_yscale</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">n_initial_points</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_BO</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">n_BO_warmstart</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ys</span><span class="p">):</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">partial</span><span class="p">(</span><span class="n">dda</span><span class="o">.</span><span class="n">DriftDiffusion_relative</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">,</span><span class="n">max_jobs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">dev_par_fname</span><span class="o">=</span><span class="n">dev_par_file</span><span class="p">),</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;JV&#39;</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">y</span><span class="p">,</span>
+                <span class="s1">&#39;X_dimensions&#39;</span><span class="p">:[</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="s1">&#39;Gfrac&#39;</span><span class="p">],</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;sun&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="s1">&#39;Current density&#39;</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="sa">r</span><span class="s1">&#39;$A/m²$&#39;</span><span class="p">},</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+    <span class="n">mo</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+    <span class="n">mo</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">mo</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;collect_init&#39;</span> <span class="k">if</span> <span class="n">ii</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;recall&#39;</span>
+    <span class="c1"># mo.warmstart = &#39;None&#39;</span>
+    <span class="n">mo</span><span class="o">.</span><span class="n">SaveOldXY2file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span> <span class="c1"># path to the file where old points are saved</span>
+    <span class="n">mo</span><span class="o">.</span><span class="n">Path2OldXY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span> <span class="c1"># path to the file where old points are saved</span>
+
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;check_improvement&#39;</span><span class="p">:</span><span class="s1">&#39;relax&#39;</span><span class="p">,</span><span class="s1">&#39;max_loop_no_improvement&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">,</span><span class="s1">&#39;ftol&#39;</span><span class="p">:</span><span class="mf">1e-3</span><span class="p">}</span><span class="c1">#,&#39;initial_point_generator&#39;:&#39;LHS&#39;}</span>
+    <span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;gaussfilt&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;True_values&#39;</span><span class="p">:</span><span class="n">True_vals</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">),</span><span class="s1">&#39;full_grid&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;randomize&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}</span>
+    <span class="n">kwargs_plot_obj</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;zscale&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">}</span>
+
+    <span class="c1"># r = mo.optimize_sko_parallel(n_jobs=n_jobs,n_yscale=n_yscale, n_BO=n_BO, n_initial_points = n_initial_points,n_BO_warmstart=n_BO_warmstart,n_jobs_init=n_jobs_init,kwargs=kwargs,verbose=False,loss=&#39;soft_l1&#39;,threshold=1000,base_estimator = &#39;GP&#39;,show_objective_func=False,show_posterior=True,kwargs_posterior = kwargs_posterior,kwargs_plot_obj=kwargs_plot_obj,)</span>
+
+    <span class="n">ax_client</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">BoTorchOpti</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="p">[</span><span class="n">n_jobs_init</span><span class="p">,</span><span class="n">n_jobs</span><span class="p">],</span> <span class="n">n_step_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_initial_points</span><span class="p">,</span>  <span class="n">n_BO</span> <span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sobol&#39;</span><span class="p">,</span><span class="s1">&#39;GPEI&#39;</span><span class="p">],</span><span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;MSE&#39;</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;soft_l1&#39;</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">use_CUDA</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">kwargs_posterior</span><span class="o">=</span><span class="n">kwargs_posterior</span><span class="p">)</span>
+
+    <span class="n">pf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">))</span> <span class="c1"># collects optimized fitparameters</span>
+    <span class="c1"># rrr = r[&#39;r&#39;] # the results dict of the last optimizer.tell()</span>
+
+
+    <span class="c1">#get true parameters and make a params object</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params_true</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">True_paramsList</span><span class="p">[</span><span class="n">ii</span><span class="p">]:</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">True_paramsList</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="c1"># plot the fit results</span>
+    <span class="n">fit_results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">kwargs_plot_res</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x_scaling&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;xaxis_label&#39;</span><span class="p">:</span><span class="s1">&#39;Voltage [V]&#39;</span><span class="p">,</span><span class="s1">&#39;xscale_type&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;y_scaling&#39;</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;yaxis_label&#39;</span><span class="p">:</span><span class="s1">&#39;Current density [mA cm$^2$]&#39;</span><span class="p">,</span><span class="s1">&#39;yscale_type&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;norm_data&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;delog&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figsize&#39;</span><span class="p">:(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;JV_fits_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">),</span><span class="s1">&#39;figdir&#39;</span><span class="p">:</span><span class="s1">&#39;temp&#39;</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">num</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">targets</span><span class="p">):</span>
+        <span class="n">kwargs_plot_res</span><span class="p">[</span><span class="s1">&#39;figname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_fit_</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">dda</span><span class="o">.</span><span class="n">plot_fit_res</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="s1">&#39;Vext&#39;</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="p">[],</span><span class="n">ylim</span><span class="o">=</span><span class="p">[],</span><span class="n">kwargs</span><span class="o">=</span><span class="n">kwargs_plot_res</span><span class="p">)</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+        <span class="n">X_dimensions</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">](</span><span class="n">X</span><span class="p">,</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">X_dimensions</span><span class="p">)</span> <span class="c1"># get the best fits</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span> <span class="n">yfit</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yfit</span><span class="p">),</span><span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">fit_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># prepare the data for saving</span>
+    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">dda</span><span class="o">.</span><span class="n">get_param_dict</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="c1"># get fitparameters (and fixed ones) as dict</span>
+    <span class="n">pout</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.3E</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">pp</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">]</span> <span class="c1"># convert to list of lists</span>
+
+    <span class="n">save_output</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">save_output</span><span class="p">:</span>
+        <span class="c1"># produce output excel file with data, fitparameters and FOMs</span>
+        <span class="n">fn_xlsx</span> <span class="o">=</span> <span class="s1">&#39;fits_results.xlsx&#39;</span>
+        <span class="n">namecols</span> <span class="o">=</span> <span class="n">X_dimensions</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Jexp&#39;</span><span class="p">,</span><span class="s1">&#39;Jfit&#39;</span><span class="p">]</span>
+        <span class="c1"># delete old file if it exists</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">)):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mo</span><span class="o">.</span><span class="n">targets</span><span class="p">):</span>
+                <span class="k">if</span> <span class="s1">&#39;target_name&#39;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">tname</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="s1">&#39;target_name&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tname</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span>
+                <span class="n">namecols</span> <span class="o">=</span> <span class="n">X_dimensions</span> <span class="o">+</span> <span class="p">[</span><span class="n">tname</span><span class="o">+</span><span class="s1">&#39;_exp&#39;</span><span class="p">,</span><span class="n">tname</span><span class="o">+</span><span class="s1">&#39;_fit&#39;</span><span class="p">]</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fit_results</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="n">namecols</span><span class="p">)</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="n">tname</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pout</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;params&#39;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 02-22 16:16:11] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 6 decimal points.
+[INFO 02-22 16:16:11] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#39;kdirect&#39;, parameter_type=FLOAT, range=[-18.0, -16.0]), RangeParameter(name=&#39;mun_0&#39;, parameter_type=FLOAT, range=[-8.0, -7.0]), RangeParameter(name=&#39;mup_0&#39;, parameter_type=FLOAT, range=[-8.0, -7.0])], parameter_constraints=[]).
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 0 with parameters {&#39;kdirect&#39;: -16.382344, &#39;mun_0&#39;: -7.8101, &#39;mup_0&#39;: -7.90501}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 1 with parameters {&#39;kdirect&#39;: -16.582192, &#39;mun_0&#39;: -7.960114, &#39;mup_0&#39;: -7.737169}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 2 with parameters {&#39;kdirect&#39;: -17.573586, &#39;mun_0&#39;: -7.840695, &#39;mup_0&#39;: -7.88335}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 3 with parameters {&#39;kdirect&#39;: -17.336018, &#39;mun_0&#39;: -7.788962, &#39;mup_0&#39;: -7.085882}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 4 with parameters {&#39;kdirect&#39;: -17.122276, &#39;mun_0&#39;: -7.123826, &#39;mup_0&#39;: -7.940311}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 5 with parameters {&#39;kdirect&#39;: -17.240643, &#39;mun_0&#39;: -7.492653, &#39;mup_0&#39;: -7.277736}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 6 with parameters {&#39;kdirect&#39;: -17.477699, &#39;mun_0&#39;: -7.183533, &#39;mup_0&#39;: -7.265736}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 7 with parameters {&#39;kdirect&#39;: -16.60961, &#39;mun_0&#39;: -7.966842, &#39;mup_0&#39;: -7.780209}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 8 with parameters {&#39;kdirect&#39;: -17.319549, &#39;mun_0&#39;: -7.181183, &#39;mup_0&#39;: -7.499077}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 9 with parameters {&#39;kdirect&#39;: -16.60764, &#39;mun_0&#39;: -7.626074, &#39;mup_0&#39;: -7.69784}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 10 with parameters {&#39;kdirect&#39;: -17.589054, &#39;mun_0&#39;: -7.67241, &#39;mup_0&#39;: -7.89809}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 11 with parameters {&#39;kdirect&#39;: -17.974817, &#39;mun_0&#39;: -7.390804, &#39;mup_0&#39;: -7.502443}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 12 with parameters {&#39;kdirect&#39;: -16.96795, &#39;mun_0&#39;: -7.57006, &#39;mup_0&#39;: -7.223829}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 13 with parameters {&#39;kdirect&#39;: -16.702446, &#39;mun_0&#39;: -7.156575, &#39;mup_0&#39;: -7.784837}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 14 with parameters {&#39;kdirect&#39;: -16.432092, &#39;mun_0&#39;: -7.869515, &#39;mup_0&#39;: -7.676722}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 15 with parameters {&#39;kdirect&#39;: -16.151351, &#39;mun_0&#39;: -7.663852, &#39;mup_0&#39;: -7.20611}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 16 with parameters {&#39;kdirect&#39;: -17.69533, &#39;mun_0&#39;: -7.100279, &#39;mup_0&#39;: -7.585004}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 17 with parameters {&#39;kdirect&#39;: -17.420969, &#39;mun_0&#39;: -7.207348, &#39;mup_0&#39;: -7.516094}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 18 with parameters {&#39;kdirect&#39;: -17.008701, &#39;mun_0&#39;: -7.923931, &#39;mup_0&#39;: -7.077645}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 19 with parameters {&#39;kdirect&#39;: -17.138915, &#39;mun_0&#39;: -7.469817, &#39;mup_0&#39;: -7.830334}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 20 with parameters {&#39;kdirect&#39;: -16.266923, &#39;mun_0&#39;: -7.848161, &#39;mup_0&#39;: -7.40461}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 21 with parameters {&#39;kdirect&#39;: -17.580115, &#39;mun_0&#39;: -7.611749, &#39;mup_0&#39;: -7.636178}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 22 with parameters {&#39;kdirect&#39;: -16.888478, &#39;mun_0&#39;: -7.909214, &#39;mup_0&#39;: -7.320553}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 23 with parameters {&#39;kdirect&#39;: -16.914884, &#39;mun_0&#39;: -7.822602, &#39;mup_0&#39;: -7.26216}.
+[INFO 02-22 16:16:11] ax.service.ax_client: Generated new trial 24 with parameters {&#39;kdirect&#39;: -16.489432, &#39;mun_0&#39;: -7.760156, &#39;mup_0&#39;: -7.017309}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 0 with data: {&#39;MSE&#39;: (78.136753, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 1 with data: {&#39;MSE&#39;: (64.573804, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 2 with data: {&#39;MSE&#39;: (32.879498, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 3 with data: {&#39;MSE&#39;: (5.053966, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 4 with data: {&#39;MSE&#39;: (18.972345, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 5 with data: {&#39;MSE&#39;: (5.918228, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 6 with data: {&#39;MSE&#39;: (15.484387, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 7 with data: {&#39;MSE&#39;: (64.960116, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 8 with data: {&#39;MSE&#39;: (7.494068, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 9 with data: {&#39;MSE&#39;: (49.836548, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 10 with data: {&#39;MSE&#39;: (30.835148, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 11 with data: {&#39;MSE&#39;: (49.60842, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 12 with data: {&#39;MSE&#39;: (27.266558, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 13 with data: {&#39;MSE&#39;: (47.571194, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 14 with data: {&#39;MSE&#39;: (68.0681, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 15 with data: {&#39;MSE&#39;: (84.836961, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 16 with data: {&#39;MSE&#39;: (26.231029, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 17 with data: {&#39;MSE&#39;: (8.928671, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 18 with data: {&#39;MSE&#39;: (24.384605, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 19 with data: {&#39;MSE&#39;: (19.018268, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 20 with data: {&#39;MSE&#39;: (72.064539, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 21 with data: {&#39;MSE&#39;: (27.137553, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 22 with data: {&#39;MSE&#39;: (32.37167, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 23 with data: {&#39;MSE&#39;: (28.146624, None)}.
+[INFO 02-22 16:16:16] ax.service.ax_client: Completed trial 24 with data: {&#39;MSE&#39;: (70.004538, None)}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 25 with parameters {&#39;kdirect&#39;: -17.589646, &#39;mun_0&#39;: -7.7793, &#39;mup_0&#39;: -7.254291}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 26 with parameters {&#39;kdirect&#39;: -16.042168, &#39;mun_0&#39;: -7.385014, &#39;mup_0&#39;: -7.712917}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 27 with parameters {&#39;kdirect&#39;: -17.224065, &#39;mun_0&#39;: -7.285295, &#39;mup_0&#39;: -7.165921}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 28 with parameters {&#39;kdirect&#39;: -16.629445, &#39;mun_0&#39;: -7.996164, &#39;mup_0&#39;: -7.519184}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 29 with parameters {&#39;kdirect&#39;: -16.870068, &#39;mun_0&#39;: -7.718245, &#39;mup_0&#39;: -7.488464}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 30 with parameters {&#39;kdirect&#39;: -17.54224, &#39;mun_0&#39;: -7.326183, &#39;mup_0&#39;: -7.052687}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 31 with parameters {&#39;kdirect&#39;: -16.878713, &#39;mun_0&#39;: -7.328623, &#39;mup_0&#39;: -7.185715}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 32 with parameters {&#39;kdirect&#39;: -16.881998, &#39;mun_0&#39;: -7.274017, &#39;mup_0&#39;: -7.150691}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 33 with parameters {&#39;kdirect&#39;: -17.307055, &#39;mun_0&#39;: -7.95429, &#39;mup_0&#39;: -7.471287}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 34 with parameters {&#39;kdirect&#39;: -16.683775, &#39;mun_0&#39;: -7.663601, &#39;mup_0&#39;: -7.73209}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 35 with parameters {&#39;kdirect&#39;: -17.064187, &#39;mun_0&#39;: -7.675985, &#39;mup_0&#39;: -7.218108}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 36 with parameters {&#39;kdirect&#39;: -16.290942, &#39;mun_0&#39;: -7.627987, &#39;mup_0&#39;: -7.333589}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 37 with parameters {&#39;kdirect&#39;: -17.855856, &#39;mun_0&#39;: -7.332683, &#39;mup_0&#39;: -7.751817}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 38 with parameters {&#39;kdirect&#39;: -16.304436, &#39;mun_0&#39;: -7.009769, &#39;mup_0&#39;: -7.668737}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 39 with parameters {&#39;kdirect&#39;: -16.796347, &#39;mun_0&#39;: -7.221505, &#39;mup_0&#39;: -7.484764}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 40 with parameters {&#39;kdirect&#39;: -17.28654, &#39;mun_0&#39;: -7.810542, &#39;mup_0&#39;: -7.834433}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 41 with parameters {&#39;kdirect&#39;: -16.547576, &#39;mun_0&#39;: -7.130395, &#39;mup_0&#39;: -7.374096}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 42 with parameters {&#39;kdirect&#39;: -17.751417, &#39;mun_0&#39;: -7.572292, &#39;mup_0&#39;: -7.412386}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 43 with parameters {&#39;kdirect&#39;: -17.139783, &#39;mun_0&#39;: -7.235544, &#39;mup_0&#39;: -7.884472}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 44 with parameters {&#39;kdirect&#39;: -16.371048, &#39;mun_0&#39;: -7.974261, &#39;mup_0&#39;: -7.398158}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 45 with parameters {&#39;kdirect&#39;: -16.434312, &#39;mun_0&#39;: -7.884739, &#39;mup_0&#39;: -7.116175}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 46 with parameters {&#39;kdirect&#39;: -17.273867, &#39;mun_0&#39;: -7.686713, &#39;mup_0&#39;: -7.949368}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 47 with parameters {&#39;kdirect&#39;: -16.754269, &#39;mun_0&#39;: -7.024543, &#39;mup_0&#39;: -7.095607}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 48 with parameters {&#39;kdirect&#39;: -17.353278, &#39;mun_0&#39;: -7.910147, &#39;mup_0&#39;: -7.272666}.
+[INFO 02-22 16:16:17] ax.service.ax_client: Generated new trial 49 with parameters {&#39;kdirect&#39;: -17.580012, &#39;mun_0&#39;: -7.984149, &#39;mup_0&#39;: -7.283459}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 25 with data: {&#39;MSE&#39;: (25.293226, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 26 with data: {&#39;MSE&#39;: (85.203242, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 27 with data: {&#39;MSE&#39;: (22.30853, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 28 with data: {&#39;MSE&#39;: (55.607733, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 29 with data: {&#39;MSE&#39;: (30.482333, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 30 with data: {&#39;MSE&#39;: (19.081582, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 31 with data: {&#39;MSE&#39;: (51.69229, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 32 with data: {&#39;MSE&#39;: (58.51053, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 33 with data: {&#39;MSE&#39;: (22.394473, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 34 with data: {&#39;MSE&#39;: (46.736112, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 35 with data: {&#39;MSE&#39;: (16.675204, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 36 with data: {&#39;MSE&#39;: (71.443121, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 37 with data: {&#39;MSE&#39;: (40.602139, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 38 with data: {&#39;MSE&#39;: (90.981735, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 39 with data: {&#39;MSE&#39;: (47.360244, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 40 with data: {&#39;MSE&#39;: (28.181543, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 41 with data: {&#39;MSE&#39;: (83.940048, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 42 with data: {&#39;MSE&#39;: (37.11292, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 43 with data: {&#39;MSE&#39;: (16.161363, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 44 with data: {&#39;MSE&#39;: (68.412026, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 45 with data: {&#39;MSE&#39;: (65.626612, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 46 with data: {&#39;MSE&#39;: (28.511032, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 47 with data: {&#39;MSE&#39;: (106.011284, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 48 with data: {&#39;MSE&#39;: (15.628047, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Completed trial 49 with data: {&#39;MSE&#39;: (27.149846, None)}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 50 with parameters {&#39;kdirect&#39;: -16.29588, &#39;mun_0&#39;: -7.456246, &#39;mup_0&#39;: -7.562744}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 51 with parameters {&#39;kdirect&#39;: -16.892095, &#39;mun_0&#39;: -7.366069, &#39;mup_0&#39;: -7.233609}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 52 with parameters {&#39;kdirect&#39;: -16.358488, &#39;mun_0&#39;: -7.44755, &#39;mup_0&#39;: -7.803868}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 53 with parameters {&#39;kdirect&#39;: -17.730097, &#39;mun_0&#39;: -7.191808, &#39;mup_0&#39;: -7.861204}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 54 with parameters {&#39;kdirect&#39;: -16.833347, &#39;mun_0&#39;: -7.268128, &#39;mup_0&#39;: -7.800979}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 55 with parameters {&#39;kdirect&#39;: -17.647806, &#39;mun_0&#39;: -7.121736, &#39;mup_0&#39;: -7.153317}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 56 with parameters {&#39;kdirect&#39;: -17.792573, &#39;mun_0&#39;: -7.961703, &#39;mup_0&#39;: -7.859637}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 57 with parameters {&#39;kdirect&#39;: -16.94559, &#39;mun_0&#39;: -7.046527, &#39;mup_0&#39;: -7.503135}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 58 with parameters {&#39;kdirect&#39;: -16.803415, &#39;mun_0&#39;: -7.601498, &#39;mup_0&#39;: -7.454293}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 59 with parameters {&#39;kdirect&#39;: -16.373189, &#39;mun_0&#39;: -7.909667, &#39;mup_0&#39;: -7.895}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 60 with parameters {&#39;kdirect&#39;: -17.481871, &#39;mun_0&#39;: -7.101241, &#39;mup_0&#39;: -7.417931}.
+[INFO 02-22 16:16:19] ax.service.ax_client: Generated new trial 61 with parameters {&#39;kdirect&#39;: -17.919101, &#39;mun_0&#39;: -7.664685, &#39;mup_0&#39;: -7.051988}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 62 with parameters {&#39;kdirect&#39;: -17.038347, &#39;mun_0&#39;: -7.19244, &#39;mup_0&#39;: -7.960555}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 63 with parameters {&#39;kdirect&#39;: -16.805292, &#39;mun_0&#39;: -7.751452, &#39;mup_0&#39;: -7.708736}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 64 with parameters {&#39;kdirect&#39;: -17.065645, &#39;mun_0&#39;: -7.836211, &#39;mup_0&#39;: -7.189995}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 65 with parameters {&#39;kdirect&#39;: -16.501973, &#39;mun_0&#39;: -7.32518, &#39;mup_0&#39;: -7.265851}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 66 with parameters {&#39;kdirect&#39;: -16.688669, &#39;mun_0&#39;: -7.4287, &#39;mup_0&#39;: -7.761063}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 67 with parameters {&#39;kdirect&#39;: -17.140459, &#39;mun_0&#39;: -7.596996, &#39;mup_0&#39;: -7.961125}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 68 with parameters {&#39;kdirect&#39;: -17.193583, &#39;mun_0&#39;: -7.116824, &#39;mup_0&#39;: -7.406301}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 69 with parameters {&#39;kdirect&#39;: -16.072367, &#39;mun_0&#39;: -7.25188, &#39;mup_0&#39;: -7.910581}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 70 with parameters {&#39;kdirect&#39;: -16.724536, &#39;mun_0&#39;: -7.571164, &#39;mup_0&#39;: -7.556744}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 71 with parameters {&#39;kdirect&#39;: -16.497607, &#39;mun_0&#39;: -7.90165, &#39;mup_0&#39;: -7.097264}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 72 with parameters {&#39;kdirect&#39;: -16.340732, &#39;mun_0&#39;: -7.098955, &#39;mup_0&#39;: -7.351907}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 73 with parameters {&#39;kdirect&#39;: -17.898886, &#39;mun_0&#39;: -7.427886, &#39;mup_0&#39;: -7.044374}.
+[INFO 02-22 16:16:20] ax.service.ax_client: Generated new trial 74 with parameters {&#39;kdirect&#39;: -16.805741, &#39;mun_0&#39;: -7.430558, &#39;mup_0&#39;: -7.499296}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 50 with data: {&#39;MSE&#39;: (69.268103, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 51 with data: {&#39;MSE&#39;: (44.415331, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 52 with data: {&#39;MSE&#39;: (65.964414, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 53 with data: {&#39;MSE&#39;: (28.95929, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 54 with data: {&#39;MSE&#39;: (34.866315, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 55 with data: {&#39;MSE&#39;: (24.936774, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 56 with data: {&#39;MSE&#39;: (41.427906, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 57 with data: {&#39;MSE&#39;: (45.782839, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 58 with data: {&#39;MSE&#39;: (33.937659, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 59 with data: {&#39;MSE&#39;: (82.774277, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 60 with data: {&#39;MSE&#39;: (13.846709, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 61 with data: {&#39;MSE&#39;: (44.473698, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 62 with data: {&#39;MSE&#39;: (24.854268, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 63 with data: {&#39;MSE&#39;: (41.132272, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 64 with data: {&#39;MSE&#39;: (17.923217, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 65 with data: {&#39;MSE&#39;: (78.213024, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 66 with data: {&#39;MSE&#39;: (43.392443, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 67 with data: {&#39;MSE&#39;: (29.436057, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 68 with data: {&#39;MSE&#39;: (23.185422, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 69 with data: {&#39;MSE&#39;: (85.943136, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 70 with data: {&#39;MSE&#39;: (39.336888, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 71 with data: {&#39;MSE&#39;: (61.735593, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 72 with data: {&#39;MSE&#39;: (106.010028, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 73 with data: {&#39;MSE&#39;: (43.07671, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Completed trial 74 with data: {&#39;MSE&#39;: (35.922755, None)}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 75 with parameters {&#39;kdirect&#39;: -17.223871, &#39;mun_0&#39;: -7.938981, &#39;mup_0&#39;: -7.050446}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 76 with parameters {&#39;kdirect&#39;: -16.482435, &#39;mun_0&#39;: -7.80771, &#39;mup_0&#39;: -7.109402}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 77 with parameters {&#39;kdirect&#39;: -16.743957, &#39;mun_0&#39;: -7.72914, &#39;mup_0&#39;: -7.659262}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 78 with parameters {&#39;kdirect&#39;: -17.96141, &#39;mun_0&#39;: -7.737973, &#39;mup_0&#39;: -7.629978}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 79 with parameters {&#39;kdirect&#39;: -16.774905, &#39;mun_0&#39;: -7.415416, &#39;mup_0&#39;: -7.496745}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 80 with parameters {&#39;kdirect&#39;: -16.335195, &#39;mun_0&#39;: -7.083749, &#39;mup_0&#39;: -7.410472}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 81 with parameters {&#39;kdirect&#39;: -16.37026, &#39;mun_0&#39;: -7.461003, &#39;mup_0&#39;: -7.056461}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 82 with parameters {&#39;kdirect&#39;: -17.221347, &#39;mun_0&#39;: -7.466231, &#39;mup_0&#39;: -7.718997}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 83 with parameters {&#39;kdirect&#39;: -17.204181, &#39;mun_0&#39;: -7.328133, &#39;mup_0&#39;: -7.280676}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 84 with parameters {&#39;kdirect&#39;: -17.761302, &#39;mun_0&#39;: -7.08875, &#39;mup_0&#39;: -7.922258}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 85 with parameters {&#39;kdirect&#39;: -16.401935, &#39;mun_0&#39;: -7.23449, &#39;mup_0&#39;: -7.062846}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 86 with parameters {&#39;kdirect&#39;: -17.266695, &#39;mun_0&#39;: -7.167717, &#39;mup_0&#39;: -7.618385}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 87 with parameters {&#39;kdirect&#39;: -17.760927, &#39;mun_0&#39;: -7.140538, &#39;mup_0&#39;: -7.430462}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 88 with parameters {&#39;kdirect&#39;: -16.577568, &#39;mun_0&#39;: -7.136194, &#39;mup_0&#39;: -7.67102}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 89 with parameters {&#39;kdirect&#39;: -17.417342, &#39;mun_0&#39;: -7.513506, &#39;mup_0&#39;: -7.262779}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 90 with parameters {&#39;kdirect&#39;: -16.03439, &#39;mun_0&#39;: -7.227147, &#39;mup_0&#39;: -7.926782}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 91 with parameters {&#39;kdirect&#39;: -17.748861, &#39;mun_0&#39;: -7.895509, &#39;mup_0&#39;: -7.194456}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 92 with parameters {&#39;kdirect&#39;: -16.172718, &#39;mun_0&#39;: -7.051312, &#39;mup_0&#39;: -7.195488}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 93 with parameters {&#39;kdirect&#39;: -16.501649, &#39;mun_0&#39;: -7.963868, &#39;mup_0&#39;: -7.296412}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 94 with parameters {&#39;kdirect&#39;: -16.422804, &#39;mun_0&#39;: -7.53408, &#39;mup_0&#39;: -7.864917}.
+[INFO 02-22 16:16:22] ax.service.ax_client: Generated new trial 95 with parameters {&#39;kdirect&#39;: -17.916463, &#39;mun_0&#39;: -7.981058, &#39;mup_0&#39;: -7.07801}.
+[INFO 02-22 16:16:23] ax.service.ax_client: Generated new trial 96 with parameters {&#39;kdirect&#39;: -17.178239, &#39;mun_0&#39;: -7.045205, &#39;mup_0&#39;: -7.226759}.
+[INFO 02-22 16:16:23] ax.service.ax_client: Generated new trial 97 with parameters {&#39;kdirect&#39;: -16.884179, &#39;mun_0&#39;: -7.979004, &#39;mup_0&#39;: -7.160477}.
+[INFO 02-22 16:16:23] ax.service.ax_client: Generated new trial 98 with parameters {&#39;kdirect&#39;: -17.318383, &#39;mun_0&#39;: -7.055243, &#39;mup_0&#39;: -7.671102}.
+[INFO 02-22 16:16:23] ax.service.ax_client: Generated new trial 99 with parameters {&#39;kdirect&#39;: -17.461135, &#39;mun_0&#39;: -7.31219, &#39;mup_0&#39;: -7.207422}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 75 with data: {&#39;MSE&#39;: (11.961122, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 76 with data: {&#39;MSE&#39;: (63.67625, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 77 with data: {&#39;MSE&#39;: (42.617571, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 78 with data: {&#39;MSE&#39;: (49.981228, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 79 with data: {&#39;MSE&#39;: (38.794883, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 80 with data: {&#39;MSE&#39;: (102.031229, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 81 with data: {&#39;MSE&#39;: (96.462742, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 82 with data: {&#39;MSE&#39;: (11.657049, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 83 with data: {&#39;MSE&#39;: (16.064165, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 84 with data: {&#39;MSE&#39;: (27.207989, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 85 with data: {&#39;MSE&#39;: (120.027152, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 86 with data: {&#39;MSE&#39;: (6.019374, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 87 with data: {&#39;MSE&#39;: (32.454329, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 88 with data: {&#39;MSE&#39;: (61.019365, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 89 with data: {&#39;MSE&#39;: (10.406479, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 90 with data: {&#39;MSE&#39;: (88.725823, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 91 with data: {&#39;MSE&#39;: (34.9179, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 92 with data: {&#39;MSE&#39;: (146.892663, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 93 with data: {&#39;MSE&#39;: (58.8729, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 94 with data: {&#39;MSE&#39;: (64.595854, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 95 with data: {&#39;MSE&#39;: (42.1357, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 96 with data: {&#39;MSE&#39;: (39.431954, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 97 with data: {&#39;MSE&#39;: (34.006819, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 98 with data: {&#39;MSE&#39;: (6.299344, None)}.
+[INFO 02-22 16:16:25] ax.service.ax_client: Completed trial 99 with data: {&#39;MSE&#39;: (14.143299, None)}.
+[INFO 02-22 16:16:28] ax.service.ax_client: Generated new trial 100 with parameters {&#39;kdirect&#39;: -17.320508, &#39;mun_0&#39;: -7.714038, &#39;mup_0&#39;: -7.021852}.
+[INFO 02-22 16:16:28] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:29] ax.service.ax_client: Generated new trial 101 with parameters {&#39;kdirect&#39;: -17.29621, &#39;mun_0&#39;: -7.672272, &#39;mup_0&#39;: -7.124427}.
+[INFO 02-22 16:16:29] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:30] ax.service.ax_client: Generated new trial 102 with parameters {&#39;kdirect&#39;: -17.339215, &#39;mun_0&#39;: -7.734462, &#39;mup_0&#39;: -7.0}.
+[INFO 02-22 16:16:30] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:33] ax.service.ax_client: Generated new trial 103 with parameters {&#39;kdirect&#39;: -17.326614, &#39;mun_0&#39;: -7.191712, &#39;mup_0&#39;: -7.685947}.
+[INFO 02-22 16:16:38] ax.service.ax_client: Completed trial 100 with data: {&#39;MSE&#39;: (2.412415, None)}.
+[INFO 02-22 16:16:38] ax.service.ax_client: Completed trial 101 with data: {&#39;MSE&#39;: (2.330508, None)}.
+[INFO 02-22 16:16:38] ax.service.ax_client: Completed trial 102 with data: {&#39;MSE&#39;: (2.59937, None)}.
+[INFO 02-22 16:16:38] ax.service.ax_client: Completed trial 103 with data: {&#39;MSE&#39;: (2.525677, None)}.
+[INFO 02-22 16:16:39] ax.service.ax_client: Generated new trial 104 with parameters {&#39;kdirect&#39;: -17.306323, &#39;mun_0&#39;: -7.680541, &#39;mup_0&#39;: -7.023796}.
+[INFO 02-22 16:16:39] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:39] ax.service.ax_client: Generated new trial 105 with parameters {&#39;kdirect&#39;: -17.420344, &#39;mun_0&#39;: -7.0, &#39;mup_0&#39;: -8.0}.
+[INFO 02-22 16:16:39] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:40] ax.service.ax_client: Generated new trial 106 with parameters {&#39;kdirect&#39;: -17.350767, &#39;mun_0&#39;: -7.167498, &#39;mup_0&#39;: -7.771437}.
+[INFO 02-22 16:16:40] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:43] ax.service.ax_client: Generated new trial 107 with parameters {&#39;kdirect&#39;: -17.356931, &#39;mun_0&#39;: -7.156899, &#39;mup_0&#39;: -7.793159}.
+[INFO 02-22 16:16:43] ax.service.ax_client: Completed trial 104 with data: {&#39;MSE&#39;: (3.302949, None)}.
+[INFO 02-22 16:16:43] ax.service.ax_client: Completed trial 105 with data: {&#39;MSE&#39;: (8.592821, None)}.
+[INFO 02-22 16:16:43] ax.service.ax_client: Completed trial 106 with data: {&#39;MSE&#39;: (4.02507, None)}.
+[INFO 02-22 16:16:43] ax.service.ax_client: Completed trial 107 with data: {&#39;MSE&#39;: (4.485396, None)}.
+[INFO 02-22 16:16:44] ax.service.ax_client: Generated new trial 108 with parameters {&#39;kdirect&#39;: -17.313411, &#39;mun_0&#39;: -7.673738, &#39;mup_0&#39;: -7.071623}.
+[INFO 02-22 16:16:44] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:45] ax.service.ax_client: Generated new trial 109 with parameters {&#39;kdirect&#39;: -17.311821, &#39;mun_0&#39;: -7.717203, &#39;mup_0&#39;: -7.0}.
+[INFO 02-22 16:16:45] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:46] ax.service.ax_client: Generated new trial 110 with parameters {&#39;kdirect&#39;: -17.33751, &#39;mun_0&#39;: -7.695773, &#39;mup_0&#39;: -7.0}.
+[INFO 02-22 16:16:46] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:47] ax.service.ax_client: Generated new trial 111 with parameters {&#39;kdirect&#39;: -17.29136, &#39;mun_0&#39;: -7.654366, &#39;mup_0&#39;: -7.127428}.
+[INFO 02-22 16:16:47] ax.service.ax_client: Completed trial 108 with data: {&#39;MSE&#39;: (2.642586, None)}.
+[INFO 02-22 16:16:47] ax.service.ax_client: Completed trial 109 with data: {&#39;MSE&#39;: (2.687816, None)}.
+[INFO 02-22 16:16:47] ax.service.ax_client: Completed trial 110 with data: {&#39;MSE&#39;: (3.093481, None)}.
+[INFO 02-22 16:16:47] ax.service.ax_client: Completed trial 111 with data: {&#39;MSE&#39;: (2.53719, None)}.
+[INFO 02-22 16:16:48] ax.service.ax_client: Generated new trial 112 with parameters {&#39;kdirect&#39;: -17.296559, &#39;mun_0&#39;: -7.690117, &#39;mup_0&#39;: -7.072638}.
+[INFO 02-22 16:16:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:48] ax.service.ax_client: Generated new trial 113 with parameters {&#39;kdirect&#39;: -17.322994, &#39;mun_0&#39;: -7.246584, &#39;mup_0&#39;: -7.674354}.
+[INFO 02-22 16:16:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:49] ax.service.ax_client: Generated new trial 114 with parameters {&#39;kdirect&#39;: -17.308992, &#39;mun_0&#39;: -7.162452, &#39;mup_0&#39;: -7.720845}.
+[INFO 02-22 16:16:49] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:49] ax.service.ax_client: Generated new trial 115 with parameters {&#39;kdirect&#39;: -17.301713, &#39;mun_0&#39;: -7.672754, &#39;mup_0&#39;: -7.09233}.
+[INFO 02-22 16:16:50] ax.service.ax_client: Completed trial 112 with data: {&#39;MSE&#39;: (2.472583, None)}.
+[INFO 02-22 16:16:50] ax.service.ax_client: Completed trial 113 with data: {&#39;MSE&#39;: (3.312617, None)}.
+[INFO 02-22 16:16:50] ax.service.ax_client: Completed trial 114 with data: {&#39;MSE&#39;: (2.626688, None)}.
+[INFO 02-22 16:16:50] ax.service.ax_client: Completed trial 115 with data: {&#39;MSE&#39;: (2.475589, None)}.
+[INFO 02-22 16:16:50] ax.service.ax_client: Generated new trial 116 with parameters {&#39;kdirect&#39;: -16.74175, &#39;mun_0&#39;: -7.366838, &#39;mup_0&#39;: -7.841796}.
+[INFO 02-22 16:16:50] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:50] ax.service.ax_client: Generated new trial 117 with parameters {&#39;kdirect&#39;: -17.310108, &#39;mun_0&#39;: -7.209921, &#39;mup_0&#39;: -7.719458}.
+[INFO 02-22 16:16:51] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:51] ax.service.ax_client: Generated new trial 118 with parameters {&#39;kdirect&#39;: -17.283656, &#39;mun_0&#39;: -7.64893, &#39;mup_0&#39;: -7.175765}.
+[INFO 02-22 16:16:51] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:51] ax.service.ax_client: Generated new trial 119 with parameters {&#39;kdirect&#39;: -17.288488, &#39;mun_0&#39;: -7.670751, &#39;mup_0&#39;: -7.092674}.
+[INFO 02-22 16:16:51] ax.service.ax_client: Completed trial 116 with data: {&#39;MSE&#39;: (41.186331, None)}.
+[INFO 02-22 16:16:51] ax.service.ax_client: Completed trial 117 with data: {&#39;MSE&#39;: (3.130067, None)}.
+[INFO 02-22 16:16:51] ax.service.ax_client: Completed trial 118 with data: {&#39;MSE&#39;: (2.429657, None)}.
+[INFO 02-22 16:16:51] ax.service.ax_client: Completed trial 119 with data: {&#39;MSE&#39;: (2.735158, None)}.
+[INFO 02-22 16:16:52] ax.service.ax_client: Generated new trial 120 with parameters {&#39;kdirect&#39;: -16.045996, &#39;mun_0&#39;: -7.210566, &#39;mup_0&#39;: -7.262861}.
+[INFO 02-22 16:16:52] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:53] ax.service.ax_client: Generated new trial 121 with parameters {&#39;kdirect&#39;: -17.300814, &#39;mun_0&#39;: -7.649399, &#39;mup_0&#39;: -7.134189}.
+[INFO 02-22 16:16:53] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:53] ax.service.ax_client: Generated new trial 122 with parameters {&#39;kdirect&#39;: -17.27807, &#39;mun_0&#39;: -7.65181, &#39;mup_0&#39;: -7.213687}.
+[INFO 02-22 16:16:53] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:53] ax.service.ax_client: Generated new trial 123 with parameters {&#39;kdirect&#39;: -17.313941, &#39;mun_0&#39;: -7.664192, &#39;mup_0&#39;: -7.101624}.
+[INFO 02-22 16:16:54] ax.service.ax_client: Completed trial 120 with data: {&#39;MSE&#39;: (121.033348, None)}.
+[INFO 02-22 16:16:54] ax.service.ax_client: Completed trial 121 with data: {&#39;MSE&#39;: (2.527876, None)}.
+[INFO 02-22 16:16:54] ax.service.ax_client: Completed trial 122 with data: {&#39;MSE&#39;: (2.668718, None)}.
+[INFO 02-22 16:16:54] ax.service.ax_client: Completed trial 123 with data: {&#39;MSE&#39;: (2.620257, None)}.
+[INFO 02-22 16:16:55] ax.service.ax_client: Generated new trial 124 with parameters {&#39;kdirect&#39;: -17.422484, &#39;mun_0&#39;: -7.919485, &#39;mup_0&#39;: -7.938298}.
+[INFO 02-22 16:16:55] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:55] ax.service.ax_client: Generated new trial 125 with parameters {&#39;kdirect&#39;: -17.906755, &#39;mun_0&#39;: -7.290311, &#39;mup_0&#39;: -7.217357}.
+[INFO 02-22 16:16:55] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:55] ax.service.ax_client: Generated new trial 126 with parameters {&#39;kdirect&#39;: -16.446998, &#39;mun_0&#39;: -7.887731, &#39;mup_0&#39;: -7.649353}.
+[INFO 02-22 16:16:55] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:55] ax.service.ax_client: Generated new trial 127 with parameters {&#39;kdirect&#39;: -17.216082, &#39;mun_0&#39;: -7.694542, &#39;mup_0&#39;: -7.778223}.
+[INFO 02-22 16:16:56] ax.service.ax_client: Completed trial 124 with data: {&#39;MSE&#39;: (34.122732, None)}.
+[INFO 02-22 16:16:56] ax.service.ax_client: Completed trial 125 with data: {&#39;MSE&#39;: (43.942516, None)}.
+[INFO 02-22 16:16:56] ax.service.ax_client: Completed trial 126 with data: {&#39;MSE&#39;: (66.860642, None)}.
+[INFO 02-22 16:16:56] ax.service.ax_client: Completed trial 127 with data: {&#39;MSE&#39;: (22.725252, None)}.
+[INFO 02-22 16:16:57] ax.service.ax_client: Generated new trial 128 with parameters {&#39;kdirect&#39;: -17.28472, &#39;mun_0&#39;: -7.673347, &#39;mup_0&#39;: -7.135362}.
+[INFO 02-22 16:16:57] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:57] ax.service.ax_client: Generated new trial 129 with parameters {&#39;kdirect&#39;: -17.175368, &#39;mun_0&#39;: -7.774818, &#39;mup_0&#39;: -7.150003}.
+[INFO 02-22 16:16:57] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:57] ax.service.ax_client: Generated new trial 130 with parameters {&#39;kdirect&#39;: -17.237687, &#39;mun_0&#39;: -7.721423, &#39;mup_0&#39;: -7.150501}.
+[INFO 02-22 16:16:57] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:57] ax.service.ax_client: Generated new trial 131 with parameters {&#39;kdirect&#39;: -17.290446, &#39;mun_0&#39;: -7.68729, &#39;mup_0&#39;: -7.1006}.
+[INFO 02-22 16:16:58] ax.service.ax_client: Completed trial 128 with data: {&#39;MSE&#39;: (2.390487, None)}.
+[INFO 02-22 16:16:58] ax.service.ax_client: Completed trial 129 with data: {&#39;MSE&#39;: (9.183292, None)}.
+[INFO 02-22 16:16:58] ax.service.ax_client: Completed trial 130 with data: {&#39;MSE&#39;: (4.449589, None)}.
+[INFO 02-22 16:16:58] ax.service.ax_client: Completed trial 131 with data: {&#39;MSE&#39;: (2.37381, None)}.
+[INFO 02-22 16:16:59] ax.service.ax_client: Generated new trial 132 with parameters {&#39;kdirect&#39;: -16.811463, &#39;mun_0&#39;: -7.311708, &#39;mup_0&#39;: -7.611658}.
+[INFO 02-22 16:16:59] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:59] ax.service.ax_client: Generated new trial 133 with parameters {&#39;kdirect&#39;: -16.113881, &#39;mun_0&#39;: -7.132049, &#39;mup_0&#39;: -7.883245}.
+[INFO 02-22 16:16:59] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:59] ax.service.ax_client: Generated new trial 134 with parameters {&#39;kdirect&#39;: -17.779501, &#39;mun_0&#39;: -7.438988, &#39;mup_0&#39;: -7.056621}.
+[INFO 02-22 16:16:59] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:16:59] ax.service.ax_client: Generated new trial 135 with parameters {&#39;kdirect&#39;: -17.29969, &#39;mun_0&#39;: -7.639978, &#39;mup_0&#39;: -7.219687}.
+[INFO 02-22 16:17:00] ax.service.ax_client: Completed trial 132 with data: {&#39;MSE&#39;: (36.7137, None)}.
+[INFO 02-22 16:17:00] ax.service.ax_client: Completed trial 133 with data: {&#39;MSE&#39;: (86.645208, None)}.
+[INFO 02-22 16:17:00] ax.service.ax_client: Completed trial 134 with data: {&#39;MSE&#39;: (35.696413, None)}.
+[INFO 02-22 16:17:00] ax.service.ax_client: Completed trial 135 with data: {&#39;MSE&#39;: (2.961391, None)}.
+[INFO 02-22 16:17:00] ax.service.ax_client: Generated new trial 136 with parameters {&#39;kdirect&#39;: -16.445231, &#39;mun_0&#39;: -7.788418, &#39;mup_0&#39;: -7.722623}.
+[INFO 02-22 16:17:00] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:01] ax.service.ax_client: Generated new trial 137 with parameters {&#39;kdirect&#39;: -16.384062, &#39;mun_0&#39;: -7.470129, &#39;mup_0&#39;: -7.981499}.
+[INFO 02-22 16:17:01] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:01] ax.service.ax_client: Generated new trial 138 with parameters {&#39;kdirect&#39;: -17.351538, &#39;mun_0&#39;: -7.700804, &#39;mup_0&#39;: -7.0}.
+[INFO 02-22 16:17:01] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:01] ax.service.ax_client: Generated new trial 139 with parameters {&#39;kdirect&#39;: -17.292075, &#39;mun_0&#39;: -7.650156, &#39;mup_0&#39;: -7.154739}.
+[INFO 02-22 16:17:02] ax.service.ax_client: Completed trial 136 with data: {&#39;MSE&#39;: (65.791337, None)}.
+[INFO 02-22 16:17:02] ax.service.ax_client: Completed trial 137 with data: {&#39;MSE&#39;: (69.592995, None)}.
+[INFO 02-22 16:17:02] ax.service.ax_client: Completed trial 138 with data: {&#39;MSE&#39;: (3.372107, None)}.
+[INFO 02-22 16:17:02] ax.service.ax_client: Completed trial 139 with data: {&#39;MSE&#39;: (2.419619, None)}.
+[INFO 02-22 16:17:02] ax.service.ax_client: Generated new trial 140 with parameters {&#39;kdirect&#39;: -16.359159, &#39;mun_0&#39;: -7.421973, &#39;mup_0&#39;: -7.232597}.
+[INFO 02-22 16:17:02] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:03] ax.service.ax_client: Generated new trial 141 with parameters {&#39;kdirect&#39;: -17.28785, &#39;mun_0&#39;: -7.639515, &#39;mup_0&#39;: -7.151628}.
+[INFO 02-22 16:17:03] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:03] ax.service.ax_client: Generated new trial 142 with parameters {&#39;kdirect&#39;: -17.218953, &#39;mun_0&#39;: -7.337903, &#39;mup_0&#39;: -7.420629}.
+[INFO 02-22 16:17:03] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:03] ax.service.ax_client: Generated new trial 143 with parameters {&#39;kdirect&#39;: -17.306234, &#39;mun_0&#39;: -7.679758, &#39;mup_0&#39;: -7.104705}.
+[INFO 02-22 16:17:03] ax.service.ax_client: Completed trial 140 with data: {&#39;MSE&#39;: (83.17738, None)}.
+[INFO 02-22 16:17:03] ax.service.ax_client: Completed trial 141 with data: {&#39;MSE&#39;: (2.586468, None)}.
+[INFO 02-22 16:17:03] ax.service.ax_client: Completed trial 142 with data: {&#39;MSE&#39;: (8.705713, None)}.
+[INFO 02-22 16:17:03] ax.service.ax_client: Completed trial 143 with data: {&#39;MSE&#39;: (2.356442, None)}.
+[INFO 02-22 16:17:04] ax.service.ax_client: Generated new trial 144 with parameters {&#39;kdirect&#39;: -17.305848, &#39;mun_0&#39;: -7.693643, &#39;mup_0&#39;: -7.076266}.
+[INFO 02-22 16:17:04] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:05] ax.service.ax_client: Generated new trial 145 with parameters {&#39;kdirect&#39;: -17.300869, &#39;mun_0&#39;: -7.664514, &#39;mup_0&#39;: -7.137817}.
+[INFO 02-22 16:17:05] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:05] ax.service.ax_client: Generated new trial 146 with parameters {&#39;kdirect&#39;: -17.288579, &#39;mun_0&#39;: -7.614236, &#39;mup_0&#39;: -7.200974}.
+[INFO 02-22 16:17:05] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:05] ax.service.ax_client: Generated new trial 147 with parameters {&#39;kdirect&#39;: -17.32454, &#39;mun_0&#39;: -7.558431, &#39;mup_0&#39;: -7.189963}.
+[INFO 02-22 16:17:06] ax.service.ax_client: Completed trial 144 with data: {&#39;MSE&#39;: (2.312874, None)}.
+[INFO 02-22 16:17:06] ax.service.ax_client: Completed trial 145 with data: {&#39;MSE&#39;: (2.395074, None)}.
+[INFO 02-22 16:17:06] ax.service.ax_client: Completed trial 146 with data: {&#39;MSE&#39;: (2.601667, None)}.
+[INFO 02-22 16:17:06] ax.service.ax_client: Completed trial 147 with data: {&#39;MSE&#39;: (4.247886, None)}.
+[INFO 02-22 16:17:06] ax.service.ax_client: Generated new trial 148 with parameters {&#39;kdirect&#39;: -17.284327, &#39;mun_0&#39;: -7.642112, &#39;mup_0&#39;: -7.133963}.
+[INFO 02-22 16:17:06] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:07] ax.service.ax_client: Generated new trial 149 with parameters {&#39;kdirect&#39;: -17.265453, &#39;mun_0&#39;: -7.682778, &#39;mup_0&#39;: -7.122992}.
+[INFO 02-22 16:17:07] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:07] ax.service.ax_client: Generated new trial 150 with parameters {&#39;kdirect&#39;: -17.233252, &#39;mun_0&#39;: -7.549576, &#39;mup_0&#39;: -7.132542}.
+[INFO 02-22 16:17:07] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:07] ax.service.ax_client: Generated new trial 151 with parameters {&#39;kdirect&#39;: -17.238773, &#39;mun_0&#39;: -7.623816, &#39;mup_0&#39;: -7.283043}.
+[INFO 02-22 16:17:07] ax.service.ax_client: Completed trial 148 with data: {&#39;MSE&#39;: (2.817531, None)}.
+[INFO 02-22 16:17:07] ax.service.ax_client: Completed trial 149 with data: {&#39;MSE&#39;: (3.032167, None)}.
+[INFO 02-22 16:17:07] ax.service.ax_client: Completed trial 150 with data: {&#39;MSE&#39;: (9.004204, None)}.
+[INFO 02-22 16:17:07] ax.service.ax_client: Completed trial 151 with data: {&#39;MSE&#39;: (3.73111, None)}.
+[INFO 02-22 16:17:08] ax.service.ax_client: Generated new trial 152 with parameters {&#39;kdirect&#39;: -17.618442, &#39;mun_0&#39;: -7.642959, &#39;mup_0&#39;: -7.670978}.
+[INFO 02-22 16:17:08] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:08] ax.service.ax_client: Generated new trial 153 with parameters {&#39;kdirect&#39;: -17.676339, &#39;mun_0&#39;: -7.025872, &#39;mup_0&#39;: -7.644342}.
+[INFO 02-22 16:17:08] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:08] ax.service.ax_client: Generated new trial 154 with parameters {&#39;kdirect&#39;: -17.101617, &#39;mun_0&#39;: -7.379997, &#39;mup_0&#39;: -7.726336}.
+[INFO 02-22 16:17:08] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:08] ax.service.ax_client: Generated new trial 155 with parameters {&#39;kdirect&#39;: -17.042194, &#39;mun_0&#39;: -7.848378, &#39;mup_0&#39;: -7.48118}.
+[INFO 02-22 16:17:09] ax.service.ax_client: Completed trial 152 with data: {&#39;MSE&#39;: (30.056921, None)}.
+[INFO 02-22 16:17:09] ax.service.ax_client: Completed trial 153 with data: {&#39;MSE&#39;: (22.361819, None)}.
+[INFO 02-22 16:17:09] ax.service.ax_client: Completed trial 154 with data: {&#39;MSE&#39;: (14.787553, None)}.
+[INFO 02-22 16:17:09] ax.service.ax_client: Completed trial 155 with data: {&#39;MSE&#39;: (24.444069, None)}.
+[INFO 02-22 16:17:10] ax.service.ax_client: Generated new trial 156 with parameters {&#39;kdirect&#39;: -17.303946, &#39;mun_0&#39;: -7.678253, &#39;mup_0&#39;: -7.13655}.
+[INFO 02-22 16:17:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:10] ax.service.ax_client: Generated new trial 157 with parameters {&#39;kdirect&#39;: -17.256364, &#39;mun_0&#39;: -7.638907, &#39;mup_0&#39;: -7.219366}.
+[INFO 02-22 16:17:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:10] ax.service.ax_client: Generated new trial 158 with parameters {&#39;kdirect&#39;: -17.434907, &#39;mun_0&#39;: -7.986637, &#39;mup_0&#39;: -7.322715}.
+[INFO 02-22 16:17:10] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 02-22 16:17:10] ax.service.ax_client: Generated new trial 159 with parameters {&#39;kdirect&#39;: -17.32209, &#39;mun_0&#39;: -7.998219, &#39;mup_0&#39;: -7.466488}.
+[INFO 02-22 16:17:11] ax.service.ax_client: Completed trial 156 with data: {&#39;MSE&#39;: (2.443345, None)}.
+[INFO 02-22 16:17:11] ax.service.ax_client: Completed trial 157 with data: {&#39;MSE&#39;: (2.990325, None)}.
+[INFO 02-22 16:17:11] ax.service.ax_client: Completed trial 158 with data: {&#39;MSE&#39;: (22.038311, None)}.
+[INFO 02-22 16:17:11] ax.service.ax_client: Completed trial 159 with data: {&#39;MSE&#39;: (24.248754, None)}.
+[INFO 02-22 16:17:11] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+[INFO 02-22 16:17:11] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Sampling for posterior distribution done in  0.25377511978149414 s
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_11_2.png" src="../_images/examples_DD_Fit_fake_OPV_torch_11_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_11_3.png" src="../_images/examples_DD_Fit_fake_OPV_torch_11_3.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mo</span><span class="o">.</span><span class="n">marginal_posterior_1D</span><span class="p">(</span><span class="s1">&#39;mun_0&#39;</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Nres</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Ninteg</span><span class="o">=</span><span class="mf">1e4</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mf">1e-40</span><span class="p">,</span><span class="n">True_values</span><span class="o">=</span><span class="n">True_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_12_0.png" src="../_images/examples_DD_Fit_fake_OPV_torch_12_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(2.0246809785519454e-08,
+ (2.0246809785519454e-08, 2.1544346900318822e-08),
+ [-18.0, -8.0, -8.0],
+ [-16.0, -7.0, -7.0])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the 2D posterior</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">marginal_posterior_2D</span><span class="p">(</span><span class="s1">&#39;mun_0&#39;</span><span class="p">,</span><span class="s1">&#39;mup_0&#39;</span><span class="p">,</span><span class="n">points</span><span class="o">=</span><span class="n">mo</span><span class="o">.</span><span class="n">points</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Nres</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Ninteg</span><span class="o">=</span><span class="mf">1e3</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mf">1e-40</span><span class="p">,</span><span class="n">True_values</span><span class="o">=</span><span class="n">True_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_13_0.png" src="../_images/examples_DD_Fit_fake_OPV_torch_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the parameters evolution</span>
+<span class="n">param_plot</span> <span class="o">=</span> <span class="n">dda</span><span class="o">.</span><span class="n">plot_params</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span><span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;plot_param&#39;</span><span class="p">,</span><span class="s1">&#39;figdir&#39;</span><span class="p">:</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="s1">&#39;nrows&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;ncols&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;figsize&#39;</span><span class="p">:(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)})</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_DD_Fit_fake_OPV_torch_14_0.png" src="../_images/examples_DD_Fit_fake_OPV_torch_14_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean output files from simulation folders</span>
+<span class="kn">from</span> <span class="nn">boar.SIMsalabim_utils.CleanFolder</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">Do_Cleaning</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Careful, this will delete all files in the folder</span>
+<span class="k">if</span> <span class="n">Do_Cleaning</span><span class="p">:</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;tj&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;tVG&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;JV&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;Var&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;scPars&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;Str4Parallel&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="n">clean_up_output</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span><span class="n">path2simu</span><span class="p">)</span>
+    <span class="c1"># os.remove(mo.path2oldxy) # remove the old_xy.json file if it exists</span>
+    <span class="c1"># delete warmstart folder if it exists</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;warmstart/&#39;</span><span class="p">)):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="s1">&#39;warmstart/&#39;</span><span class="p">))</span>
+    <span class="c1"># delete temp folder if it exists</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">res_dir</span><span class="p">):</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">res_dir</span><span class="p">)</span>
+<br/><br/></pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../gallery_fitting.html" class="btn btn-neutral float-left" title="Notebooks gallery" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TrPL_Fit_BTD_model_fake.html" class="btn btn-neutral float-right" title="BOAR for TrPL fitting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

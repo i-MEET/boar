@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.agents package &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=377e76b0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="boar.core package" href="boar.core.html" />
+    <link rel="prev" title="boar.SIMsalabim_utils package" href="boar.SIMsalabim_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">boar</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="boar.html">boar package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="boar.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="boar.SIMsalabim_utils.html">boar.SIMsalabim_utils package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">boar.agents package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html">boar.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.dynamic_utils.html">boar.dynamic_utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="boar.html#module-boar">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">boar</a></li>
+          <li class="breadcrumb-item"><a href="boar.html">boar package</a></li>
+      <li class="breadcrumb-item active">boar.agents package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/boar.agents.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="boar-agents-package">
+<h1>boar.agents package<a class="headerlink" href="#boar-agents-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-boar.agents.Agent">
+<span id="boar-agents-agent-module"></span><h2>boar.agents.Agent module<a class="headerlink" href="#module-boar.agents.Agent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.Agent.</span></span><span class="sig-name descname"><span class="pre">Agent</span></span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class providing functionality such as plotting, export, that all agents need</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.Xy_to_dict">
+<span class="sig-name descname"><span class="pre">Xy_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yexp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yfit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.Xy_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.Xy_to_dict" title="Link to this definition"></a></dt>
+<dd><p>Convert the X array into a dict containing the measured axis and the (constant) metadata
+This representation is useful for physical modeling (rate equations, drift-diffusion, etc)
+while the X notation is more useful for machine learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray</em>) – the experimental dimensions</p></li>
+<li><p><strong>yexp</strong> (<em>ndarray</em><em> of </em><em>shape</em><em>(</em><em>n</em><em>,</em><em>)</em>) – the experimental values, if available</p></li>
+<li><p><strong>yfit</strong> (<em>ndarray</em><em> of </em><em>shape</em><em>(</em><em>n</em><em>,</em><em>)</em>) – the fitted values, if available</p></li>
+<li><p><strong>axis</strong> (<em>int</em><em>, </em><em>optional</em>) – the column in X containing the varied parameter, by default 0</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – names of the X columns (including the measurement axis), by default []</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>key ‘x’ is independent parameter, other keys are metadata</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.get_fitval">
+<span class="sig-name descname"><span class="pre">get_fitval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.get_fitval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.get_fitval" title="Link to this definition"></a></dt>
+<dd><p>Get the values for all fitparam objects in params whoes names are mentioned in ps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ps</strong> (<em>list</em><em> of </em><em>string</em>) – list the names of the desired fit parameters</p></li>
+<li><p><strong>params</strong> (<em>list</em><em> of </em><a class="reference internal" href="boar.core.html#boar.core.FitParams.Fitparam" title="boar.core.FitParams.Fitparam"><em>Fitparam</em></a><em>(</em><em>)</em>) – Fitparam objects</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the values of the respective fit parameters</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.get_param_dict">
+<span class="sig-name descname"><span class="pre">get_param_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.get_param_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.get_param_dict" title="Link to this definition"></a></dt>
+<dd><p>get standard deviations from parameters
+if optimization has been done in log scale, convert them into
+linear scale which will make the upper and lower limit unsymmetric and will return a tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>list</em><em> of </em><a class="reference internal" href="boar.core.html#boar.core.FitParams.Fitparam" title="boar.core.FitParams.Fitparam"><em>Fitparam</em></a><em>(</em><em>)</em>) – list of Fitparam objects</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of dict with keys ‘name’(string),’relRange’(float),’val’(float),’std’(float or tuple of float)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if optim_type is not ‘linear’ or ‘log’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.plot_fit_res">
+<span class="sig-name descname"><span class="pre">plot_fit_res</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.plot_fit_res"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.plot_fit_res" title="Link to this definition"></a></dt>
+<dd><p>Compare the targets vs fitting results</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>dict</em>) – Dictionary with the target parameters</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects with the fitted parameters</p></li>
+<li><p><strong>xaxis_name</strong> (<em>str</em>) – name of the x axis</p></li>
+<li><p><strong>xlim</strong> (<em>list</em><em>, </em><em>optional</em>) – list of 2 elements with the x limits, by default []</p></li>
+<li><p><strong>ylim</strong> (<em>list</em><em>, </em><em>optional</em>) – list of 2 elements with the y limits, by default []</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string with the fixed parameters, by default ‘’</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print the results, by default False</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>dictionary with the plotting options, by default None</p>
+<blockquote>
+<div><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">bool, optional</span></dt><dd><p>save the figure, by default True</p>
+</dd>
+<dt>figname<span class="classifier">str, optional</span></dt><dd><p>name of the figure, by default ‘JV_fit’</p>
+</dd>
+<dt>figdir<span class="classifier">str, optional</span></dt><dd><p>directory where to save the figure, by default ‘’</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (8,8)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+<dt>x_scaling<span class="classifier">float, optional</span></dt><dd><p>scaling factor for the x axis, by default 1</p>
+</dd>
+<dt>y_scaling<span class="classifier">float, optional</span></dt><dd><p>scaling factor for the y axis, by default 1</p>
+</dd>
+<dt>xscale_type<span class="classifier">str, optional</span></dt><dd><p>type of the x axis, by default ‘linear’</p>
+</dd>
+<dt>yscale_type<span class="classifier">str, optional</span></dt><dd><p>type of the y axis, by default ‘linear’</p>
+</dd>
+<dt>norm_data<span class="classifier">bool, optional</span></dt><dd><p>normalize the data, by default False</p>
+</dd>
+<dt>delog<span class="classifier">bool, optional</span></dt><dd><p>de-log the data, by default False</p>
+</dd>
+<dt>absx<span class="classifier">bool, optional</span></dt><dd><p>take the absolute value of the x axis, by default False</p>
+</dd>
+<dt>absy<span class="classifier">bool, optional</span></dt><dd><p>take the absolute value of the y axis, by default False</p>
+</dd>
+<dt>xaxis_label<span class="classifier">str, optional</span></dt><dd><p>label of the x axis, by default ‘’</p>
+</dd>
+<dt>yaxis_label<span class="classifier">str, optional</span></dt><dd><p>label of the y axis, by default ‘’</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.plot_params">
+<span class="sig-name descname"><span class="pre">plot_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paramslist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.plot_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.plot_params" title="Link to this definition"></a></dt>
+<dd><p>Plot the fit parameters as a function of the varied parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>paramslist</strong> (<em>list</em>) – list of FitParam objects</p></li>
+<li><p><strong>fpu</strong> (<em>list</em><em>, </em><em>optional</em>) – list to plot on the x axis, by default []</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>dictionary with the plotting options, by default None</p>
+<blockquote>
+<div><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">bool, optional</span></dt><dd><p>save the figure, by default True</p>
+</dd>
+<dt>figname<span class="classifier">str, optional</span></dt><dd><p>name of the figure, by default ‘JV_fit’</p>
+</dd>
+<dt>figdir<span class="classifier">str, optional</span></dt><dd><p>directory where to save the figure, by default ‘’</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (8*Np,12)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+<dt>nrows<span class="classifier">int, optional</span></dt><dd><p>number of rows in the figure, by default 1</p>
+</dd>
+<dt>ncols<span class="classifier">int, optional</span></dt><dd><p>number of columns in the figure, by default Np</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>tuple containing:</dt><dd><p>fpu</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.plot_results">
+<span class="sig-name descname"><span class="pre">plot_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pdisplay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.plot_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.plot_results" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.Agent.Agent.to_excel">
+<span class="sig-name descname"><span class="pre">to_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn_xlsx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/Agent.html#Agent.to_excel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.Agent.Agent.to_excel" title="Link to this definition"></a></dt>
+<dd><p>Export the results to an excel file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn_xlsx</strong> (<em>str</em>) – filename of the excel file</p></li>
+<li><p><strong>outdict</strong> (<em>dict</em>) – dictionary containing the results see Xy_to_dict</p></li>
+<li><p><strong>params</strong> (<em>list</em><em> of </em><a class="reference internal" href="boar.core.html#boar.core.FitParams.Fitparam" title="boar.core.FitParams.Fitparam"><em>Fitparam</em></a><em>(</em><em>)</em>) – list of Fitparam objects</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.DD_agents">
+<span id="boar-agents-dd-agents-module"></span><h2>boar.agents.DD_agents module<a class="headerlink" href="#module-boar.agents.DD_agents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.DD_agents.</span></span><span class="sig-name descname"><span class="pre">Drift_diffusion_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path2simu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SafeModeParallel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.agents.Agent.Agent" title="boar.agents.Agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>Agent to run drift diffusion simulations with SIMsalabim to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path2simu</strong> (<em>str</em>) – Path to the simulation executable</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.Check_fit_params">
+<span class="sig-name descname"><span class="pre">Check_fit_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ParFileDic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.Check_fit_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.Check_fit_params" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Correct the energy level values from relative positions to absolute positions that are used in SIMsalabim.</dt><dd><p>Perform the same check as in SIMsalabim to make sure that the energy levels are in the corrected properly.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nam</strong> (<em>str</em>) – name of the parameter to be checked</p></li>
+<li><p><strong>val</strong> (<em>float</em>) – value of the parameter to be checked</p></li>
+<li><p><strong>names</strong> (<em>list</em>) – list of the names of the fitting parameters</p></li>
+<li><p><strong>ParFileDic</strong> (<em>dict</em>) – dictionary of the parameters in the parameter file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ParStrDic</strong> – dictionary of the parameters that are to be changed in the parameter file or string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_exp">
+<span class="sig-name descname"><span class="pre">Compare_JVs_exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FOMs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DD_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.Compare_JVs_exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_exp" title="Link to this definition"></a></dt>
+<dd><p>Compare the simulated JV with the result from the fit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>dict</em>) – Dictionary with the target parameters</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects with the fitted parameters</p></li>
+<li><p><strong>FOMs</strong> (<em>list</em><em>, </em><em>optional</em>) – list of FOMparam objects, by default None</p></li>
+<li><p><strong>xlim</strong> (<em>list</em><em>, </em><em>optional</em>) – list of 2 elements with the x limits, by default []</p></li>
+<li><p><strong>ylim</strong> (<em>list</em><em>, </em><em>optional</em>) – list of 2 elements with the y limits, by default []</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string with the fixed parameters, by default ‘’</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – print the results, by default False</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>dictionary with the plotting options, by default None</p>
+<blockquote>
+<div><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>savefig<span class="classifier">bool, optional</span></dt><dd><p>save the figure, by default True</p>
+</dd>
+<dt>figname<span class="classifier">str, optional</span></dt><dd><p>name of the figure, by default ‘JV_fit’</p>
+</dd>
+<dt>figdir<span class="classifier">str, optional</span></dt><dd><p>directory where to save the figure, by default ‘’</p>
+</dd>
+<dt>figext<span class="classifier">str, optional</span></dt><dd><p>extension of the figure, by default ‘.png’</p>
+</dd>
+<dt>figsize<span class="classifier">tuple, optional</span></dt><dd><p>size of the figure, by default (16,12)</p>
+</dd>
+<dt>figdpi<span class="classifier">int, optional</span></dt><dd><p>dpi of the figure, by default 300</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_simu">
+<span class="sig-name descname"><span class="pre">Compare_JVs_simu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FOMs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DD_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.Compare_JVs_simu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_simu" title="Link to this definition"></a></dt>
+<dd><p>Compare the simulated JV with the result from the fit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>dict</em>) – Dictionary with the target parameters</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects with the fitted parameters</p></li>
+<li><p><strong>params_true</strong> (<em>list</em>) – list of Fitparam objects with the true parameters</p></li>
+<li><p><strong>FOMs</strong> (<em>list</em>) – list of FOMparam objects</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion">
+<span class="sig-name descname"><span class="pre">DriftDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.DriftDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion" title="Link to this definition"></a></dt>
+<dd><p>Run the drift diffusion simulations for a given list of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like Voltages, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of jobs to run in parallel, by default 3</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string of fixed parameters to be passed to SIMsalabim, by default ‘’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results (Current Density)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion4fit">
+<span class="sig-name descname"><span class="pre">DriftDiffusion4fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Trap_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.DriftDiffusion4fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion4fit" title="Link to this definition"></a></dt>
+<dd><p>Run the drift diffusion simulations for a given list of parametersUse the relative energy level positions, see Check_fit_params for more info.
+Also, input the custom trap distribution with different models.
+For now, only the urbach tails and urbach tail plus mid gap traps are implemented.
+Can also control the CNI, CPI ions densities being equal by using Cions as a parameter name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like Voltages, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of jobs to run in parallel, by default 3</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string of fixed parameters to be passed to SIMsalabim, by default ‘’</p></li>
+<li><p><strong>dev_par_fname</strong> (<em>str</em><em>, </em><em>optional</em>) – can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ‘’</p></li>
+<li><p><strong>Trap_dist</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>name of the trap model to be used, by default None</dt><dd><dl class="simple">
+<dt>Can be:</dt><dd><p>’conduction_urbach’ : urbach tails below the conduction band
+‘calence_urbach’ : urbach tails above the valence band
+‘double_urbach’ : urbach tails above the valence band and below the conduction band
+‘double_urbach_midgap’ : urbach tails above the valence band and below the conduction band plus mid gap traps
+None : no trap distribution is used (default)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>dictionary of optional parameters to be passed to the simulation code, by default {}</dt><dd><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>num_points<span class="classifier">int, optional</span></dt><dd><p>number of points in the trap distribution, by default 20</p>
+</dd>
+<dt>ignore_error_code<span class="classifier">bool, optional</span></dt><dd><p>if True, ignore the error code returned by SIMsalabim, by default True</p>
+</dd>
+<dt>take_log<span class="classifier">bool, optional</span></dt><dd><p>if True, take the log of the absolute value of the current density, by default False</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results (Current Density)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist">
+<span class="sig-name descname"><span class="pre">DriftDiffusion_rela_nrj_Trap_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Trap_dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist" title="Link to this definition"></a></dt>
+<dd><p>Run the drift diffusion simulations for a given list of parametersUse the relative energy level positions, see Check_fit_params for more info.
+Also, input the custom trap distribution with different models.
+For now, only the urbach tails and urbach tail plus mid gap traps are implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like Voltages, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of jobs to run in parallel, by default 3</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string of fixed parameters to be passed to SIMsalabim, by default ‘’</p></li>
+<li><p><strong>dev_par_fname</strong> (<em>str</em><em>, </em><em>optional</em>) – can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ‘’</p></li>
+<li><p><strong>Trap_dist</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>name of the trap model to be used, by default None</dt><dd><dl class="simple">
+<dt>Can be:</dt><dd><p>’conduction_urbach’ : urbach tails below the conduction band
+‘calence_urbach’ : urbach tails above the valence band
+‘double_urbach’ : urbach tails above the valence band and below the conduction band
+‘double_urbach_midgap’ : urbach tails above the valence band and below the conduction band plus mid gap traps
+None : no trap distribution is used (default)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>test</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True, run a test simulation that does not transform the input, by default True</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>dictionary of optional parameters to be passed to the simulation code, by default {}</dt><dd><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>num_points<span class="classifier">int, optional</span></dt><dd><p>number of points in the trap distribution, by default 20</p>
+</dd>
+<dt>ignore_error_code<span class="classifier">bool, optional</span></dt><dd><p>if True, ignore the error code returned by SIMsalabim, by default True</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results (Current Density)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_relative">
+<span class="sig-name descname"><span class="pre">DriftDiffusion_relative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_par_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.DriftDiffusion_relative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_relative" title="Link to this definition"></a></dt>
+<dd><p>Run the drift diffusion simulations for a given list of parametersUse the relative energy level positions, see Check_fit_params for more info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like Voltages, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+<li><p><strong>max_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of jobs to run in parallel, by default 3</p></li>
+<li><p><strong>fixed_str</strong> (<em>str</em><em>, </em><em>optional</em>) – string of fixed parameters to be passed to SIMsalabim, by default ‘’</p></li>
+<li><p><strong>dev_par_fname</strong> (<em>str</em><em>, </em><em>optional</em>) – can be used to update the name of the file containing the device parameters be careful not to provide the dev_par filename in fixed_str, by default ‘’</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>additional arguments to be passed to the DriftDiffusion function, by default {}</dt><dd><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>ignore_error_code<span class="classifier">bool, optional</span></dt><dd><p>if True, ignore the error code returned by SIMsalabim, by default True</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results (Current Density)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.get_FOM">
+<span class="sig-name descname"><span class="pre">get_FOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FOMs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.get_FOM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.get_FOM" title="Link to this definition"></a></dt>
+<dd><p>Calculates the FOMs for a given set of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params_dict</strong> (<em>dict</em>) – Dictionary of the parameters</p></li>
+<li><p><strong>FOMs</strong> (<em>list</em>) – list of FOMparam with the FOMs to be calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of the FOMs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.get_FOMs">
+<span class="sig-name descname"><span class="pre">get_FOMs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FOMs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.get_FOMs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.get_FOMs" title="Link to this definition"></a></dt>
+<dd><p>Calculates the FOMs for a given list of parameters and returns a np.array of FOMs for each parameter set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>list</em>) – list of lists of parameters used to calculate FOMs</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>FOMs</strong> (<em>list</em>) – list of FOMparam with the FOMs to be calculated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of FOMs</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.DD_agents.Drift_diffusion_agent.return_FOM">
+<span class="sig-name descname"><span class="pre">return_FOM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FOMs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">True_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/DD_agents.html#Drift_diffusion_agent.return_FOM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.DD_agents.Drift_diffusion_agent.return_FOM" title="Link to this definition"></a></dt>
+<dd><p>Print the FOMs for a given set of parameters
+if True_params is given, also prints the fit and true values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fit_params</strong> (<em>dict</em>) – dictionary of fit parameters</p></li>
+<li><p><strong>FOMs</strong> (<em>list</em>) – list of FOMparam with the FOMs to be calculated</p></li>
+<li><p><strong>True_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – dictionary of true parameters, by default {}</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.NonIdealDiode_agents">
+<span id="boar-agents-nonidealdiode-agents-module"></span><h2>boar.agents.NonIdealDiode_agents module<a class="headerlink" href="#module-boar.agents.NonIdealDiode_agents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.NonIdealDiode_agents.</span></span><span class="sig-name descname"><span class="pre">Non_Ideal_Diode_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path2simu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Agent to run drift diffusion simulations with SIMsalabim to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path2simu</strong> (<em>str</em>) – Path to the simulation executable</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialIdealityFactor">
+<span class="sig-name descname"><span class="pre">DifferentialIdealityFactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.DifferentialIdealityFactor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialIdealityFactor" title="Link to this definition"></a></dt>
+<dd><p>Calculate the differential ideality factor of a diode from the voltage and current with:</p>
+<blockquote>
+<div><p>ndiff = 1/(Vt*dV/d(ln(J)))</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the currents.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the differential ideality factor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialResistance">
+<span class="sig-name descname"><span class="pre">DifferentialResistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.DifferentialResistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialResistance" title="Link to this definition"></a></dt>
+<dd><p>Calculate the differential resistance of a diode from the voltage and current with:</p>
+<blockquote>
+<div><p>Rdiff = dV/dJ</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the currents.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the differential resistance.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.FitNonIdealDiode">
+<span class="sig-name descname"><span class="pre">FitNonIdealDiode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">JV_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dark'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">([1e-30,</span> <span class="pre">0.8,</span> <span class="pre">1e-08,</span> <span class="pre">0.001],</span> <span class="pre">[0.001,</span> <span class="pre">3,</span> <span class="pre">100.0,</span> <span class="pre">100000000.0])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.FitNonIdealDiode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.FitNonIdealDiode" title="Link to this definition"></a></dt>
+<dd><p>Fit the non ideal diode equation to the data using the least squares method.</p>
+<blockquote>
+<div><p>see NonIdealDiode_dark and NonIdealDiode_light for more details</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the currents.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+<li><p><strong>JV_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of JV curve to fit. Can be ‘dark’ or ‘light’.</p></li>
+<li><p><strong>take_log</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, take the logarithm of the current.</p></li>
+<li><p><strong>bounds</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Bounds for the fit. The default is ([1e-20, 0.8, 1e-8, 1e-3], [1e-3, 3, 1e2, 1e8])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing the fit results.
+{‘J0’:J0, ‘J0_err’:J0_err, ‘n’:n, ‘n_err’:n_err, ‘Rs’:Rs, ‘Rs_err’:Rs_err, ‘Rsh’:Rsh, ‘Rsh_err’:Rsh_err}</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark">
+<span class="sig-name descname"><span class="pre">NonIdealDiode_dark</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.NonIdealDiode_dark"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Solve non ideal diode equation for dark current</dt><dd><p>J = J0*[exp(-(V-J*Rs)/(n*Vt*)) - 1] + (V - J*Rs)/Rsh
+with the method described in:
+Solid-State Electronics 44 (2000) 1861-1864,
+see equation (4)-(5)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J0</strong> (<em>float</em>) – Dark Saturation Current.</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Ideality factor.</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Series resistance.</p></li>
+<li><p><strong>Rsh</strong> (<em>float</em>) – Shunt resistance.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the currents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark_log">
+<span class="sig-name descname"><span class="pre">NonIdealDiode_dark_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.NonIdealDiode_dark_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark_log" title="Link to this definition"></a></dt>
+<dd><p>The logarithmic version of the non ideal diode equation for dark current
+see NonIdealDiode_dark for more details</p>
+<p>note: this is only useful when doing the fits of the dark current-voltage characteristics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J0</strong> (<em>float</em>) – Dark Saturation Current.</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Ideality factor.</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Series resistance.</p></li>
+<li><p><strong>Rsh</strong> (<em>float</em>) – Shunt resistance.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the currents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light">
+<span class="sig-name descname"><span class="pre">NonIdealDiode_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Jph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.NonIdealDiode_light"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Solve non ideal diode equation for light current</dt><dd><p>J = Jph - J0*[exp(-(V-J*Rs)/(n*Vt*)) - 1] - (V - J*Rs)/Rsh
+with the method described in:
+Solar Energy Materials &amp; Solar Cells 81 (2004) 269–277
+see equation (1)-(2)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J0</strong> (<em>float</em>) – Dark Saturation Current.</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Ideality factor.</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Series resistance.</p></li>
+<li><p><strong>Rsh</strong> (<em>float</em>) – Shunt resistance.</p></li>
+<li><p><strong>Jph</strong> (<em>float</em>) – Photocurrent.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the currents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light_log">
+<span class="sig-name descname"><span class="pre">NonIdealDiode_light_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rsh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Jph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.NonIdealDiode_light_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light_log" title="Link to this definition"></a></dt>
+<dd><p>The logarithmic version of the non ideal diode equation for light current
+see NonIdealDiode_light for more details</p>
+<p>note: this is only useful when doing the fits of the light current-voltage characteristics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>J0</strong> (<em>float</em>) – Dark Saturation Current.</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Ideality factor.</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Series resistance.</p></li>
+<li><p><strong>Rsh</strong> (<em>float</em>) – Shunt resistance.</p></li>
+<li><p><strong>Jph</strong> (<em>float</em>) – Photocurrent.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – Absolute temperature , by default 300</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing the currents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1-D sequence of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Jsc">
+<span class="sig-name descname"><span class="pre">get_Jsc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.get_Jsc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Jsc" title="Link to this definition"></a></dt>
+<dd><p>Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Jsc</strong> – Short-circuit current value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Voc">
+<span class="sig-name descname"><span class="pre">get_Voc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Volt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Curr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/NonIdealDiode_agents.html#Non_Ideal_Diode_agent.get_Voc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Voc" title="Link to this definition"></a></dt>
+<dd><p>Get the Open-circuit voltage (Voc) from solar cell JV-curve by interpolating the Voltage when the current is 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Volt</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the voltages.</p></li>
+<li><p><strong>Curr</strong> (<em>1-D sequence</em><em> of </em><em>floats</em>) – Array containing the current-densities.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Voc</strong> – Open-circuit voltage value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.TAS_agent">
+<span id="boar-agents-tas-agent-module"></span><h2>boar.agents.TAS_agent module<a class="headerlink" href="#module-boar.agents.TAS_agent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.TAS_agent.TAS_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.TAS_agent.</span></span><span class="sig-name descname"><span class="pre">TAS_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">TAS_model=&lt;function</span> <span class="pre">Bimolecular_Trapping_equation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_model=&lt;function</span> <span class="pre">square_pump&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_params={'A':</span> <span class="pre">9e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'P':</span> <span class="pre">0.0039</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'alpha':</span> <span class="pre">1.0000000000000001e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'background':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fpu':</span> <span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'pulse_width':</span> <span class="pre">2e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'t0':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'wvl':</span> <span class="pre">850}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_density_model=&lt;function</span> <span class="pre">get_flux_density&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TAS_agent.html#TAS_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TAS_agent.TAS_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.agents.Agent.Agent" title="boar.agents.Agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>Agent to run Transient Absorption Spectroscopy (TAS) simulation based on rate equations to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TAS_model</strong> (<em>function</em><em>, </em><em>optional</em>) – TAS model to be used, by default Bimolecular_Trapping_equation
+To see the available models, check the rate_eq.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_model</strong> (<em>function</em><em>, </em><em>optional</em>) – pump model to be used, by default square_pump
+To see the available models, check the pump.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – <p>dictionary of pump parameters, by default {‘P’:0.0039, ‘wvl’:850, ‘fpu’:10000, ‘A’:0.3*0.3*1e-4, ‘alpha’:1e-5*1e-2, ‘pulse_width’:0.2*(1/10000), ‘t0’:0, ‘background’:0}</p>
+<blockquote>
+<div><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>P<span class="classifier">float</span></dt><dd><p>total CW power of pulse in W</p>
+</dd>
+<dt>wvl<span class="classifier">float</span></dt><dd><p>excitation wavelength in nm</p>
+</dd>
+<dt>fpu<span class="classifier">float</span></dt><dd><p>pump frequency in Hz</p>
+</dd>
+<dt>A<span class="classifier">float</span></dt><dd><p>effective pump area in m^-2</p>
+</dd>
+<dt>alpha<span class="classifier">float</span></dt><dd><p>penetration depth in m</p>
+</dd>
+<dt>pulse_width<span class="classifier">float</span></dt><dd><p>width of the pump pulse in seconds</p>
+</dd>
+<dt>t0<span class="classifier">float, optional</span></dt><dd><p>time shift of the pump pulse, by default 0</p>
+</dd>
+<dt>background<span class="classifier">float, optional</span></dt><dd><p>background volume density of generated photons, by default 0</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TAS_agent.TAS_agent.TAS">
+<span class="sig-name descname"><span class="pre">TAS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TAS_agent.html#TAS_agent.TAS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TAS_agent.TAS_agent.TAS" title="Link to this definition"></a></dt>
+<dd><p>Run the TAS simulations for a given list of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like time, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+<li><p><strong>take_log</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True, the simulation results are taken in log10, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TAS_agent.TAS_agent.get_pseudo_JV">
+<span class="sig-name descname"><span class="pre">get_pseudo_JV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">powers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Nc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">293</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TAS_agent.html#TAS_agent.get_pseudo_JV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TAS_agent.TAS_agent.get_pseudo_JV" title="Link to this definition"></a></dt>
+<dd><p>Calculate the pseudo JV curve from the stationary charge concentration
+using the TAS model.
+See: <a class="reference external" href="https://doi.org/10.1002/adma.202000080">https://doi.org/10.1002/adma.202000080</a>
+and <a class="reference external" href="https://doi.org/10.1002/solr.202000649">https://doi.org/10.1002/solr.202000649</a></p>
+<p>QFLS = Eg - kT * ln(Nc*Nv/n*p)</p>
+<p>here we assume Nc = Nv</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>list</em><em> of </em><em>FitParam objects</em>) – list with the parameters that were fitted</p></li>
+<li><p><strong>powers</strong> (<em>1D sequence</em><em> of </em><em>floats</em>) – list of the pump powers</p></li>
+<li><p><strong>Eg</strong> (<em>float</em>) – bandgap of the material, if Eg is not params then Eg here is used</p></li>
+<li><p><strong>Nc</strong> (<em>float</em>) – effective density of states [m^-3] if Nc is not params then Nc here is used</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature in K, by default 293</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Xqfls</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TAS_agent.TAS_agent.init_args_flux_pump_models">
+<span class="sig-name descname"><span class="pre">init_args_flux_pump_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TAS_agent.html#TAS_agent.init_args_flux_pump_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TAS_agent.TAS_agent.init_args_flux_pump_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize the arguments for the flux density model, pump model and TAS model
+For more information, check the pump.py file in the dynamic_utils folder</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.TrMC_agent">
+<span id="boar-agents-trmc-agent-module"></span><h2>boar.agents.TrMC_agent module<a class="headerlink" href="#module-boar.agents.TrMC_agent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.TrMC_agent.TrMC_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.TrMC_agent.</span></span><span class="sig-name descname"><span class="pre">TrMC_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trMC_model=&lt;function</span> <span class="pre">Bimolecular_Trapping_equation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_model=&lt;function</span> <span class="pre">initial_carrier_density&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_params={'background':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fpu':</span> <span class="pre">1000}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_density_model=&lt;function</span> <span class="pre">get_flux_density&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrMC_agent.html#TrMC_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrMC_agent.TrMC_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.agents.Agent.Agent" title="boar.agents.Agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>Agent to run Transient Phololuminescence simulation based on rate equations to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trMC_model</strong> (<em>function</em><em>, </em><em>optional</em>) – trMC model to be used, by default Bimolecular_Trapping_equation
+To see the available models, check the rate_eq.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_model</strong> (<em>function</em><em>, </em><em>optional</em>) – pump model to be used, by default square_pump
+To see the available models, check the pump.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>dictionary of pump parameters, by default {‘P’:0.0039, ‘wvl’:850, ‘fpu’:10000, ‘A’:0.3*0.3*1e-4, ‘alpha’:1e-5*1e-2, ‘pulse_width’:0.2*(1/10000), ‘t0’:0, ‘background’:0}</dt><dd><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>P<span class="classifier">float</span></dt><dd><p>total CW power of pulse in W</p>
+</dd>
+<dt>wvl<span class="classifier">float</span></dt><dd><p>excitation wavelength in nm</p>
+</dd>
+<dt>fpu<span class="classifier">float</span></dt><dd><p>pump frequency in Hz</p>
+</dd>
+<dt>A<span class="classifier">float</span></dt><dd><p>effective pump area in m^-2</p>
+</dd>
+<dt>alpha<span class="classifier">float</span></dt><dd><p>penetration depth in m</p>
+</dd>
+<dt>pulse_width<span class="classifier">float</span></dt><dd><p>width of the pump pulse in seconds</p>
+</dd>
+<dt>t0<span class="classifier">float, optional</span></dt><dd><p>time shift of the pump pulse, by default 0</p>
+</dd>
+<dt>background<span class="classifier">float, optional</span></dt><dd><p>background volume density of generated photons, by default 0</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TrMC_agent.TrMC_agent.init_args_flux_pump_models">
+<span class="sig-name descname"><span class="pre">init_args_flux_pump_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrMC_agent.html#TrMC_agent.init_args_flux_pump_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrMC_agent.TrMC_agent.init_args_flux_pump_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize the arguments for the flux density model, pump model and trMC model
+For more information, check the pump.py file in the dynamic_utils folder</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TrMC_agent.TrMC_agent.trMC">
+<span class="sig-name descname"><span class="pre">trMC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrMC_agent.html#TrMC_agent.trMC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrMC_agent.TrMC_agent.trMC" title="Link to this definition"></a></dt>
+<dd><p>Run the trMC simulations for a given list of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like time, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.TrPL_agent">
+<span id="boar-agents-trpl-agent-module"></span><h2>boar.agents.TrPL_agent module<a class="headerlink" href="#module-boar.agents.TrPL_agent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.TrPL_agent.TrPL_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.TrPL_agent.</span></span><span class="sig-name descname"><span class="pre">TrPL_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trPL_model=&lt;function</span> <span class="pre">Bimolecular_Trapping_equation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_model=&lt;function</span> <span class="pre">initial_carrier_density&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pump_params={'background':</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'fpu':</span> <span class="pre">1000}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_density_model=&lt;function</span> <span class="pre">get_flux_density&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrPL_agent.html#TrPL_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrPL_agent.TrPL_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.agents.Agent.Agent" title="boar.agents.Agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>Agent to run Transient Phololuminescence simulation based on rate equations to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trPL_model</strong> (<em>function</em><em>, </em><em>optional</em>) – trPL model to be used, by default Bimolecular_Trapping_equation
+To see the available models, check the rate_eq.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_model</strong> (<em>function</em><em>, </em><em>optional</em>) – pump model to be used, by default square_pump
+To see the available models, check the pump.py file in the dynamic_utils folder</p></li>
+<li><p><strong>pump_params</strong> (<em>dict</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>dictionary of pump parameters, by default {‘P’:0.0039, ‘wvl’:850, ‘fpu’:10000, ‘A’:0.3*0.3*1e-4, ‘alpha’:1e-5*1e-2, ‘pulse_width’:0.2*(1/10000), ‘t0’:0, ‘background’:0}</dt><dd><dl class="simple">
+<dt>including:</dt><dd><dl class="simple">
+<dt>P<span class="classifier">float</span></dt><dd><p>total CW power of pulse in W</p>
+</dd>
+<dt>wvl<span class="classifier">float</span></dt><dd><p>excitation wavelength in nm</p>
+</dd>
+<dt>fpu<span class="classifier">float</span></dt><dd><p>pump frequency in Hz</p>
+</dd>
+<dt>A<span class="classifier">float</span></dt><dd><p>effective pump area in m^-2</p>
+</dd>
+<dt>alpha<span class="classifier">float</span></dt><dd><p>penetration depth in m</p>
+</dd>
+<dt>pulse_width<span class="classifier">float</span></dt><dd><p>width of the pump pulse in seconds</p>
+</dd>
+<dt>t0<span class="classifier">float, optional</span></dt><dd><p>time shift of the pump pulse, by default 0</p>
+</dd>
+<dt>background<span class="classifier">float, optional</span></dt><dd><p>background volume density of generated photons, by default 0</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TrPL_agent.TrPL_agent.init_args_flux_pump_models">
+<span class="sig-name descname"><span class="pre">init_args_flux_pump_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrPL_agent.html#TrPL_agent.init_args_flux_pump_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrPL_agent.TrPL_agent.init_args_flux_pump_models" title="Link to this definition"></a></dt>
+<dd><p>Initialize the arguments for the flux density model, pump model and trPL model
+For more information, check the pump.py file in the dynamic_utils folder</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TrPL_agent.TrPL_agent.trPL">
+<span class="sig-name descname"><span class="pre">trPL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_dimensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TrPL_agent.html#TrPL_agent.trPL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TrPL_agent.TrPL_agent.trPL" title="Link to this definition"></a></dt>
+<dd><p>Run the trPL simulations for a given list of parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (like time, light intensities, etc.))</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>X_dimensions</strong> (<em>list</em><em>, </em><em>optional</em>) – name of the fixed parameters in X, by default []</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of containing the simulation results</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents.TranferMatrix_agent">
+<span id="boar-agents-tranfermatrix-agent-module"></span><h2>boar.agents.TranferMatrix_agent module<a class="headerlink" href="#module-boar.agents.TranferMatrix_agent" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">boar.agents.TranferMatrix_agent.</span></span><span class="sig-name descname"><span class="pre">Transfer_Matrix_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thicknesses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activeLayer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mat_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Example_Data/matdata'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">am15_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'AM15G.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nm'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boar.agents.Agent.Agent" title="boar.agents.Agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>Agent to run drift diffusion simulations with SIMsalabim to be used with BOAR MultiObjectiveOptimizer</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.I_mat">
+<span class="sig-name descname"><span class="pre">I_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent.I_mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.I_mat" title="Link to this definition"></a></dt>
+<dd><p>calculate the interface matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n1</strong> (<em>float</em>) – refractive index of the first material</p></li>
+<li><p><strong>n2</strong> (<em>float</em>) – refractive index of the second material</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ret</strong> – interface matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.L_mat">
+<span class="sig-name descname"><span class="pre">L_mat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent.L_mat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.L_mat" title="Link to this definition"></a></dt>
+<dd><p>calculate the propagation matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>array</em>) – complex refractive index of the material</p></li>
+<li><p><strong>d</strong> (<em>float</em>) – thickness of the material</p></li>
+<li><p><strong>l</strong> (<em>float</em>) – wavelength</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>L</strong> – propagation matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.TM">
+<span class="sig-name descname"><span class="pre">TM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['Jsc']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_MOO</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent.TM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.TM" title="Link to this definition"></a></dt>
+<dd><p>Calculate the Jsc, AVT or LUE for a multilayer stack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array</em>) – Array of fixed parameters (not really relevant here)</p></li>
+<li><p><strong>params</strong> (<em>list</em>) – list of Fitparam objects</p></li>
+<li><p><strong>output</strong> (<em>list</em><em>, </em><em>optional</em>) – type of output, can be ‘Jsc’, ‘AVT’ or ‘LUE’, by default [‘Jsc’]</p></li>
+<li><p><strong>is_MOO</strong> (<em>bool</em><em>, </em><em>optional</em>) – check if the function is called by a MOO algorithm, if True, the output is a dictionary with ‘Jsc’, ‘AVT’ and ‘LUE’ as keys, if not the output is a list with the values in the same order as output, by default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary or list with the values of the requested output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – Wrong indices for the thicknesses</p></li>
+<li><p><strong>ValueError</strong> – Wrong indices for the complex refractive index</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.get_ntotal">
+<span class="sig-name descname"><span class="pre">get_ntotal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambdas</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent.get_ntotal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.get_ntotal" title="Link to this definition"></a></dt>
+<dd><p>get the complex refractive index of a material from a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matName</strong> (<em>string</em>) – name of the material in the matdata folder</p></li>
+<li><p><strong>lambdas</strong> (<em>list</em>) – list of wavelengths in nm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ntotal</strong> – list of complex refractive index values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.openFile">
+<span class="sig-name descname"><span class="pre">openFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boar/agents/TranferMatrix_agent.html#Transfer_Matrix_agent.openFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.openFile" title="Link to this definition"></a></dt>
+<dd><p>opens files and returns a list split at each new line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fname</strong> (<em>string</em>) – path to the file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>fd</strong> – list of lines in the file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Target is not a readable file</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-boar.agents">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-boar.agents" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="boar.SIMsalabim_utils.html" class="btn btn-neutral float-left" title="boar.SIMsalabim_utils package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boar.core.html" class="btn btn-neutral float-right" title="boar.core package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design of Experiments to optimize perovskite solar cells efficiency &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/js/rtd_search_config.js"></script>
+        <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multi-objective optimization for perovskite material composition" href="BOAR_Exp_MO.html" />
+    <link rel="prev" title="BOAR for TrPL fitting" href="TrPL_Fit_BTD_model_fake.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design of Experiments to optimize perovskite solar cells efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Design of Experiments to optimize perovskite solar cells efficiency</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/examples/BOAR_Exp.ipynb" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Design-of-Experiments-to-optimize-perovskite-solar-cells-efficiency">
+<h1>Design of Experiments to optimize perovskite solar cells efficiency<a class="headerlink" href="#Design-of-Experiments-to-optimize-perovskite-solar-cells-efficiency" title="Link to this heading"></a></h1>
+<p>Version 1.0.0 (c) Vincent M. Le Corre, Larry Lueer, i-MEET 2021-2023</p>
+<p>This notebook is made to use BOAR to design experiments. Here, we show how to load some data from a presampling, and how to use BOAR to suggest the next set of experiment using Bayesian optimization. The goal here is to optimize the processing conditions for a perovskite solar cell to maximize the power conversion efficiency (PCE).</p>
+<p>Note: The data used here is real data generated in the <a class="reference external" href="https://www.i-meet.ww.uni-erlangen.de/">i-MEET</a> and <a class="reference external" href="https://www.hi-ern.de/de">HI-ERN</a> labs at the university of Erlangen-Nuremberg (FAU) by Jiyun Zang. The data is not published yet, and is only used here for demonstration purposes. For more information, please contact us.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate matplotlib widgets</span>
+<span class="c1"># %matplotlib inline</span>
+<span class="c1"># comment the next line if you are on the jupyterhub server</span>
+<span class="c1"># %matplotlib widget</span>
+<span class="c1"># %matplotlib notebook</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span> <span class="c1"># comment out to only render png</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;png&#39;</span>
+
+<span class="c1"># Import libraries</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">types</span><span class="o">,</span><span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span> <span class="c1"># comment this out to see warnings</span>
+
+<span class="c1"># Import boar</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># comment out if the Notebook is in the Notebooks folder</span>
+<span class="kn">from</span> <span class="nn">boar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boar.core.optimization_botorch</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># import additional libraries from Ax</span>
+<span class="kn">from</span> <span class="nn">ax.utils.notebook.plotting</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">init_notebook_plotting</span> <span class="c1"># for plotting in notebook</span>
+<span class="kn">from</span> <span class="nn">ax.plot.slice</span> <span class="kn">import</span> <span class="n">plot_slice</span>
+<span class="kn">from</span> <span class="nn">ax.plot.scatter</span> <span class="kn">import</span> <span class="n">interact_fitted</span><span class="p">,</span><span class="n">plot_objective_vs_constraints</span><span class="p">,</span><span class="n">tile_fitted</span>
+<span class="kn">from</span> <span class="nn">ax.modelbridge.cross_validation</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">ax.plot.contour</span> <span class="kn">import</span> <span class="n">interact_contour</span>
+<span class="kn">from</span> <span class="nn">ax.plot.diagnostic</span> <span class="kn">import</span> <span class="n">interact_cross_validation</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_utils</span> <span class="kn">import</span> <span class="n">compute_posterior_pareto_frontier</span>
+<span class="kn">from</span> <span class="nn">ax.plot.pareto_frontier</span> <span class="kn">import</span> <span class="n">plot_pareto_frontier</span>
+<span class="c1"># Import homemade package by VLC</span>
+<span class="c1"># import boar.SIMsalabim_utils.plot_settings_screen # to set default plot settings</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the path to the data</span>
+<span class="n">curr_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="c1"># current directory</span>
+<span class="n">res_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span> <span class="c1"># path to the results directory</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">),</span><span class="s1">&#39;Example_Data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;No.&#39;</span><span class="p">,</span> <span class="s1">&#39;Spin_Speed_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Duration_t1&#39;</span><span class="p">,</span> <span class="s1">&#39;Spin_Speed_2&#39;</span><span class="p">,</span> <span class="s1">&#39;Dispense_Speed&#39;</span><span class="p">,</span><span class="s1">&#39;Duration_t3&#39;</span><span class="p">,</span> <span class="s1">&#39;Spin_Speed_3&#39;</span><span class="p">,</span> <span class="s1">&#39;Pmax&#39;</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="s1">&#39;Jiyun&#39;</span><span class="p">,</span><span class="s1">&#39;Inital Data Set LHS + Devices Results.xlsx&#39;</span><span class="p">),</span><span class="s1">&#39;First Round&#39;</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">17</span><span class="p">],</span><span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># print stats on the data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+             No.  Spin_Speed_1  Duration_t1  Spin_Speed_2  Dispense_Speed  \
+count  32.000000     32.000000    32.000000     32.000000       32.000000
+mean   16.500000   1500.784375    21.568438   1997.100625      204.753750
+std     9.380832    583.231977     7.935312    587.607149      114.860663
+min     1.000000    540.030000     8.580000   1021.640000       16.030000
+25%     8.750000   1007.037500    15.107500   1513.842500      107.287500
+50%    16.500000   1487.390000    21.350000   1985.235000      208.160000
+75%    24.250000   1988.642500    28.302500   2488.645000      294.430000
+max    32.000000   2471.680000    34.340000   2993.560000      396.430000
+
+       Duration_t3  Spin_Speed_3       Pmax
+count    32.000000     32.000000  32.000000
+mean     17.492812   3502.554375  15.980469
+std       7.267707    878.453420   3.871971
+min       5.550000   2046.930000   4.690000
+25%      11.432500   2796.907500  14.939000
+50%      17.435000   3493.705000  17.266000
+75%      23.390000   4237.402500  18.562750
+max      29.390000   4981.540000  19.824000
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_names</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">params_names</span><span class="o">+</span><span class="n">target_names</span><span class="p">])</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+
+<span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:[],</span><span class="s1">&#39;y_0&#39;</span><span class="p">:[],</span><span class="s1">&#39;ydyn_0&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;y_1&#39;</span><span class="p">:[],</span><span class="s1">&#39;ydyn_1&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">)):</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="n">params_names</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">dic</span><span class="p">[</span><span class="s1">&#39;y_0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="n">target_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+
+
+<span class="c1"># save to res_dir</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;x&#39;: [[2404.3, 15.37, 1745.24, 203.73, 13.43, 4494.19], [1835.67, 17.26, 2289.07, 289.2, 11.71, 4389.66], [1067.9, 33.77, 2352.58, 235.32, 5.55, 2861.68], [2276.03, 18.09, 1821.08, 26.02, 15.74, 3241.99], [2147.06, 30.31, 2816.31, 290.32, 29.06, 4981.54], [1152.66, 28.88, 2734.96, 122.63, 8.57, 4856.11], [1240.99, 23.85, 2993.56, 190.72, 19.98, 2560.64], [2471.68, 21.86, 1394.98, 138.38, 29.39, 2046.93], [907.4, 9.36, 2766.28, 314.87, 22.86, 4323.36], [2034.13, 18.67, 1021.64, 90.9, 7.89, 4776.24], [540.03, 19.25, 2383.83, 16.03, 23.23, 4632.76], [1532.37, 12.86, 1955.23, 383.93, 18.06, 4137.02], [1024.8, 8.58, 2631.08, 367.72, 21.69, 2135.81], [1768.01, 22.92, 2927.6, 77.78, 10.6, 4208.75], [1598.13, 29.16, 2592.42, 396.43, 23.87, 3688.4], [691.46, 14.32, 1661.51, 248.43, 19.54, 3523.45], [1745.39, 28.11, 1098.41, 108.1, 16.43, 2467.57], [2111.73, 31.26, 2065.44, 349.36, 27.79, 2251.41], [621.02, 26.31, 1221.45, 51.78, 26.15, 3907.48], [1442.41, 9.97, 1297.14, 306.76, 9.05, 3972.69], [810.2, 33.24, 1776.59, 258.82, 6.39, 4599.99], [1308.04, 32.43, 2558.77, 146.55, 12.7, 3111.18], [1333.17, 20.49, 1878.83, 212.59, 24.7, 3386.13], [863.48, 34.34, 1535.26, 104.85, 25.37, 3160.77], [675.45, 26.72, 1604.13, 66.24, 21.09, 2720.67], [1420.15, 12.15, 2015.24, 277.29, 7.06, 3621.27], [1973.48, 24.8, 2137.16, 218.5, 16.81, 2822.32], [2349.2, 15.71, 1315.5, 35.69, 18.83, 2282.89], [2211.41, 10.56, 2465.27, 156.76, 13.6, 2585.89], [1632.37, 20.84, 2233.62, 328.26, 14.8, 3025.95], [1881.23, 25.54, 1449.59, 360.46, 10.19, 3843.04], [953.75, 13.21, 1167.45, 177.7, 27.64, 3463.96]], &#39;y_0&#39;: [13.83, 19.712, 18.797, 12.903, 18.556, 17.962, 18.726, 10.414, 17.342, 5.922, 15.154, 19.105, 17.644, 18.34, 16.013, 16.773, 7.984, 17.178, 17.19, 18.583, 14.294, 18.165, 19.824, 18.115, 16.732, 18.876, 15.688, 4.69, 17.522, 19.463, 13.608, 16.27], &#39;ydyn_0&#39;: 1, &#39;y_1&#39;: [], &#39;ydyn_1&#39;: 1}
+</pre></div></div>
+</div>
+<section id="Define-the-free-parameters-to-be-optimized">
+<h2>Define the free parameters to be optimized<a class="headerlink" href="#Define-the-free-parameters-to-be-optimized" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">Spin_Speed_1</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_Speed_1&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">1000</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin Speed 1&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;RPM&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_Speed_1</span><span class="p">)</span>
+<span class="n">Duration_t1</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Duration_t1&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Duration t1&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span>
+                        <span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Duration_t1</span><span class="p">)</span>
+<span class="n">Spin_Speed_2</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_Speed_2&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">1000</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin Speed 2&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;RPM&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span>
+                        <span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_Speed_2</span><span class="p">)</span>
+<span class="n">Dispense_Speed</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Dispense_Speed&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">100</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">400</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Dispense Speed&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span>
+                        <span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Dispense_Speed</span><span class="p">)</span>
+<span class="n">Duration_t3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Duration_t3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">10</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Duration t3&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span>
+                        <span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Duration_t3</span><span class="p">)</span>
+<span class="n">Spin_Speed_3</span> <span class="o">=</span> <span class="n">Fitparam</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Spin_Speed_3&#39;</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span>  <span class="mi">1000</span><span class="p">,</span> <span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span> <span class="n">relRange</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">range_type</span> <span class="o">=</span> <span class="s1">&#39;lin&#39;</span><span class="p">,</span>
+            <span class="n">lim_type</span> <span class="o">=</span> <span class="s1">&#39;absolute&#39;</span><span class="p">,</span><span class="n">optim_type</span><span class="o">=</span><span class="s1">&#39;lin&#39;</span><span class="p">,</span> <span class="n">display_name</span> <span class="o">=</span> <span class="s1">&#39;Spin Speed 3&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;RPM&#39;</span><span class="p">,</span><span class="n">val_type</span><span class="o">=</span><span class="s1">&#39;int&#39;</span><span class="p">,</span><span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Spin_Speed_3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create an excel file with len(params) columns and nb_new_exp rows filled with nan</span>
+<span class="n">nb_new_exp</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">dat_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_new_exp</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># replace all with &#39;nan&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dat_array</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dat_array</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+        <span class="n">dat_array</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nan&#39;</span>
+<span class="n">pnames</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span> <span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dat_array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">pnames</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp.xlsx&#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp.xlsx&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">exp_to_df</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+    Spin_Speed_1  Duration_t1  Spin_Speed_2  Dispense_Speed  Duration_t3  \
+0            NaN          NaN           NaN             NaN          NaN
+1            NaN          NaN           NaN             NaN          NaN
+2            NaN          NaN           NaN             NaN          NaN
+3            NaN          NaN           NaN             NaN          NaN
+4            NaN          NaN           NaN             NaN          NaN
+5            NaN          NaN           NaN             NaN          NaN
+6            NaN          NaN           NaN             NaN          NaN
+7            NaN          NaN           NaN             NaN          NaN
+8            NaN          NaN           NaN             NaN          NaN
+9            NaN          NaN           NaN             NaN          NaN
+10           NaN          NaN           NaN             NaN          NaN
+11           NaN          NaN           NaN             NaN          NaN
+12           NaN          NaN           NaN             NaN          NaN
+13           NaN          NaN           NaN             NaN          NaN
+14           NaN          NaN           NaN             NaN          NaN
+15           NaN          NaN           NaN             NaN          NaN
+16           NaN          NaN           NaN             NaN          NaN
+17           NaN          NaN           NaN             NaN          NaN
+
+    Spin_Speed_3
+0            NaN
+1            NaN
+2            NaN
+3            NaN
+4            NaN
+5            NaN
+6            NaN
+7            NaN
+8            NaN
+9            NaN
+10           NaN
+11           NaN
+12           NaN
+13           NaN
+14           NaN
+15           NaN
+16           NaN
+17           NaN
+</pre></div></div>
+</div>
+</section>
+<section id="Start-the-optimization">
+<h2>Start the optimization<a class="headerlink" href="#Start-the-optimization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the targets and the model for the TM problem</span>
+<span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">]</span>
+<span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;Pmax&#39;</span>
+<span class="n">target</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span><span class="n">exp_to_df</span><span class="p">,</span><span class="s1">&#39;target_name&#39;</span><span class="p">:</span><span class="s1">&#39;Pmax&#39;</span><span class="p">,</span><span class="s1">&#39;minimize&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="s1">&#39;data&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;y&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">:</span><span class="n">X_dimensions</span><span class="p">,</span><span class="s1">&#39;X_units&#39;</span><span class="p">:[</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">],</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">:</span><span class="n">y_dimension</span><span class="p">,</span><span class="s1">&#39;y_unit&#39;</span><span class="p">:</span><span class="s1">&#39;mW cm$^{-2}$&#39;</span><span class="p">}</span>
+            <span class="p">,</span><span class="s1">&#39;target_weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+
+
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="n">obj_type</span><span class="o">=</span><span class="s1">&#39;identity&#39;</span>
+<span class="n">loss</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span>
+<span class="n">threshold</span><span class="o">=</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span>
+
+<span class="n">mo</span> <span class="o">=</span> <span class="n">MooBOtorch</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span> <span class="n">targets</span><span class="p">)</span> <span class="c1"># initialize the optimization object</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">warmstart</span> <span class="o">=</span> <span class="s1">&#39;recall&#39;</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># needed if number of cores is lower than number of CPU - 1 to ensure we output the right number of points</span>
+<span class="c1"># mo.SaveOldXY2file = os.path.join(res_dir,&#39;old_XY.json&#39;)</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">Path2OldXY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;old_XY.json&#39;</span><span class="p">)</span>
+<span class="c1"># mo.parameter_constraints = [f&#39;{stepsize_fraction}*Cs_fraction + {stepsize_fraction}*Fa_fraction &lt;= 1&#39;]</span>
+
+<span class="c1"># Define custom evaluation function</span>
+<span class="k">def</span> <span class="nf">evaluate_custom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">px</span><span class="p">,</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+
+<span class="n">mo</span><span class="o">.</span><span class="n">evaluate_custom</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">MethodType</span><span class="p">(</span><span class="n">evaluate_custom</span><span class="p">,</span> <span class="n">mo</span><span class="p">)</span> <span class="c1"># add the method to the object FullyBayesianMOO</span>
+<span class="n">kwargs_posterior</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Nres&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;Ninteg&#39;</span><span class="p">:</span><span class="mf">1e3</span><span class="p">,</span><span class="s1">&#39;logscale&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;vmin&#39;</span><span class="p">:</span><span class="mf">1e-100</span><span class="p">,</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;min_prob&#39;</span><span class="p">:</span><span class="mf">1e-40</span><span class="p">,</span><span class="s1">&#39;clear_axis&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;True_values&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span><span class="s1">&#39;show_points&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;savefig&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s1">&#39;figname&#39;</span><span class="p">:</span><span class="s1">&#39;param_posterior&#39;</span><span class="p">,</span><span class="s1">&#39;full_grid&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">&#39;randomize&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
+
+<span class="n">ax_client</span> <span class="o">=</span> <span class="n">mo</span><span class="o">.</span><span class="n">BoTorchOpti</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="p">[</span><span class="n">nb_new_exp</span><span class="p">],</span> <span class="n">n_step_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">nb_new_exp</span><span class="p">],</span> <span class="n">models</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GPEI&#39;</span><span class="p">],</span><span class="n">obj_type</span><span class="o">=</span><span class="n">obj_type</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span><span class="n">use_CUDA</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">is_MOO</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">show_posterior</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">kwargs_posterior</span><span class="o">=</span><span class="n">kwargs_posterior</span><span class="p">,</span><span class="n">use_custom_func</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">suggest_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-26 08:39:45] ax.service.ax_client: Starting optimization with verbose logging. To disable logging, set the `verbose_logging` argument to `False`. Note that float values in the logs are rounded to 6 decimal points.
+[INFO 09-26 08:39:45] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#39;Spin_Speed_1&#39;, parameter_type=INT, range=[500, 3000]), RangeParameter(name=&#39;Duration_t1&#39;, parameter_type=INT, range=[5, 35]), RangeParameter(name=&#39;Spin_Speed_2&#39;, parameter_type=INT, range=[1000, 3000]), RangeParameter(name=&#39;Dispense_Speed&#39;, parameter_type=INT, range=[10, 400]), RangeParameter(name=&#39;Duration_t3&#39;, parameter_type=INT, range=[5, 35]), RangeParameter(name=&#39;Spin_Speed_3&#39;, parameter_type=INT, range=[2000, 5000])], parameter_constraints=[]).
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2404, &#39;Duration_t1&#39;: 15, &#39;Spin_Speed_2&#39;: 1745, &#39;Dispense_Speed&#39;: 203, &#39;Duration_t3&#39;: 13, &#39;Spin_Speed_3&#39;: 4494}] as trial 0.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 0 with data: {&#39;identity&#39;: (13.83, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1835, &#39;Duration_t1&#39;: 17, &#39;Spin_Speed_2&#39;: 2289, &#39;Dispense_Speed&#39;: 289, &#39;Duration_t3&#39;: 11, &#39;Spin_Speed_3&#39;: 4389}] as trial 1.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 1 with data: {&#39;identity&#39;: (19.712, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1067, &#39;Duration_t1&#39;: 33, &#39;Spin_Speed_2&#39;: 2352, &#39;Dispense_Speed&#39;: 235, &#39;Duration_t3&#39;: 5, &#39;Spin_Speed_3&#39;: 2861}] as trial 2.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 2 with data: {&#39;identity&#39;: (18.797, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2276, &#39;Duration_t1&#39;: 18, &#39;Spin_Speed_2&#39;: 1821, &#39;Dispense_Speed&#39;: 26, &#39;Duration_t3&#39;: 15, &#39;Spin_Speed_3&#39;: 3241}] as trial 3.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 3 with data: {&#39;identity&#39;: (12.903, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2147, &#39;Duration_t1&#39;: 30, &#39;Spin_Speed_2&#39;: 2816, &#39;Dispense_Speed&#39;: 290, &#39;Duration_t3&#39;: 29, &#39;Spin_Speed_3&#39;: 4981}] as trial 4.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 4 with data: {&#39;identity&#39;: (18.556, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1152, &#39;Duration_t1&#39;: 28, &#39;Spin_Speed_2&#39;: 2734, &#39;Dispense_Speed&#39;: 122, &#39;Duration_t3&#39;: 8, &#39;Spin_Speed_3&#39;: 4856}] as trial 5.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 5 with data: {&#39;identity&#39;: (17.962, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1240, &#39;Duration_t1&#39;: 23, &#39;Spin_Speed_2&#39;: 2993, &#39;Dispense_Speed&#39;: 190, &#39;Duration_t3&#39;: 19, &#39;Spin_Speed_3&#39;: 2560}] as trial 6.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 6 with data: {&#39;identity&#39;: (18.726, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2471, &#39;Duration_t1&#39;: 21, &#39;Spin_Speed_2&#39;: 1394, &#39;Dispense_Speed&#39;: 138, &#39;Duration_t3&#39;: 29, &#39;Spin_Speed_3&#39;: 2046}] as trial 7.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 7 with data: {&#39;identity&#39;: (10.414, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 907, &#39;Duration_t1&#39;: 9, &#39;Spin_Speed_2&#39;: 2766, &#39;Dispense_Speed&#39;: 314, &#39;Duration_t3&#39;: 22, &#39;Spin_Speed_3&#39;: 4323}] as trial 8.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 8 with data: {&#39;identity&#39;: (17.342, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2034, &#39;Duration_t1&#39;: 18, &#39;Spin_Speed_2&#39;: 1021, &#39;Dispense_Speed&#39;: 90, &#39;Duration_t3&#39;: 7, &#39;Spin_Speed_3&#39;: 4776}] as trial 9.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 9 with data: {&#39;identity&#39;: (5.922, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 540, &#39;Duration_t1&#39;: 19, &#39;Spin_Speed_2&#39;: 2383, &#39;Dispense_Speed&#39;: 16, &#39;Duration_t3&#39;: 23, &#39;Spin_Speed_3&#39;: 4632}] as trial 10.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 10 with data: {&#39;identity&#39;: (15.154, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1532, &#39;Duration_t1&#39;: 12, &#39;Spin_Speed_2&#39;: 1955, &#39;Dispense_Speed&#39;: 383, &#39;Duration_t3&#39;: 18, &#39;Spin_Speed_3&#39;: 4137}] as trial 11.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 11 with data: {&#39;identity&#39;: (19.105, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1024, &#39;Duration_t1&#39;: 8, &#39;Spin_Speed_2&#39;: 2631, &#39;Dispense_Speed&#39;: 367, &#39;Duration_t3&#39;: 21, &#39;Spin_Speed_3&#39;: 2135}] as trial 12.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 12 with data: {&#39;identity&#39;: (17.644, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1768, &#39;Duration_t1&#39;: 22, &#39;Spin_Speed_2&#39;: 2927, &#39;Dispense_Speed&#39;: 77, &#39;Duration_t3&#39;: 10, &#39;Spin_Speed_3&#39;: 4208}] as trial 13.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 13 with data: {&#39;identity&#39;: (18.34, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1598, &#39;Duration_t1&#39;: 29, &#39;Spin_Speed_2&#39;: 2592, &#39;Dispense_Speed&#39;: 396, &#39;Duration_t3&#39;: 23, &#39;Spin_Speed_3&#39;: 3688}] as trial 14.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 14 with data: {&#39;identity&#39;: (16.013, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 691, &#39;Duration_t1&#39;: 14, &#39;Spin_Speed_2&#39;: 1661, &#39;Dispense_Speed&#39;: 248, &#39;Duration_t3&#39;: 19, &#39;Spin_Speed_3&#39;: 3523}] as trial 15.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 15 with data: {&#39;identity&#39;: (16.773, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1745, &#39;Duration_t1&#39;: 28, &#39;Spin_Speed_2&#39;: 1098, &#39;Dispense_Speed&#39;: 108, &#39;Duration_t3&#39;: 16, &#39;Spin_Speed_3&#39;: 2467}] as trial 16.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 16 with data: {&#39;identity&#39;: (7.984, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2111, &#39;Duration_t1&#39;: 31, &#39;Spin_Speed_2&#39;: 2065, &#39;Dispense_Speed&#39;: 349, &#39;Duration_t3&#39;: 27, &#39;Spin_Speed_3&#39;: 2251}] as trial 17.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 17 with data: {&#39;identity&#39;: (17.178, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 621, &#39;Duration_t1&#39;: 26, &#39;Spin_Speed_2&#39;: 1221, &#39;Dispense_Speed&#39;: 51, &#39;Duration_t3&#39;: 26, &#39;Spin_Speed_3&#39;: 3907}] as trial 18.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 18 with data: {&#39;identity&#39;: (17.19, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1442, &#39;Duration_t1&#39;: 9, &#39;Spin_Speed_2&#39;: 1297, &#39;Dispense_Speed&#39;: 306, &#39;Duration_t3&#39;: 9, &#39;Spin_Speed_3&#39;: 3972}] as trial 19.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 19 with data: {&#39;identity&#39;: (18.583, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 810, &#39;Duration_t1&#39;: 33, &#39;Spin_Speed_2&#39;: 1776, &#39;Dispense_Speed&#39;: 258, &#39;Duration_t3&#39;: 6, &#39;Spin_Speed_3&#39;: 4599}] as trial 20.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 20 with data: {&#39;identity&#39;: (14.294, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1308, &#39;Duration_t1&#39;: 32, &#39;Spin_Speed_2&#39;: 2558, &#39;Dispense_Speed&#39;: 146, &#39;Duration_t3&#39;: 12, &#39;Spin_Speed_3&#39;: 3111}] as trial 21.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 21 with data: {&#39;identity&#39;: (18.165, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1333, &#39;Duration_t1&#39;: 20, &#39;Spin_Speed_2&#39;: 1878, &#39;Dispense_Speed&#39;: 212, &#39;Duration_t3&#39;: 24, &#39;Spin_Speed_3&#39;: 3386}] as trial 22.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 22 with data: {&#39;identity&#39;: (19.824, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 863, &#39;Duration_t1&#39;: 34, &#39;Spin_Speed_2&#39;: 1535, &#39;Dispense_Speed&#39;: 104, &#39;Duration_t3&#39;: 25, &#39;Spin_Speed_3&#39;: 3160}] as trial 23.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 23 with data: {&#39;identity&#39;: (18.115, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 675, &#39;Duration_t1&#39;: 26, &#39;Spin_Speed_2&#39;: 1604, &#39;Dispense_Speed&#39;: 66, &#39;Duration_t3&#39;: 21, &#39;Spin_Speed_3&#39;: 2720}] as trial 24.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 24 with data: {&#39;identity&#39;: (16.732, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1420, &#39;Duration_t1&#39;: 12, &#39;Spin_Speed_2&#39;: 2015, &#39;Dispense_Speed&#39;: 277, &#39;Duration_t3&#39;: 7, &#39;Spin_Speed_3&#39;: 3621}] as trial 25.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 25 with data: {&#39;identity&#39;: (18.876, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1973, &#39;Duration_t1&#39;: 24, &#39;Spin_Speed_2&#39;: 2137, &#39;Dispense_Speed&#39;: 218, &#39;Duration_t3&#39;: 16, &#39;Spin_Speed_3&#39;: 2822}] as trial 26.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 26 with data: {&#39;identity&#39;: (15.688, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2349, &#39;Duration_t1&#39;: 15, &#39;Spin_Speed_2&#39;: 1315, &#39;Dispense_Speed&#39;: 35, &#39;Duration_t3&#39;: 18, &#39;Spin_Speed_3&#39;: 2282}] as trial 27.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 27 with data: {&#39;identity&#39;: (4.69, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 2211, &#39;Duration_t1&#39;: 10, &#39;Spin_Speed_2&#39;: 2465, &#39;Dispense_Speed&#39;: 156, &#39;Duration_t3&#39;: 13, &#39;Spin_Speed_3&#39;: 2585}] as trial 28.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 28 with data: {&#39;identity&#39;: (17.522, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1632, &#39;Duration_t1&#39;: 20, &#39;Spin_Speed_2&#39;: 2233, &#39;Dispense_Speed&#39;: 328, &#39;Duration_t3&#39;: 14, &#39;Spin_Speed_3&#39;: 3025}] as trial 29.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 29 with data: {&#39;identity&#39;: (19.463, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 1881, &#39;Duration_t1&#39;: 25, &#39;Spin_Speed_2&#39;: 1449, &#39;Dispense_Speed&#39;: 360, &#39;Duration_t3&#39;: 10, &#39;Spin_Speed_3&#39;: 3843}] as trial 30.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 30 with data: {&#39;identity&#39;: (13.608, None)}.
+[INFO 09-26 08:39:45] ax.core.experiment: Attached custom parameterizations [{&#39;Spin_Speed_1&#39;: 953, &#39;Duration_t1&#39;: 13, &#39;Spin_Speed_2&#39;: 1167, &#39;Dispense_Speed&#39;: 177, &#39;Duration_t3&#39;: 27, &#39;Spin_Speed_3&#39;: 3463}] as trial 31.
+[INFO 09-26 08:39:45] ax.service.ax_client: Completed trial 31 with data: {&#39;identity&#39;: (16.27, None)}.
+[INFO 09-26 08:39:47] ax.service.ax_client: Generated new trial 32 with parameters {&#39;Spin_Speed_1&#39;: 1474, &#39;Duration_t1&#39;: 14, &#39;Spin_Speed_2&#39;: 2324, &#39;Dispense_Speed&#39;: 250, &#39;Duration_t3&#39;: 19, &#39;Spin_Speed_3&#39;: 3910}.
+[INFO 09-26 08:39:47] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:48] ax.service.ax_client: Generated new trial 33 with parameters {&#39;Spin_Speed_1&#39;: 1515, &#39;Duration_t1&#39;: 16, &#39;Spin_Speed_2&#39;: 2676, &#39;Dispense_Speed&#39;: 269, &#39;Duration_t3&#39;: 6, &#39;Spin_Speed_3&#39;: 3552}.
+[INFO 09-26 08:39:48] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:49] ax.service.ax_client: Generated new trial 34 with parameters {&#39;Spin_Speed_1&#39;: 1165, &#39;Duration_t1&#39;: 23, &#39;Spin_Speed_2&#39;: 2063, &#39;Dispense_Speed&#39;: 241, &#39;Duration_t3&#39;: 32, &#39;Spin_Speed_3&#39;: 2863}.
+[INFO 09-26 08:39:49] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:50] ax.service.ax_client: Generated new trial 35 with parameters {&#39;Spin_Speed_1&#39;: 1913, &#39;Duration_t1&#39;: 13, &#39;Spin_Speed_2&#39;: 2671, &#39;Dispense_Speed&#39;: 222, &#39;Duration_t3&#39;: 22, &#39;Spin_Speed_3&#39;: 5000}.
+[INFO 09-26 08:39:50] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:52] ax.service.ax_client: Generated new trial 36 with parameters {&#39;Spin_Speed_1&#39;: 1421, &#39;Duration_t1&#39;: 8, &#39;Spin_Speed_2&#39;: 2021, &#39;Dispense_Speed&#39;: 279, &#39;Duration_t3&#39;: 25, &#39;Spin_Speed_3&#39;: 3002}.
+[INFO 09-26 08:39:52] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:53] ax.service.ax_client: Generated new trial 37 with parameters {&#39;Spin_Speed_1&#39;: 1840, &#39;Duration_t1&#39;: 5, &#39;Spin_Speed_2&#39;: 2401, &#39;Dispense_Speed&#39;: 360, &#39;Duration_t3&#39;: 10, &#39;Spin_Speed_3&#39;: 3825}.
+[INFO 09-26 08:39:53] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:54] ax.service.ax_client: Generated new trial 38 with parameters {&#39;Spin_Speed_1&#39;: 1476, &#39;Duration_t1&#39;: 13, &#39;Spin_Speed_2&#39;: 2036, &#39;Dispense_Speed&#39;: 242, &#39;Duration_t3&#39;: 25, &#39;Spin_Speed_3&#39;: 5000}.
+[INFO 09-26 08:39:54] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:56] ax.service.ax_client: Generated new trial 39 with parameters {&#39;Spin_Speed_1&#39;: 1096, &#39;Duration_t1&#39;: 20, &#39;Spin_Speed_2&#39;: 2295, &#39;Dispense_Speed&#39;: 247, &#39;Duration_t3&#39;: 17, &#39;Spin_Speed_3&#39;: 2231}.
+[INFO 09-26 08:39:56] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:58] ax.service.ax_client: Generated new trial 40 with parameters {&#39;Spin_Speed_1&#39;: 2126, &#39;Duration_t1&#39;: 21, &#39;Spin_Speed_2&#39;: 2903, &#39;Dispense_Speed&#39;: 266, &#39;Duration_t3&#39;: 9, &#39;Spin_Speed_3&#39;: 5000}.
+[INFO 09-26 08:39:58] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:58] ax.service.ax_client: Generated new trial 41 with parameters {&#39;Spin_Speed_1&#39;: 1600, &#39;Duration_t1&#39;: 18, &#39;Spin_Speed_2&#39;: 2444, &#39;Dispense_Speed&#39;: 187, &#39;Duration_t3&#39;: 32, &#39;Spin_Speed_3&#39;: 4233}.
+[INFO 09-26 08:39:58] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:39:59] ax.service.ax_client: Generated new trial 42 with parameters {&#39;Spin_Speed_1&#39;: 1184, &#39;Duration_t1&#39;: 29, &#39;Spin_Speed_2&#39;: 1946, &#39;Dispense_Speed&#39;: 191, &#39;Duration_t3&#39;: 35, &#39;Spin_Speed_3&#39;: 4204}.
+[INFO 09-26 08:39:59] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:00] ax.service.ax_client: Generated new trial 43 with parameters {&#39;Spin_Speed_1&#39;: 1210, &#39;Duration_t1&#39;: 18, &#39;Spin_Speed_2&#39;: 1933, &#39;Dispense_Speed&#39;: 325, &#39;Duration_t3&#39;: 21, &#39;Spin_Speed_3&#39;: 2000}.
+[INFO 09-26 08:40:00] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:02] ax.service.ax_client: Generated new trial 44 with parameters {&#39;Spin_Speed_1&#39;: 1220, &#39;Duration_t1&#39;: 15, &#39;Spin_Speed_2&#39;: 2546, &#39;Dispense_Speed&#39;: 198, &#39;Duration_t3&#39;: 11, &#39;Spin_Speed_3&#39;: 2783}.
+[INFO 09-26 08:40:02] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:03] ax.service.ax_client: Generated new trial 45 with parameters {&#39;Spin_Speed_1&#39;: 1570, &#39;Duration_t1&#39;: 5, &#39;Spin_Speed_2&#39;: 2329, &#39;Dispense_Speed&#39;: 211, &#39;Duration_t3&#39;: 19, &#39;Spin_Speed_3&#39;: 4466}.
+[INFO 09-26 08:40:03] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:04] ax.service.ax_client: Generated new trial 46 with parameters {&#39;Spin_Speed_1&#39;: 925, &#39;Duration_t1&#39;: 22, &#39;Spin_Speed_2&#39;: 2808, &#39;Dispense_Speed&#39;: 268, &#39;Duration_t3&#39;: 5, &#39;Spin_Speed_3&#39;: 2000}.
+[INFO 09-26 08:40:04] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:05] ax.service.ax_client: Generated new trial 47 with parameters {&#39;Spin_Speed_1&#39;: 1631, &#39;Duration_t1&#39;: 22, &#39;Spin_Speed_2&#39;: 2902, &#39;Dispense_Speed&#39;: 281, &#39;Duration_t3&#39;: 5, &#39;Spin_Speed_3&#39;: 3450}.
+[INFO 09-26 08:40:05] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:07] ax.service.ax_client: Generated new trial 48 with parameters {&#39;Spin_Speed_1&#39;: 1720, &#39;Duration_t1&#39;: 5, &#39;Spin_Speed_2&#39;: 2707, &#39;Dispense_Speed&#39;: 260, &#39;Duration_t3&#39;: 10, &#39;Spin_Speed_3&#39;: 4488}.
+[INFO 09-26 08:40:07] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+[INFO 09-26 08:40:08] ax.service.ax_client: Generated new trial 49 with parameters {&#39;Spin_Speed_1&#39;: 1451, &#39;Duration_t1&#39;: 9, &#39;Spin_Speed_2&#39;: 2149, &#39;Dispense_Speed&#39;: 256, &#39;Duration_t3&#39;: 27, &#39;Spin_Speed_3&#39;: 3416}.
+[INFO 09-26 08:40:08] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+[INFO 09-26 08:40:08] ax.modelbridge.torch: The observations are identical to the last set of observations used to fit the model. Skipping model fitting.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the optimized stack structure</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mo</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">val_type</span> <span class="o">!=</span> <span class="s1">&#39;str&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">lims</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">display_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Spin Speed 1 1333
+[500, 3000]
+Duration t1 20
+[5, 35]
+Spin Speed 2 1878
+[1000, 3000]
+Dispense Speed 212
+[10, 400]
+Duration t3 24
+[5, 35]
+Spin Speed 3 3386
+[2000, 5000]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all tried data from the ax_client</span>
+<span class="n">triedX</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">trials_as_df</span>
+<span class="c1"># print(triedX.tail())</span>
+<span class="n">triedY</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">fetch_data</span><span class="p">()</span><span class="o">.</span><span class="n">df</span>
+<span class="c1"># print(triedY.tail())</span>
+
+<span class="c1"># find Trial Status ABANDONED</span>
+<span class="n">abandoned_trials</span> <span class="o">=</span> <span class="n">triedX</span><span class="p">[</span><span class="n">triedX</span><span class="p">[</span><span class="s1">&#39;Trial Status&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ABANDONED&#39;</span><span class="p">]</span>
+<span class="n">dics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">abandoned_trials</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+
+    <span class="n">dic_dum</span> <span class="o">=</span> <span class="n">abandoned_trials</span><span class="p">[</span><span class="s1">&#39;Arm Parameterizations&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dic_dum</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="n">dic_dum</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="n">dics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+
+<span class="c1"># put in a dataframe</span>
+<span class="n">df2try</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dics</span><span class="p">)</span>
+
+<span class="c1"># save to excel</span>
+<span class="n">df2try</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res_dir</span><span class="p">,</span><span class="s1">&#39;BOAR_Exp_2_try.xlsx&#39;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-26 08:40:23] ax.modelbridge.generation_strategy: Note that parameter values in dataframe are rounded to 2 decimal points; the values in the dataframe are thus not the exact ones suggested by Ax in trials.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Pareto front of the test problem</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_all_objectives</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_13_0.png" src="../_images/examples_BOAR_Exp_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the density of points that were sampled during the optimization process</span>
+<span class="n">mo</span><span class="o">.</span><span class="n">plot_density</span><span class="p">(</span><span class="n">ax_client</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_14_0.png" src="../_images/examples_BOAR_Exp_14_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the contour of the objective function for a given target</span>
+
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="p">))</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="p">))</span>
+<span class="n">render</span><span class="p">(</span><span class="n">ax_client</span><span class="o">.</span><span class="n">get_contour_plot</span><span class="p">(</span><span class="n">param_x</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">param_y</span><span class="o">=</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="n">obj_type</span><span class="p">))</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-26 08:40:26] ax.service.ax_client: Retrieving contour plot with parameter &#39;Spin_Speed_1&#39; on X-axis and &#39;Spin_Speed_3&#39; on Y-axis, for metric &#39;identity&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_15_1.png" src="../_images/examples_BOAR_Exp_15_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-26 08:40:27] ax.service.ax_client: Retrieving contour plot with parameter &#39;Spin_Speed_1&#39; on X-axis and &#39;Duration_t1&#39; on Y-axis, for metric &#39;identity&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_15_3.png" src="../_images/examples_BOAR_Exp_15_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+[INFO 09-26 08:40:28] ax.service.ax_client: Retrieving contour plot with parameter &#39;Spin_Speed_1&#39; on X-axis and &#39;Duration_t3&#39; on Y-axis, for metric &#39;identity&#39;. Remaining parameters are affixed to the middle of their range.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_15_5.png" src="../_images/examples_BOAR_Exp_15_5.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the slice (i.e., 1D projection) of the model along the a single dimension</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ax_client</span><span class="o">.</span><span class="n">generation_strategy</span><span class="o">.</span><span class="n">model</span>
+<span class="n">render</span><span class="p">(</span><span class="n">plot_slice</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">obj_type</span><span class="p">))</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_16_0.png" src="../_images/examples_BOAR_Exp_16_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the results of cross validation</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_cross_validation</span><span class="p">(</span><span class="n">cv_results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_17_0.png" src="../_images/examples_BOAR_Exp_17_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Interactive plot of the target during the optimization process</span>
+<span class="n">render</span><span class="p">(</span><span class="n">interact_fitted</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_BOAR_Exp_18_0.png" src="../_images/examples_BOAR_Exp_18_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TrPL_Fit_BTD_model_fake.html" class="btn btn-neutral float-left" title="BOAR for TrPL fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BOAR_Exp_MO.html" class="btn btn-neutral float-right" title="Multi-objective optimization for perovskite material composition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

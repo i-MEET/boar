@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar package &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=377e76b0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="boar.SIMsalabim_utils package" href="boar.SIMsalabim_utils.html" />
+    <link rel="prev" title="boar" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">boar</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">boar package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.SIMsalabim_utils.html">boar.SIMsalabim_utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html">boar.agents package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html">boar.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.dynamic_utils.html">boar.dynamic_utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-boar">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">boar</a></li>
+      <li class="breadcrumb-item active">boar package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/boar.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="boar-package">
+<h1>boar package<a class="headerlink" href="#boar-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="boar.SIMsalabim_utils.html">boar.SIMsalabim_utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CalcFom">boar.SIMsalabim_utils.CalcFom module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_B"><code class="docutils literal notranslate"><span class="pre">Theta_B()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_T"><code class="docutils literal notranslate"><span class="pre">Theta_T()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Theta_T2"><code class="docutils literal notranslate"><span class="pre">Theta_T2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.Vbi"><code class="docutils literal notranslate"><span class="pre">Vbi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.delta_B"><code class="docutils literal notranslate"><span class="pre">delta_B()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.delta_T"><code class="docutils literal notranslate"><span class="pre">delta_T()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.get_Rseries"><code class="docutils literal notranslate"><span class="pre">get_Rseries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.get_Rshunt"><code class="docutils literal notranslate"><span class="pre">get_Rshunt()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.w_int_L"><code class="docutils literal notranslate"><span class="pre">w_int_L()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CalcFom.w_int_R"><code class="docutils literal notranslate"><span class="pre">w_int_R()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CleanFolder">boar.SIMsalabim_utils.CleanFolder module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.Store_output_in_folder"><code class="docutils literal notranslate"><span class="pre">Store_output_in_folder()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.clean_file_type"><code class="docutils literal notranslate"><span class="pre">clean_file_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CleanFolder.clean_up_output"><code class="docutils literal notranslate"><span class="pre">clean_up_output()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.CompileProg">boar.SIMsalabim_utils.CompileProg module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.CompileProg.fpc_prog"><code class="docutils literal notranslate"><span class="pre">fpc_prog()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.Download_SIMsalabim">boar.SIMsalabim_utils.Download_SIMsalabim module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.Download_SIMsalabim.download_simsalabim"><code class="docutils literal notranslate"><span class="pre">download_simsalabim()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.GetInputPar">boar.SIMsalabim_utils.GetInputPar module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.ChosePar"><code class="docutils literal notranslate"><span class="pre">ChosePar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.GetParFromStr"><code class="docutils literal notranslate"><span class="pre">GetParFromStr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.GetInputPar.ReadParameterFile"><code class="docutils literal notranslate"><span class="pre">ReadParameterFile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.MakeDevParFile">boar.SIMsalabim_utils.MakeDevParFile module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.CheckProgVersion"><code class="docutils literal notranslate"><span class="pre">CheckProgVersion()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.MakeDevParFileCopy"><code class="docutils literal notranslate"><span class="pre">MakeDevParFileCopy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.MakeDevParFile.UpdateDevParFile"><code class="docutils literal notranslate"><span class="pre">UpdateDevParFile()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.PlotInputPar">boar.SIMsalabim_utils.PlotInputPar module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.VisualizeDevParFile"><code class="docutils literal notranslate"><span class="pre">VisualizeDevParFile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_SRH_lifetime"><code class="docutils literal notranslate"><span class="pre">plot_input_SRH_lifetime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_dens"><code class="docutils literal notranslate"><span class="pre">plot_input_dens()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_mob"><code class="docutils literal notranslate"><span class="pre">plot_input_mob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.PlotInputPar.plot_input_nrj_diag"><code class="docutils literal notranslate"><span class="pre">plot_input_nrj_diag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.RunSim">boar.SIMsalabim_utils.RunSim module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.DegradationPrepareSimuInputs"><code class="docutils literal notranslate"><span class="pre">DegradationPrepareSimuInputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.PrepareSimuInputs"><code class="docutils literal notranslate"><span class="pre">PrepareSimuInputs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.RunSimulation"><code class="docutils literal notranslate"><span class="pre">RunSimulation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_code"><code class="docutils literal notranslate"><span class="pre">run_code()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_multiprocess_simu"><code class="docutils literal notranslate"><span class="pre">run_multiprocess_simu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.RunSim.run_parallel_simu"><code class="docutils literal notranslate"><span class="pre">run_parallel_simu()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.SimSS_plots">boar.SIMsalabim_utils.SimSS_plots module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensSimSS"><code class="docutils literal notranslate"><span class="pre">PlotDensSimSS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotDensWithTime"><code class="docutils literal notranslate"><span class="pre">PlotDensWithTime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJV"><code class="docutils literal notranslate"><span class="pre">PlotJV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotJVPerf"><code class="docutils literal notranslate"><span class="pre">PlotJVPerf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagSimSS"><code class="docutils literal notranslate"><span class="pre">PlotNrjDiagSimSS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.SimSS_plots.PlotNrjDiagWithTime"><code class="docutils literal notranslate"><span class="pre">PlotNrjDiagWithTime()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.ZimT_plots">boar.SIMsalabim_utils.ZimT_plots module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_Voltage_transient_plot"><code class="docutils literal notranslate"><span class="pre">zimt_Voltage_transient_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_dens_plot"><code class="docutils literal notranslate"><span class="pre">zimt_dens_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_tj_JV_plot"><code class="docutils literal notranslate"><span class="pre">zimt_tj_JV_plot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.ZimT_plots.zimt_tj_plot"><code class="docutils literal notranslate"><span class="pre">zimt_tj_plot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.aux_func">boar.SIMsalabim_utils.aux_func module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.LinearFunc"><code class="docutils literal notranslate"><span class="pre">LinearFunc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpDecay"><code class="docutils literal notranslate"><span class="pre">MonoExpDecay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.MonoExpInc"><code class="docutils literal notranslate"><span class="pre">MonoExpInc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.StretchedExp"><code class="docutils literal notranslate"><span class="pre">StretchedExp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.conduction_urbach"><code class="docutils literal notranslate"><span class="pre">conduction_urbach()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach"><code class="docutils literal notranslate"><span class="pre">double_urbach()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.double_urbach_midgap"><code class="docutils literal notranslate"><span class="pre">double_urbach_midgap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_FF"><code class="docutils literal notranslate"><span class="pre">get_FF()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Jsc"><code class="docutils literal notranslate"><span class="pre">get_Jsc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_PCE"><code class="docutils literal notranslate"><span class="pre">get_PCE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_Voc"><code class="docutils literal notranslate"><span class="pre">get_Voc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_alpha_factor"><code class="docutils literal notranslate"><span class="pre">get_alpha_factor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_ideality_factor"><code class="docutils literal notranslate"><span class="pre">get_ideality_factor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.get_random_value"><code class="docutils literal notranslate"><span class="pre">get_random_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.sci_notation"><code class="docutils literal notranslate"><span class="pre">sci_notation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.aux_func.valence_urbach"><code class="docutils literal notranslate"><span class="pre">valence_urbach()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.plot_settings_screen">boar.SIMsalabim_utils.plot_settings_screen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils.tVG_gen">boar.SIMsalabim_utils.tVG_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.gaussian_pulse"><code class="docutils literal notranslate"><span class="pre">gaussian_pulse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_BACE"><code class="docutils literal notranslate"><span class="pre">zimt_BACE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_CELIV"><code class="docutils literal notranslate"><span class="pre">zimt_CELIV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_double_sweep"><code class="docutils literal notranslate"><span class="pre">zimt_JV_double_sweep()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_JV_sweep"><code class="docutils literal notranslate"><span class="pre">zimt_JV_sweep()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_Gauss_pulse"><code class="docutils literal notranslate"><span class="pre">zimt_TPC_Gauss_pulse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPC_square_pulse"><code class="docutils literal notranslate"><span class="pre">zimt_TPC_square_pulse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TPV"><code class="docutils literal notranslate"><span class="pre">zimt_TPV()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_TrPL"><code class="docutils literal notranslate"><span class="pre">zimt_TrPL()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_impedance"><code class="docutils literal notranslate"><span class="pre">zimt_impedance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_light_decay"><code class="docutils literal notranslate"><span class="pre">zimt_light_decay()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_tdcf"><code class="docutils literal notranslate"><span class="pre">zimt_tdcf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.SIMsalabim_utils.html#boar.SIMsalabim_utils.tVG_gen.zimt_voltage_step"><code class="docutils literal notranslate"><span class="pre">zimt_voltage_step()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.SIMsalabim_utils.html#module-boar.SIMsalabim_utils">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boar.agents.html">boar.agents package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.Agent">boar.agents.Agent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.Xy_to_dict"><code class="docutils literal notranslate"><span class="pre">Agent.Xy_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.get_fitval"><code class="docutils literal notranslate"><span class="pre">Agent.get_fitval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.get_param_dict"><code class="docutils literal notranslate"><span class="pre">Agent.get_param_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.plot_fit_res"><code class="docutils literal notranslate"><span class="pre">Agent.plot_fit_res()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.plot_params"><code class="docutils literal notranslate"><span class="pre">Agent.plot_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.plot_results"><code class="docutils literal notranslate"><span class="pre">Agent.plot_results()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.Agent.Agent.to_excel"><code class="docutils literal notranslate"><span class="pre">Agent.to_excel()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.DD_agents">boar.agents.DD_agents module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Check_fit_params"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.Check_fit_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_exp"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.Compare_JVs_exp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.Compare_JVs_simu"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.Compare_JVs_simu()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.DriftDiffusion()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion4fit"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.DriftDiffusion4fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.DriftDiffusion_rela_nrj_Trap_dist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.DriftDiffusion_relative"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.DriftDiffusion_relative()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.get_FOM"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.get_FOM()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.get_FOMs"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.get_FOMs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.DD_agents.Drift_diffusion_agent.return_FOM"><code class="docutils literal notranslate"><span class="pre">Drift_diffusion_agent.return_FOM()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.NonIdealDiode_agents">boar.agents.NonIdealDiode_agents module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialIdealityFactor"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.DifferentialIdealityFactor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.DifferentialResistance"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.DifferentialResistance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.FitNonIdealDiode"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.FitNonIdealDiode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.NonIdealDiode_dark()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_dark_log"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.NonIdealDiode_dark_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.NonIdealDiode_light()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.NonIdealDiode_light_log"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.NonIdealDiode_light_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Jsc"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.get_Jsc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.NonIdealDiode_agents.Non_Ideal_Diode_agent.get_Voc"><code class="docutils literal notranslate"><span class="pre">Non_Ideal_Diode_agent.get_Voc()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.TAS_agent">boar.agents.TAS_agent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.TAS_agent.TAS_agent"><code class="docutils literal notranslate"><span class="pre">TAS_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.TAS"><code class="docutils literal notranslate"><span class="pre">TAS_agent.TAS()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.get_pseudo_JV"><code class="docutils literal notranslate"><span class="pre">TAS_agent.get_pseudo_JV()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TAS_agent.TAS_agent.init_args_flux_pump_models"><code class="docutils literal notranslate"><span class="pre">TAS_agent.init_args_flux_pump_models()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.TrMC_agent">boar.agents.TrMC_agent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent"><code class="docutils literal notranslate"><span class="pre">TrMC_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent.init_args_flux_pump_models"><code class="docutils literal notranslate"><span class="pre">TrMC_agent.init_args_flux_pump_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TrMC_agent.TrMC_agent.trMC"><code class="docutils literal notranslate"><span class="pre">TrMC_agent.trMC()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.TrPL_agent">boar.agents.TrPL_agent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent"><code class="docutils literal notranslate"><span class="pre">TrPL_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.init_args_flux_pump_models"><code class="docutils literal notranslate"><span class="pre">TrPL_agent.init_args_flux_pump_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TrPL_agent.TrPL_agent.trPL"><code class="docutils literal notranslate"><span class="pre">TrPL_agent.trPL()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents.TranferMatrix_agent">boar.agents.TranferMatrix_agent module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.I_mat"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent.I_mat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.L_mat"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent.L_mat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.TM"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent.TM()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.get_ntotal"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent.get_ntotal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html#boar.agents.TranferMatrix_agent.Transfer_Matrix_agent.openFile"><code class="docutils literal notranslate"><span class="pre">Transfer_Matrix_agent.openFile()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.agents.html#module-boar.agents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boar.core.html">boar.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core.FitParams">boar.core.FitParams module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.FitParams.FOMparam"><code class="docutils literal notranslate"><span class="pre">FOMparam</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.FitParams.FOMparam.update_FOMparam"><code class="docutils literal notranslate"><span class="pre">FOMparam.update_FOMparam()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.FitParams.Fitparam"><code class="docutils literal notranslate"><span class="pre">Fitparam</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core.funcs">boar.core.funcs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.callable_name"><code class="docutils literal notranslate"><span class="pre">callable_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.gauss"><code class="docutils literal notranslate"><span class="pre">gauss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.gauss_sk"><code class="docutils literal notranslate"><span class="pre">gauss_sk()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.gaussian_pulse_norm"><code class="docutils literal notranslate"><span class="pre">gaussian_pulse_norm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.get_flux_density"><code class="docutils literal notranslate"><span class="pre">get_flux_density()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.get_unique_X"><code class="docutils literal notranslate"><span class="pre">get_unique_X()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.get_unique_X_and_xaxis_values"><code class="docutils literal notranslate"><span class="pre">get_unique_X_and_xaxis_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.polynom"><code class="docutils literal notranslate"><span class="pre">polynom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.sci_notation"><code class="docutils literal notranslate"><span class="pre">sci_notation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.funcs.sigmoid"><code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core.optimization">boar.core.optimization module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.LH"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.LH()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.LLH"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.LLH()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.cost_from_old_xy"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.cost_from_old_xy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.do_grid_posterior"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.do_grid_posterior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.load_old_xy"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.load_old_xy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_1D"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.marginal_posterior_1D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.marginal_posterior_2D"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.marginal_posterior_2D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.obj_func_sko"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.obj_func_sko()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.optimize_sko_parallel"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.optimize_sko_parallel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.plot_objective_function"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.plot_objective_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.posterior"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.posterior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.randomize_grid_posterior"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.randomize_grid_posterior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.save_old_xy"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.save_old_xy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization.MultiObjectiveOptimizer.single_point"><code class="docutils literal notranslate"><span class="pre">MultiObjectiveOptimizer.single_point()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core.optimization_botorch">boar.core.optimization_botorch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch"><code class="docutils literal notranslate"><span class="pre">MooBOtorch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.BoTorchOpti"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.BoTorchOpti()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.ConvertParams"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.ConvertParams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.LH_torch"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.LH_torch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.do_grid_posterior"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.do_grid_posterior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.evaluate"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.evaluate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.evaluate_custom"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.evaluate_custom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.expected_minimum_BOAR"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.expected_minimum_BOAR()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.get_model"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.get_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.makeobjectives"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.makeobjectives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_1D"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.marginal_posterior_1D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.marginal_posterior_2D"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.marginal_posterior_2D()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_all_objectives"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.plot_all_objectives()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_density"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.plot_density()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.plot_hypervolume"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.plot_hypervolume()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.MooBOtorch.posterior"><code class="docutils literal notranslate"><span class="pre">MooBOtorch.posterior()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy"><code class="docutils literal notranslate"><span class="pre">SimpleThresholdGlobalStoppingStrategy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimization_botorch.SimpleThresholdGlobalStoppingStrategy.should_stop_optimization"><code class="docutils literal notranslate"><span class="pre">SimpleThresholdGlobalStoppingStrategy.should_stop_optimization()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core.optimizer">boar.core.optimizer module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.format_func"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.format_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.invert_lossfunc"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.invert_lossfunc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.lossfunc"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.lossfunc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_curvefit"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.obj_func_curvefit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_metric"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.obj_func_metric()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.obj_func_scipy"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.obj_func_scipy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_basin_hopping"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.optimize_basin_hopping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_curvefit"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.optimize_curvefit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.optimize_dual_annealing"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.optimize_dual_annealing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.params_r"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.params_r()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html#boar.core.optimizer.BoarOptimizer.params_w"><code class="docutils literal notranslate"><span class="pre">BoarOptimizer.params_w()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.core.html#module-boar.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boar.dynamic_utils.html">boar.dynamic_utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boar.dynamic_utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="boar.dynamic_utils.html#module-boar.dynamic_utils.pump">boar.dynamic_utils.pump module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pulse_norm"><code class="docutils literal notranslate"><span class="pre">gaussian_pulse_norm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.gaussian_pump"><code class="docutils literal notranslate"><span class="pre">gaussian_pump()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.get_flux_density"><code class="docutils literal notranslate"><span class="pre">get_flux_density()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.initial_carrier_density"><code class="docutils literal notranslate"><span class="pre">initial_carrier_density()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.pump_from_file"><code class="docutils literal notranslate"><span class="pre">pump_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.pump.square_pump"><code class="docutils literal notranslate"><span class="pre">square_pump()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.dynamic_utils.html#module-boar.dynamic_utils.rate_eq">boar.dynamic_utils.rate_eq module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_Detrapping_equation"><code class="docutils literal notranslate"><span class="pre">Bimolecular_Trapping_Detrapping_equation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="boar.dynamic_utils.html#boar.dynamic_utils.rate_eq.Bimolecular_Trapping_equation"><code class="docutils literal notranslate"><span class="pre">Bimolecular_Trapping_equation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="boar.dynamic_utils.html#module-boar.dynamic_utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-boar">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-boar" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="boar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boar.SIMsalabim_utils.html" class="btn btn-neutral float-right" title="boar.SIMsalabim_utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

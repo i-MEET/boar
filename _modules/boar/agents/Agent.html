@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>boar.agents.Agent &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=377e76b0"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/js/rtd_search_config.js"></script>
+        <script src="../../../_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">boar.agents.Agent</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for boar.agents.Agent</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">itertools</span><span class="o">,</span><span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">from</span> <span class="nn">boar.core.funcs</span> <span class="kn">import</span> <span class="n">get_unique_X</span><span class="p">,</span><span class="n">get_unique_X_and_xaxis_values</span>
+
+<div class="viewcode-block" id="Agent">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent">[docs]</a>
+<span class="k">class</span> <span class="nc">Agent</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; A base class providing functionality such as plotting, export, that all agents need</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="Agent.get_param_dict">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.get_param_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get standard deviations from parameters</span>
+<span class="sd">        if optimization has been done in log scale, convert them into </span>
+<span class="sd">        linear scale which will make the upper and lower limit unsymmetric and will return a tuple</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        params : list of Fitparam()</span>
+<span class="sd">            list of Fitparam objects</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of dict</span>
+<span class="sd">            list of dict with keys &#39;name&#39;(string),&#39;relRange&#39;(float),&#39;val&#39;(float),&#39;std&#39;(float or tuple of float)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            if optim_type is not &#39;linear&#39; or &#39;log&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+
+        <span class="n">paramdict</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">val</span>
+            <span class="n">pn</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">lims</span> <span class="o">==</span><span class="p">[]:</span>
+                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">relRange</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">rr</span> <span class="o">=</span> <span class="mf">0.001</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">rr</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">relRange</span>
+
+                <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">optim_type</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+                    <span class="n">param</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span>  <span class="o">-</span> <span class="n">rr</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span><span class="p">),</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span>  <span class="o">+</span> <span class="n">rr</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span><span class="p">)]</span>
+                <span class="k">elif</span> <span class="n">param</span><span class="o">.</span><span class="n">optim_type</span> <span class="o">==</span> <span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                    <span class="n">param</span><span class="o">.</span><span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span> <span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">rr</span><span class="p">),</span><span class="n">param</span><span class="o">.</span><span class="n">startVal</span> <span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">rr</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;optim_type must be &#39;&#39;linear&#39;&#39; or &#39;&#39;log&#39;&#39;&#39;</span><span class="p">)</span>
+
+                <span class="c1"># lims = [param.val - rr*abs(param.val),param.val + rr*abs(param.val)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lims</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">lims</span>
+
+
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">relRange</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">s3</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">std</span>
+            <span class="c1">#     if param.optim_type==&#39;log&#39;:# obj func is interpreted as log normal </span>
+            <span class="c1">#         # s[s&gt;2]=2</span>
+            <span class="c1">#         s1 = 10**(np.log10(p)+s) - p # upper error bars </span>
+            <span class="c1">#         s2 = -10**(np.log10(p)-s) + p # lower error bars </span>
+            <span class="c1">#         # check if the error bars are within the limits else set them to the limit</span>
+            <span class="c1">#         if p+s1&gt;lims[1]:</span>
+            <span class="c1">#             s1 = lims[1]</span>
+            <span class="c1">#         if p-s2&lt;lims[0]:</span>
+            <span class="c1">#             s2 = lims[0]</span>
+
+            <span class="c1">#         s3 = (s2,s1)</span>
+            <span class="c1">#     else:</span>
+            <span class="c1">#         s3 = (s,s)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">paramdict</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">pn</span><span class="p">,</span><span class="s1">&#39;relRange&#39;</span><span class="p">:</span><span class="n">param</span><span class="o">.</span><span class="n">relRange</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">:</span><span class="n">p</span><span class="p">,</span><span class="s1">&#39;std_l&#39;</span><span class="p">:</span><span class="n">s3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;std_h&#39;</span><span class="p">:</span><span class="n">s3</span><span class="p">[</span><span class="mi">1</span><span class="p">]})</span>
+
+
+        <span class="k">return</span> <span class="n">paramdict</span></div>
+
+
+<div class="viewcode-block" id="Agent.get_fitval">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.get_fitval">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_fitval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ps</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the values for all fitparam objects in params whoes names are mentioned in ps</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ps : list of string</span>
+<span class="sd">            list the names of the desired fit parameters</span>
+<span class="sd">        params : list of Fitparam()</span>
+<span class="sd">            Fitparam objects</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of float</span>
+<span class="sd">            the values of the respective fit parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">pp</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">params</span> <span class="k">if</span> <span class="n">pp</span><span class="o">.</span><span class="n">name</span><span class="o">==</span><span class="n">s</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="Agent.Xy_to_dict">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.Xy_to_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">Xy_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">yexp</span><span class="o">=</span><span class="p">[],</span><span class="n">yfit</span><span class="o">=</span><span class="p">[],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert the X array into a dict containing the measured axis and the (constant) metadata</span>
+<span class="sd">        This representation is useful for physical modeling (rate equations, drift-diffusion, etc)</span>
+<span class="sd">        while the X notation is more useful for machine learning.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : ndarray</span>
+<span class="sd">           the experimental dimensions</span>
+<span class="sd">        yexp : ndarray of shape(n,)</span>
+<span class="sd">            the experimental values, if available</span>
+<span class="sd">        yfit : ndarray of shape(n,)</span>
+<span class="sd">            the fitted values, if available</span>
+<span class="sd">        axis : int, optional</span>
+<span class="sd">            the column in X containing the varied parameter, by default 0</span>
+<span class="sd">        X_dimensions : list, optional</span>
+<span class="sd">            names of the X columns (including the measurement axis), by default []</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dictionary</span>
+<span class="sd">            key &#39;x&#39; is independent parameter, other keys are metadata</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Xm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># delete data column of X, leaving only the metadata columns</span>
+        <span class="n">uniqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">Xm</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">X_dimensions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">X_dimensions</span><span class="p">)</span> <span class="c1"># dereference</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_dimensions</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dim_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+        <span class="n">X_data_dim</span> <span class="o">=</span> <span class="n">X_dimensions</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
+        <span class="n">outdict</span><span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">uniq</span> <span class="ow">in</span> <span class="n">uniqs</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">pp</span><span class="p">,</span><span class="n">Xd</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">uniq</span><span class="p">,</span><span class="n">X_dimensions</span><span class="p">):</span>
+                <span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">Xd</span><span class="p">:</span><span class="n">pp</span><span class="p">})</span>
+
+            <span class="n">irs</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialize and conditions</span>
+            <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">pp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">uniq</span><span class="p">):</span>   
+                <span class="n">ir</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Xm</span><span class="p">[:,</span><span class="n">ii</span><span class="p">]</span><span class="o">==</span><span class="n">pp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="c1"># apply an AND condition of unknown nb of items</span>
+                <span class="n">irs</span> <span class="o">=</span> <span class="n">irs</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">ir</span><span class="p">)</span>
+
+            <span class="n">irsu</span><span class="p">,</span><span class="n">irsuc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">irs</span><span class="p">),</span><span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">irsux</span> <span class="o">=</span> <span class="n">irsu</span><span class="p">[</span><span class="n">irsuc</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">uniq</span><span class="p">)]</span> <span class="c1"># for AND it must appear in all columns</span>
+
+            <span class="n">ydict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;yexp&#39;</span><span class="p">:[],</span><span class="s1">&#39;yfit&#39;</span><span class="p">:[]}</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">yexp</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">ydict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;yexp&#39;</span><span class="p">:</span><span class="n">yexp</span><span class="p">[</span><span class="n">irsux</span><span class="p">]})</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">yfit</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">ydict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;yfit&#39;</span><span class="p">:</span><span class="n">yfit</span><span class="p">[</span><span class="n">irsux</span><span class="p">]})</span>
+            <span class="n">dum_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">[</span><span class="n">irsux</span><span class="p">,</span><span class="n">axis</span><span class="p">]}</span>
+            <span class="n">dum_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+            <span class="n">dum_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ydict</span><span class="p">)</span>
+            <span class="n">outdict</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dum_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">outdict</span> </div>
+
+
+<div class="viewcode-block" id="Agent.plot_results">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.plot_results">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">outdict</span><span class="p">,</span><span class="n">pdisplay</span><span class="p">,</span><span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="p">[],</span><span class="n">y_dimension</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_dimensions</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">X_dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X axis&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_dimension</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">y_dimension</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Y axis&#39;</span><span class="p">]</span>            
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">curve</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outdict</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;yexp&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ii</span><span class="o">*</span><span class="n">offset</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;yfit&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">ii</span><span class="o">*</span><span class="n">offset</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">),</span><span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">curve</span><span class="p">[</span><span class="n">pdisplay</span><span class="p">]</span><span class="si">:</span><span class="s1">.2e</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">pdisplay</span> <span class="ow">in</span> <span class="n">curve</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">curve</span><span class="p">[</span><span class="s1">&#39;yfit&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">0</span><span class="o">+</span><span class="n">ii</span><span class="o">*</span><span class="n">offset</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">X_dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_dimension</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">pdisplay</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="Agent.to_excel">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.to_excel">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_excel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fn_xlsx</span><span class="p">,</span><span class="n">outdict</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export the results to an excel file</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fn_xlsx : str</span>
+<span class="sd">            filename of the excel file</span>
+<span class="sd">        outdict : dict</span>
+<span class="sd">            dictionary containing the results see Xy_to_dict</span>
+<span class="sd">        params : list of Fitparam()</span>
+<span class="sd">            list of Fitparam objects</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">param_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_param_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="c1"># get fitparameters (and fixed ones)</span>
+        <span class="n">pout</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.3E</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">pp</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">]</span>
+
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">fn_xlsx</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ii</span><span class="p">,</span><span class="n">outx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">outdict</span><span class="p">):</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">outx</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">outx</span><span class="p">[</span><span class="s1">&#39;yexp&#39;</span><span class="p">],</span><span class="n">outx</span><span class="p">[</span><span class="s1">&#39;yfit&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;yexp&#39;</span><span class="p">,</span><span class="s1">&#39;yfit&#39;</span><span class="p">])</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;data_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span> 
+                <span class="n">mdk</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">outx</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;yexp&#39;</span><span class="p">,</span><span class="s1">&#39;yfit&#39;</span><span class="p">]]</span>
+                <span class="n">mdv</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">outx</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;yexp&#39;</span><span class="p">,</span><span class="s1">&#39;yfit&#39;</span><span class="p">]]</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mdk</span><span class="p">,</span><span class="n">mdv</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;par&#39;</span><span class="p">,</span><span class="s1">&#39;val&#39;</span><span class="p">])</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;metadata_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ii</span><span class="p">))</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pout</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">param_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span> <span class="o">=</span> <span class="s1">&#39;params&#39;</span><span class="p">)</span> </div>
+
+    
+ 
+<div class="viewcode-block" id="Agent.plot_params">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.plot_params">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">paramslist</span><span class="p">,</span><span class="n">fpu</span><span class="o">=</span><span class="p">[],</span><span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">  </span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot the fit parameters as a function of the varied parameter</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        paramslist : list</span>
+<span class="sd">            list of FitParam objects</span>
+<span class="sd">        fpu : list, optional</span>
+<span class="sd">            list to plot on the x axis, by default []</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            dictionary with the plotting options, by default None  </span>
+
+<span class="sd">                including:  </span>
+<span class="sd">                    savefig : bool, optional  </span>
+<span class="sd">                        save the figure, by default True</span>
+<span class="sd">                    figname : str, optional  </span>
+<span class="sd">                        name of the figure, by default &#39;JV_fit&#39;</span>
+<span class="sd">                    figdir : str, optional  </span>
+<span class="sd">                        directory where to save the figure, by default &#39;&#39;</span>
+<span class="sd">                    figext : str, optional  </span>
+<span class="sd">                        extension of the figure, by default &#39;.png&#39;</span>
+<span class="sd">                    figsize : tuple, optional  </span>
+<span class="sd">                        size of the figure, by default (8*Np,12)</span>
+<span class="sd">                    figdpi : int, optional  </span>
+<span class="sd">                        dpi of the figure, by default 300</span>
+<span class="sd">                    nrows : int, optional  </span>
+<span class="sd">                        number of rows in the figure, by default 1</span>
+<span class="sd">                    ncols : int, optional  </span>
+<span class="sd">                        number of columns in the figure, by default Np</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple</span>
+<span class="sd">            tuple containing:</span>
+<span class="sd">                fpu</span>
+<span class="sd">        &quot;&quot;&quot;</span>   
+        <span class="n">infopack</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># for output</span>
+        <span class="n">pf</span> <span class="o">=</span> <span class="p">[[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pp</span>  <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">relRange</span><span class="o">!=</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">paramslist</span><span class="p">]</span> <span class="c1"># free params</span>
+        <span class="n">Np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pf</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fpu</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">fpu</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">paramslist</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">savefig</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;savefig&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">figname</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figname&#39;</span><span class="p">,</span><span class="s1">&#39;JV_fit&#39;</span><span class="p">)</span>
+        <span class="n">figdir</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figdir&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">figext</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figext&#39;</span><span class="p">,</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,(</span><span class="mi">16</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+        <span class="n">figdpi</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figdpi&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>   
+        <span class="n">xaxis_label</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xaxis_label&#39;</span><span class="p">,</span><span class="s1">&#39;# meas&#39;</span><span class="p">)</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,(</span><span class="mi">8</span><span class="o">*</span><span class="n">Np</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+        <span class="n">nrows</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nrows&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ncols&#39;</span><span class="p">,</span><span class="n">Np</span><span class="p">)</span>
+
+        <span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Np</span><span class="p">):</span> <span class="c1"># iterate over all parameters </span>
+            <span class="n">nam</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">full_name</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">])</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">std</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">])</span>
+            <span class="n">lims</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">lims</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">])</span>
+            <span class="c1"># if pf[0][ii].optim_type==&#39;log&#39;:# obj func is interpreted as log normal </span>
+            <span class="c1">#     axs[ii].set_yscale(&#39;log&#39;) </span>
+            <span class="c1">#     # s[s&gt;2]=2</span>
+                
+            <span class="c1">#     s1 = 10**(np.log10(p)+s) - p # upper error bars</span>
+            <span class="c1">#     s2 = -10**(np.log10(p)-s) + p # lower error bars </span>
+
+            <span class="c1">#     # check if error bars are outside the limits</span>
+            <span class="c1">#     s1[p+s1&gt;lims[:,1]]=lims[p+s1&gt;lims[:,1],1]</span>
+            <span class="c1">#     s2[p-s2&lt;lims[:,0]]=lims[p-s2&lt;lims[:,0],0]</span>
+
+            <span class="c1">#     s3 = np.vstack((s2.reshape(1,-1),s1.reshape(1,-1)))</span>
+                
+            <span class="c1"># else:</span>
+            <span class="c1">#     s3 = s</span>
+            <span class="c1"># print(pf[1])</span>
+            <span class="n">s1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">])</span> <span class="c1"># upper error bars</span>
+            <span class="n">s2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pf</span><span class="p">])</span> <span class="c1"># lower error bars</span>
+            <span class="c1"># s3 = s.reshape(1,-1)   </span>
+            <span class="c1"># s3[np.isinf(s3)]=0 # set error bars to zero if std is inf</span>
+            <span class="c1"># s3[np.isnan(s3)]=0 # set error bars to zero if std is nan</span>
+            <span class="c1"># set s3 as list of tuples based on s</span>
+            <span class="n">s3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">s2</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">s1</span><span class="p">)))</span>
+            <span class="c1"># s3 = np.vstack((abs(p-s2),abs(p-s1)))</span>
+            <span class="k">if</span> <span class="n">pf</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">axis_type</span><span class="o">==</span><span class="s1">&#39;log&#39;</span><span class="p">:</span>
+                <span class="n">axs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+            <span class="n">axs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">fpu</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">s3</span><span class="p">)</span> 
+            <span class="n">axs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpu</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+            <span class="c1">#axs[ii].set_xticks([0,1,2,3]) </span>
+            <span class="c1">#axs[ii].set_xticklabels([&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;])</span>
+            <span class="c1">#axs[ii].set_xscale(&#39;log&#39;)</span>
+            <span class="n">infopack</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">fpu</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">s3</span><span class="p">])</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">nam</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">figdir</span><span class="p">,</span><span class="n">figname</span><span class="o">+</span><span class="n">figext</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">figdpi</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">infopack</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Agent.plot_fit_res">
+<a class="viewcode-back" href="../../../boar.agents.html#boar.agents.Agent.Agent.plot_fit_res">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_fit_res</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">xaxis_name</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="p">[],</span><span class="n">ylim</span><span class="o">=</span><span class="p">[],</span><span class="n">kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>       
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare the targets vs fitting results</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        target : dict</span>
+<span class="sd">            Dictionary with the target parameters</span>
+<span class="sd">        params :list</span>
+<span class="sd">            list of Fitparam objects with the fitted parameters</span>
+<span class="sd">        xaxis_name : str</span>
+<span class="sd">            name of the x axis</span>
+<span class="sd">        xlim : list, optional</span>
+<span class="sd">            list of 2 elements with the x limits, by default []</span>
+<span class="sd">        ylim : list, optional</span>
+<span class="sd">            list of 2 elements with the y limits, by default []</span>
+<span class="sd">        fixed_str : str, optional</span>
+<span class="sd">            string with the fixed parameters, by default &#39;&#39;</span>
+<span class="sd">        verbose : bool, optional</span>
+<span class="sd">            print the results, by default False</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            dictionary with the plotting options, by default None  </span>
+
+<span class="sd">                including:  </span>
+<span class="sd">                    savefig : bool, optional  </span>
+<span class="sd">                        save the figure, by default True</span>
+<span class="sd">                    figname : str, optional  </span>
+<span class="sd">                        name of the figure, by default &#39;JV_fit&#39;</span>
+<span class="sd">                    figdir : str, optional  </span>
+<span class="sd">                        directory where to save the figure, by default &#39;&#39;</span>
+<span class="sd">                    figext : str, optional  </span>
+<span class="sd">                        extension of the figure, by default &#39;.png&#39;</span>
+<span class="sd">                    figsize : tuple, optional  </span>
+<span class="sd">                        size of the figure, by default (8,8)</span>
+<span class="sd">                    figdpi : int, optional  </span>
+<span class="sd">                        dpi of the figure, by default 300</span>
+<span class="sd">                    x_scaling : float, optional  </span>
+<span class="sd">                        scaling factor for the x axis, by default 1</span>
+<span class="sd">                    y_scaling : float, optional  </span>
+<span class="sd">                        scaling factor for the y axis, by default 1</span>
+<span class="sd">                    xscale_type : str, optional  </span>
+<span class="sd">                        type of the x axis, by default &#39;linear&#39;</span>
+<span class="sd">                    yscale_type : str, optional  </span>
+<span class="sd">                        type of the y axis, by default &#39;linear&#39;</span>
+<span class="sd">                    norm_data : bool, optional  </span>
+<span class="sd">                        normalize the data, by default False</span>
+<span class="sd">                    delog : bool, optional  </span>
+<span class="sd">                        de-log the data, by default False</span>
+<span class="sd">                    absx : bool, optional  </span>
+<span class="sd">                        take the absolute value of the x axis, by default False</span>
+<span class="sd">                    absy : bool, optional  </span>
+<span class="sd">                        take the absolute value of the y axis, by default False</span>
+<span class="sd">                    xaxis_label : str, optional  </span>
+<span class="sd">                        label of the x axis, by default &#39;&#39;</span>
+<span class="sd">                    yaxis_label : str, optional  </span>
+<span class="sd">                        label of the y axis, by default &#39;&#39;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="c1"># if kwargs != {}:</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">show_fig</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_fig&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">savefig</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;savefig&#39;</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">figname</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figname&#39;</span><span class="p">,</span><span class="s1">&#39;JV_fit&#39;</span><span class="p">)</span>
+        <span class="n">figdir</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figdir&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">figext</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figext&#39;</span><span class="p">,</span><span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+        <span class="n">figsize</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">figdpi</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;figdpi&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">x_scaling</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x_scaling&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">y_scaling</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;y_scaling&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">xscale_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xscale_type&#39;</span><span class="p">,</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+        <span class="n">yscale_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yscale_type&#39;</span><span class="p">,</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+        <span class="n">norm_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;norm_data&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">delog</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;delog&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">absx</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absx&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">absy</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;absy&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># check if xscale_type and yscale_type are correct</span>
+        <span class="k">if</span> <span class="n">xscale_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">:</span>
+            <span class="n">xscale_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span>
+        <span class="k">if</span> <span class="n">yscale_type</span> <span class="o">==</span> <span class="s1">&#39;lin&#39;</span><span class="p">:</span>
+            <span class="n">yscale_type</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span>
+
+
+        <span class="k">if</span> <span class="s1">&#39;xaxis_label&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">xaxis_label</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;xaxis_label&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xaxis_label</span> <span class="o">=</span> <span class="n">xaxis_name</span> <span class="o">+</span> <span class="s1">&#39; [&#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_units&#39;</span><span class="p">][</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">xaxis_name</span><span class="p">)]</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;yaxis_label&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">yaxis_label</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;yaxis_label&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">yaxis_label</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y_dimension&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y_unit&#39;</span><span class="p">]</span>
+
+        <span class="c1"># get unique X values and their dimensions</span>
+        <span class="n">X_unique</span><span class="p">,</span> <span class="n">X_dimensions_uni</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">get_unique_X_and_xaxis_values</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">xaxis_name</span><span class="p">,</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">])</span>
+
+        <span class="c1"># get exp values</span>
+        <span class="n">ytrue</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+        <span class="c1"># run model with fitted parameters</span>
+        <span class="n">yfit</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">](</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">params</span><span class="p">,</span><span class="n">X_dimensions</span><span class="o">=</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span> <span class="p">)</span>
+
+        <span class="c1"># plot</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">uni</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X_unique</span><span class="p">):</span>
+            <span class="n">lab</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">for</span> <span class="n">ii</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X_dimensions_uni</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">uni</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1e3</span> <span class="ow">or</span> <span class="n">uni</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1e-2</span><span class="p">:</span>
+                    <span class="n">dum</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.2e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uni</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dum</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uni</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+
+                <span class="n">lab</span> <span class="o">=</span> <span class="n">lab</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="n">dum</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_units&#39;</span><span class="p">][</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)]</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+            
+            <span class="n">XX</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">])</span>
+            <span class="n">XX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">XX</span><span class="p">,</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X_dimensions&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">xaxis_name</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">pick</span> <span class="o">=</span> <span class="n">XX</span><span class="o">==</span><span class="n">uni</span>
+            <span class="n">pick2</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pick</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">pick2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pick2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;X&#39;</span><span class="p">][</span><span class="n">pick2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">yp</span> <span class="o">=</span> <span class="n">ytrue</span><span class="p">[</span><span class="n">pick2</span><span class="p">]</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">yfit</span><span class="p">[</span><span class="n">pick2</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">x_scaling</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># rescaling the x axis to chnage the units</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">xp</span><span class="o">*</span><span class="n">x_scaling</span>
+
+            <span class="k">if</span> <span class="n">y_scaling</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># rescaling the y axis to chnage the units</span>
+                <span class="n">yp</span> <span class="o">=</span> <span class="n">yp</span><span class="o">*</span><span class="n">y_scaling</span>
+                <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">*</span><span class="n">y_scaling</span>
+
+            <span class="k">if</span> <span class="n">delog</span><span class="p">:</span>
+                <span class="n">yp</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">yp</span>
+                <span class="n">yf</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">yf</span>
+
+            <span class="k">if</span> <span class="n">norm_data</span><span class="p">:</span>
+                <span class="n">yp</span> <span class="o">=</span> <span class="n">yp</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span>
+                <span class="n">yf</span> <span class="o">=</span> <span class="n">yf</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">absx</span><span class="p">:</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absy</span><span class="p">:</span>
+                <span class="n">yp</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">yp</span><span class="p">)</span>
+                <span class="n">yf</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">)</span>
+                
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">yp</span><span class="p">,</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">yf</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+            <span class="c1"># plt.loglog(abs(xp),abs(yp),&#39;o&#39;,c=&#39;C&#39;+str(idx),label=lab)</span>
+            <span class="c1"># plt.loglog(abs(xp),abs(yf),c=&#39;C&#39;+str(idx))</span>
+            <span class="n">idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="p">[]:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="p">[]:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xaxis_label</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">yaxis_label</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="n">xscale_type</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="n">yscale_type</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show_fig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">figdir</span><span class="p">,</span><span class="n">figname</span><span class="o">+</span><span class="n">figext</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">figdpi</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to BOAR’s documentation! &mdash; boar 1.0.10 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=61a4c737" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/rtd_sphinx_search.min.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=377e76b0"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/js/rtd_search_config.js"></script>
+        <script src="_static/js/rtd_sphinx_search.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            boar
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">boar</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">boar</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to BOAR’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/i-MEET/boar/blob/main/docs/source/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-boar-s-documentation">
+<h1>Welcome to BOAR’s documentation!<a class="headerlink" href="#welcome-to-boar-s-documentation" title="Link to this heading"></a></h1>
+<p><strong>BOAR</strong> is a Python package for Bayesian Optimization. It is designed to be a flexible and easy-to-use tool for researchers and practitioners alike. While it can be used for a wide variety of applications, the implemented agents are specifically designed for solar cell and general research on semiconductor. The package is designed to be modular and extensible, allowing users to easily add new agents.</p>
+<p>Most of the agents in BOAR can be used to fit a model to experimental data, yet BOAR can be also used to optimize experimental process condition and guide experimentation in an automated fashion.</p>
+<p>See the <a class="reference external" href="https://github.com/i-MEET/boar">BOAR GitHub repository</a> for more information.</p>
+</section>
+<section id="authors">
+<h1>Authors<a class="headerlink" href="#authors" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/larryluer">Larry Lüer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/VMLC-PV">Vincent M. Le Corre</a></p></li>
+</ul>
+</section>
+<section id="institution">
+<h1>Institution<a class="headerlink" href="#institution" title="Link to this heading"></a></h1>
+<figure class="align-left">
+<a class="reference internal image-reference" href="_images/imeet_logo_square.jpg"><img alt="i-MEET logo" src="_images/imeet_logo_square.jpg" style="width: 100px;" /></a>
+</figure>
+<div class="line-block">
+<div class="line"><a class="reference external" href="https://www.i-meet.ww.uni-erlangen.de/">Institute Materials for Electronics and Energy Technology</a> (i-MEET)</div>
+<div class="line">University of Erlangen-Nuremberg (FAU)</div>
+<div class="line">Erlangen, Germany</div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="what-is-currently-implemented-in-boar-the-optimizers-agents">
+<h2>What is currently implemented in BOAR? : The optimizers &amp; agents<a class="headerlink" href="#what-is-currently-implemented-in-boar-the-optimizers-agents" title="Link to this heading"></a></h2>
+<section id="the-optimizers">
+<h3>The optimizers<a class="headerlink" href="#the-optimizers" title="Link to this heading"></a></h3>
+<p>The optimizers are used to find the optimal parameters for a given optimization problem.</p>
+<p>Available optimizers are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scikit-optimize.github.io/stable/index.html">scikit-optimize</a></p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html">scipy.optimize.curve_fit</a></p></li>
+<li><p><a class="reference external" href="https://ax.dev/tutorials/multiobjective_optimization.html">Ax &amp; BoTorch</a></p></li>
+</ul>
+<p>Currently, the main optimizer implemented in BOAR is based on  <a class="reference external" href="https://scikit-optimize.github.io/stable/index.html">scikit-optimize</a> (skopt). It is the default optimizer used in BOAR and the most tested one.</p>
+<p>For more information on the optimizers, see the optimizer section.</p>
+</section>
+<section id="the-agents">
+<h3>The agents<a class="headerlink" href="#the-agents" title="Link to this heading"></a></h3>
+<p>The agents are used to run a model depending on the input parameters given by the user or the optimizers. Users are free to create their own agents. For more information on the agents, see the agents section.</p>
+<p>Available agents are:</p>
+<ul class="simple">
+<li><p>Drift-diffusion agent (DD)</p></li>
+<li><p>Transient absorption spectroscopy agent (TAS)</p></li>
+<li><p>Transient photoluminescence agent (TrPL)</p></li>
+<li><p>Transient microwave conductivity agent (TrMC)</p></li>
+<li><p>Transfer matrix agent (TM)</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Getting started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-pip">With pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-conda">With conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#additional-necessary-for-boar-with-botorch-ax">Additional necessary for BOAR with BoTorch/Ax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#additional-necessary-installs-for-the-agents">Additional necessary installs for the agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#drift-diffusion-agent">Drift-diffusion agent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#id1">SIMsalabim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#parallel-simulations">Parallel simulations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Scientific publications based on the BOAR project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change Log</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-0-10">v1.0.10</a></li>
+<li class="toctree-l2"><a class="reference internal" href="change_log.html#v1-0-9">v1.0.9</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Model fitting examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Check-the-structure-of-the-device-for-SIMsalabim">Check the structure of the device for SIMsalabim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Import-Experimental-Data">Import Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Fit-non-ideal-diode-model">Fit non-ideal diode model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Multi-Objective-Optimization">Multi-Objective Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Define-the-fitting-parameters">Define the fitting parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Prepare-Experimental-Data">Prepare Experimental Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Start-the-optimization">Start the optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Gradient-descent">Gradient descent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_fitting.html">Notebooks gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html">BOAR with SIMsalabim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Check-the-structure-of-the-device-for-SIMsalabim">Check the structure of the device for SIMsalabim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_fake_OPV_torch.html">BOAR with SIMsalabim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV_torch.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV_torch.html#Check-the-structure-of-the-device-for-SIMsalabim">Check the structure of the device for SIMsalabim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV_torch.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_fake_OPV_torch.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/DD_Fit_real_OPV.html">BOAR with SIMsalabim Organic Photovoltaic (OPV) example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Import-Experimental-Data">Import Experimental Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Fit-non-ideal-diode-model">Fit non-ideal diode model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Multi-Objective-Optimization">Multi-Objective Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/DD_Fit_real_OPV.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html">BOAR for TAS fitting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TAS_fit_BT_model_fake.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TrPL_Fit_BTD_model_fake.html">BOAR for TrPL fitting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/TrPL_Fit_BTD_model_fake.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TrPL_Fit_BTD_model_fake.html#Prepare-fake-data-for-fitting">Prepare fake data for fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TrPL_Fit_BTD_model_fake.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/MO_TrPL_TrMC.html">Multi-Objective Fitting of TrPL and TrMC Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Prepare-Experimental-Data">Prepare Experimental Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Start-the-optimization">Start the optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/MO_TrPL_TrMC.html#Gradient-descent">Gradient descent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Optimization and DoE examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp_MO.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp_MO.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gallery_Opti_DoE.html">Notebooks gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp.html">Design of Experiments to optimize perovskite solar cells efficiency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/BOAR_Exp.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/BOAR_Exp.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/BOAR_Exp_MO.html">Multi-objective optimization for perovskite material composition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/BOAR_Exp_MO.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/BOAR_Exp_MO.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TM_LUE.html">BOAR with Transfer Matrix Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_LUE.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_LUE.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html">Custom evaluate function for Multi-Objective Optimization - Transfer Matrix example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_AVT_Jsc_MO_custom_func.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/TM_AVT_Jsc_MO.html">BOAR with Transfer Matrix Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_AVT_Jsc_MO.html#Define-the-free-parameters-to-be-optimized">Define the free parameters to be optimized</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/TM_AVT_Jsc_MO.html#Start-the-optimization">Start the optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">BOAR API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">boar</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="boar.html">boar package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="boar.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="boar.SIMsalabim_utils.html">boar.SIMsalabim_utils package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.agents.html">boar.agents package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.core.html">boar.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="boar.dynamic_utils.html">boar.dynamic_utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="boar.html#module-boar">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Vincent M. Le Corre, Larry Lüer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
