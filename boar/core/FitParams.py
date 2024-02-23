@@ -6,7 +6,7 @@
 import numpy as np
 
 class Fitparam():
-    def __init__(self, name = '', startVal = None, val = 1.0, relRange = 0, lims = [], std = 0, d = '',display_name='',unit='',
+    def __init__(self, name = '', startVal = None, val = 1.0, relRange = 0, lims = [], std = 0, p0m = None, d = '',display_name='',unit='',
                 range_type = 'log', lim_type = 'absolute', optim_type = 'linear',axis_type = None, val_type = 'float',rescale = True,stepsize = None):
         """ Fitparam class object
 
@@ -19,12 +19,14 @@ class Fitparam():
         val : float, optional
             achieved value after the optimizaton, by default 1.0
         relRange : float, optional
-            allowed variation range. Interpretation depends on range_type\\
+            allowed variation range. Interpretation depends on range_type  
             if relRange=0, parameter is considered fixed, by default 0
         lims : list, optional
             hard limits, by default []
         std : float, optional
             standard deviation as returened from optimization, by default 0
+        p0m : float, optional
+            order of magnitude of the parameter/scaling factor, by default None
         d : str, optional
             parameter description, by default ''
         display_name : str, optional
@@ -43,7 +45,7 @@ class Fitparam():
         val_type : str, optional
             type of the parameter, can be 'float' or 'int' or 'str', by default 'float'
         rescale : bool, optional
-            rescale the parameter to the order of magnitude of the startVal, by default True
+            if optim_type = 'linear' it rescales the parameter to the order of magnitude of the startVal if p0m is not defined, for now this does not affect the results if optim_type = 'log', by default True
         stepsize : float, optional
             stepsize for integer parameters (val_type = 'int'), by default None
 
@@ -57,8 +59,12 @@ class Fitparam():
             optim_type must be 'linear', 'lin', 'logarithmic' of 'log'
         ValueError
             axis_type must be 'linear', 'lin', 'logarithmic' of 'log'
+        ValueError
+            val_type must be 'float', 'int' or 'str'
+        ValueError
+            p0m must be None, int or float
 
-       
+
         """        
 
         self.name = name
@@ -130,8 +136,13 @@ class Fitparam():
                 self.startVal = startVal
             self.val = val
 
+        self.p0m = p0m
 
-       
+        #check that p0m is either None, int or float
+        if self.p0m != None:
+            if not isinstance(self.p0m, (int, float)):
+                raise ValueError('p0m must be None, int or float')
+
         self.relRange = relRange
         
         if lims ==[] and self.val_type == 'float':

@@ -28,6 +28,14 @@ boar.SIMsalabim\_utils.CompileProg module
    :undoc-members:
    :show-inheritance:
 
+boar.SIMsalabim\_utils.Download\_SIMsalabim module
+--------------------------------------------------
+
+.. automodule:: boar.SIMsalabim_utils.Download_SIMsalabim
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 boar.SIMsalabim\_utils.GetInputPar module
 -----------------------------------------
 

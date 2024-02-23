@@ -66,16 +66,32 @@ def sci_notation(number, sig_fig=2):
 
 
 def LinearFunc(t,a,b):
+    """Linear function
+    f(t) = a\*t + b
+
+    Parameters
+    ----------
+    t : 1-D sequence of floats
+        time
+
+    a : float
+        slope
+
+    b : float
+        offset
+
+    Returns
+    -------
+    1-D sequence of floats
+        f(t)
+    """
     
     return a*t + b
 
-def testfunc(t, tau, f0 , finf,lam):
-    
-    return (f0-finf) * np.exp(-(t/tau) ) + finf - lam * t 
 
 def MonoExpDecay(t, tau, f0 , finf):
     """ Monoexponential decay function
-    f(t) = (f0-finf) * np.exp(-(t/tau) ) + finf
+    f(t) = (f0-finf) \* np.exp(-(t/tau) ) + finf
 
     Parameters
     ----------
@@ -101,7 +117,7 @@ def MonoExpDecay(t, tau, f0 , finf):
 
 def MonoExpInc(t, tau, f0, finf):
     """ Monoexponential Inc function
-    f(t) = (finf-f0) *(1-np.exp(-(t/tau))) + f0)
+    f(t) = (finf-f0) \*(1-np.exp(-(t/tau))) + f0)
 
     Parameters
     ----------
@@ -126,7 +142,7 @@ def MonoExpInc(t, tau, f0, finf):
 
 def StretchedExp(t, tau, h, A, B):
     """ Stretched decay function
-    f(t) = A * np.exp(- (t/tau)^h ) + B
+    f(t) = A \* np.exp(- (t/tau)^h ) + B
 
     Parameters
     ----------
@@ -152,31 +168,6 @@ def StretchedExp(t, tau, h, A, B):
     """
     return A * np.exp(- (t/tau)**h ) + B
 
-def Larryfunc(t, a1, a2, tau,  k, gamma):
-    """Larry degradation fitting function
-    f(t) = (1-a1*exp(-t/tau)) * 1 / ((1/a2)+k * t ** gamma)
-
-    Parameters
-    ----------
-    t : 1-D sequence of floats
-        time
-    a1 : float
-        [description]
-    tau : float
-        [description]
-    a2 : float
-        [description]
-    k : float
-        [description]
-    gamma : float
-        [description]
-
-    Returns
-    -------
-    1-D sequence of floats
-        f(t)
-    """
-    return (1-a1*np.exp(-t/tau)) * 1 / ((1/a2)+k * t ** gamma)
 
 def get_Jsc(Volt,Curr):
     """Get the short-circuit current (Jsc) from solar cell JV-curve by interpolating the current at 0 V
@@ -265,7 +256,7 @@ def get_PCE(Volt,Curr,suns=1):
     return abs(PCE_dumb)
 
 def get_ideality_factor(suns,Vocs,T=295):
-    """Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)*log(suns) + intercept
+    """Returns ideality factor from suns-Voc data linear fit of Voc = (nIF/Vt)\*log(suns) + intercept
 
     Parameters
     ----------
@@ -304,7 +295,7 @@ def get_ideality_factor(suns,Vocs,T=295):
     return nIF,intercept_d, r_value_d**2, p_value_d, std_err_d
 
 def get_alpha_factor(suns,Jscs):
-    """Returns alpha from suns-Jsc data linear fit of log(Jsc) = alpha*log(suns) + b
+    """Returns alpha from suns-Jsc data linear fit of log(Jsc) = alpha\*log(suns) + b
 
     Parameters
     ----------
@@ -556,3 +547,4 @@ def double_urbach_midgap(CB,VB,Eu,fracmid,num_points):
     Ntraps = Ntraps/np.sum(Ntraps)
     
     return E,Ntraps
+

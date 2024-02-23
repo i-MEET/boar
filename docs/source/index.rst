@@ -64,6 +64,7 @@ Available agents are:
 
    installation
    references
+   change_log
 
 .. toctree::
    :maxdepth: 3
@@ -89,8 +90,7 @@ Available agents are:
    :caption: BOAR API:
    
    modules
-   change_log
-   
+      
 
 Indices and tables
 ==================

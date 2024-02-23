@@ -26,7 +26,7 @@ from sphinx_gallery.sorting import (  # pylint: disable=no-name-in-module
 project = 'boar'
 copyright = '2023, Vincent M. Le Corre, Larry Lüer'
 author = 'Vincent M. Le Corre, Larry Lüer'
-release = '1.0.9'
+release = '1.0.10'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

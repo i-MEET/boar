@@ -10,12 +10,15 @@
 # Import libraries
 import os,copy,warnings
 import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib import cm
 from copy import deepcopy
 from sklearn.metrics import mean_squared_error,mean_squared_log_error,mean_absolute_error,mean_absolute_percentage_error
 from scipy.spatial.distance import directed_hausdorff
-from scipy.optimize import curve_fit
+from scipy.optimize import curve_fit,basinhopping,dual_annealing
 from functools import partial
-
+from matplotlib.gridspec import GridSpec
+from matplotlib.colors import LogNorm
 # Import boar libraries
 from boar.core.funcs import sci_notation
 from boar.core.funcs import get_unique_X
@@ -35,18 +38,21 @@ class BoarOptimizer():
 
     
     def params_r(self, params):
-        """ Prepare starting guess and bounds for optimizer \\
-        Considering settings of Fitparameters:\\
-        optim_type: if 'linear': abstract the order of magnitude (number between 1 and 10)\\
-                    if 'log': bring to decadic logarithm (discarding the negative sign, if any!)\\
-        lim_type:   if 'absolute', respect user settings in Fitparam.lims \\
-                    if 'relative', respect user settings in Fitparam.relRange:\\
-                    if Fitparam.range_type=='linear':\\
-                        interpret Fitparam.relRange as factor\\
-                    if Fitparam.range_type=='log':\\
-                        interpret Fitparam.relRange as order of magnitude\\
-        relRange:   if zero, Fitparam is not included into starting guess and bounds\\
-                            (but still available to the objective function) 
+        """ Prepare starting guess and bounds for optimizer  
+        Considering settings of Fitparameters:  
+
+            optim_type: 
+                if 'linear': abstract the order of magnitude (number between 1 and 10)  
+                if 'log': bring to decadic logarithm (discarding the negative sign, if any!)  
+            lim_type:   if 'absolute', respect user settings in Fitparam.lims  
+                if 'relative', respect user settings in Fitparam.relRange: 
+
+                    if Fitparam.range_type=='linear':  
+                        interpret Fitparam.relRange as factor  
+                    if Fitparam.range_type=='log':  
+                        interpret Fitparam.relRange as order of magnitude  
+            relRange:   if zero, Fitparam is not included into starting guess and bounds  
+                        (but still available to the objective function)  
         
 
         Parameters
@@ -70,18 +76,21 @@ class BoarOptimizer():
                 if par.relRange != 0:
                     if par.optim_type=='linear':
                         if par.rescale == True:
-                            if par.startVal == 0:
-                                if par.lims[0] != 0:
-                                    p0m = 10**(np.floor(np.log10(np.abs(par.lims[0])))) # the order of magnitude of the parameters
-                                    par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
-                                elif par.lims[1] != 0:
-                                    p0m = 10**(np.floor(np.log10(np.abs(par.lims[1])))) # the order of magnitude of the parameters
-                                    par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
+                            if par.p0m == None:
+                                if par.startVal == 0:
+                                    if par.lims[0] != 0:
+                                        p0m = 10**(np.floor(np.log10(np.abs(par.lims[0])))) # the order of magnitude of the parameters
+                                        par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
+                                    elif par.lims[1] != 0:
+                                        p0m = 10**(np.floor(np.log10(np.abs(par.lims[1])))) # the order of magnitude of the parameters
+                                        par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
+                                    else:
+                                        par.p0m = 1
                                 else:
-                                    par.p0m = 1
+                                    p0m = 10**(np.floor(np.log10(np.abs(par.startVal)))) # the order of magnitude of the parameters
+                                    par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
                             else:
-                                p0m = 10**(np.floor(np.log10(np.abs(par.startVal)))) # the order of magnitude of the parameters
-                                par.p0m = p0m # save it in the Fitparam so it does not need to be calculated again
+                                p0m = par.p0m
                             p0.append(par.startVal/p0m) # optimizer can't handle very large besides very small numbers
                                                         # therefore, bring values to same order of magnitude
                             if par.lim_type == 'absolute':
@@ -116,24 +125,84 @@ class BoarOptimizer():
 
 
                     elif par.optim_type=='log':
-                        # optimizer won't have problems with logarithmic quantities
-                        if par.startVal == 0:
-                            p0.append(-10)
-                            par.startVal = 1e-10
+                        if par.rescale == True:
+                            if par.p0m == None:
+                                # optimizer won't have problems with logarithmic quantities
+                                if par.startVal == 0:
+                                    p0.append(-10)
+                                    par.startVal = 1e-10
+                                else:
+                                    if par.startVal < 0:
+                                        print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
+                                    p0.append(np.log10(abs(par.startVal)))
+                                if par.lim_type == 'absolute':
+                                    lb.append(np.log10(par.lims[0]))
+                                    ub.append(np.log10(par.lims[1]))
+                                elif par.lim_type == 'relative':
+                                    if par.range_type == 'linear':
+                                        lb.append(np.log10(par.startVal - par.relRange * abs(par.startVal)))   # this is linear version
+                                        ub.append(np.log10(par.startVal + par.relRange * abs(par.startVal)))    # this is linear version                                
+                                    elif par.range_type == 'log':
+                                        lb.append(np.log10(par.startVal*10**(-par.relRange)))  # this is logarithmic version
+                                        ub.append(np.log10(par.startVal*10**(par.relRange)))  # this is logarithmic version
+                                
+                            else:
+                                if par.startVal == 0:
+                                    p0.append(np.log10(1e-10/par.p0m))
+                                    par.startVal = 1e-10/par.p0m
+                                else:
+                                    if par.startVal < 0:
+                                        print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
+                                    p0.append(np.log10(abs(par.startVal/par.p0m)))
+                                if par.lim_type == 'absolute':
+                                    lb.append(np.log10(par.lims[0]/par.p0m))
+                                    ub.append(np.log10(par.lims[1]/par.p0m))
+                                elif par.lim_type == 'relative':
+                                    if par.range_type == 'linear':
+                                        lb.append(np.log10((par.startVal - par.relRange * abs(par.startVal))/par.p0m))
+                                        ub.append(np.log10((par.startVal + par.relRange * abs(par.startVal))/par.p0m))
+                                    elif par.range_type == 'log':
+                                        lb.append(np.log10(par.startVal*10**(-par.relRange)/par.p0m))
+                                        ub.append(np.log10(par.startVal*10**(par.relRange)/par.p0m))
                         else:
-                            if par.startVal < 0:
-                                print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
-                            p0.append(np.log10(par.startVal))
-                        if par.lim_type == 'absolute':
-                            lb.append(np.log10(par.lims[0]))
-                            ub.append(np.log10(par.lims[1]))
-                        elif par.lim_type == 'relative':
-                            if par.range_type == 'linear':
-                                lb.append(np.log10(par.startVal - par.relRange * abs(par.startVal)))   # this is linear version
-                                ub.append(np.log10(par.startVal + par.relRange * abs(par.startVal)))    # this is linear version                                
-                            elif par.range_type == 'log':
-                                lb.append(np.log10(par.startVal*10**(-par.relRange)))  # this is logarithmic version
-                                ub.append(np.log10(par.startVal*10**(par.relRange)))  # this is logarithmic version
+                            if par.p0m == None:
+                                # optimizer won't have problems with logarithmic quantities
+                                if par.startVal == 0:
+                                    p0.append(1e-10)
+                                    par.startVal = 1e-10
+                                else:
+                                    if par.startVal < 0:
+                                        print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
+                                    p0.append(par.startVal)
+                                if par.lim_type == 'absolute':
+                                    lb.append(par.lims[0])
+                                    ub.append(par.lims[1])
+                                elif par.lim_type == 'relative':
+                                    if par.range_type == 'linear':
+                                        lb.append(par.startVal - par.relRange * abs(par.startVal))
+                                        ub.append(par.startVal + par.relRange * abs(par.startVal))
+                                    elif par.range_type == 'log':
+                                        lb.append(par.startVal*10**(-par.relRange))
+                                        ub.append(par.startVal*10**(par.relRange))
+                                
+                            else:
+                                if par.startVal == 0:
+                                    p0.append(1e-10/par.p0m)
+                                    par.startVal = 1e-10/par.p0m
+                                else:
+                                    if par.startVal < 0:
+                                        print('WARNING: negative start value for parameter ' + par.name + ' will be converted to positive value for optimization')
+                                    p0.append(par.startVal/par.p0m)
+                                if par.lim_type == 'absolute':
+                                    lb.append(par.lims[0]/par.p0m)
+                                    ub.append(par.lims[1]/par.p0m)
+                                elif par.lim_type == 'relative':
+                                    if par.range_type == 'linear':
+                                        lb.append((par.startVal - par.relRange * abs(par.startVal))/par.p0m)
+                                        ub.append((par.startVal + par.relRange * abs(par.startVal))/par.p0m)
+                                    elif par.range_type == 'log':
+                                        lb.append(par.startVal*10**(-par.relRange)/par.p0m)
+                                        ub.append(par.startVal*10**(par.relRange)/par.p0m)
                 else:
                     par.p0m = 1
             elif par.val_type == 'int':
@@ -193,16 +262,35 @@ class BoarOptimizer():
                 if par.relRange != 0:
                     if par.optim_type == 'linear':
                         if which=='val':
-                            par.val = x[ip] * par.p0m # bring back to correct order of magnitude
+                            par.val = x[ip] * par.p0m # bring back to correct order of magnitude, if necessary
                         elif which=='startVal':
                             par.startVal = x[ip] * par.p0m
                         par.std = std[ip] #* par.p0m
 
                     elif par.optim_type == 'log':
-                        if which=='val':
-                            par.val = 10**(x[ip])
-                        elif which=='startVal':
-                            par.startVal = 10**(x[ip])
+                        if par.rescale == True:
+                            if par.p0m == None:
+                                if which=='val':
+                                    par.val = 10**(x[ip])
+                                elif which=='startVal':
+                                    par.startVal = 10**(x[ip])
+                            else:
+                                if which=='val':
+                                    par.val = 10**(x[ip])*par.p0m
+                                elif which=='startVal':
+                                    par.startVal = 10**(x[ip])*par.p0m
+                        else:
+                            if par.p0m == None:
+                                if which=='val':
+                                    par.val = x[ip]
+                                elif which=='startVal':
+                                    par.startVal = x[ip]
+                            else:
+                                if which=='val':
+                                    par.val = x[ip]*par.p0m
+                                elif which=='startVal':
+                                    par.startVal = x[ip]*par.p0m
+
                         par.std = std[ip] # !!!!!! This is logarithmic while par.val is delogarithmized!!!!!
                     else: 
                         raise ValueError('ERROR. ',par.name,' optim_type needs to be ''linear'' or ''log'' not ',par.optim_type,'.')      
@@ -413,11 +501,45 @@ class BoarOptimizer():
             raise ValueError('Loss function not recognized (choose from linear, soft_l1, huber, cauchy, arctan)')
         return threshold*c # make sure the cost is between 0 and 100 too
 
+    def invert_lossfunc(self,z0,loss,threshold=1000):
+        """Invert the loss function to get the mean squared error values back
+
+        Parameters
+        ----------
+        z0 : 1D-array
+            data array of size (n,) with the loss function values
+        loss : str
+            type of loss function to use, can be ['linear','soft_l1','huber','cauchy','arctan']
+        threshold : int, optional
+            critical value above which loss sets in, by default 1000. 
+            Wisely select so that the loss function affects only outliers.
+            If threshold is set too low, then c<z0 even fon non-outliers
+            falsifying the mean square error and thus the log likelihood, the Hessian and the error bars.
+
+        Returns
+        -------
+        1D-array
+            array of size (n,) with the mean squared error values
+        """    
+        z = z0/threshold
+        if loss=='linear':
+            c = z*threshold
+        elif loss=='soft_l1':
+            c = ((z/2+1)**2 - 1)*threshold
+        elif loss=='huber':
+            c = z*threshold if z <= 1 else ((z+1)**2/4)*threshold
+        elif loss=='cauchy':
+            c = (np.exp(z)-1)*threshold
+        elif loss=='arctan':
+            c = np.tan(z)*threshold
+        else:
+            raise ValueError('Loss function not recognized (choose from linear, soft_l1, huber, cauchy, arctan)')
+        return c
     
     def format_func(self,value, tick_number):
-        """Format function for the x and y axis ticks
-        to be passed to axo[ii,jj].xaxis.set_major_formatter(plt.FuncFormatter(format_func))
-        to get the logarithmic ticks looking good on the plot
+        """Format function for the x and y axis ticks  
+        to be passed to axo[ii,jj].xaxis.set_major_formatter(plt.FuncFormatter(format_func))  
+        to get the logarithmic ticks looking good on the plot  
 
         Parameters
         ----------
@@ -548,3 +670,158 @@ class BoarOptimizer():
         self.params_w(popt,self.params,std=stdx) # write variable parameters into params, respecting user settings
 
         return {'popt':popt,'pcov':pcov,'std':std,'infodict':infodict}
+
+    ###############################################################################
+    ########################## scipy Optimizers ###################################
+    ###############################################################################
+
+    def obj_func_scipy(self, *p, params, targets,obj_type='MSE', loss='linear'):
+        """Objective function directly returning the loss function
+        for use with the Bayesian Optimizer
+        
+        Parameters
+        ----------
+        '*p' : 1D-sequence of floats
+            the parameters as passed by the Bayesian Optimizer
+        params : list
+            list of Fitparam() objects
+        model : callable
+            Model function yf = f(X) to compare to y
+        X : ndarray
+            X Data array of size(n,m): n=number of data points, m=number of dimensions
+        y : 1D-array
+            data array of size (n,) to fit 
+        obj_type : str, optional
+            objective function type, can be ['MSE', 'RMSE', 'MSLE','nRMSE','MAE','larry','nRMSE_VLC'], by default 'MSE'  
+
+                'MSE': mean squared error  
+                'RMSE': root mean squared error  
+                'MSLE': mean squared log error  
+                'nRMSE': normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf)))  
+                'MAE': mean absolute error  
+                'RAE': relative absolute error sum(abs(yf-y))/sum(mean(y)-y)  
+                'larry': mean squared error legacy version  
+                'nRMSE_VLC': normalized root mean squared error (RMSE/(max(y,yf)-min(y,yf))) for each experiment separately and then averaged over all experiments  
+        loss : str, optional
+            type of loss function to use, can be ['linear','soft_l1','huber','cauchy','arctan'], by default 'linear'
+        
+
+        Returns
+        -------
+        1D-array
+            array of size (n,) with the loss function values
+        """
+
+        px = p[0] # scikit-optimize provide 2d array of X values 
+        self.params_w(px, params) # write variable parameters into params, respecting user settings
+        zs = [] # list of losses
+        target_weights = []
+        for num, t in enumerate(targets):
+            X = t['data']['X']
+            y = t['data']['y']
+            if 'weight' in t.keys(): 
+                weight = t['weight']
+            else:
+                weight = 1
+            yf = t['model'](X,params)
+            # yf = model(X,params)
+
+            if 'loss' in t.keys(): # if loss is specified in targets, use it
+                loss_dum = t['loss']
+            else:
+                loss_dum = loss
+            
+            if 'obj_type' in t.keys():
+                obj_type_dum = t['obj_type']
+            else:
+                obj_type_dum = obj_type
+            
+            z = self.obj_func_metric(t,yf,obj_type=obj_type_dum)
+
+            if 'target_weight' in t.keys() and (isinstance(t['target_weight'], float) or isinstance(t['target_weight'], int)): # if target_weight is specified in targets, use it
+                #check if target_weight is a float
+                # if isinstance(t['target_weight'], float) or isinstance(t['target_weight'], int):
+                    target_weights.append(t['target_weight'])
+            else:
+                target_weights.append(1)
+                warnings.warn('target_weight for target '+str(num)+' must be a float or int. Using default value of 1.')
+
+            zs.append(self.lossfunc(z,loss_dum,threshold=1))
+
+        # cost is the weigthed average of the losses
+        cost = np.average(zs, weights=target_weights)    
+
+        return cost
+
+    def optimize_dual_annealing(self, obj_type='MSE',loss='linear', kwargs = None):
+        """Use dual_annealing to optimize a function y = f(x) where x can be multi-dimensional.
+        See scipy.optimize.dual_annealing documentation for more information.
+
+        Parameters
+        ----------
+        kwargs : dict, optional
+            Keyword arguments for dual_annealing, see scipy.optimize.dual_annealing documentation for more information, by default None.
+            If no kwargs is provided, use:
+            kwargs = {'maxiter': 100, 'local_search_options': None, 'initial_temp': 5230.0, 'restart_temp_ratio': 2e-05, 'visit': 2.62, 'accept': -5.0, 'maxfun': 1000, 'no_local_search': False, 'x0': None, 'bounds': None, 'args': ()}
+
+        Returns
+        -------
+        dict
+            Dictionary with the optimized parameters ('x') and the corresponding function value ('fun').
+        """
+        
+
+        if kwargs == None:
+            kwargs = {'maxiter': 100, 'local_search_options': None, 'initial_temp': 5230.0, 'restart_temp_ratio': 2e-05, 'visit': 2.62, 'accept': -5.0, 'maxfun': 1000, 'no_local_search': False, 'args': ()}
+
+
+        p0,lb,ub = self.params_r(self.params) # read out Fitparams & respect settings
+        # using partial functions allows passing extra parameters
+        pfunc = partial(self.obj_func_scipy, params = self.params,targets=self.targets,obj_type=obj_type,loss=loss)
+
+        result = dual_annealing(pfunc,x0=p0, bounds=list(zip(lb, ub)), **kwargs)
+        popt = result.x
+        fun = result.fun
+
+        self.params_w(popt, self.params)  # write variable parameters into params, respecting user settings
+
+        return {'x': popt, 'fun': fun}
+
+    def optimize_basin_hopping(self, obj_type='MSE',loss='linear', kwargs = None):
+        """Use basin_hopping to optimize a function y = f(x) where x can be multi-dimensional.
+        See scipy.optimize.basin_hopping documentation for more information.
+
+        Parameters
+        ----------
+        kwargs : dict, optional
+            Keyword arguments for basin_hopping, see scipy.optimize.basin_hopping documentation for more information, by default None.
+            If no kwargs is provided, use:
+            kwargs = {'niter': 100, 'T': 1.0, 'stepsize': 0.5, 'interval': 50, 'minimizer_kwargs': None, 'take_step': None, 'accept_test': None, 'callback': None, 'niter_success': None, 'seed': None, 'disp': False, 'niter_success': 10}
+
+        Returns
+        -------
+        dict
+            Dictionary with the optimized parameters ('x') and the corresponding function value ('fun').
+        """
+        if kwargs == None:
+            kwargs = {'niter': 100, 'T': 1.0, 'stepsize': 0.5, 'interval': 50, 'minimizer_kwargs': None, 'take_step': None, 'accept_test': None, 'callback': None, 'niter_success': None, 'seed': None, 'disp': False, 'niter_success': 10}
+
+        p0,lb,ub = self.params_r(self.params)
+        # using partial functions allows passing extra parameters
+        pfunc = partial(self.obj_func_scipy, params = self.params,targets=self.targets,obj_type=obj_type,loss=loss)
+        
+        # if 'minimizer_kwargs' in kwargs.keys() or kwargs['minimizer_kwargs'] == None:
+        #     minimizer_kwargs = {"method": "L-BFGS-B", "bounds": list(zip(lb, ub))}
+        #     kwargs['minimizer_kwargs'] = minimizer_kwargs
+
+        result = basinhopping(pfunc, x0=p0, minimizer_kwargs={"bounds": list(zip(lb, ub))}, **kwargs)
+        popt = result.x
+        fun = result.fun
+
+        self.params_w(popt, self.params)  # write variable parameters into params, respecting user settings
+
+        return {'x': popt, 'fun': fun}
+
+
+
+    
